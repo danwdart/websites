@@ -1,0 +1,6 @@
+[submodule ".sites/dandart"]
+	path = .sites/dandart
+	url = git@github.com:danwdart/dandart.git
+[submodule ".sites/jolharg"]
+	path = .sites/jolharg
+	url = git@github.com:JolHarg/jolharg.git
