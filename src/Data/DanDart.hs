@@ -89,6 +89,16 @@ favCharacters = [
                 "Amethyst",
                 wikia "steven-universe" "Amethyst",
                 "she's got \"a system\" and I like her vibe."
+            ),
+            (
+                "(Um)Greg",
+                wikia "steven-universe" "Greg_Universe",
+                "of his guitar skills."
+            ),
+            (
+                "Steven Universe (from the movie)",
+                wikia "steven-universe" "Steven_Universe_(character)",
+                "his evolution to this stage helps my waifu Spinel."
             )
         ]
     ),
