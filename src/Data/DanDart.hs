@@ -46,11 +46,11 @@ favCharacters :: [(Html, AttributeValue, [(Html, AttributeValue, Html)])]
 favCharacters = [
     (
         "Star Trek",
-        wikipedia <> "Star_Trek",
+        wikipedia "Star_Trek",
         [
             (
                 "Spock",
-                wikipedia <> "Spock",
+                wikipedia "Spock",
                 "I often think of the world logically"
             ),
             (
@@ -60,30 +60,35 @@ favCharacters = [
             ),
             (
                 "Data",
-                wikipedia <> "Data_%28Star_Trek%29",
+                wikipedia "Data_%28Star_Trek%29",
                 "I am curious, confused and if he was human he'd probably be autistic"
             )
         ]
     ),
     (
         "Danganronpa",
-        wikipedia <> "Danganronpa",
+        wikipedia "Danganronpa",
         [
             (
+                "Chihiro Fujisaki",
+                fandom "danganronpa" "Chihiro_Fujisaki",
+                "I love programming and feel similar about life"
+            ),
+            (
                 "Nagito Komaeda",
-                wikipedia <> "List_of_Danganronpa_characters#Danganronpa_2:_Goodbye_Despair",
+                fandom "danganronpa" "Nagito_Komaeda",
                 "I'm very lucky and obsessed with hope, and also trash"
             ),
             (
-                "Chihiro Fujisaki",
-                wikipedia <> "List_of_Danganronpa_characters#Danganronpa:_Trigger_Happy_Havoc",
-                "I love programming and feel similar about life"
+                "Shuichi Saihara",
+                fandom "danganronpa" "Shuichi_Saihara",
+                "he's cute, a little bit emo and evolves like I do."
             )
         ]
     ),
     (
         "Steven Universe",
-        wikipedia <> "Steven_Universe",
+        wikipedia "Steven_Universe",
         [
             (
                 "Amethyst",
@@ -104,7 +109,7 @@ favCharacters = [
     ),
     (
         "Kobayashi-san Chi no Maid Dragon",
-        wikipedia <> "Miss_Kobayashi%27s_Dragon_Maid",
+        wikipedia "Miss_Kobayashi%27s_Dragon_Maid",
         [
             (
                 "Fafnir",
@@ -115,7 +120,7 @@ favCharacters = [
     ),
     (
         "Mirai Nikki",
-        wikipedia <> "Future_Diary",
+        wikipedia "Future_Diary",
         [
             (
                 "Yukiteru Amano",
@@ -126,29 +131,29 @@ favCharacters = [
     ),
     (
         "Berserk",
-        wikipedia <> "Berserk_%28manga%29",
+        wikipedia "Berserk_%28manga%29",
         [
             (
                 "Griffith",
-                wikipedia <> "List_of_Berserk_characters#Griffith",
+                wikipedia "List_of_Berserk_characters#Griffith",
                 "he's sneaky and smart and he looks fabulous"
             )
         ]
     ),
     (
         "Kuroshitsuji",
-        wikipedia <> "Black_Butler",
+        wikipedia "Black_Butler",
         [
             (
                 "Grell Sutcliff",
-                "https://kuroshitsuji.fandom.com/wiki/Grell_Sutcliff",
+                fandom "kuroshitsuji" "Grell_Sutcliff",
                 "he's hysterical, fabulous and has good taste in butlers"
             )
         ]
     ),
     (
         "Mahoutsukai no Yome",
-        wikipedia <> "The_Ancient_Magus%27_Bride",
+        wikipedia "The_Ancient_Magus%27_Bride",
         [
             (
                 "Elias Ainsworth",
@@ -159,33 +164,33 @@ favCharacters = [
     ),
     (
         "Neon Genesis Evangelion",
-        wikipedia <> "Neon_Genesis_Evangelion",
+        wikipedia "Neon_Genesis_Evangelion",
         [
             (
                 "Shinji Ikari",
-                wikipedia <> "Shinji_Ikari",
+                wikipedia "Shinji_Ikari",
                 "existentialism, essentially. He's a whiner, but I like his thought patterns when he's being existential."
             )
         ]
     ),
     (
         "MLP",
-        wikipedia <> "My_Little_Pony:_Friendship_Is_Magic",
+        wikipedia "My_Little_Pony:_Friendship_Is_Magic",
         [
             (
                 "Twilight Sparkle",
-                wikipedia <> "List_of_My_Little_Pony%3A_Friendship_Is_Magic_characters#Twilight_Sparkle",
+                wikipedia "List_of_My_Little_Pony%3A_Friendship_Is_Magic_characters#Twilight_Sparkle",
                 "knowledge and being awesome"
             )
         ]
     ),
     (
         "Alice's Adventures in Wonderland",
-        wikipedia <> "Alice%27s_Adventures_in_Wonderland",
+        wikipedia "Alice%27s_Adventures_in_Wonderland",
         [
             (
                 "The Mad Hatter",
-                wikipedia <> "Hatter_(Alice%27s_Adventures_in_Wonderland)",
+                wikipedia "Hatter_(Alice%27s_Adventures_in_Wonderland)",
                 "I like his sense of humour, eccentricity and hats"
             )
         ]
@@ -203,29 +208,29 @@ favCharacters = [
     ),
     (
         "Back to the Future",
-        wikipedia <> "Back_to_the_Future_(franchise)",
+        wikipedia "Back_to_the_Future_(franchise)",
         [
             (
                 "\"Doc\" Emmett Brown",
-                wikipedia <> "Emmett_Brown",
+                wikipedia "Emmett_Brown",
                 "he's eccentric and time travel, hell yeah"
             )
         ]
     ),
     (
         "Doctor Who",
-        wikipedia <> "Doctor_Who",
+        wikipedia "Doctor_Who",
         [
             (
                 "The Doctor",
-                wikipedia <> "The_Doctor_(Doctor_Who)",
+                wikipedia "The_Doctor_(Doctor_Who)",
                 "of eccentricity, inventions and awesomeness"
             )
         ]
     ),
     (
         "Battleborn",
-        wikipedia <> "Battleborn_(video_game)",
+        wikipedia "Battleborn_(video_game)",
         [
             (
                 "Marquis",

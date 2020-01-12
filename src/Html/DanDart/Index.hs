@@ -107,7 +107,7 @@ pageFavourites = li ! class_ "nav-item" $ do
             ul $ do
                 li $ extLink "http://www.idsoftware.com/en-gb" "Quake"
                 li $ extLink "http://sauerbraten.org/" "Cube 2: Sauerbraten"
-                li $ extLink (wikipedia <> "The_Elder_Scrolls_IV:_Oblivion") "The Elder Scrolls IV: Oblivion"
+                li $ extLink (wikipedia "The_Elder_Scrolls_IV:_Oblivion") "The Elder Scrolls IV: Oblivion"
                 li $ extLink "https://ddlc.moe/" "Doki Doki Literature Club"
                 li $ do
                     extLink "https://danganronpa.us/" "Danganronpa"
@@ -123,9 +123,9 @@ pageFavourites = li ! class_ "nav-item" $ do
                     ": "
                     extLink "http://kubuntu.org" "Kubuntu"
                 li $ do
-                    extLink (wikipedia <> "Blue_Screen_of_Death") "Windows"
+                    extLink (wikipedia "Blue_Screen_of_Death") "Windows"
                     ": "
-                    extLink (wikipedia <> "Windows_98#Windows_98_Second_Edition") "98 SE"
+                    extLink (wikipedia "Windows_98#Windows_98_Second_Edition") "98 SE"
                 li $ do
                     "All-time: "
                     extLink "http://riscos.com/riscos/310/index.php" "RISC OS"
