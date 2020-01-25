@@ -291,15 +291,15 @@ socialIcons = H.div ! class_ "row social-row" $ H.div ! class_ "text-right socia
     socialIconB "https://blog.dandart.co.uk/" "Blogger" "blogger-b"
     socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
     -- +social('discord', 'Discord', 'url', 'black')
-    -- +social-no('facebook', 'Facebook', 'url', 'black')
+    socialIconBBanned "" "No Facebook" "facebook-f"
     --  +social('firefox
     socialIconS "mailto:website@dandart.co.uk" "Email" "envelope"
     socialIconB "https://github.com/danwdart" "GitHub" "github"
-    -- +social-no('google', 'Google', 'url', 'black')
+    socialIconBBanned "" "No Google" "google"
     socialIconB "https://news.ycombinator.com/user?id=dandart" "Hacker News" "hacker-news"
     socialIconB "https://www.hackerrank.com/dandart" "HackerRank" "hackerrank"
     socialIconB "https://www.imdb.com/user/ur81806610" "ImDB" "imdb"
-    -- +social('instagram', 'Instagram', 'url', 'black')
+    socialIconBBanned "" "No Instagram" "instagram"
     -- +social('keybase', 'Keybase', 'url', 'black')
     socialIconB "https://www.last.fm/user/DanDart" "Last.fm" "lastfm"
     socialIconB "https://www.linkedin.com/in/dandart" "LinkedIn" "linkedin"
@@ -309,18 +309,17 @@ socialIcons = H.div ! class_ "row social-row" $ H.div ! class_ "text-right socia
     socialIconB "https://www.npmjs.com/~dandart" "npm" "npm"
     socialIconB "https://www.patreon.com/kathiedart" "Patreon" "patreon"
     socialIconB "https://my.playstation.com/profile/MeowzorFnord" "PlayStation" "playstation"
-    -- +social-no('pinterest', 'Pinterest', 'url', 'black')
-    -- +pump('url', 'black')
+    socialIconBBanned "" "No Pinterest" "pinterest"
     -- +social('raspberry-pi', 'Raspberry PI', 'url', 'black')
     socialIconB "https://www.reddit.com/user/jolharg" "Reddit" "reddit"
-    -- +social('skype', 'Skype', 'url', 'black')
-    socialIconB "/img/snapcode.svg" "Snapchat" "snapchat"
+    socialIconB "skypeurl" "Skype" "skype"
+    socialIconBBanned "" "No Snapchat" "snapchat"
     socialIconB "https://soundcloud.com/kathiedart" "SoundCloud" "soundcloud"
-    -- +social('spotify', 'Spotify', 'url', 'black')
+    socialIconB "spotify url" "Spotify" "spotify"
     socialIconB "https://stackoverflow.com/users/1764563/dan-dart" "Stack Overflow" "stack-overflow"
     socialIconB "https://steamcommunity.com/id/dandart" "Steam" "steam"
     socialIconB "https://floofyhacker.com" "Tumblr" "tumblr"
-    -- +social-no('twitter', 'Twitter', 'url', 'black')
+    socialIconBBanned "" "No Twitter" "twitter"
     -- +social('ubuntu', 'Ubuntu', 'url', 'black')
     -- +social-no('windows', 'Windows', 'url', 'black')
     socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube"
