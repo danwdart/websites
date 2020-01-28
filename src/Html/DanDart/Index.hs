@@ -70,8 +70,7 @@ pageFavourites = li ! class_ "nav-item" $ do
                 li $ strong "General Knowledge / Other"
                 ul $ li $ extLink (ytChan <> "UC9pgQfOXRsp4UKrI8q0zjXQ") "Lindybeige"
             p $ do
-                strong "TV shows/movies"
-                "(I also have an "
+                strong "TV shows/movies (I also have an "
                 extLink "https://www.imdb.com/list/ls029966237/" "IMDB"
                 " watchlist)"
             ul $ do
@@ -252,7 +251,7 @@ pageAbout = li ! class_ "nav-item" $ do
             p mempty
             p $ do
                 strong "The code"
-                " actually contains no client-side JS at all, therefore, also adding to the preference of more and more users these days to not have tracking. The website code is compiled using the Pug layout engine, and uploaded to GitHub Pages. It uses my custom website theme which is published under the JolHarg organisation."
+                " actually contains no client-side JS at all, therefore, also adding to the preference of more and more users these days to not have tracking. The website code is compiled using a custom Haskell-based codebase based on Blaze, and uploaded to GitHub Pages."
             p mempty
             p $ do
                 strong "The font choice"
