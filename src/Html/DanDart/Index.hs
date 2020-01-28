@@ -70,7 +70,8 @@ pageFavourites = li ! class_ "nav-item" $ do
                 li $ strong "General Knowledge / Other"
                 ul $ li $ extLink (ytChan <> "UC9pgQfOXRsp4UKrI8q0zjXQ") "Lindybeige"
             p $ do
-                strong "TV shows/movies (I also have an "
+                strong "TV shows/movies"
+                " (I also have an "
                 extLink "https://www.imdb.com/list/ls029966237/" "IMDB"
                 " watchlist)"
             ul $ do
