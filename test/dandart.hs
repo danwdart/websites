@@ -6,6 +6,7 @@ import Control.Monad.Trans.State.Strict
 import Data.Aeson
 import Data.Default
 import Data.Text
+import System.Directory
 import System.FilePath
 import Test.QuickCheck
 import Test.WebDriver
@@ -25,6 +26,7 @@ main = do
     -- quickCheck prop_RevRev
     runSession chromeConfig $ do 
         openPage "https://dandart.co.uk"
+        liftIO . createDirectoryIfMissing True $ "images"
         saveScreenshot "images/home.png"
         mapM_ (\linkName -> do
             liftIO . putStrLn $ "Clicking " ++ unpack linkName
