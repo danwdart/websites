@@ -3,8 +3,10 @@
 import Control.Monad.Base
 import Control.Monad.IO.Class
 import Control.Monad.Trans.State.Strict
+import Data.Aeson
 import Data.Default
 import Data.Text
+import System.FilePath
 import Test.QuickCheck
 import Test.WebDriver
 import Test.WebDriver.Config
@@ -19,11 +21,17 @@ firefoxConfig = defaultConfig
 chromeConfig = useBrowser chrome defaultConfig
 
 main = do
+    putStrLn "Checking dandart.co.uk..."
     -- quickCheck prop_RevRev
     runSession chromeConfig $ do 
         openPage "https://dandart.co.uk"
-        body <- findElem $ ByTag "body"
-        text <- attr body "innerHTML"
-        liftIO . print $ text
-        saveScreenshot "bob.png"
+        saveScreenshot "images/home.png"
+        mapM_ (\linkName -> do
+            liftIO . putStrLn $ "Clicking " ++ unpack linkName
+            link <- findElem $ ByLinkText linkName
+            click link
+            liftIO . putStrLn $ "Saving " ++ unpack linkName
+            saveScreenshot $ "images" </> unpack linkName <.> "png"
+            ) ["Characters", "Favourites", "Ham Radio", "Health", "Music", "Maths", "About This Site", "Contact"]
+        -- saveScreenshot "bob.png"
         closeSession
