@@ -9,9 +9,9 @@ import Text.Blaze.Html.Renderer.Utf8
 
 main :: IO ()
 main = do
+    -- Copy all static files
     copyDir "static/common" ".sites/dandart"
     copyDir "static/dandart" ".sites/dandart"
-    -- Copy all static files
     -- Build HTML
     BSL.writeFile ".sites/dandart/index.html" $ renderHtml page
     -- Build CSS?

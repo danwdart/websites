@@ -21,6 +21,7 @@ firefoxConfig = defaultConfig
 
 chromeConfig = useBrowser chrome defaultConfig
 
+main :: IO ()
 main = do
     putStrLn "Checking dandart.co.uk..."
     -- quickCheck prop_RevRev
@@ -35,5 +36,4 @@ main = do
             liftIO . putStrLn $ "Saving " ++ unpack linkName
             saveScreenshot $ "images" </> unpack linkName <.> "png"
             ) ["Characters", "Favourites", "Ham Radio", "Health", "Music", "Maths", "About This Site", "Contact"]
-        -- saveScreenshot "bob.png"
         closeSession

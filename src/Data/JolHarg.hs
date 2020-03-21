@@ -8,16 +8,27 @@ import Text.Blaze.Html5.Attributes as A
 
 keywords :: [AttributeValue]
 keywords = [
+    "jolharg",
+    "software",
     "dan",
     "dart",
     "software",
     "engineer",
     "mathematics",
-    "lover",
-    "radio",
-    "ham",
+    "haskell",
     "php",
     "javascript",
+    "react",
+    "react.js",
+    "hoogle",
+    "help",
+    "computing",
+    "computer",
+    "serverless",
+    "npm",
+    "hask",
+    "ask",
+    "question",
     "css",
     "coffee",
     "coffeescript",
@@ -32,4 +43,4 @@ keywords = [
     ]
 
 descTitle :: String
-descTitle = "JolHarg: Engineering Software"
+descTitle = "JolHarg: Your Software Engineering Partner"
