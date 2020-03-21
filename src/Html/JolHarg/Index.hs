@@ -21,6 +21,8 @@ pagePortfolio = li ! class_ "nav-item" $ do
         H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Portfolio"
         H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
         H.div ! class_ "row" $ do
+            card "img/polaris.png" "Polaris Elements" "Hospitality software" "https://polaris-elements.co.uk/"
+            cardDefunct "Plugin ASO" "Analytics dashboard for Shopify"
             card "img/faultfixers.png" "FaultFixers" "Facilities management" "https://faultfixers.com"
             card "img/dadi.png" "DADI" "DADI web services suite" "https://dadi.cloud/en/"
             card "img/planetradio.png" "Planet Radio" "Collection of UK radio magazine websites" "https://planetradio.co.uk/"
