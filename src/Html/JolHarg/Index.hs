@@ -21,6 +21,11 @@ pagePortfolio = li ! class_ "nav-item" $ do
         H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Portfolio"
         H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
         H.div ! class_ "row" $ do
+            H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
+                img ! class_ "card-img-top" ! src "img/sample.png"
+                h4 ! class_ "card-title" $ "You"
+                p ! class_ "card-text" $ "Make an enquiry for a website:"
+                a ! class_ "btn btn-primary" ! href "mailto:website@jolharg.com" ! target "_blank" ! rel "noopener" $ "Enquire"
             card "img/polaris.png" "Polaris Elements" "Hospitality software" "https://polaris-elements.co.uk/"
             cardDefunct "Plugin ASO" "Analytics dashboard for Shopify"
             card "img/faultfixers.png" "FaultFixers" "Facilities management" "https://faultfixers.com"
