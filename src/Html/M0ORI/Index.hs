@@ -12,19 +12,9 @@ import Html.Common.Social
 import Text.Blaze.Html5 as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-pageIntro :: Html
-pageIntro = li ! class_ "nav-item" $ do
-    input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! name "selected" ! A.id "Intro" ! value "Intro"
-    H.label ! class_ "mb-0" ! for "Intro" $ a ! class_ "nav-link btn btn-sm" $ "Intro"
-    H.div ! class_ "page" ! A.id "intro" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Intro"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light" $ do
-            p "This is the page of M0ORI, Dan."
-            p "To Do."
-
 pageHamRadio :: Html
 pageHamRadio = li ! class_ "nav-item" $ do
-    input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Ham Radio" ! value "Ham Radio"
+    input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! name "selected" ! A.id "Ham Radio" ! value "Ham Radio"
     H.label ! class_ "mb-0" ! for "Ham Radio" $ a ! class_ "nav-link btn btn-sm" $ "Ham Radio"
     H.div ! class_ "page" ! A.id "ham" $ do
         H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Ham Radio"
@@ -86,7 +76,6 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
         H.span ! class_ "title ml-2" $ "M0ORI: Dan Dart"
     H.div $
         ul ! class_ "navbar-nav px-3" $ do
-            pageIntro            
             pageHamRadio
             pageContact
 
