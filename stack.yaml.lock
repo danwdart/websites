@@ -103,6 +103,13 @@ packages:
   original:
     hackage: unix-2.7.2.2
 - completed:
+    hackage: wai-app-static-3.1.7.1@sha256:5794536cf07f660cacac29a80c55b413cccffa1db2b56ecfda2efe0c06ad752e,3981
+    pantry-tree:
+      size: 1343
+      sha256: 601ed90bf7f3f315e117bc97d201a87253e2657a3779edcb1a9840debacda585
+  original:
+    hackage: wai-app-static-3.1.7.1
+- completed:
     hackage: webdriver-0.9.0.1@sha256:95b810162a436390f83e8aa5e0038bb3a094f2f0ad35f30d3c07e2a3564ae26f,3365
     pantry-tree:
       size: 1799

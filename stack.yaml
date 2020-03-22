@@ -17,6 +17,7 @@ extra-deps:
   - req-2.1.0
   - text-1.2.4.0
   - unix-2.7.2.2
+  - wai-app-static-3.1.7.1
   - webdriver-0.9.0.1
 ghc-options:
   web: -Wall -Werror
