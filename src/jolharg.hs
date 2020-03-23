@@ -2,6 +2,8 @@
 
 import Build.Utils
 
+import Control.Monad.Reader
+
 import qualified Data.ByteString.Lazy.Char8 as BSL
 
 import Data.JolHarg
@@ -27,5 +29,5 @@ main = do
     reposJH <- runReq defaultHttpConfig $ getRepos "jolharg"
     copyDir "static/common" ".sites/jolharg"
     copyDir "static/jolharg" ".sites/jolharg"
-    BSL.writeFile ".sites/jolharg/index.html" $ renderHtml $ page $ reposDan <> reposJH
+    BSL.writeFile ".sites/jolharg/index.html" $ renderHtml $ runReader page (reposDan <> reposJH)
     putStrLn "jolharg compiled."

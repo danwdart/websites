@@ -2,6 +2,8 @@
 
 module Html.JolHarg.Index (page) where
 
+import Control.Monad.Reader
+
 import Data.JolHarg
 
 import Html.Common.Card
@@ -45,14 +47,16 @@ pagePortfolio = li ! class_ "nav-item" $ do
             card "img/smdaf.png" "Shepton Mallet Digital Arts Festival" "Local festival site" "http://sheptondigitalarts.co.uk"
             card "img/ssoha.png" "SSOHA" "Somerset School of Oriental Healing Arts" "http://ssoha.org.uk"
 
-pageFs :: [Repo] -> Html
-pageFs allRepos = li ! class_ "nav-item" $ do
-    input ! type_ "radio" ! A.style "display:none" ! A.name "selected" ! A.id "Free Software" ! value "Free Software"
-    H.label ! class_ "mb-0" ! for "Free Software" $ a ! class_ "nav-link btn btn-sm" $ "Free Software"
-    H.div ! class_ "page" ! A.id "fs" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Free Software"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
-        mapM_ renderCard allRepos
+pageFs :: Reader [Repo] Html
+pageFs = do
+    repos <- ask
+    return $ li ! class_ "nav-item" $ do
+        input ! type_ "radio" ! A.style "display:none" ! A.name "selected" ! A.id "Free Software" ! value "Free Software"
+        H.label ! class_ "mb-0" ! for "Free Software" $ a ! class_ "nav-link btn btn-sm" $ "Free Software"
+        H.div ! class_ "page" ! A.id "fs" $ do
+            H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Free Software"
+            H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
+            mapM_ renderCard repos
 
 pageContact :: Html
 pageContact = li ! class_ "nav-item" $ do
@@ -78,23 +82,20 @@ pageContact = li ! class_ "nav-item" $ do
                     textarea ! class_ "form-control" ! A.id "message" ! placeholder "I am interested in a website..." ! rows "10" ! A.name "message" $ mempty
                 H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send"
 
-htmlHeader :: [Repo] -> Html
-htmlHeader allRepos = H.header $ nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
-    a ! class_ "w-75 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "" $ img ! src "/img/jolharg.png" ! A.style "height:32px" ! alt ""
-    H.div $ ul ! class_ "navbar-nav px-3" $ do
-        pagePortfolio
-        --  +menuitem('Technologies')
-        --    include ../pages/techs
-        pageFs allRepos
-        --  +menuitem('Pricing')
-        --    include ../pages/pricing
-        --  +menuitem('Blog')
-        --    include ../pages/blog
-        --  +menuitem('About')
-        --    include ../pages/about
-        pageContact
+-- Todo Technologies, Pricing, Blog, About
+htmlHeader :: Reader [Repo] Html
+htmlHeader = do
+    fs <- pageFs
+    return $ H.header $ nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
+        a ! class_ "w-75 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "" $ img ! src "/img/jolharg.png" ! A.style "height:32px" ! alt ""
+        H.div $ ul ! class_ "navbar-nav px-3" $ do
+            pagePortfolio
+            fs
+            pageContact
 
-page :: [Repo] -> Html
-page allRepos = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords
-    htmlHeader allRepos
+page :: Reader [Repo] Html
+page = do
+    header <- htmlHeader
+    return $ docTypeHtml ! lang "en-GB" $ do
+        htmlHead descTitle keywords
+        header
