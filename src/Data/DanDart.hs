@@ -1,12 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.DanDart (keywords, descTitle, musicalStyles, favCharacters, musicList) where
 
-import Html.Common.Shortcuts
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Html.Common.Shortcuts
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
-keywords :: [AttributeValue]
+keywords ∷ [AttributeValue]
 keywords = [
     "dan",
     "dart",
@@ -31,10 +32,10 @@ keywords = [
     "debian"
     ]
 
-descTitle :: String
+descTitle ∷ String
 descTitle = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician"
 
-musicalStyles :: [Html]
+musicalStyles ∷ [Html]
 musicalStyles = [
     "Prog Rock",
     "Heavy Metal",
@@ -42,7 +43,7 @@ musicalStyles = [
     "Classical"
     ]
 
-favCharacters :: [(Html, AttributeValue, [(Html, AttributeValue, Html)])]
+favCharacters ∷ [(Html, AttributeValue, [(Html, AttributeValue, Html)])]
 favCharacters = [
     (
         "Star Trek",
@@ -240,10 +241,10 @@ favCharacters = [
         ]
     )
     ]
-    
 
 
-musicList :: [(Html, [Html])]
+
+musicList ∷ [(Html, [Html])]
 musicList = [
     (
         "Pink Floyd",

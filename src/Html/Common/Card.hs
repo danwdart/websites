@@ -1,22 +1,23 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Common.Card (Language (..), imagesFs, Repo (..), card, cardDefunct, renderCard) where
 
-import Control.Monad
+import           Control.Monad
 
-import Data.String
-import Data.Maybe
-import Distribution.SPDX
+import           Data.Maybe
+import           Data.String
+import           Distribution.SPDX
 
-import Html.Common.GitHub as GH
+import           Html.Common.GitHub          as GH
 
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
-genericImage :: AttributeValue
+genericImage ∷ AttributeValue
 genericImage = "https://web.archive.org/web/20181125122112if_/https://upload.wikimedia.org/wikipedia/commons/1/1a/Code.jpg"
 
-imagesFs :: [(Language, AttributeValue)]
+imagesFs ∷ [(Language, AttributeValue)]
 imagesFs = [
     (LangJS, "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"),
     (LangHTML, "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png"),
@@ -38,28 +39,28 @@ imagesFs = [
     -- TODO Haskell, VB, Docker
     ]
 
-languageImage :: Language -> AttributeValue
+languageImage ∷ Language → AttributeValue
 languageImage l = fromMaybe genericImage (lookup l imagesFs)
-    
-card :: AttributeValue -> Html -> Html -> AttributeValue -> Html
+
+card ∷ AttributeValue → Html → Html → AttributeValue → Html
 card cardImage cardTitle cardText cardLink =  H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
     img ! class_ "card-img-top" ! src cardImage
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
     a ! class_ "btn btn-secondary" ! href cardLink ! target "_blank" ! rel "noopener" $ "Visit"
 
-cardDefunct :: Html -> Html -> Html
+cardDefunct ∷ Html → Html → Html
 cardDefunct cardTitle cardText = H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
     img ! class_ "card-img-top" ! src "img/sample.png"
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
     strong "Website defunct"
 
-licenceLink :: Licence -> Html
+licenceLink ∷ Licence → Html
 licenceLink licence =  a ! href ("https://spdx.org/licenses/" <> fromString avOrHtmlSpdx <> ".html") ! target "_blank" $ fromString avOrHtmlSpdx
     where avOrHtmlSpdx = GH.spdx_id licence
 
-renderCard :: Repo -> Html
+renderCard ∷ Repo → Html
 renderCard repo =
     H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
         img ! class_ "card-img-top-github" ! A.src (languageImage . language $ repo)

@@ -1,19 +1,22 @@
-{-# LANGUAGE DeriveAnyClass, DeriveGeneric, OverloadedStrings #-}
+{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 module Html.Common.GitHub (Repo (..), Language (..), Licence (..), getRepos) where
 
-import Control.Monad.IO.Class
-import Data.Aeson
-import Data.Aeson.Types
-import Data.Maybe
-import Data.Text as T
-import Debug.Trace
-import Distribution.SPDX
-import GHC.Generics
-import Network.HTTP.Req
-import System.Environment
+import           Control.Monad.IO.Class
+import           Data.Aeson
+import           Data.Aeson.Types
+import           Data.Maybe
+import           Data.Text              as T
+import           Debug.Trace
+import           Distribution.SPDX
+import           GHC.Generics
+import           Network.HTTP.Req
+import           System.Environment
 
 data Language = LangHS
-    | LangJS 
+    | LangJS
     | LangHTML
     | LangPHP
     | LangASM
@@ -32,25 +35,25 @@ data Language = LangHS
 
 instance FromJSON Language where
     parseJSON (String a) = return $ case a of
-        "JavaScript" -> LangJS
-        "HTML" -> LangHTML
-        "Python" -> LangPython
-        "PHP" -> LangPHP
-        "TypeScript" -> LangTS
+        "JavaScript"   -> LangJS
+        "HTML"         -> LangHTML
+        "Python"       -> LangPython
+        "PHP"          -> LangPHP
+        "TypeScript"   -> LangTS
         "CoffeeScript" -> LangCoffee
-        "Shell" -> LangShell
-        "Assembly" -> LangASM
-        "C" -> LangC
-        "Makefile" -> LangShell
+        "Shell"        -> LangShell
+        "Assembly"     -> LangASM
+        "C"            -> LangC
+        "Makefile"     -> LangShell
         "Visual Basic" -> LangVB
-        "Dockerfile" -> LangDocker
-        "Tcl" -> LangTcl
-        "BlitzBasic" -> LangBlitzBasic
-        "Haskell" -> LangHS
-        "C++" -> LangCPP
-        "VBA" -> LangVB
-        "Vim script" -> LangShell
-        _ -> error $ "Unknown language: " ++ T.unpack a
+        "Dockerfile"   -> LangDocker
+        "Tcl"          -> LangTcl
+        "BlitzBasic"   -> LangBlitzBasic
+        "Haskell"      -> LangHS
+        "C++"          -> LangCPP
+        "VBA"          -> LangVB
+        "Vim script"   -> LangShell
+        _              -> error $ "Unknown language: " ++ T.unpack a
     parseJSON Null = return LangGeneric
 
 newtype Licence = Licence {
@@ -58,14 +61,14 @@ newtype Licence = Licence {
 } deriving (Eq, FromJSON, Generic, Show)
 
 data Repo = Repo {
-    name :: String,
+    name        :: String,
     description :: Maybe String,
-    fork :: Bool,
-    language :: Language,
-    source :: Maybe String,
-    website :: Maybe String,
-    licence :: Maybe Licence,
-    stars :: Int
+    fork        :: Bool,
+    language    :: Language,
+    source      :: Maybe String,
+    website     :: Maybe String,
+    licence     :: Maybe Licence,
+    stars       :: Int
 } deriving (Generic, Show)
 
 instance FromJSON Repo where
@@ -98,7 +101,7 @@ instance FromJSON Repo where
         let website = if isJust homepage && Just "" == homepage
             then Nothing
             else homepage
-        
+
         let licenceText = if isJust licence && Just (Licence "NOASSERTION") == licence
             then Nothing
             else licence
@@ -114,7 +117,7 @@ instance FromJSON Repo where
             stars = stargazers
         }
 
-getRepos :: Text -> Req [Repo]
+getRepos ∷ Text → Req [Repo]
 getRepos user = do
     githubAccessToken <- liftIO . getEnv $ "GITHUB_ACCESS_TOKEN" -- throws
     res <- req GET (https "api.github.com" /: "users" /: user /: "repos") NoReqBody jsonResponse (

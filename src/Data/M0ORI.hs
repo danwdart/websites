@@ -1,12 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.M0ORI (keywords, descTitle) where
 
-import Html.Common.Shortcuts
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Html.Common.Shortcuts
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
-keywords :: [AttributeValue]
+keywords ∷ [AttributeValue]
 keywords = [
     "dan",
     "dart",
@@ -19,5 +20,5 @@ keywords = [
     "qrz"
     ]
 
-descTitle :: String
+descTitle ∷ String
 descTitle = "M0ORI call sign: Dan Dart, England"

@@ -1,12 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.JolHarg (keywords, descTitle) where
 
-import Html.Common.Shortcuts
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Html.Common.Shortcuts
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
-keywords :: [AttributeValue]
+keywords ∷ [AttributeValue]
 keywords = [
     "jolharg",
     "software",
@@ -42,5 +43,5 @@ keywords = [
     "debian"
     ]
 
-descTitle :: String
+descTitle ∷ String
 descTitle = "JolHarg: Your Software Engineering Partner"
