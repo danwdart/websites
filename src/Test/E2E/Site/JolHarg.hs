@@ -1,5 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+module Test.E2E.Site.JolHarg where
+
 import Control.Monad.Base
 import Control.Monad.IO.Class
 import Control.Monad.Trans.State.Strict

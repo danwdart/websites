@@ -221,7 +221,7 @@ pageOrigami = li ! class_ "nav-item" $ do
                 extLink "https://amzn.to/2BspLWn" "Ultimate Origami Kit: The Complete Step-by-step Guide to the Art of Paper Folding, a book by John Morin"
                 extLink "https://amzn.to/2VzLzqe" "How to Make Origami Airplanes That Fly, a book by Gery Hsu"
 
-pageAbout :: Html""
+pageAbout :: Html
 pageAbout = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "About This Site" ! value "About This Site"
     H.label ! class_ "mb-0" ! for "About This Site" $ a ! class_ "nav-link btn btn-sm" $ "About This Site"

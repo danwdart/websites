@@ -1,5 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+module Test.E2E.Site.DanDart where
+
 import Control.Monad.Base
 import Control.Monad.IO.Class
 import Control.Monad.Trans.State.Strict
@@ -23,10 +25,10 @@ chromeConfig = useBrowser chrome defaultConfig
 
 main :: IO ()
 main = do
-    putStrLn "Checking m0ori.com..."
+    putStrLn "Checking dandart.co.uk..."
     -- quickCheck prop_RevRev
     runSession chromeConfig $ do 
-        openPage "https://m0ori.com"
+        openPage "https://dandart.co.uk"
         liftIO . createDirectoryIfMissing True $ "images"
         saveScreenshot "images/home.png"
         mapM_ (\linkName -> do
@@ -35,5 +37,5 @@ main = do
             click link
             liftIO . putStrLn $ "Saving " ++ unpack linkName
             saveScreenshot $ "images" </> unpack linkName <.> "png"
-            ) ["Ham Radio", "Contact"]
+            ) ["Characters", "Favourites", "Ham Radio", "Health", "Music", "Maths", "About This Site", "Contact"]
         closeSession

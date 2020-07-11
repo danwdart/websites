@@ -13,33 +13,9 @@ build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
 
-executable dandart
+executable websites
   hs-source-dirs:      src
-  main-is:             dandart.hs
-  default-language:    Haskell2010
-  build-depends:       
-      base >= 4.7 && < 5
-    , blaze-html
-    , blaze-markup
-    , bytestring
-    , Cabal
-    , directory
-    , fsutils
-  other-modules:       
-      Build.Utils
-    , Data.DanDart
-    , Html.DanDart.Index
-    , Html.Common.Audio
-    , Html.Common.CSS
-    , Html.Common.Head
-    , Html.Common.Link
-    , Html.Common.Shortcuts
-    , Html.Common.Social
-    , Html.Common.Utils
-
-executable jolharg
-  hs-source-dirs:      src
-  main-is:             jolharg.hs
+  main-is:             Main.hs
   default-language:    Haskell2010
   build-depends:       
       base >= 4.7 && < 5
@@ -48,117 +24,50 @@ executable jolharg
     , blaze-markup
     , bytestring
     , Cabal
+    , cheapskate
     , directory
+    , filepath
     , fsutils
     , mtl
     , req
     , text
-  other-modules:       
-      Build.Utils
-    , Data.JolHarg
-    , Html.JolHarg.Index
-    , Html.Common.Card
-    , Html.Common.CSS
-    , Html.Common.GitHub
-    , Html.Common.Head
-    , Html.Common.Link
-    , Html.Common.Shortcuts
-    , Html.Common.Social
-    , Html.Common.Utils
-
-executable m0ori
-  hs-source-dirs:      src
-  main-is:             m0ori.hs
-  default-language:    Haskell2010
-  build-depends:       
-      base >= 4.7 && < 5
-    , aeson
-    , blaze-html
-    , blaze-markup
-    , bytestring
-    , Cabal
-    , directory
-    , fsutils
-    , req
-    , text
-  other-modules:       
-      Build.Utils
-    , Data.M0ORI
-    , Html.M0ORI.Index
-    , Html.Common.Card
-    , Html.Common.CSS
-    , Html.Common.GitHub
-    , Html.Common.Head
-    , Html.Common.Link
-    , Html.Common.Shortcuts
-    , Html.Common.Social
-    , Html.Common.Utils
-
-executable blog
-  hs-source-dirs:      src
-  main-is:             blog.hs
-  default-language:    Haskell2010
-  build-depends:       
-      base >= 4.7 && < 5
-    , aeson
-    , blaze-html
-    , blaze-markup
-    , bytestring
-    , Cabal
-    , directory
-    , fsutils
-    , markdown
-    , req
-    , text
+    , wai
+    , wai-app-static
+    , wai-extra
+    , warp
   other-modules:       
       Build.Utils
     , Data.Blog
     , Html.Blog.Index
+    , Data.DanDart
+    , Html.DanDart.Index
+    , Data.JolHarg
+    , Html.JolHarg.Index
+    , Data.M0ORI
+    , Html.M0ORI.Index
+    , Html.Common.Audio
     , Html.Common.Card
     , Html.Common.CSS
+    , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Link
+    , Html.Common.Shortcuts
+    , Html.Common.Social
     , Html.Common.Utils
+    , Site.Blog
+    , Site.DanDart
+    , Site.JolHarg
+    , Site.M0ORI
 
-executable e2e-dandart
-  hs-source-dirs:      test
-  main-is:             dandart.hs
+test-suite e2e
+  hs-source-dirs:      src
+  type:                detailed-0.9
+  test-module:         Test.E2E.Main
   default-language:    Haskell2010
   build-depends:       
       base >= 4.7 && < 5
     , aeson
-    , data-default
-    , directory
-    , filepath
-    , QuickCheck
-    , text
-    , transformers
-    , transformers-base
-    , webdriver
-
-executable e2e-jolharg
-  hs-source-dirs:      test
-  main-is:             jolharg.hs
-  default-language:    Haskell2010
-  build-depends:       
-      base >= 4.7 && < 5
-    , aeson
-    , data-default
-    , directory
-    , filepath
-    , QuickCheck
-    , text
-    , transformers
-    , transformers-base
-    , webdriver
-
-executable e2e-m0ori
-  hs-source-dirs:      test
-  main-is:             m0ori.hs
-  default-language:    Haskell2010
-  build-depends:       
-      base >= 4.7 && < 5
-    , aeson
+    , Cabal
     , data-default
     , directory
     , filepath

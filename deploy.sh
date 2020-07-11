@@ -5,7 +5,7 @@ siteupdate() {
     git push
 }
 
-./build.sh
+stack run
 cd .sites/dandart
 siteupdate
 cd ../jolharg
