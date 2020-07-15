@@ -4,3 +4,9 @@
 [submodule ".sites/jolharg"]
 	path = .sites/jolharg
 	url = git@github.com:JolHarg/jolharg.git
+[submodule ".sites/m0ori"]
+	path = .sites/m0ori
+	url = git@github.com:danwdart/m0ori.git
+[submodule ".sites/blog"]
+	path = .sites/blog
+	url = git@github.com:danwdart/blog.git

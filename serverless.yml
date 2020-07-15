@@ -1,0 +1,18 @@
+service: mypackage
+
+provider:
+  name: aws
+  runtime: haskell
+
+functions:
+  submit-comment:
+    handler: websites.submit-comment
+    name: ${self:provider.stage}-submit-comment
+    events:
+      - http:
+          path: /comment
+          method: post
+          cors: true
+          private: false
+plugins:
+  - serverless-haskell

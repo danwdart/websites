@@ -20,7 +20,7 @@ import Debug.Trace
 build :: IO ()
 build = do
     files <- getDirectoryContents "posts"
-    let fileNames = ("posts/" </>) <$> files
+    let fileNames = ("posts/" </>) <$> files -- if used in same line, use Compose
     validFiles <- filterM doesFileExist fileNames
     posts <- sequence $ TIO.readFile <$> validFiles
     make "blog" . page <$> toMarkup . markdown def $ T.concat posts

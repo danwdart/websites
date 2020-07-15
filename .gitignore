@@ -1,4 +1,6 @@
 .stack-work
+node_modules/
+.serverless/
 dist
 dist-newstyle
 .ghc.*
