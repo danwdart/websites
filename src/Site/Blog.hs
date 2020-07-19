@@ -122,14 +122,14 @@ build = do
         a ! name ("#" <> fromString postId) $ mempty
         h1 $ fromString $ T.unpack $ Site.Blog.title metadata
         small $ do
-            a ! href (fromString $ Data.List.head $ aliases metadata) $ "Permalink"
+            a ! href "#" {-(fromString $ Data.List.head $ aliases metadata) -} $ "Permalink"
             br
             "Published: "
             fromString $ show $ date metadata
             br
             "Tags: "
             foldMap ((\str -> do
-                a ! href ("#" <> fromString str) $ fromString str
+                a ! href "#" {-( <> fromString str)-} $ fromString str
                 " "
                 ) . T.unpack . getTag) (tags metadata)
         html
