@@ -27,10 +27,13 @@ executable websites
     , cheapskate
     , directory
     , filepath
+    , frontmatter
     , fsutils
+    , mmark
     , mtl
     , req
     , text
+    , time
     , wai
     , wai-app-static
     , wai-extra

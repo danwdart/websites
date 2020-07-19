@@ -1,0 +1,26 @@
+---
+title: 'Cloud OS'
+date: 2008-10-28T16:08:00.000Z
+draft: false
+aliases: [ "/2008/10/cloud-os.html" ]
+tags : [computer, windows, azure, cloud, operating system, os, blog]
+---
+
+I've noticed that a lot of companies have decided the Cloud (applications on the Internet) is the future. For me, I use a fair few to the extent that I don't use OpenOffice any more, just Google Apps. What particularly provoked me is that big companies are now doing it the whole hog. (see http://www.linux.com/feed/151604 ) So I've decided to make one.  
+It should be:  
+Easy to use  
+Intuitive  
+Aesthetically pleasing  
+Not be anything like today's GUIs  
+  
+I've gathered a few people to help me with this big task:  
+  
+From another blog, "5 things I wish Linux had" at http://www.daniweb.com/blogs/entry3288.html gave me inspiration so I contacted the author to ask him for help with ideas for this OS. He has since made a few more blogs about what Linux needs.  
+  
+This person's blog is now located at: http://thefrugalnetworker.wordpress.com/  
+  
+Another blog, "10 Features Ubuntu Should Implement" at http://www.kumailht.com/blog/linux/10-features-ubuntu-should-implement/ gave me yet more inspiration of what to include in my custom made cloud OS.  
+  
+I'd like anyone and everyone to help make this Cloud system by any means possible, be that advertising, programming, or graphics so please contact me on ( dandart googlemail com) if you would like to be involved in this project.  
+  
+Thank you.
