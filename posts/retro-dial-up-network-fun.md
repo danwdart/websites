@@ -25,68 +25,73 @@ To set this serial emulation up, I tried doing this through the VICE RS232 mode 
 The secret ingredient is to install a virtual serial port - its module is called tty0tty and it can be found here: https://github.com/freemed/tty0tty.  
   
 After installation (check the page for up to date instructions) you have access to 4 virtual serial port loops:  
+```
 /dev/tnt0 <=> /dev/tnt1  
 /dev/tnt2 <=> /dev/tnt3  
 /dev/tnt4 <=> /dev/tnt5  
 /dev/tnt6 <=> /dev/tnt7  
-  
+```
 For use as a normal user, these should be chmod'd to 666:  
-  
+```  
 sudo chmod 666 /dev/tnt\*  
-  
+```
 Anything sent to either end will be echoed on the other end, and this will act like a proper serial port, plugged in one end and the other end. For more information on this, see their GitHub repo.  
   
 Once this is set up, we can start the virtual machine. First, run qemu using the virtual serial line:  
-  
+```  
 qemu-system-i386 win98.img -serial /dev/tnt0  
-
+```
   
 
 Connect the other end to tcpser, which will emulate the phone line and allow you to dial a TCP connection.  
-  
+```
 tcpser -tsSiI -i 's0=1&k3' -s 57600 -S 57600 -l5 -d /dev/tnt1 -n 1=127.0.0.1:2323 -n 2=synchro.net -n 3=  
 localhost:23 -n 08450880101=localhost:2323 -n 08458457444=127.0.0.1:2323 -n "0845 845 7444"=127.0.0.1:2323 -n 0018002169575=127.  
-0.0.1:2323 -n 0018005433279=127.0.0.1:2323 -n 08450801000=127.0.0.1:2323  
+0.0.1:2323 -n 0018005433279=127.0.0.1:2323 -n 08450801000=127.0.0.1:2323
+```  
   
 Explanation: Log everything. Set pickup to 1 ring. Set speed to 56k. Use the other end of the first serial line. Add a few example phone numbers (-n number=IP:port), (these I've used for ISP detection in Windows 98).  
   
 Listen to that TCP connection with socat and redirect it to a second virtual serial line loopback. I don't want it to die so I'll put it in a while true.  
-  
+```  
 while true; do socat -s -d -d tcp-listen:2323 /dev/tnt2; done  
-
+```
   
 
 In order to pretend to be our own ISP, we need to run pppd on the other end of that serial line. I couldn't use IP directly, this needs a serial line, and tcpser couldn't use a second interface, so we need to use socat. The IPs I'm using are within my current network. The rest of the settings are to disable authentication (for now, as I couldn't get it to work, which needs root), not fork the process so we can debug, not die if there's no call, show the debug logs, not communicate via serial (just IP), allow the connection to be seen by the LAN, adjust the forwarding parameters of the kernel appropriately and set a default DNS server of Quad9.  
   
-  
+```  
 sudo pppd /dev/tnt3 57600 192.168.1.100:192.168.1.101 asyncmap 0 netmask 255.255.255.0 noauth silent nodetach passive persist debug local proxyarp ktune  
  ms-dns 9.9.9.9  
-  
+``` 
 If you'd like to define your own DNS mappings from your /etc/hosts, such as pretending to be the server for updates and ISP information (if you host a web server locally), add the appropriate lines to your /etc/hosts like this:  
-  
+```  
 192.168.1.100   ispreferral.microsoft.com www.update.microsoft.com v4.windowsupdate.microsoft.com windowsupdate.microsoft.com ww  
 w.msn.com  
-  
-and change ms-dns 9.9.9.9 to ms-dns 192.168.1.100 in the pppd command, then run dnsmasq:  
-  
+```  
+and change `ms-dns 9.9.9.9` to `ms-dns 192.168.1.100` in the `pppd` command, then run dnsmasq:  
+```  
 sudo dnsmasq -zdippp0 -2ppp0  
-  
+```
 The -z specifies only binding to ppp0 (to not interfere with other services running on port 53/udp, such as systemd-resolved), -d to not daemonise, -i ppp0 to specify the interface and -2 ppp0 to specify only DNS, not DHCP.  
   
   
 In any case, do the usual NAT stuff:  
   
 Allow IP forwarding...  
+```
 echo 1 | sudo tee  /proc/sys/net/ipv4/ip\_forward  
-
+```
   
 
 And allow forwarding and masquerading in the firewall (replace wlp7s0 with your main interface)  
+```
 sudo iptables -t nat -A POSTROUTING -o wlp7s0 -j MASQUERADE  
   
 sudo iptables -A FORWARD -i wlp7s0 -o ppp0 -m state --state RELATED,ESTABLISHED -j ACCEPT  
   
-sudo iptables -A FORWARD -i ppp0 -o wlp7s0 -j ACCEPT  
+sudo iptables -A FORWARD -i ppp0 -o wlp7s0 -j ACCEPT
+```
 ...  
   
 Hooray! Connecting to phone number 1 will give us a "dial up" connection through our virtual serial line! 2 will give us a line to synchro.net for use in the Terminal or HyperTerminal application, 3 will telnet to our local system if we need that for any reason and 08450880101 is the default Windows 98 "find my ISPs" service, which I've also redirected to our "ISP" connection for good measure.  
