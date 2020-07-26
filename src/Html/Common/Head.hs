@@ -27,7 +27,8 @@ metas descTitle keywords = do
 
 htmlHead ∷ String → [AttributeValue] → Html
 htmlHead descTitle keywords = H.head $ do
-    metas descTitle keywords
-    link ! rel "shortcut icon" ! type_ "image/png" ! href "/img/favicon.png"
     H.title $ toHtml descTitle
+    metas descTitle keywords
     commonCSS
+    
+    
