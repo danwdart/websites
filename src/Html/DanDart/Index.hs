@@ -245,6 +245,9 @@ pageAbout = li ! class_ "nav-item" $ do
 pageSoftware :: Html
 pageSoftware = li ! class_ "nav-item" $ a ! class_ "nav-link btn btn-sm" ! href "https://jolharg.com" ! target "_blank" $ "Software"
 
+pageBlog :: Html
+pageBlog = li ! class_ "nav-item" $ a ! class_ "nav-link btn btn-sm" ! href "https://blog.dandart.co.uk" ! target "_blank" $ "Blog"
+
 pageContact :: Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Contact" ! value "Contact"
@@ -272,7 +275,7 @@ pageContact = li ! class_ "nav-item" $ do
 socialIcons :: Html
 socialIcons = H.div ! class_ "row social-row" $ H.div ! class_ "text-right social-inside" $ do
     --  630 on mobile
-    socialIconB "https://blog.dandart.co.uk/" "Blogger" "blogger-b"
+    socialIconBBanned "" "No Blogger" "blogger-b"
     socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
     -- +social('discord', 'Discord', 'url', 'black')
     socialIconBBanned "" "No Facebook" "facebook-f"
@@ -324,6 +327,7 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
             pageMaths
             pageAbout
             pageSoftware
+            pageBlog
             pageContact
         socialIcons
 

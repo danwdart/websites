@@ -125,46 +125,47 @@ renderPost (BlogPost metadata html comments) = do
     h1 $ fromString $ T.unpack $ Site.Blog.title metadata
     small $ do
         a ! href ("#" <> fromString postId) $ "Permalink"
-        br
-        "Published: "
+        " | Published: "
         fromString $ show $ date metadata
-        br
-        "Tags: "
+        " | Tags: "
         foldMap ((\str -> do
             a ! href "#" {-( <> fromString str)-} $ fromString str
             " "
             ) . T.unpack . getTag) (tags metadata)
+    br
+    br
     html
     br
     h3 "Comments"
     if Data.List.null comments then
         p "No comments at the moment. Be the first to comment!"
     else
-        mconcat comments        
+        mconcat comments
     br
-    h4 "Post a comment"
-    H.form
-        ! A.class_ "form"
-        ! enctype "application/x-www-form-urlencoded"
-        ! action "https://postb.in/1595622105966-7620481813792"
-        ! method "post"
-        ! target "_result" $ do
-            H.input ! A.type_ "hidden" ! name "postId" ! value (fromString postId)
-            H.div ! A.class_ "form-group" $ do
-                H.label ! for "name" $ "Name"
-                H.input ! A.type_ "text" ! A.class_ "form-control" ! name "name" ! placeholder "John Smith"
-            H.div ! A.class_ "form-group" $ do
-                H.label ! for "email" $ "Email"
-                H.input ! A.type_ "email" ! A.class_ "form-control" ! name "email" ! placeholder "john@smith.com"
-            H.div ! A.class_ "form-group" $ do
-                H.label ! for "name" $ "Subject"
-                H.input ! A.type_ "text" ! A.class_ "form-control" ! name "subject" ! placeholder "My Subject"
-            H.div ! A.class_ "form-group" $ do
-                H.label ! for "name" $ "Comment"
-                H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
-            H.div ! A.class_ "form-group" $ do
-                button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
-                H.iframe ! name "_result" ! height "30" ! width "200" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
+    details $ do
+        H.summary $ h4 ! A.class_ "d-inline-block" $ "Post a comment"
+        H.form
+            ! A.class_ "form"
+            ! enctype "application/x-www-form-urlencoded"
+            ! action "https://postb.in/1595622105966-7620481813792"
+            ! method "post"
+            ! target "_result" $ do
+                H.input ! A.type_ "hidden" ! name "postId" ! value (fromString postId)
+                mapM_ (\(type_, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
+                    H.label ! for name_ $ label_
+                    H.input ! A.type_ type_ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
+                    ) [
+                        ("text", "name", "Name", "John Smith"),
+                        ("email", "email", "Email", "john@smith.com"),
+                        ("text", "website", "Website", "https://mydomain.com"),
+                        ("text", "subject", "Subject", "My Subject")
+                        ]
+                H.div ! A.class_ "form-group" $ do
+                    H.label ! for "name" $ "Comment"
+                    H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
+                H.div ! A.class_ "form-group" $ do
+                    button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
+                    H.iframe ! name "_result" ! height "30" ! width "200" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
     hr
     
 
