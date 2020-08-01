@@ -38,6 +38,34 @@ executable websites
     , wai-app-static
     , wai-extra
     , warp
+
+executable sort-comments
+  hs-source-dirs:      src
+  main-is:             sort-comments.hs
+  default-language:    Haskell2010
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , blaze-html
+    , blaze-markup
+    , bytestring
+    , Cabal
+    , cheapskate
+    , directory
+    , filepath
+    , frontmatter
+    , fsutils
+    , mmark
+    , mtl
+    , parsec
+    , req
+    , text
+    , time
+    , wai
+    , wai-app-static
+    , wai-extra
+    , warp
+
   other-modules:       
       Build.Utils
     , Data.Blog

@@ -1,14 +1,16 @@
-{-# LANGUAGE DeriveGeneric, OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric, NamedFieldPuns, OverloadedStrings #-}
 module Site.Blog where
 
 import Build.Utils
 import Cheapskate
+import Control.Applicative
 import Control.Monad
 import Data.Aeson (FromJSON, Object, (.:), (.:?))
 import qualified Data.Aeson as A
 import Data.Bifunctor
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as B
+import Data.Foldable
 import Data.Frontmatter
 import Data.List
 import Data.Maybe
@@ -17,6 +19,7 @@ import Data.String
 import Data.Text (Text)
 import Data.Text.Encoding
 import Data.Time
+import Data.Time.Format.ISO8601
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import GHC.Generics
@@ -51,21 +54,33 @@ data BlogMetadata = BlogMetadata {
     tags :: [BlogTag] -- Doesn't like tags which are numbers... nor don't have tags
 } deriving (Generic, Show)
 
-data BlogComment = BlogComment {
-    commentFrom :: Text,
-    commentText :: Text,
-    commentDate :: UTCTime
-}
+data BlogCommentMetadata = BlogCommentMetadata {
+    author :: Text,
+    authorEmail :: Text,
+    authorUrl :: Maybe Text
+} deriving (Generic, Show)
+
+instance FromJSON BlogCommentMetadata where
+    parseJSON (A.Object o) = BlogCommentMetadata <$>
+        o .: "author" <*>
+        o .: "email" <*>
+        o .: "url"
 
 data BlogPost = BlogPost {
     metadata :: BlogMetadata,
     html :: Html,
-    comments :: [Html]
+    comments :: [ParseCommentResult]
 }
 
 data ParseResult = ParseResult {
     resultMetadata :: BlogMetadata,
     resultHtml :: Html
+}
+
+data ParseCommentResult = ParseCommentResult {
+    commentDate :: UTCTime,
+    commentMetadata :: BlogCommentMetadata,
+    commentHtml :: Html
 }
 
 instance FromJSON BlogMetadata where
@@ -76,34 +91,35 @@ instance FromJSON BlogMetadata where
         o .: "aliases" <*>
         (concat <$> (o .:? "tags")) -- Maybe [a] -> [a]
 
--- Remove <h4> blocks
-cleanBlocks :: Block -> Block
-cleanBlocks (Header 4 inlines) = HtmlBlock ""
-cleanBlocks a = a
-
-cleanDoc :: Doc -> Doc
-cleanDoc (Doc opts blocks) = Doc opts $ cleanBlocks <$> blocks
-
 parseFile :: Text -> ParseResult
 parseFile contents = case parseYamlFrontmatter (encodeUtf8 contents) of
-    Done i r -> ParseResult r $ toMarkup $ cleanDoc $ markdown def $ decodeUtf8 i
+    Done i r -> ParseResult r $ toMarkup $ markdown def $ decodeUtf8 i
     Fail i xs y -> error $ "Failure of " ++ show xs ++ y
     _ -> error $ "What is " <> T.unpack contents
 
-getCommentsIfExists :: FilePath -> IO [Html]
+stringToTime :: String -> UTCTime
+stringToTime s = fromJust (
+    (zonedTimeToUTC <$> (iso8601ParseM s :: Maybe ZonedTime)) <|>
+    iso8601ParseM s
+    )
+
+parseComment :: UTCTime -> Text -> ParseCommentResult
+parseComment date contents = case parseYamlFrontmatter (encodeUtf8 contents) of
+    Done i r -> ParseCommentResult date r (toMarkup $ markdown def $ decodeUtf8 i)
+    Fail i xs y -> error $ "Failure of " ++ show xs ++ y
+    _ -> error $ "What is " <> T.unpack contents
+
+getCommentsIfExists :: FilePath -> IO [ParseCommentResult]
 getCommentsIfExists postId = do
     commentFiles <- getDirectoryContents $ "posts/" <> postId
     let commentFileNames = ("posts/" </>) . (postId </>) <$> commentFiles
     validCommentFiles <- filterM doesFileExist commentFileNames
+    let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
     commentTexts <- sequence $ TIO.readFile <$> validCommentFiles
-    let commentData = parseFile <$> commentTexts
-    return $ resultHtml <$> (
-        sortOn (Down . date . resultMetadata) .
-        filter (not . draft . resultMetadata) $
-        commentData
-        )
+    let commentData = zipWith parseComment dates commentTexts
+    return $ sortOn (Down . commentDate) commentData
 
-getComments :: FilePath -> IO [Html]
+getComments :: FilePath -> IO [ParseCommentResult]
 getComments postId = do
     dirExists <- doesDirectoryExist $ "posts/" <> postId
     if dirExists
@@ -140,7 +156,27 @@ renderPost (BlogPost metadata html comments) = do
     if Data.List.null comments then
         p "No comments at the moment. Be the first to comment!"
     else
-        mconcat comments
+        mapM_ (\ParseCommentResult {
+            commentDate,
+            commentMetadata = BlogCommentMetadata {
+                author,
+                authorEmail,
+                authorUrl
+            },
+            commentHtml
+            } -> do
+                small $ do
+                    a ! name (fromString (iso8601Show commentDate)) $ mempty
+                    a ! href ("mailto:" <> (fromString . T.unpack $ authorEmail)) $ string (T.unpack author)
+                    " "
+                    when (isJust authorUrl) $
+                        a ! href (fromString $ T.unpack $ fromJust authorUrl) $ " (URL)"
+                    " said on "
+                    a ! href ("#" <> fromString (iso8601Show commentDate)) $ fromString $ iso8601Show commentDate    
+                    ":"
+                p commentHtml
+                br
+            ) comments
     br
     details $ do
         H.summary $ h4 ! A.class_ "d-inline-block" $ "Post a comment"
@@ -157,8 +193,7 @@ renderPost (BlogPost metadata html comments) = do
                     ) [
                         ("text", "name", "Name", "John Smith"),
                         ("email", "email", "Email", "john@smith.com"),
-                        ("text", "website", "Website", "https://mydomain.com"),
-                        ("text", "subject", "Subject", "My Subject")
+                        ("text", "website", "Website", "https://mydomain.com")
                         ]
                 H.div ! A.class_ "form-group" $ do
                     H.label ! for "name" $ "Comment"
