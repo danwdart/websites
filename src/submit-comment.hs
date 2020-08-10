@@ -8,12 +8,15 @@ import Data.Aeson.Embedded
 import Data.ByteString.Lazy.Base64
 import Data.Char
 import Data.Function ((&))
+import Data.Maybe
 import Data.Text as T
+import Data.Text.Encoding
 import Data.Time
 import Data.Time.Format.ISO8601
 import GHC.Generics
 import GitHub.REST as GH hiding ((.:))
 import Network.AWS.Data.Text
+import Network.AWS.Data.Query
 import Network.AWS.Lens
 
 newtype RefObject = RefObject {
@@ -29,10 +32,6 @@ data CommentRecord = CommentRecord {
     recComment :: Text
 } deriving (Generic, ToJSON)
 
-newtype CommentResponse = CommentResponse {
-  ok :: Bool
-} deriving (Generic, FromJSON, ToJSON)
-
 instance FromJSON CommentRecord where
   parseJSON (Object o) = CommentRecord <$>
     o .: "name" <*>
@@ -42,9 +41,12 @@ instance FromJSON CommentRecord where
 main :: IO ()
 main = apiGatewayMain handler
   
-handler :: APIGatewayProxyRequest (Embedded Value) -> IO (APIGatewayProxyResponse (Embedded CommentResponse))
+handler :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
 handler request = do
+    print $ request ^. agprqHeaders
     print $ request ^. requestBody
+    print $ parseQueryString $ encodeUtf8 $ fromMaybe "" $ request ^. requestBody
+    {-}
     let state = GitHubState {
           token = Just (AccessToken "Not for you!")
         , userAgent = "danwdart/websites"
@@ -56,7 +58,8 @@ handler request = do
         void $ createBranch masterSHA branch
         void $ commitNewFile branch postId commentId
         void $ pullRequest branch
-    pure $ responseOK & responseBodyEmbedded ?~ CommentResponse True
+    -}
+    pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:green\">OK</span>"
 
 -- Use GitHub API to submit a PR.
 name :: Text

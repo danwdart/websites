@@ -1,1 +1,1 @@
--l -a -aT Main.serve --reload=posts --reload=static --command=stack ghci
+-l -aT Main.serve --reload=posts --reload=static --command=stack ghci websites:build-websites

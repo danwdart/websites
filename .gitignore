@@ -9,3 +9,5 @@ google.json
 *.o
 .sites
 images
+bootstrap
+submit-comment

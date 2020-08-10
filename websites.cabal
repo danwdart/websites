@@ -38,6 +38,29 @@ executable build-websites
     , wai-app-static
     , wai-extra
     , warp
+  other-modules:
+      Build.Utils
+    , Data.Blog
+    , Data.DanDart
+    , Data.JolHarg
+    , Data.M0ORI
+    , Html.Blog.Index
+    , Html.Common.Audio
+    , Html.Common.CSS
+    , Html.Common.Card
+    , Html.Common.GitHub
+    , Html.Common.Head
+    , Html.Common.Link
+    , Html.Common.Shortcuts
+    , Html.Common.Social
+    , Html.Common.Utils
+    , Html.DanDart.Index
+    , Html.JolHarg.Index
+    , Html.M0ORI.Index
+    , Site.Blog
+    , Site.DanDart
+    , Site.JolHarg
+    , Site.M0ORI
 
 executable sort-comments
   hs-source-dirs:      src
@@ -65,7 +88,6 @@ executable sort-comments
     , wai-app-static
     , wai-extra
     , warp
-
   other-modules:       
       Build.Utils
     , Data.Blog

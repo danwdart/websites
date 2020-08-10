@@ -1,8 +1,16 @@
-service: mypackage
+org: dandart
+app: websites
+service: websites
 
 provider:
   name: aws
+  region: eu-west-2
   runtime: haskell
+  environment:
+    LANG: en_GB.UTF-8
+    LC_ALL: en_GB.UTF-8
+  logs:
+    restApi: false
 
 functions:
   submit-comment:
@@ -14,5 +22,18 @@ functions:
           method: post
           cors: true
           private: false
+
 plugins:
   - serverless-haskell
+  - serverless-offline
+  #- serverless-http-invoker
+
+custom:
+  haskell:
+    docker: true
+    stackBuildArgs:
+      - --allow-different-user
+  serverless-offline:
+    # useDocker: true
+    # useChildProcesses: true
+    printOutput: true

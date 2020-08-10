@@ -183,7 +183,7 @@ renderPost (BlogPost metadata html comments) = do
         H.form
             ! A.class_ "form"
             ! enctype "application/x-www-form-urlencoded"
-            ! action "https://postb.in/1595622105966-7620481813792"
+            ! action "http://localhost:3000/dev/comment"
             ! method "post"
             ! target "_result" $ do
                 H.input ! A.type_ "hidden" ! name "postId" ! value (fromString postId)
