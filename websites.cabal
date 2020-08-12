@@ -122,6 +122,7 @@ executable submit-comment
     , aeson
     , amazonka-core
     , base64
+    , bytestring
     , github-rest
     , serverless-haskell
     , text

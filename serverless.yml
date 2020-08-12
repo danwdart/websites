@@ -9,6 +9,7 @@ provider:
   environment:
     LANG: en_GB.UTF-8
     LC_ALL: en_GB.UTF-8
+    GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
   logs:
     restApi: false
 
@@ -24,9 +25,9 @@ functions:
           private: false
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-haskell
   - serverless-offline
-  #- serverless-http-invoker
 
 custom:
   haskell:
