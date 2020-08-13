@@ -5,11 +5,13 @@ siteupdate() {
     git push
 }
 
-stack run
+stack run build-websites
 cd .sites/dandart
 siteupdate
 cd ../jolharg
 siteupdate
 cd ../m0ori
+siteupdate
+cd ../blog
 siteupdate
 cd ../..
