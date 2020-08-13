@@ -124,6 +124,7 @@ executable submit-comment
     , base64
     , bytestring
     , github-rest
+    , http-types
     , serverless-haskell
     , text
     , time

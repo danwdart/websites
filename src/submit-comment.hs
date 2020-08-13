@@ -7,6 +7,7 @@ import Data.Aeson hiding (object)
 import Data.Aeson.Embedded
 import Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as BSL
 import Data.ByteString.Lazy.Base64
 import Data.Char
 import Data.Function ((&))
@@ -20,7 +21,9 @@ import GitHub.REST as GH hiding ((.:))
 import Network.AWS.Data.Text
 import Network.AWS.Data.Query
 import Network.AWS.Lens
+import Network.HTTP.Types
 import System.Environment
+import Text.Printf
 
 newtype RefObject = RefObject {
     sha :: Text
@@ -32,16 +35,14 @@ newtype Ref = Ref {
 
 data CommentRecord = CommentRecord {
     recName :: Text,
-    recComment :: Text,
-    recEmail :: Text
-} deriving (Generic, ToJSON)
+    recEmail :: Text,
+    recUrl :: Text,
+    recComment :: Text
+}
 
-instance FromJSON CommentRecord where
-  parseJSON (Object o) = CommentRecord <$>
-    o .: "name" <*>
-    o .: "comment" <*>
-    o .: "email"
-  parseJSON _ = error "Unacceptable comment record"
+instance Show CommentRecord where
+  show CommentRecord { recName, recEmail, recUrl, recComment } =
+    printf "---\nauthor: %s\nemail: %s\nurl: %s\n---\n\n%s" recName recEmail recUrl recComment
 
 owner :: Text
 owner = "danwdart"
@@ -73,13 +74,14 @@ handler request = do
     --print $ request ^. requestBody
     githubAccessToken <- getEnv "GITHUB_ACCESS_TOKEN"
     let qs = parseQueryString $ encodeUtf8 $ fromMaybe "" $ request ^. requestBody
-    let lookupQS = lookupQueryString qs
-    let name = decodeUtf8 $ lookupQS "name"
-    let email = decodeUtf8 $ lookupQS "email"
-    let comment = decodeUtf8 $ lookupQS "comment"
-    let postId = decodeUtf8 $ lookupQS "postId"
-    commentId <- T.pack . show <$> getCurrentTime
-    let commentRecord = CommentRecord name comment email
+    let lookupQS = decodeUtf8 . urlDecode True . lookupQueryString qs
+    let name = lookupQS "name"
+    let email = lookupQS "email"
+    let website = lookupQS "website"
+    let comment = lookupQS "comment"
+    let postId = lookupQS "postId"
+    commentId <- T.pack . iso8601Show <$> getCurrentTime
+    let commentRecord = CommentRecord name email website comment
     let state = GitHubState {
           token = Just (AccessToken $ B.pack githubAccessToken)
         , userAgent = "danwdart/websites"
@@ -133,7 +135,7 @@ commitNewFile branch postId commentId commentRecord = queryGitHub GHEndpoint
     ]
   , ghData =
     [ "message" := title (recName commentRecord)
-    , "content" := encodeBase64 (encode commentRecord)
+    , "content" := encodeBase64 (BSL.pack $ show commentRecord)
     , "branch"  := branch
     , "committer" := [
         "name" := recName commentRecord,
