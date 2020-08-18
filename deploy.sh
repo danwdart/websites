@@ -15,3 +15,6 @@ siteupdate
 cd ../blog
 siteupdate
 cd ../..
+git add .
+git commit -m 'Site update'
+git push
