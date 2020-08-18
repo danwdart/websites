@@ -12,6 +12,7 @@ import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as B
 import Data.Foldable
 import Data.Frontmatter
+import Data.Function
 import Data.List
 import Data.Maybe
 import Data.Ord
@@ -103,6 +104,57 @@ stringToTime s = fromJust (
     iso8601ParseM s
     )
 
+t1 :: (a, b, c) -> a
+t1 (a, b, c) = a
+
+t2 :: (a, b, c) -> b
+t2 (a, b, c) = b
+
+t3 :: (a, b, c) -> c
+t3 (a, b, c) = c
+
+year :: UTCTime -> Integer
+year = t1 . toGregorian . utctDay
+
+month :: UTCTime -> Int
+month = t2 . toGregorian . utctDay
+
+groupOn :: Eq a1 => (a2 -> a1) -> [a2] -> [[a2]]
+groupOn = groupBy . on (==)
+
+renderMetaLink :: BlogMetadata -> Html
+renderMetaLink m = a ! href (fromString ("#" <> getPostId m)) $ fromString (T.unpack (Site.Blog.title m))
+
+renderLink :: BlogPost -> Html
+renderLink = renderMetaLink . metadata
+
+makeLinks :: [BlogPost] -> Html
+makeLinks = foldMap ((
+        \byYear -> do
+            details ! customAttribute "open" "" ! class_ "pl-2" $ do
+                H.summary $ fromString . show . year . date . metadata . Data.List.head . Data.List.head $ byYear
+                p $ foldMap (
+                    \byMonth -> details! customAttribute "open" "" ! class_ "pl-2" $ do
+                        -- "%B" is Month
+                        H.summary $ fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth 
+                        p $ foldMap (\link -> do
+                            p ! class_ "pl-2" $ renderLink link
+                            br
+                            ) byMonth
+                    ) byYear
+        ) .
+        groupOn (month . date . metadata)
+    ) . groupOn (year . date . metadata)
+
+{-
+{-}
+details $ do
+    H.summary "2020"
+    details  $ do
+        H.summary "08"
+        a ! class_ "pl-2" ! href "#" $ "The thing." -}
+-}
+
 parseComment :: UTCTime -> Text -> ParseCommentResult
 parseComment date contents = case parseYamlFrontmatter (encodeUtf8 contents) of
     Done i r -> ParseCommentResult date r (toMarkup $ markdown def $ decodeUtf8 i)
@@ -178,12 +230,16 @@ renderComment ParseCommentResult {
             ":"
         p commentHtml
         br
-            
 
+getPostId :: BlogMetadata -> FilePath
+getPostId = dropExtension . takeFileName . Data.List.head . aliases
+            
 renderPost :: BlogPost -> Html
 renderPost (BlogPost metadata html comments) = do
-    let postId = dropExtension $ takeFileName $ Data.List.head $ aliases metadata
+    let postId = getPostId metadata
     a ! name (fromString postId) $ mempty
+    -- Not working in Safari yet, so filter
+    img ! height "0" ! width "0" ! src ("/favicon.ico?" <> fromString postId) ! customAttribute "loading" "lazy"
     h1 $ fromString $ T.unpack $ Site.Blog.title metadata
     small $ do
         a ! href ("#" <> fromString postId) $ "Permalink"
@@ -208,7 +264,6 @@ renderPost (BlogPost metadata html comments) = do
         H.summary $ h4 ! A.class_ "d-inline-block" $ "Post a comment"
         commentForm postId
     hr
-    
 
 build :: IO ()
 build = do
@@ -218,7 +273,8 @@ build = do
     posts <- sequence $ makeBlogPost <$> validFiles
     let rendered = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
     let renderedPosts = foldMap renderPost rendered
-    make "blog" $ page renderedPosts
+    let renderedLinks = makeLinks rendered
+    make "blog" $ page renderedLinks renderedPosts
 
 serve :: IO ()
 serve = do
