@@ -69,7 +69,7 @@ main = do
                     Fail i xs y -> error $ "Failure of " ++ show xs ++ y
                     _ -> error $ "What is " <> comment
             ) <$> comments
-    let postNames = (last . splitDirectories . dropFileName) <$> commentFiles
+    let postNames = last . splitDirectories . dropFileName <$> commentFiles
     let completeComments = zip postNames parsedComments
     mapM_ (\(filename, commentsAll) ->
         mapM_ (\(author, authorUrl, authorEmail, time, text) ->
