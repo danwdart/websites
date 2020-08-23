@@ -1,29 +1,33 @@
-{-# LANGUAGE BlockArguments, DeriveAnyClass, DeriveGeneric, NamedFieldPuns, OverloadedStrings #-}
+{-# LANGUAGE BlockArguments    #-}
+{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE NamedFieldPuns    #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import AWSLambda.Events.APIGateway
-import Control.Monad
-import Data.Aeson hiding (object)
-import Data.Aeson.Embedded
-import Data.ByteString.Char8 (ByteString)
-import qualified Data.ByteString.Char8 as B
-import qualified Data.ByteString.Lazy.Char8 as BSL
-import Data.ByteString.Lazy.Base64
-import Data.Char
-import Data.Function ((&))
-import Data.Maybe
-import Data.Text as T
-import Data.Text.Encoding
-import Data.Time
-import Data.Time.Format.ISO8601
-import GHC.Generics
-import GitHub.REST as GH hiding ((.:))
-import Network.AWS.Data.Text
-import Network.AWS.Data.Query
-import Network.AWS.Lens
-import Network.HTTP.Types
-import System.Environment
-import Text.Printf
+import           AWSLambda.Events.APIGateway
+import           Control.Monad
+import           Data.Aeson                  hiding (object)
+import           Data.Aeson.Embedded
+import           Data.ByteString.Char8       (ByteString)
+import qualified Data.ByteString.Char8       as B
+import           Data.ByteString.Lazy.Base64
+import qualified Data.ByteString.Lazy.Char8  as BSL
+import           Data.Char
+import           Data.Function               ((&))
+import           Data.Maybe
+import           Data.Text                   as T
+import           Data.Text.Encoding
+import           Data.Time
+import           Data.Time.Format.ISO8601
+import           GHC.Generics
+import           GitHub.REST                 as GH hiding ((.:))
+import           Network.AWS.Data.Query
+import           Network.AWS.Data.Text
+import           Network.AWS.Lens
+import           Network.HTTP.Types
+import           System.Environment
+import           Text.Printf
 
 newtype RefObject = RefObject {
     sha :: Text
@@ -34,9 +38,9 @@ newtype Ref = Ref {
 } deriving (FromJSON, Generic)
 
 data CommentRecord = CommentRecord {
-    recName :: Text,
-    recEmail :: Text,
-    recUrl :: Text,
+    recName    :: Text,
+    recEmail   :: Text,
+    recUrl     :: Text,
     recComment :: Text
 }
 
@@ -63,11 +67,11 @@ main :: IO ()
 main = apiGatewayMain handler
 
 lookupQueryString :: QueryString -> ByteString -> ByteString
-lookupQueryString qs key = 
+lookupQueryString qs key =
   (\[QPair a (QValue (Just b))] -> b) $
   Prelude.filter (\(QPair a b) -> a == key) $
   (\(QList x) -> x) qs
-  
+
 handler :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
 handler request = do
     -- print $ request ^. agprqHeaders
@@ -117,7 +121,7 @@ createBranch fromSHA branch = queryGitHub GHEndpoint
     [ "owner" := owner
     , "repo" := repo
     ]
-  , ghData = 
+  , ghData =
     [
       "ref" := "refs/heads/" <> branch
     , "sha" := fromSHA

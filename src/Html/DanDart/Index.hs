@@ -2,16 +2,16 @@
 
 module Html.DanDart.Index (page) where
 
-import Data.DanDart
+import           Data.DanDart
 
-import Html.Common.Audio
-import Html.Common.Head
-import Html.Common.Link
-import Html.Common.Shortcuts
-import Html.Common.Social
+import           Html.Common.Audio
+import           Html.Common.Head
+import           Html.Common.Link
+import           Html.Common.Shortcuts
+import           Html.Common.Social
 
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
 pageIntro :: Html
 pageIntro = li ! class_ "nav-item" $ do

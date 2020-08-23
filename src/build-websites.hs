@@ -2,21 +2,21 @@
 
 module Main where
 
-import Data.Maybe
-import Data.ByteString (isPrefixOf)
+import           Data.ByteString                (isPrefixOf)
+import           Data.Maybe
 
-import Network.Wai
-import Network.Wai.Application.Static
-import Network.Wai.Handler.Warp
-import Network.Wai.Middleware.Vhost
-import WaiAppStatic.Types
+import           Network.Wai
+import           Network.Wai.Application.Static
+import           Network.Wai.Handler.Warp
+import           Network.Wai.Middleware.Vhost
+import           WaiAppStatic.Types
 
-import qualified Site.Blog as B 
-import qualified Site.DanDart as D
-import qualified Site.JolHarg as J
-import qualified Site.M0ORI as M
+import qualified Site.Blog                      as B
+import qualified Site.DanDart                   as D
+import qualified Site.JolHarg                   as J
+import qualified Site.M0ORI                     as M
 
-import Debug.Trace
+import           Debug.Trace
 
 build :: IO ()
 build = do
@@ -32,19 +32,19 @@ serve = do
     runEnv 80 $ vhost [
         (
             isPrefixOf "blog" . fromMaybe "" . requestHeaderHost,
-            staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = indices } 
+            staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = indices }
         ),
         (
             isPrefixOf "dandart" . fromMaybe "" . requestHeaderHost,
-            staticApp $ (defaultWebAppSettings ".sites/dandart/"){ ssIndices = indices } 
+            staticApp $ (defaultWebAppSettings ".sites/dandart/"){ ssIndices = indices }
         ),
         (
             isPrefixOf "jolharg" . fromMaybe "" . requestHeaderHost,
-            staticApp $ (defaultWebAppSettings ".sites/jolharg/"){ ssIndices = indices } 
+            staticApp $ (defaultWebAppSettings ".sites/jolharg/"){ ssIndices = indices }
         ),
         (
             isPrefixOf "m0ori" . fromMaybe "" . requestHeaderHost,
-            staticApp $ (defaultWebAppSettings ".sites/m0ori/"){ ssIndices = indices } 
+            staticApp $ (defaultWebAppSettings ".sites/m0ori/"){ ssIndices = indices }
         )
         ] $ staticApp $ defaultWebAppSettings ".sites/"
     where indices = mapMaybe toPiece ["index.html"]

@@ -1,27 +1,27 @@
 module Main where
 
-import Cheapskate
-import Control.Applicative
-import Control.Monad
-import Data.Aeson
-import Data.Bifunctor
-import Data.ByteString (ByteString)
-import qualified Data.ByteString.Char8 as B
-import Data.Maybe
-import Data.String
-import qualified Data.Text as T
-import Data.Text (Text)
-import Data.Text.Encoding
-import Data.Time
-import Data.Time.Format.ISO8601
-import Data.Frontmatter as F
-import Debug.Trace
-import System.Directory
-import System.FilePath.Posix
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html.Renderer.Pretty
-import Text.Parsec as P hiding ((<|>))
-import Text.Printf
+import           Cheapskate
+import           Control.Applicative
+import           Control.Monad
+import           Data.Aeson
+import           Data.Bifunctor
+import           Data.ByteString                 (ByteString)
+import qualified Data.ByteString.Char8           as B
+import           Data.Frontmatter                as F
+import           Data.Maybe
+import           Data.String
+import           Data.Text                       (Text)
+import qualified Data.Text                       as T
+import           Data.Text.Encoding
+import           Data.Time
+import           Data.Time.Format.ISO8601
+import           Debug.Trace
+import           System.Directory
+import           System.FilePath.Posix
+import           Text.Blaze.Html.Renderer.Pretty
+import           Text.Blaze.Html5                as H hiding (main)
+import           Text.Parsec                     as P hiding ((<|>))
+import           Text.Printf
 
 stringToTime :: String -> UTCTime
 stringToTime s = fromJust (

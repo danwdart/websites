@@ -30,5 +30,5 @@ htmlHead descTitle keywords = H.head $ do
     H.title $ toHtml descTitle
     metas descTitle keywords
     commonCSS
-    
-    
+
+

@@ -2,18 +2,18 @@
 
 module Html.JolHarg.Index (page) where
 
-import Control.Monad.Reader
+import           Control.Monad.Reader
 
-import Data.JolHarg
+import           Data.JolHarg
 
-import Html.Common.Card
-import Html.Common.GitHub
-import Html.Common.Head
+import           Html.Common.Card
+import           Html.Common.GitHub
+import           Html.Common.Head
 
-import Network.HTTP.Req
+import           Network.HTTP.Req
 
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
 pagePortfolio :: Html
 pagePortfolio = li ! class_ "nav-item" $ do

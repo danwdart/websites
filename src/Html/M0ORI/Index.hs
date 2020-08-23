@@ -2,15 +2,15 @@
 
 module Html.M0ORI.Index (page) where
 
-import Data.M0ORI
+import           Data.M0ORI
 
-import Html.Common.Head
-import Html.Common.Link
-import Html.Common.Shortcuts
-import Html.Common.Social
+import           Html.Common.Head
+import           Html.Common.Link
+import           Html.Common.Shortcuts
+import           Html.Common.Social
 
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5.Attributes as A
 
 pageHamRadio :: Html
 pageHamRadio = li ! class_ "nav-item" $ do

@@ -1,6 +1,6 @@
 module Test.E2E.Main where
 
-import Distribution.TestSuite
+import           Distribution.TestSuite
 
 tests :: IO [Test]
 tests = return []

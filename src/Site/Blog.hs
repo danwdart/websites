@@ -1,41 +1,43 @@
-{-# LANGUAGE DeriveGeneric, NamedFieldPuns, OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE NamedFieldPuns    #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Site.Blog where
 
-import Build.Utils
-import Cheapskate
-import Control.Applicative
-import Control.Monad
-import Data.Aeson (FromJSON, Object, (.:), (.:?))
-import qualified Data.Aeson as A
-import Data.Bifunctor
-import Data.ByteString (ByteString)
-import qualified Data.ByteString.Char8 as B
-import Data.Foldable
-import Data.Frontmatter
-import Data.Function
-import Data.List
-import Data.Maybe
-import Data.Ord
-import Data.String
-import Data.Text (Text)
-import Data.Text.Encoding
-import Data.Time
-import Data.Time.Format.ISO8601
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIO
-import GHC.Generics
-import Html.Blog.Index
-import Network.Wai.Application.Static
-import Network.Wai.Handler.Warp
-import System.Directory
-import System.FilePath
-import Text.Blaze.Html5 as H hiding (main)
-import Text.Blaze.Html5.Attributes as A
-import Text.Blaze.Internal
-import Text.Blaze.Renderer.Pretty
+import           Build.Utils
+import           Cheapskate
+import           Control.Applicative
+import           Control.Monad
+import           Data.Aeson                     (FromJSON, Object, (.:), (.:?))
+import qualified Data.Aeson                     as A
+import           Data.Bifunctor
+import           Data.ByteString                (ByteString)
+import qualified Data.ByteString.Char8          as B
+import           Data.Foldable
+import           Data.Frontmatter
+import           Data.Function
+import           Data.List
+import           Data.Maybe
+import           Data.Ord
+import           Data.String
+import           Data.Text                      (Text)
+import qualified Data.Text                      as T
+import           Data.Text.Encoding
+import qualified Data.Text.IO                   as TIO
+import           Data.Time
+import           Data.Time.Format.ISO8601
+import           GHC.Generics
+import           Html.Blog.Index
+import           Network.Wai.Application.Static
+import           Network.Wai.Handler.Warp
+import           System.Directory
+import           System.FilePath
+import           Text.Blaze.Html5               as H hiding (main)
+import           Text.Blaze.Html5.Attributes    as A
+import           Text.Blaze.Internal
+import           Text.Blaze.Renderer.Pretty
 -- import Text.Blaze.Renderer.Utf8
-import WaiAppStatic.Types
-import Debug.Trace
+import           Debug.Trace
+import           WaiAppStatic.Types
 
 newtype BlogTag = BlogTag {
     getTag :: Text
@@ -44,21 +46,21 @@ newtype BlogTag = BlogTag {
 instance FromJSON BlogTag where
     parseJSON (A.String a) = return $ BlogTag a
     parseJSON (A.Number a) = return $ BlogTag $ T.pack (show a)
-    parseJSON (A.Bool a) = return $ BlogTag $ T.pack (show a)
-    parseJSON e = error (show e)
+    parseJSON (A.Bool a)   = return $ BlogTag $ T.pack (show a)
+    parseJSON e            = error (show e)
 
 data BlogMetadata = BlogMetadata {
-    title :: Text,
-    date :: UTCTime,
-    draft :: Bool,
+    title   :: Text,
+    date    :: UTCTime,
+    draft   :: Bool,
     aliases :: [FilePath],
-    tags :: [BlogTag] -- Doesn't like tags which are numbers... nor don't have tags
+    tags    :: [BlogTag] -- Doesn't like tags which are numbers... nor don't have tags
 } deriving (Generic, Show)
 
 data BlogCommentMetadata = BlogCommentMetadata {
-    author :: Text,
+    author      :: Text,
     authorEmail :: Text,
-    authorUrl :: Maybe Text
+    authorUrl   :: Maybe Text
 } deriving (Generic, Show)
 
 instance FromJSON BlogCommentMetadata where
@@ -69,19 +71,19 @@ instance FromJSON BlogCommentMetadata where
 
 data BlogPost = BlogPost {
     metadata :: BlogMetadata,
-    html :: Html,
+    html     :: Html,
     comments :: [ParseCommentResult]
 }
 
 data ParseResult = ParseResult {
     resultMetadata :: BlogMetadata,
-    resultHtml :: Html
+    resultHtml     :: Html
 }
 
 data ParseCommentResult = ParseCommentResult {
-    commentDate :: UTCTime,
+    commentDate     :: UTCTime,
     commentMetadata :: BlogCommentMetadata,
-    commentHtml :: Html
+    commentHtml     :: Html
 }
 
 instance FromJSON BlogMetadata where
@@ -94,9 +96,9 @@ instance FromJSON BlogMetadata where
 
 parseFile :: Text -> ParseResult
 parseFile contents = case parseYamlFrontmatter (encodeUtf8 contents) of
-    Done i r -> ParseResult r $ toMarkup $ markdown def $ decodeUtf8 i
+    Done i r    -> ParseResult r $ toMarkup $ markdown def $ decodeUtf8 i
     Fail i xs y -> error $ "Failure of " ++ show xs ++ y
-    _ -> error $ "What is " <> T.unpack contents
+    _           -> error $ "What is " <> T.unpack contents
 
 stringToTime :: String -> UTCTime
 stringToTime s = fromJust (
@@ -136,7 +138,7 @@ makeLinks = foldMap ((
                 p $ foldMap (
                     \byMonth -> details! customAttribute "open" "" ! class_ "pl-2" $ do
                         -- "%B" is Month
-                        H.summary $ fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth 
+                        H.summary $ fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
                         p $ foldMap (\link -> do
                             p ! class_ "pl-2" $ renderLink link
                             br
@@ -226,14 +228,14 @@ renderComment ParseCommentResult {
             when (isJust authorUrl) $
                 a ! href (fromString $ T.unpack $ fromJust authorUrl) $ " (URL)"
             " said on "
-            a ! href ("#" <> fromString (iso8601Show commentDate)) $ fromString $ iso8601Show commentDate    
+            a ! href ("#" <> fromString (iso8601Show commentDate)) $ fromString $ iso8601Show commentDate
             ":"
         p commentHtml
         br
 
 getPostId :: BlogMetadata -> FilePath
 getPostId = dropExtension . takeFileName . Data.List.head . aliases
-            
+
 renderPost :: BlogPost -> Html
 renderPost (BlogPost metadata html comments) = do
     let postId = getPostId metadata
@@ -281,4 +283,4 @@ serve = do
     putStrLn "Building..."
     build
     putStrLn "Serving..."
-    runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = mapMaybe toPiece ["index.html"] } 
+    runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = mapMaybe toPiece ["index.html"] }
