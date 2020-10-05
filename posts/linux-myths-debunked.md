@@ -29,12 +29,6 @@ Ubuntu and Mint are world renound for their ease of use, and that means there is
 It is likely that your distribution does not come with necessary media codecs (for legal reasons). That is why I recommend Mint (to anyone in a country where the software is legal, get the Main edition). This includes software to play DVDs and almost all media formats. Though it is not hard to install it in Ubuntu, the media players prompt you to choose a codec and install it!  
   
 5\. "Linux is all command line".  
-Proof enough are these pictures:  
+Proof enough is this picture:  
   
-[![](http://www.bilisimcell.net/wp-content/resimler/daryna.png)](http://www.bilisimcell.net/wp-content/resimler/daryna.png)  
-  
-  
-[![](http://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)](http://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)  
-  
-  
-[![](http://www.geeks.co.uk/wp-content/uploads/2009/07/ubuntu.jpg)](http://www.geeks.co.uk/wp-content/uploads/2009/07/ubuntu.jpg)
+[![](https://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)](https://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)
