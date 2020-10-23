@@ -26,6 +26,7 @@ executable build-websites
     , Cabal
     , cheapskate
     , directory
+    , feed
     , filepath
     , frontmatter
     , fsutils
@@ -38,8 +39,14 @@ executable build-websites
     , wai-app-static
     , wai-extra
     , warp
+    , xml-conduit
   other-modules:
-      Build.Utils
+      Blog.Comment
+    , Blog.Feed
+    , Blog.Link
+    , Blog.Post
+    , Blog.Types
+    , Build.Utils
     , Data.Blog
     , Data.DanDart
     , Data.JolHarg
@@ -61,6 +68,9 @@ executable build-websites
     , Site.DanDart
     , Site.JolHarg
     , Site.M0ORI
+    , Util.List
+    , Util.Time
+    , Util.Triple
 
 executable sort-comments
   hs-source-dirs:      src
@@ -75,6 +85,7 @@ executable sort-comments
     , Cabal
     , cheapskate
     , directory
+    , feed
     , filepath
     , frontmatter
     , fsutils
@@ -88,29 +99,38 @@ executable sort-comments
     , wai-app-static
     , wai-extra
     , warp
+    , xml-conduit
   other-modules:       
-      Build.Utils
+      Blog.Comment
+    , Blog.Feed
+    , Blog.Link
+    , Blog.Post
+    , Blog.Types
+    , Build.Utils
     , Data.Blog
-    , Html.Blog.Index
     , Data.DanDart
-    , Html.DanDart.Index
     , Data.JolHarg
-    , Html.JolHarg.Index
     , Data.M0ORI
-    , Html.M0ORI.Index
+    , Html.Blog.Index
     , Html.Common.Audio
-    , Html.Common.Card
     , Html.Common.CSS
+    , Html.Common.Card
     , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Link
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.DanDart.Index
+    , Html.JolHarg.Index
+    , Html.M0ORI.Index
     , Site.Blog
     , Site.DanDart
     , Site.JolHarg
     , Site.M0ORI
+    , Util.List
+    , Util.Time
+    , Util.Triple
 
 executable submit-comment
   hs-source-dirs:      src

@@ -1,12 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
+module Blog.Link where
 
-module Site.Blog where
-
-import           Blog.Comment
-import           Blog.Feed
-import           Blog.Link
-import           Blog.Post
 import           Blog.Types
+import           Blog.Post (getPostId)
 import           Build.Utils
 import           Cheapskate
 import           Control.Applicative
@@ -35,31 +31,39 @@ import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           System.Directory
 import           System.FilePath
-import qualified Text.Atom.Feed                 as Atom
-import qualified Text.Atom.Feed.Export          as Export
+import qualified Text.Atom.Feed as Atom
+import qualified Text.Atom.Feed.Export as Export
 import           Text.Blaze.Html5               as H hiding (main)
 import           Text.Blaze.Html5.Attributes    as A
 import           Text.Blaze.Internal
 import           Text.Blaze.Renderer.Pretty
+-- import Text.Blaze.Renderer.Utf8
 import           Text.XML
+import           Util.List
+import           Util.Time
 import           Util.Triple
 import           WaiAppStatic.Types
 
-build :: IO ()
-build = do
-    files <- getDirectoryContents "posts"
-    let fileNames = ("posts/" </>) <$> files -- if used in same line, use Compose
-    validFiles <- filterM doesFileExist fileNames
-    posts <- sequence $ makeBlogPost <$> validFiles
-    let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-    let renderedPosts = foldMap renderPost sortedPosts
-    TIO.writeFile ".sites/blog/feed.rss" $ makeRSSFeed sortedPosts
-    let renderedLinks = makeLinks sortedPosts
-    make "blog" $ page renderedLinks renderedPosts
+renderMetaLink :: BlogMetadata -> Html
+renderMetaLink m = a ! href (fromString ("#" <> getPostId m)) $ fromString (T.unpack (Blog.Types.title m))
 
-serve :: IO ()
-serve = do
-    putStrLn "Building..."
-    build
-    putStrLn "Serving..."
-    runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = mapMaybe toPiece ["index.html"] }
+renderLink :: BlogPost -> Html
+renderLink = renderMetaLink . metadata
+
+makeLinks :: [BlogPost] -> Html
+makeLinks = foldMap ((
+        \byYear -> do
+            details ! customAttribute "open" "" ! class_ "pl-2" $ do
+                H.summary $ fromString . show . year . date . metadata . Data.List.head . Data.List.head $ byYear
+                p $ foldMap (
+                    \byMonth -> details! customAttribute "open" "" ! class_ "pl-2" $ do
+                        -- "%B" is Month
+                        H.summary $ fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
+                        p $ foldMap (\link -> do
+                            p ! class_ "pl-2" $ renderLink link
+                            br
+                            ) byMonth
+                    ) byYear
+        ) .
+        groupOn (month . date . metadata)
+    ) . groupOn (year . date . metadata)

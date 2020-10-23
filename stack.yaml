@@ -6,4 +6,4 @@ extra-deps:
     git: https://github.com/danwdart/fsutils.git
     commit: a4167c212939f7b2b123072542ad305777943903
 ghc-options:
-  web: -Wall -Werror
+  websites: -Wall -Werror
