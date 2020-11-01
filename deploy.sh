@@ -6,15 +6,14 @@ siteupdate() {
 }
 
 stack run build-websites
-cd .sites/dandart
+
+cd .sites
+for site in */
+do
+    cd $site
+    siteupdate
+    cd ..
+done
+cd ..
+
 siteupdate
-cd ../jolharg
-siteupdate
-cd ../m0ori
-siteupdate
-cd ../blog
-siteupdate
-cd ../..
-git add .
-git commit -m 'Site update'
-git push
