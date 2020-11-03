@@ -38,9 +38,9 @@ pageCharacters = li ! class_ "nav-item" $ do
         H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Characters"
         H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light" $ do
             p "Some of my favourite characters and characters that I identify with are:"
-            ul $ mapM_ (\(fandom, fandomLink, characters) -> do
+            ul $ mapM_ (\(fandom', fandomLink, characters) -> do
                 "from "
-                extLink fandomLink fandom
+                extLink fandomLink fandom'
                 ":"
                 ul $ mapM_ (\(character, charLink, reason) -> li $ do
                         extLink charLink character
@@ -97,9 +97,9 @@ pageFavourites = li ! class_ "nav-item" $ do
                     extLink (imdb <> "0056751") "Doctor Who (1963-)"
                     " (my favourite Doctor is Tom Baker)"
             p $ strong "Music"
-            ul $ mapM_ (\(title, list) -> do
-                title
-                ul $ mapM_ li list
+            ul $ mapM_ (\(title', list') -> do
+                title'
+                ul $ mapM_ li list'
                 ) musicList
             p $ strong "Musical styles"
             ul $ mapM_ li musicalStyles
@@ -207,6 +207,7 @@ pageMaths = li ! class_ "nav-item" $ do
                 li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
                 li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477."
 
+{-
 pageOrigami :: Html
 pageOrigami = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "origami" ! value "Origami"
@@ -220,6 +221,7 @@ pageOrigami = li ! class_ "nav-item" $ do
                 extLink "https://amzn.to/2BqLCO4" "Star Trek Paper Universe, a book by Andrew Pang"
                 extLink "https://amzn.to/2BspLWn" "Ultimate Origami Kit: The Complete Step-by-step Guide to the Art of Paper Folding, a book by John Morin"
                 extLink "https://amzn.to/2VzLzqe" "How to Make Origami Airplanes That Fly, a book by Gery Hsu"
+-}
 
 pageAbout :: Html
 pageAbout = li ! class_ "nav-item" $ do

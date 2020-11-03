@@ -7,12 +7,8 @@ import           Build.Utils
 import           Cheapskate
 import           Control.Applicative
 import           Control.Monad
-import           Data.Aeson                     (FromJSON, Object, (.:), (.:?))
+import           Data.Aeson                     (FromJSON, (.:), (.:?))
 import qualified Data.Aeson                     as A
-import           Data.Bifunctor
-import           Data.ByteString                (ByteString)
-import qualified Data.ByteString.Char8          as B
-import           Data.Foldable
 import           Data.Frontmatter
 import           Data.Function
 import           Data.List
@@ -33,10 +29,7 @@ import           System.Directory
 import           System.FilePath
 import           Text.Blaze.Html5               as H hiding (main)
 import           Text.Blaze.Html5.Attributes    as A
-import           Text.Blaze.Internal
-import           Text.Blaze.Renderer.Pretty
 -- import Text.Blaze.Renderer.Utf8
-import           Debug.Trace
 import           WaiAppStatic.Types
 
 newtype BlogTag = BlogTag {
@@ -44,9 +37,9 @@ newtype BlogTag = BlogTag {
  } deriving (Show)
 
 instance FromJSON BlogTag where
-    parseJSON (A.String a) = return $ BlogTag a
-    parseJSON (A.Number a) = return $ BlogTag $ T.pack (show a)
-    parseJSON (A.Bool a)   = return $ BlogTag $ T.pack (show a)
+    parseJSON (A.String a') = return $ BlogTag a'
+    parseJSON (A.Number a') = return $ BlogTag $ T.pack (show a')
+    parseJSON (A.Bool a')   = return $ BlogTag $ T.pack (show a')
     parseJSON e            = error (show e)
 
 data BlogMetadata = BlogMetadata {
@@ -68,6 +61,7 @@ instance FromJSON BlogCommentMetadata where
         o .: "author" <*>
         o .: "email" <*>
         o .: "url"
+    parseJSON _ = error "Bad blog comment metadata"
 
 data BlogPost = BlogPost {
     metadata :: BlogMetadata,
@@ -93,12 +87,13 @@ instance FromJSON BlogMetadata where
         o .: "draft" <*>
         o .: "aliases" <*>
         (concat <$> (o .:? "tags")) -- Maybe [a] -> [a]
+    parseJSON _ = error "Bad blog metadata"
 
 parseFile :: Text -> ParseResult
-parseFile contents = case parseYamlFrontmatter (encodeUtf8 contents) of
-    Done i r    -> ParseResult r $ toMarkup $ markdown def $ decodeUtf8 i
-    Fail i xs y -> error $ "Failure of " ++ show xs ++ y
-    _           -> error $ "What is " <> T.unpack contents
+parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
+    Done i' r    -> ParseResult r $ toMarkup $ markdown def $ decodeUtf8 i'
+    Fail _ xs y -> error $ "Failure of " ++ show xs ++ y
+    _           -> error $ "What is " <> T.unpack contents'
 
 stringToTime :: String -> UTCTime
 stringToTime s = fromJust (
@@ -107,13 +102,13 @@ stringToTime s = fromJust (
     )
 
 t1 :: (a, b, c) -> a
-t1 (a, b, c) = a
+t1 (a', _, _) = a'
 
 t2 :: (a, b, c) -> b
-t2 (a, b, c) = b
+t2 (_, b', _) = b'
 
 t3 :: (a, b, c) -> c
-t3 (a, b, c) = c
+t3 (_, _, c) = c
 
 year :: UTCTime -> Integer
 year = t1 . toGregorian . utctDay
@@ -139,8 +134,8 @@ makeLinks = foldMap ((
                     \byMonth -> details! customAttribute "open" "" ! class_ "pl-2" $ do
                         -- "%B" is Month
                         H.summary $ fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
-                        p $ foldMap (\link -> do
-                            p ! class_ "pl-2" $ renderLink link
+                        p $ foldMap (\link' -> do
+                            p ! class_ "pl-2" $ renderLink link'
                             br
                             ) byMonth
                     ) byYear
@@ -158,10 +153,10 @@ details $ do
 -}
 
 parseComment :: UTCTime -> Text -> ParseCommentResult
-parseComment date contents = case parseYamlFrontmatter (encodeUtf8 contents) of
-    Done i r -> ParseCommentResult date r (toMarkup $ markdown def $ decodeUtf8 i)
-    Fail i xs y -> error $ "Failure of " ++ show xs ++ y
-    _ -> error $ "What is " <> T.unpack contents
+parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
+    Done i' r -> ParseCommentResult date r (toMarkup $ markdown def $ decodeUtf8 i')
+    Fail _ xs y -> error $ "Failure of " ++ show xs ++ y
+    _ -> error $ "What is " <> T.unpack contents'
 
 getCommentsIfExists :: FilePath -> IO [ParseCommentResult]
 getCommentsIfExists postId = do
@@ -183,10 +178,10 @@ getComments postId = do
 makeBlogPost :: FilePath -> IO BlogPost
 makeBlogPost filename = do
     fileText <- TIO.readFile filename
-    let (ParseResult metadata html) = parseFile fileText
+    let (ParseResult metadata html') = parseFile fileText
     let postId = dropExtension $ takeFileName filename
     comments <- getComments postId
-    return $ BlogPost metadata html comments
+    return $ BlogPost metadata html' comments
 
 commentForm :: FilePath -> Html
 commentForm postId = H.form
@@ -196,9 +191,9 @@ commentForm postId = H.form
     ! method "post"
     ! target "_result" $ do
         H.input ! A.type_ "hidden" ! name "postId" ! value (fromString postId)
-        mapM_ (\(type_, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
+        mapM_ (\(type', name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
             H.label ! for name_ $ label_
-            H.input ! A.type_ type_ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
+            H.input ! A.type_ type' ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
             ) [
                 ("text", "name", "Name", "John Smith"),
                 ("email", "email", "Email", "john@smith.com"),
@@ -237,7 +232,7 @@ getPostId :: BlogMetadata -> FilePath
 getPostId = dropExtension . takeFileName . Data.List.head . aliases
 
 renderPost :: BlogPost -> Html
-renderPost (BlogPost metadata html comments) = do
+renderPost (BlogPost metadata html' comments) = do
     let postId = getPostId metadata
     a ! name (fromString postId) $ mempty
     -- Not working in Safari yet, so filter
@@ -254,7 +249,7 @@ renderPost (BlogPost metadata html comments) = do
             ) . T.unpack . getTag) (tags metadata)
     br
     br
-    html
+    html'
     br
     h3 "Comments"
     if Data.List.null comments then

@@ -3,7 +3,6 @@
 module Html.Common.Shortcuts (ghPages, ghPagesProjects, projectsSource, imdb, wikipedia, yt, ytChan, ytUser, nhs, oeis, wikia, fandom) where
 
 import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
 
 ghPages, ghPagesProjects, projectsSource, imdb, yt, ytChan, ytUser, nhs, oeis :: AttributeValue
 ghPages = "https://danwdart.github.io/"
@@ -17,7 +16,7 @@ nhs = "https://www.nhs.uk/conditions/"
 oeis = "https://oeis.org/A"
 
 wiki :: AttributeValue -> AttributeValue -> AttributeValue -> AttributeValue
-wiki name subdomain article = "https://" <> subdomain <> "." <> name <> "/wiki/" <> article
+wiki name' subdomain article' = "https://" <> subdomain <> "." <> name' <> "/wiki/" <> article'
 
 wikipedia :: AttributeValue -> AttributeValue
 wikipedia = wiki "wikipedia.org" "en"

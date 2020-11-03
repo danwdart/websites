@@ -6,7 +6,6 @@ import           System.Directory
 import           System.Path
 import           Text.Blaze.Html.Renderer.Utf8
 import           Text.Blaze.Html5              as H hiding (main)
-import           Text.Blaze.Html5.Attributes   as A
 
 mkdirp ∷ String → IO ()
 mkdirp = createDirectoryIfMissing True

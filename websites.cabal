@@ -62,56 +62,6 @@ executable build-websites
     , Site.JolHarg
     , Site.M0ORI
 
-executable sort-comments
-  hs-source-dirs:      src
-  main-is:             sort-comments.hs
-  default-language:    Haskell2010
-  build-depends:       
-      base >= 4.7 && < 5
-    , aeson
-    , blaze-html
-    , blaze-markup
-    , bytestring
-    , Cabal
-    , cheapskate
-    , directory
-    , filepath
-    , frontmatter
-    , fsutils
-    , mmark
-    , mtl
-    , parsec
-    , req
-    , text
-    , time
-    , wai
-    , wai-app-static
-    , wai-extra
-    , warp
-  other-modules:       
-      Build.Utils
-    , Data.Blog
-    , Html.Blog.Index
-    , Data.DanDart
-    , Html.DanDart.Index
-    , Data.JolHarg
-    , Html.JolHarg.Index
-    , Data.M0ORI
-    , Html.M0ORI.Index
-    , Html.Common.Audio
-    , Html.Common.Card
-    , Html.Common.CSS
-    , Html.Common.GitHub
-    , Html.Common.Head
-    , Html.Common.Link
-    , Html.Common.Shortcuts
-    , Html.Common.Social
-    , Html.Common.Utils
-    , Site.Blog
-    , Site.DanDart
-    , Site.JolHarg
-    , Site.M0ORI
-
 executable submit-comment
   hs-source-dirs:      src
   main-is:             submit-comment.hs

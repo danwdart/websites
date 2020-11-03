@@ -6,8 +6,6 @@ import           Data.M0ORI
 
 import           Html.Common.Head
 import           Html.Common.Link
-import           Html.Common.Shortcuts
-import           Html.Common.Social
 
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A

@@ -2,19 +2,13 @@
 
 module Site.JolHarg where
 
-import           Build.Utils
-
 import           Control.Monad.Reader
 
 import qualified Data.ByteString.Lazy.Char8     as BSL
 
 import           Data.Maybe
 
-import           Data.JolHarg
-
-import           Html.Common.Card
 import           Html.Common.GitHub
-import           Html.Common.Head
 
 import           Html.JolHarg.Index
 
@@ -23,12 +17,9 @@ import           Network.HTTP.Req
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 
-import           System.Directory
 import           System.Path
 
 import           Text.Blaze.Html.Renderer.Utf8
-import           Text.Blaze.Html5               as H hiding (main)
-import           Text.Blaze.Html5.Attributes    as A
 
 import           WaiAppStatic.Types
 
