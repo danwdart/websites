@@ -5,7 +5,6 @@ module Data.DanDart (keywords, descTitle, musicalStyles, favCharacters, musicLis
 
 import           Html.Common.Shortcuts
 import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
 
 keywords ∷ [AttributeValue]
 keywords = [

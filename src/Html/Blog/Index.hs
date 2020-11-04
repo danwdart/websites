@@ -5,7 +5,6 @@ module Html.Blog.Index (page) where
 import           Data.Blog
 
 import           Html.Common.Head
-import           Html.Common.Link
 
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A

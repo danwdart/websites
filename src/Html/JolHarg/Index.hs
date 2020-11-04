@@ -7,10 +7,7 @@ import           Control.Monad.Reader
 import           Data.JolHarg
 
 import           Html.Common.Card
-import           Html.Common.GitHub
 import           Html.Common.Head
-
-import           Network.HTTP.Req
 
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
@@ -95,7 +92,7 @@ htmlHeader = do
 
 page :: Reader [Repo] Html
 page = do
-    header <- htmlHeader
+    header' <- htmlHeader
     return $ docTypeHtml ! lang "en-GB" $ do
         htmlHead descTitle keywords
-        header
+        header'

@@ -6,11 +6,8 @@ module Html.Common.GitHub (Repo (..), Language (..), Licence (..), getRepos) whe
 
 import           Control.Monad.IO.Class
 import           Data.Aeson
-import           Data.Aeson.Types
 import           Data.Maybe
 import           Data.Text              as T
-import           Debug.Trace
-import           Distribution.SPDX
 import           GHC.Generics
 import           Network.HTTP.Req
 import           System.Environment
@@ -55,6 +52,7 @@ instance FromJSON Language where
         "Vim script"   -> LangShell
         _              -> error $ "Unknown language: " ++ T.unpack a
     parseJSON Null = return LangGeneric
+    parseJSON _ = return LangGeneric
 
 newtype Licence = Licence {
     spdx_id :: String
@@ -75,20 +73,20 @@ instance FromJSON Repo where
     parseJSON (Object a) = do
         homepage <- a .: "homepage"
         -- private <- a .: "private"
-        fork <- a .: "fork"
+        fork' <- a .: "fork"
         -- fullName <- a .: "full_name"
         url <- a .: "clone_url"
         -- issuesUrl <- a .: "issues_url"
-        name <- a .: "name"
+        name' <- a .: "name"
         -- forksCount <- a .: "forks_count"
         -- updatedAt <- a .: "updated_at"
-        language <- a .: "language"
+        language' <- a .: "language"
         -- pushedAt <- a .: "pushed_at"
         -- openIssuesCount <- a .: "open_issues_count"
         -- openIssues <- a .: "open_issues"
         -- watchers <- a .: "watchers"
         stargazers <- a .: "stargazers_count"
-        licence <- a .:? "license"
+        licence' <- a .:? "license"
         -- licenceUrl <- licence .: "url"
         -- licenceKey <- licence .: "key"
         -- licenceName <- licence .: "name"
@@ -98,24 +96,25 @@ instance FromJSON Repo where
         desc <- a .: "description"
         -- watchersCount <- a .: "watchers_count"
 
-        let website = if isJust homepage && Just "" == homepage
+        let website' = if isJust homepage && Just "" == homepage
             then Nothing
             else homepage
 
-        let licenceText = if isJust licence && Just (Licence "NOASSERTION") == licence
+        let licenceText = if isJust licence' && Just (Licence "NOASSERTION") == licence'
             then Nothing
-            else licence
+            else licence'
 
         return $ Repo {
-            name = name,
+            name = name',
             description = desc,
-            fork = fork,
-            language = language,
+            fork = fork',
+            language = language',
             source = url,
-            website = website,
+            website = website',
             licence = licenceText,
             stars = stargazers
         }
+    parseJSON _ = error "Wrong object"
 
 getRepos ∷ Text → Req [Repo]
 getRepos user = do

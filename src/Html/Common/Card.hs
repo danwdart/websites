@@ -7,7 +7,6 @@ import           Control.Monad
 
 import           Data.Maybe
 import           Data.String
-import           Distribution.SPDX
 
 import           Html.Common.GitHub          as GH
 
@@ -57,8 +56,8 @@ cardDefunct cardTitle cardText = H.div ! class_ "card col-md-4 text-center" $ H.
     strong "Website defunct"
 
 licenceLink ∷ Licence → Html
-licenceLink licence =  a ! href ("https://spdx.org/licenses/" <> fromString avOrHtmlSpdx <> ".html") ! target "_blank" $ fromString avOrHtmlSpdx
-    where avOrHtmlSpdx = GH.spdx_id licence
+licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> fromString avOrHtmlSpdx <> ".html") ! target "_blank" $ fromString avOrHtmlSpdx
+    where avOrHtmlSpdx = GH.spdx_id licence'
 
 renderCard ∷ Repo → Html
 renderCard repo =
@@ -73,5 +72,5 @@ renderCard repo =
             H.span ! class_ "description" $ fromString . fromMaybe "" $ GH.description repo
             br
             maybe (small $ em "Not yet licenced") licenceLink (licence repo)
-        maybe "" (\src -> a ! class_ "btn btn-secondary mx-1" ! href (fromString src) ! target "_blank" $ "Source") (GH.source repo)
+        maybe "" (\src' -> a ! class_ "btn btn-secondary mx-1" ! href (fromString src') ! target "_blank" $ "Source") (GH.source repo)
         maybe "" (\site -> a ! class_ "btn btn-secondary mx-1" ! href (fromString site) ! target "_blank" $ "Website") $ website repo

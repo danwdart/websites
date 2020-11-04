@@ -16,8 +16,6 @@ import qualified Site.DanDart                   as D
 import qualified Site.JolHarg                   as J
 import qualified Site.M0ORI                     as M
 
-import           Debug.Trace
-
 build :: IO ()
 build = do
     B.build

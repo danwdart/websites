@@ -8,13 +8,11 @@ module Main where
 import           AWSLambda.Events.APIGateway
 import           Control.Monad
 import           Data.Aeson                  hiding (object)
-import           Data.Aeson.Embedded
 import           Data.ByteString.Char8       (ByteString)
 import qualified Data.ByteString.Char8       as B
 import           Data.ByteString.Lazy.Base64
 import qualified Data.ByteString.Lazy.Char8  as BSL
 import           Data.Char
-import           Data.Function               ((&))
 import           Data.Maybe
 import           Data.Text                   as T
 import           Data.Text.Encoding
@@ -23,7 +21,6 @@ import           Data.Time.Format.ISO8601
 import           GHC.Generics
 import           GitHub.REST                 as GH hiding ((.:))
 import           Network.AWS.Data.Query
-import           Network.AWS.Data.Text
 import           Network.AWS.Lens
 import           Network.HTTP.Types
 import           System.Environment
@@ -68,8 +65,8 @@ main = apiGatewayMain handler
 
 lookupQueryString :: QueryString -> ByteString -> ByteString
 lookupQueryString qs key =
-  (\[QPair a (QValue (Just b))] -> b) $
-  Prelude.filter (\(QPair a b) -> a == key) $
+  (\[QPair _ (QValue (Just b))] -> b) $
+  Prelude.filter (\(QPair a _) -> a == key) $
   (\(QList x) -> x) qs
 
 handler :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
