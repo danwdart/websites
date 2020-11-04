@@ -3,7 +3,7 @@
 
 module Data.JolHarg (keywords, descTitle) where
 
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5 as H hiding (main)
 
 keywords ∷ [AttributeValue]
 keywords = [

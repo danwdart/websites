@@ -1,4 +1,4 @@
-module Util.Triple (t1, t2, t3) where 
+module Util.Triple (t1, t2, t3) where
 
 -- Because I can't be bothered with lenses for now.
 
