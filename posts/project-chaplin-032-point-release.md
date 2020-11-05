@@ -12,11 +12,11 @@ Introducing the second point release for the 0.3 series of Project Chaplin.
   
 Project Chaplin is the first fully free software and open source video streaming service, installable locally or usable online.  
   
-The software is available through GitHub at[ ](https://www.blogger.com/goog_1096986118)[https://github.com/kathiedart/projectchaplin/releases](https://github.com/kathiedart/projectchaplin/releases).  
+The software is available through GitHub at[ ](https://www.blogger.com/goog_1096986118)[https://github.com/danwdart/projectchaplin/releases](https://github.com/danwdart/projectchaplin/releases).  
   
 _New for_ _0.3.2_: A demo server has been installed at [https://projectchaplin.com](https://projectchaplin.com/) for those who wish to test without downloading anything! Please don't hit this server a lot, as it is only hosted on a small server, and is mainly for testing purposes. Please let me know (see below) if you notice any outstanding issues not covered in the issue tracker, and email me privately for any security issues.  
   
-The project is always looking for new developers, designers and ideas people. Please contact "viablog032 att projectchaplin dott com" if you are looking for a new project to join. The list of new bugs, feature requests, etc is available at [https://github.com/kathiedart/projectchaplin/issues](https://github.com/kathiedart/projectchaplin/issues)  
+The project is always looking for new developers, designers and ideas people. Please contact "viablog032 att projectchaplin dott com" if you are looking for a new project to join. The list of new bugs, feature requests, etc is available at [https://github.com/danwdart/projectchaplin/issues](https://github.com/danwdart/projectchaplin/issues)  
   
 **Changelog (0.3 series)**  
 **New in 0.3.2:**  
