@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Site.JolHarg where
 
@@ -23,16 +24,16 @@ import           Text.Blaze.Html.Renderer.Utf8
 
 import           WaiAppStatic.Types
 
-build :: IO ()
+build ∷ IO ()
 build = do
     reposDan <- runReq defaultHttpConfig $ getRepos "danwdart"
     reposJH <- runReq defaultHttpConfig $ getRepos "jolharg"
     copyDir "static/common" ".sites/jolharg"
     copyDir "static/jolharg" ".sites/jolharg"
-    BSL.writeFile ".sites/jolharg/index.html" $ renderHtml $ runReader page (reposDan <> reposJH)
+    BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ runReader page (reposDan <> reposJH)
     putStrLn "jolharg compiled."
 
-serve :: IO ()
+serve ∷ IO ()
 serve = do
     putStrLn "Building..."
     build

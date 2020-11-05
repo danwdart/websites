@@ -65,8 +65,7 @@ main = apiGatewayMain handler
 
 lookupQueryString :: QueryString -> ByteString -> ByteString
 lookupQueryString qs key =
-  (\[QPair _ (QValue (Just b))] -> b) $
-  Prelude.filter (\(QPair a _) -> a == key) $
+  (\[QPair _ (QValue (Just b))] -> b) . Prelude.filter (\(QPair a _) -> a == key) $
   (\(QList x) -> x) qs
 
 handler :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
@@ -74,7 +73,7 @@ handler request = do
     -- print $ request ^. agprqHeaders
     --print $ request ^. requestBody
     githubAccessToken <- getEnv "GITHUB_ACCESS_TOKEN"
-    let qs = parseQueryString $ encodeUtf8 $ fromMaybe "" $ request ^. requestBody
+    let qs = parseQueryString . encodeUtf8 $ fromMaybe "" (request ^. requestBody)
     let lookupQS = decodeUtf8 . urlDecode True . lookupQueryString qs
     let name = lookupQS "name"
     let email = lookupQS "email"

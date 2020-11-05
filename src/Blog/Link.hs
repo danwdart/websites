@@ -1,10 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 module Blog.Link where
 
 import           Blog.Types
 import           Data.List
 import           Data.String
-import           Data.Text (Text)
+import           Data.Text                   (Text)
 import qualified Data.Text                   as T
 import           Data.Time
 import           Text.Blaze.Html5            as H hiding (main)
@@ -12,13 +13,13 @@ import           Text.Blaze.Html5.Attributes as A
 import           Util.List
 import           Util.Time
 
-renderMetaLink :: Text -> BlogMetadata -> Html
+renderMetaLink ∷ Text → BlogMetadata → Html
 renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (Blog.Types.title m))
 
-renderLink :: BlogPost -> Html
+renderLink ∷ BlogPost → Html
 renderLink bp = renderMetaLink (postId bp) (metadata bp)
 
-makeLinks :: [BlogPost] -> Html
+makeLinks ∷ [BlogPost] → Html
 makeLinks = foldMap ((
         \byYear -> do
             details ! customAttribute "open" "" ! class_ "pl-2" $ do

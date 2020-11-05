@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Site.M0ORI where
 
@@ -9,10 +10,10 @@ import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           WaiAppStatic.Types
 
-build :: IO ()
+build ∷ IO ()
 build = make "m0ori" page
 
-serve :: IO ()
+serve ∷ IO ()
 serve = do
     putStrLn "Building..."
     build

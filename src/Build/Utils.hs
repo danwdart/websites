@@ -12,7 +12,7 @@ mkdirp = createDirectoryIfMissing True
 
 make ∷ String → Html → IO ()
 make name page = do
-    copyDir "static/common" $ ".sites/" ++ name
-    copyDir ("static/" ++ name) (".sites/" ++ name)
-    BSL.writeFile (".sites/" ++ name ++ "/index.html") $ renderHtml page
-    putStrLn $ name ++ " compiled."
+    copyDir "static/common" $ ".sites/" <> name
+    copyDir ("static/" <> name) (".sites/" <> name)
+    BSL.writeFile (".sites/" <> (name <> "/index.html")) $ renderHtml page
+    putStrLn $ name <> " compiled."

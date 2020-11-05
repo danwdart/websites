@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Site.Blog where
 
@@ -19,7 +20,7 @@ import           System.Directory
 import           System.FilePath
 import           WaiAppStatic.Types
 
-build :: IO ()
+build ∷ IO ()
 build = do
   files <- getDirectoryContents "posts"
   let fileNames = ("posts/" </>) <$> files -- if used in same line, use Compose
@@ -31,7 +32,7 @@ build = do
   let renderedLinks = makeLinks sortedPosts
   make "blog" $ page renderedLinks renderedPosts
 
-serve :: IO ()
+serve ∷ IO ()
 serve = do
   putStrLn "Building..."
   build

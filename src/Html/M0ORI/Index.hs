@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.M0ORI.Index (page) where
 
@@ -10,7 +11,7 @@ import           Html.Common.Link
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageHamRadio :: Html
+pageHamRadio ∷ Html
 pageHamRadio = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! name "selected" ! A.id "Ham Radio" ! value "Ham Radio"
     (H.label ! class_ "mb-0" ! for "Ham Radio") . (a ! class_ "nav-link btn btn-sm") $ "Ham Radio"
@@ -43,7 +44,7 @@ pageHamRadio = li ! class_ "nav-item" $ do
                 li "JT modes on usually 20m"
             p $ extLink "https://www.qrzcq.com/call/M0ORI" "My QRZCQ page")
 
-pageContact :: Html
+pageContact ∷ Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Contact" ! value "Contact"
     (H.label ! class_ "mb-0" ! for "Contact") . (a ! class_ "nav-link btn btn-sm") $ "Contact"
@@ -67,7 +68,7 @@ pageContact = li ! class_ "nav-item" $ do
                     textarea ! class_ "form-control" ! A.id "message" ! placeholder "Hello!..." ! rows "10" ! name "message" $ mempty
                 H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send")
 
-htmlHeader :: Html
+htmlHeader ∷ Html
 htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
     a ! class_ "w-25 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#intro" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
@@ -76,7 +77,7 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
             pageHamRadio
             pageContact)
 
-page :: Html
+page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader

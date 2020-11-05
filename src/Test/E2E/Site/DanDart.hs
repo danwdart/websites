@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Test.E2E.Site.DanDart where
 
@@ -18,12 +19,12 @@ import           Test.WebDriver.Session
 -- prop_RevRev xs = reverse (reverse xs) == xs
 --   where types = xs::[Int]
 
-firefoxConfig :: WDConfig
+firefoxConfig ∷ WDConfig
 firefoxConfig = defaultConfig
 
 chromeConfig = useBrowser chrome defaultConfig
 
-main :: IO ()
+main ∷ IO ()
 main = do
     putStrLn "Checking dandart.co.uk..."
     -- quickCheck prop_RevRev
@@ -32,10 +33,10 @@ main = do
         liftIO . createDirectoryIfMissing True $ "images"
         saveScreenshot "images/home.png"
         mapM_ (\linkName -> do
-            liftIO . putStrLn $ "Clicking " ++ unpack linkName
+            liftIO . putStrLn $ "Clicking " <> unpack linkName
             link <- findElem $ ByLinkText linkName
             click link
-            liftIO . putStrLn $ "Saving " ++ unpack linkName
+            liftIO . putStrLn $ "Saving " <> unpack linkName
             saveScreenshot $ "images" </> unpack linkName <.> "png"
             ) ["Characters", "Favourites", "Ham Radio", "Health", "Music", "Maths", "About This Site", "Contact"]
         closeSession

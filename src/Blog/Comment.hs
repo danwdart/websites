@@ -1,5 +1,6 @@
 {-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Blog.Comment where
 
@@ -32,13 +33,13 @@ details $ do
         a ! class_ "pl-2" ! href "#" $ "The thing." -}
 -}
 
-parseComment :: UTCTime -> Text -> ParseCommentResult
+parseComment ∷ UTCTime → Text → ParseCommentResult
 parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r -> ParseCommentResult date r (toMarkup $ markdown def $ decodeUtf8 i')
-    Fail _ xs y -> error $ "Failure of " ++ show xs ++ y
+    Done i' r -> ParseCommentResult date r (toMarkup . markdown def $ decodeUtf8 i')
+    Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
     _ -> error $ "What is " <> T.unpack contents'
 
-getCommentsIfExists :: FilePath -> IO [ParseCommentResult]
+getCommentsIfExists ∷ FilePath → IO [ParseCommentResult]
 getCommentsIfExists postId = do
     commentFiles <- getDirectoryContents $ "posts/" <> postId
     let commentFileNames = ("posts/" </>) . (postId </>) <$> commentFiles
@@ -48,14 +49,14 @@ getCommentsIfExists postId = do
     let commentData = zipWith parseComment dates commentTexts
     return $ sortOn (Down . commentDate) commentData
 
-getComments :: FilePath -> IO [ParseCommentResult]
+getComments ∷ FilePath → IO [ParseCommentResult]
 getComments postId = do
     dirExists <- doesDirectoryExist $ "posts/" <> postId
     if dirExists
         then getCommentsIfExists postId
         else return mempty
 
-commentForm :: Text -> Html
+commentForm ∷ Text → Html
 commentForm postId = H.form
     ! A.class_ "form"
     ! enctype "application/x-www-form-urlencoded"
@@ -78,7 +79,7 @@ commentForm postId = H.form
             button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
             H.iframe ! name "_result" ! height "30" ! width "200" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
 
-renderComment :: ParseCommentResult -> Html
+renderComment ∷ ParseCommentResult → Html
 renderComment ParseCommentResult {
     commentDate,
     commentMetadata = BlogCommentMetadata {
@@ -92,10 +93,9 @@ renderComment ParseCommentResult {
             a ! name (fromString (iso8601Show commentDate)) $ mempty
             a ! href ("mailto:" <> (fromString . T.unpack $ authorEmail)) $ string (T.unpack author)
             " "
-            when (isJust authorUrl) $
-                a ! href (fromString $ T.unpack $ fromJust authorUrl) $ " (URL)"
+            when (isJust authorUrl) . (a ! href (fromString . T.unpack $ fromJust authorUrl)) $ " (URL)"
             " said on "
-            a ! href ("#" <> fromString (iso8601Show commentDate)) $ fromString $ iso8601Show commentDate
+            (a ! href ("#" <> fromString (iso8601Show commentDate))) . fromString $ iso8601Show commentDate
             ":"
         p commentHtml
         br

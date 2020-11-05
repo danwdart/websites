@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Main where
 
@@ -16,14 +17,14 @@ import qualified Site.DanDart                   as D
 import qualified Site.JolHarg                   as J
 import qualified Site.M0ORI                     as M
 
-build :: IO ()
+build ∷ IO ()
 build = do
     B.build
     D.build
     J.build
     M.build
 
-serve :: IO ()
+serve ∷ IO ()
 serve = do
     build
     putStrLn "Serving..."
@@ -47,5 +48,5 @@ serve = do
         ]) . staticApp $ defaultWebAppSettings ".sites/"
     where indices = mapMaybe toPiece ["index.html"]
 
-main :: IO ()
+main ∷ IO ()
 main = build

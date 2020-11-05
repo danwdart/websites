@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.DanDart.Index (page) where
 
@@ -13,13 +14,13 @@ import           Html.Common.Social
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageIntro :: Html
+pageIntro ∷ Html
 pageIntro = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! name "selected" ! A.id "Intro" ! value "Intro"
-    H.label ! class_ "mb-0" ! for "Intro" $ a ! class_ "nav-link btn btn-sm" $ "Intro"
+    (H.label ! class_ "mb-0" ! for "Intro") . (a ! class_ "nav-link btn btn-sm") $ "Intro"
     H.div ! class_ "page" ! A.id "intro" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Intro"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Intro"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light") $ (do
             p "Hello, my name is Dan."
             p "I am a software engineer, mathematics lover, radio ham and musician."
             p $ do
@@ -28,15 +29,15 @@ pageIntro = li ! class_ "nav-item" $ do
                 "."
             p "I also enjoy discordant and nonsensical commentary."
             p "I can speak about maths, physics, computer science and linguistics at length."
-            p "You can find out more by using the links at the top."
+            p "You can find out more by using the links at the top.")
 
-pageCharacters :: Html
+pageCharacters ∷ Html
 pageCharacters = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Characters" ! value "Characters"
-    H.label ! class_ "mb-0" ! for "Characters" $ a ! class_ "nav-link btn btn-sm" $ "Characters"
+    (H.label ! class_ "mb-0" ! for "Characters") . (a ! class_ "nav-link btn btn-sm") $ "Characters"
     H.div ! class_ "page" ! A.id "characters" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Characters"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Characters"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light") $ (do
             p "Some of my favourite characters and characters that I identify with are:"
             ul $ mapM_ (\(fandom', fandomLink, characters) -> do
                 "from "
@@ -47,15 +48,15 @@ pageCharacters = li ! class_ "nav-item" $ do
                         ", because "
                         reason
                     ) characters
-                ) favCharacters
+                ) favCharacters)
 
-pageFavourites :: Html
+pageFavourites ∷ Html
 pageFavourites = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Favourites" ! value "Favourites"
-    H.label ! class_ "mb-0" ! for "Favourites" $ a ! class_ "nav-link btn btn-sm" $ "Favourites"
+    (H.label ! class_ "mb-0" ! for "Favourites") . (a ! class_ "nav-link btn btn-sm") $ "Favourites"
     H.div ! class_ "page" ! A.id "favs" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Favourites"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Favourites"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light") $ (do
             p "Here is a list of some of my favourite things."
             p $ strong "YouTube channels"
             ul $ do
@@ -64,11 +65,11 @@ pageFavourites = li ! class_ "nav-item" $ do
                     li $ extLink (ytUser <> "numberphile") "Numberphile"
                     li $ extLink (ytChan <> "UC1_uAIS3r8Vu6JjXWvastJg") "Mathologer"
                 li $ strong "Science"
-                ul $ li $ extLink (ytUser <> "Vsauce") "Vsauce"
+                ul . li $ extLink (ytUser <> "Vsauce") "Vsauce"
                 li $ strong "Computer Science"
-                ul $ li $ extLink (ytUser <> "Computerphile") "Computerphile"
+                ul . li $ extLink (ytUser <> "Computerphile") "Computerphile"
                 li $ strong "General Knowledge / Other"
-                ul $ li $ extLink (ytChan <> "UC9pgQfOXRsp4UKrI8q0zjXQ") "Lindybeige"
+                ul . li $ extLink (ytChan <> "UC9pgQfOXRsp4UKrI8q0zjXQ") "Lindybeige"
             p $ do
                 strong "TV shows/movies"
                 " (I also have an "
@@ -113,9 +114,9 @@ pageFavourites = li ! class_ "nav-item" $ do
                     extLink "https://danganronpa.us/" "Danganronpa"
                     " (no despair girls / hope side spoilers please!)"
             p $ strong "Coding language:"
-            ul $ li $ do
+            ul . li $ (do
                 extLink "https://www.haskell.org/" "Haskell"
-                " (it's epic and pure!)"
+                " (it's epic and pure!)")
             p $ strong "Operating Systems"
             ul $ do
                 li $ do
@@ -128,18 +129,18 @@ pageFavourites = li ! class_ "nav-item" $ do
                     extLink (wikipedia "Windows_98#Windows_98_Second_Edition") "98 SE"
                 li $ do
                     "All-time: "
-                    extLink "http://riscos.com/riscos/310/index.php" "RISC OS"
+                    extLink "http://riscos.com/riscos/310/index.php" "RISC OS")
 
-pageHamRadio :: Html
-pageHamRadio = li ! class_ "nav-item" $ a ! class_ "nav-link btn btn-sm" ! href "https://m0ori.com" ! target "_blank" $ "Ham Radio"
+pageHamRadio ∷ Html
+pageHamRadio = (li ! class_ "nav-item") . (a ! class_ "nav-link btn btn-sm" ! href "https://m0ori.com" ! target "_blank") $ "Ham Radio"
 
-pageHealth :: Html
+pageHealth ∷ Html
 pageHealth = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Health" ! value "Health"
-    H.label ! class_ "mb-0" ! for "Health" $ a ! class_ "nav-link btn btn-sm" $ "Health"
+    (H.label ! class_ "mb-0" ! for "Health") . (a ! class_ "nav-link btn btn-sm") $ "Health"
     H.div ! class_ "page" ! A.id "health" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Health"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Health"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light") $ (do
             p "Both my physical and mental health are very low at the moment, but I am always more than happy to talk about them."
             p "I think I'm addicted to caffeine, which I wouldn't recommend."
             p "I have been diagnosed with the following things, both physical and mental intermingling:"
@@ -149,28 +150,28 @@ pageHealth = li ! class_ "nav-item" $ do
                 li $ extLink (nhs <> "fibromyalgia") "Fibromyalgia"
                 li $ extLink (nhs <> "autism") "Asperger's Syndrome"
                 li $ extLink (nhs <> "attention-deficit-hyperactivity-disorder-adhd") "ADHD"
-                li $ extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
+                li $ extLink (nhs <> "generalised-anxiety-disorder") "Anxiety")
 
-pageMusic :: Html
+pageMusic ∷ Html
 pageMusic = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Music" ! value "Music"
-    H.label ! class_ "mb-0" ! for "Music" $ a ! class_ "nav-link btn btn-sm" $ "Music"
+    (H.label ! class_ "mb-0" ! for "Music") . (a ! class_ "nav-link btn btn-sm") $ "Music"
     H.div ! class_ "page" ! A.id "music" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Music"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Music"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light") $ (do
             p "I play the guitar, keyboard and synthesiser."
             p "I've created the following pieces of music/sound effects:"
             audioFile "Gothic Orchestra" "GothicOrchestra" "SatanicOrchestra"
             audioFile "Shall It Be" "ShallItBe" "ShallItBe"
-            audioFile "Swim Deep (take 1)" "SwimDeepTake1" "SwimDeepTake1"
+            audioFile "Swim Deep (take 1)" "SwimDeepTake1" "SwimDeepTake1")
 
-pageMaths :: Html
+pageMaths ∷ Html
 pageMaths = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Maths" ! value "Maths"
-    H.label ! class_ "mb-0" ! for "Maths" $ a ! class_ "nav-link btn btn-sm" $ "Maths"
+    (H.label ! class_ "mb-0" ! for "Maths") . (a ! class_ "nav-link btn btn-sm") $ "Maths"
     H.div ! class_ "page" ! A.id "maths" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Maths"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Maths"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light") $ (do
             p "Mathematics has always been a great pastime for me."
             p $ do
                 "I have invented quite a few visualisations and generators for several interesting pieces of mathematics, some of which you can see and try on repos like my projects repo on GitHub ("
@@ -205,7 +206,7 @@ pageMaths = li ! class_ "nav-item" $ do
                 li $ extLink (oeis <> "275124") "A275124: Multiples of 5 where Pisano periods of Fibonacci numbers A001175 and Lucas numbers A106291 agree."
                 li $ extLink (oeis <> "275167") "A275167: Pisano periods of A275124."
                 li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
-                li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477."
+                li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477.")
 
 {-
 pageOrigami :: Html
@@ -223,13 +224,13 @@ pageOrigami = li ! class_ "nav-item" $ do
                 extLink "https://amzn.to/2VzLzqe" "How to Make Origami Airplanes That Fly, a book by Gery Hsu"
 -}
 
-pageAbout :: Html
+pageAbout ∷ Html
 pageAbout = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "About This Site" ! value "About This Site"
-    H.label ! class_ "mb-0" ! for "About This Site" $ a ! class_ "nav-link btn btn-sm" $ "About This Site"
+    (H.label ! class_ "mb-0" ! for "About This Site") . (a ! class_ "nav-link btn btn-sm") $ "About This Site"
     H.div ! class_ "page" ! A.id "about" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» About This Site"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» About This Site"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light") $ (do
             p "This website entailed a few design and code decisions which I would like to explain."
             p mempty
             p $ do
@@ -242,21 +243,21 @@ pageAbout = li ! class_ "nav-item" $ do
             p mempty
             p $ do
                 strong "The font choice"
-                " was difficult to make, as I was (and am still not quite happy enough with it, and so therefore still am) looking for a suitable, free software natural sans-serif font style, which has the single-storey \"a\", non-looped \"g\", and the double-seriffed I and J amongst other things. For now I've settled on Caudex, which whilst it is still serif, seems to be the closest I've yet to come across."
+                " was difficult to make, as I was (and am still not quite happy enough with it, and so therefore still am) looking for a suitable, free software natural sans-serif font style, which has the single-storey \"a\", non-looped \"g\", and the double-seriffed I and J amongst other things. For now I've settled on Caudex, which whilst it is still serif, seems to be the closest I've yet to come across.")
 
-pageSoftware :: Html
-pageSoftware = li ! class_ "nav-item" $ a ! class_ "nav-link btn btn-sm" ! href "https://jolharg.com" ! target "_blank" $ "Software"
+pageSoftware ∷ Html
+pageSoftware = (li ! class_ "nav-item") . (a ! class_ "nav-link btn btn-sm" ! href "https://jolharg.com" ! target "_blank") $ "Software"
 
-pageBlog :: Html
-pageBlog = li ! class_ "nav-item" $ a ! class_ "nav-link btn btn-sm" ! href "https://blog.dandart.co.uk" ! target "_blank" $ "Blog"
+pageBlog ∷ Html
+pageBlog = (li ! class_ "nav-item") . (a ! class_ "nav-link btn btn-sm" ! href "https://blog.dandart.co.uk" ! target "_blank") $ "Blog"
 
-pageContact :: Html
+pageContact ∷ Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Contact" ! value "Contact"
-    H.label ! class_ "mb-0" ! for "Contact" $ a ! class_ "nav-link btn btn-sm" $ "Contact"
+    (H.label ! class_ "mb-0" ! for "Contact") . (a ! class_ "nav-link btn btn-sm") $ "Contact"
     H.div ! class_ "page" ! A.id "contact" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Contact"
-        H.div ! class_ "row" $ H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Contact"
+        (H.div ! class_ "row") . (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3") $ (do
             p "If you would like to contact Dan, please use this form:"
             H.form ! action "https://formspree.io/website@dandart.co.uk" ! method "post" $ do
                 H.div ! class_ "form-group" $ do
@@ -272,10 +273,10 @@ pageContact = li ! class_ "nav-item" $ do
                 H.div ! class_ "form-group" $ do
                     H.label ! for "message" $ "Your message"
                     textarea ! class_ "form-control" ! A.id "message" ! placeholder "Hello!..." ! rows "10" ! name "message" $ mempty
-                H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send"
+                H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send")
 
-socialIcons :: Html
-socialIcons = H.div ! class_ "row social-row" $ H.div ! class_ "text-right social-inside" $ do
+socialIcons ∷ Html
+socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right social-inside") $ (do
     --  630 on mobile
     socialIconBBanned "" "No Blogger" "blogger-b"
     socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
@@ -311,9 +312,9 @@ socialIcons = H.div ! class_ "row social-row" $ H.div ! class_ "text-right socia
     socialIconBBanned "" "No Twitter" "twitter"
     -- +social('ubuntu', 'Ubuntu', 'url', 'black')
     -- +social-no('windows', 'Windows', 'url', 'black')
-    socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube"
+    socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube")
 
-htmlHeader :: Html
+htmlHeader ∷ Html
 htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
     a ! class_ "w-25 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#intro" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
@@ -333,7 +334,7 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
             pageContact
         socialIcons
 
-page :: Html
+page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader

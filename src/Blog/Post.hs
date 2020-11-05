@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Blog.Post where
 
@@ -17,14 +18,14 @@ import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 -- import Text.Blaze.Renderer.Utf8
 
-parseFile :: Text -> ParseResult
+parseFile ∷ Text → ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r   -> ParseResult r . toMarkup $ markdown def (decodeUtf8 i')
+    Done i' r -> ParseResult r . toMarkup $ markdown def (decodeUtf8 i')
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
-    _           -> error $ "What is " <> T.unpack contents'
+    _ -> error $ "What is " <> T.unpack contents'
 
 
-makeBlogPost :: FilePath -> IO BlogPost
+makeBlogPost ∷ FilePath → IO BlogPost
 makeBlogPost filename = do
     fileText <- TIO.readFile filename
     let (ParseResult metadata' html') = parseFile fileText
@@ -32,7 +33,7 @@ makeBlogPost filename = do
     comments' <- getComments postId'
     return $ BlogPost (T.pack postId') metadata' html' comments'
 
-renderPost :: BlogPost -> Html
+renderPost ∷ BlogPost → Html
 renderPost (BlogPost postId' metadata' html' comments') = do
     a ! name (fromString (T.unpack postId')) $ mempty
     -- Not working in Safari yet, so filter

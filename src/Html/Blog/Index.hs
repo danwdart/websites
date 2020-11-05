@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Blog.Index (page) where
 
@@ -9,7 +10,7 @@ import           Html.Common.Head
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageBlog :: Html -> Html -> Html
+pageBlog ∷ Html → Html → Html
 pageBlog blogPostLinks blogPosts = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! name "selected" ! A.id "Blog" ! value "Blog"
     (H.label ! class_ "mb-0" ! for "Blog") . (a ! class_ "nav-link btn btn-sm") $ "Blog"
@@ -19,7 +20,7 @@ pageBlog blogPostLinks blogPosts = li ! class_ "nav-item" $ do
             H.div ! class_ "col-md-2 py-3 mb-3" $ blogPostLinks
             H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ blogPosts
 
-htmlHeader :: Html -> Html -> Html
+htmlHeader ∷ Html → Html → Html
 htmlHeader blogPostLinks blogPosts = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
     a ! class_ "w-25 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#blog" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
@@ -27,7 +28,7 @@ htmlHeader blogPostLinks blogPosts = nav ! class_ "p-0 p-sm-2 navbar d-block d-s
     H.div . (ul ! class_ "navbar-nav px-3") $
             pageBlog blogPostLinks blogPosts
 
-page :: Html -> Html -> Html
+page ∷ Html → Html → Html
 page blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords $ do
         link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan Dart's Blog" ! href "/atom.xml"

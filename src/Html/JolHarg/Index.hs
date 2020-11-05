@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.JolHarg.Index (page) where
 
@@ -12,7 +13,7 @@ import           Html.Common.Head
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pagePortfolio :: Html
+pagePortfolio ∷ Html
 pagePortfolio = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! A.name "selected" ! A.id "Portfolio" ! value "Portfolio"
     (H.label ! class_ "mb-0" ! for "Portfolio") . (a ! class_ "nav-link btn btn-sm") $ "Portfolio"
@@ -44,18 +45,18 @@ pagePortfolio = li ! class_ "nav-item" $ do
             card "img/smdaf.png" "Shepton Mallet Digital Arts Festival" "Local festival site" "http://sheptondigitalarts.co.uk"
             card "img/ssoha.png" "SSOHA" "Somerset School of Oriental Healing Arts" "http://ssoha.org.uk"
 
-pageFs :: Reader [Repo] Html
+pageFs ∷ Reader [Repo] Html
 pageFs = do
     repos <- ask
     return . (li ! class_ "nav-item") $ (do
         input ! type_ "radio" ! A.style "display:none" ! A.name "selected" ! A.id "Free Software" ! value "Free Software"
-        H.label ! class_ "mb-0" ! for "Free Software" $ a ! class_ "nav-link btn btn-sm" $ "Free Software"
+        (H.label ! class_ "mb-0" ! for "Free Software") . (a ! class_ "nav-link btn btn-sm") $ "Free Software"
         H.div ! class_ "page" ! A.id "fs" $ do
-            H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Free Software"
-            H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
+            (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Free Software"
+            (H.div ! class_ "row") . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
             mapM_ renderCard repos)
 
-pageContact :: Html
+pageContact ∷ Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! A.name "selected" ! A.id "Contact" ! value "Contact"
     (H.label ! class_ "mb-0" ! for "Contact") . (a ! class_ "nav-link btn btn-sm") $ "Contact"
@@ -80,7 +81,7 @@ pageContact = li ! class_ "nav-item" $ do
                 H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send")
 
 -- Todo Technologies, Pricing, Blog, About
-htmlHeader :: Reader [Repo] Html
+htmlHeader ∷ Reader [Repo] Html
 htmlHeader = do
     fs <- pageFs
     return . H.header $ (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
@@ -90,7 +91,7 @@ htmlHeader = do
             fs
             pageContact))
 
-page :: Reader [Repo] Html
+page ∷ Reader [Repo] Html
 page = do
     header' <- htmlHeader
     return . (docTypeHtml ! lang "en-GB") $ (do

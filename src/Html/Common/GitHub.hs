@@ -32,25 +32,25 @@ data Language = LangHS
 
 instance FromJSON Language where
     parseJSON (String a) = return $ case a of
-        "JavaScript"   -> LangJS
-        "HTML"         -> LangHTML
-        "Python"       -> LangPython
-        "PHP"          -> LangPHP
-        "TypeScript"   -> LangTS
+        "JavaScript" -> LangJS
+        "HTML" -> LangHTML
+        "Python" -> LangPython
+        "PHP" -> LangPHP
+        "TypeScript" -> LangTS
         "CoffeeScript" -> LangCoffee
-        "Shell"        -> LangShell
-        "Assembly"     -> LangASM
-        "C"            -> LangC
-        "Makefile"     -> LangShell
+        "Shell" -> LangShell
+        "Assembly" -> LangASM
+        "C" -> LangC
+        "Makefile" -> LangShell
         "Visual Basic" -> LangVB
-        "Dockerfile"   -> LangDocker
-        "Tcl"          -> LangTcl
-        "BlitzBasic"   -> LangBlitzBasic
-        "Haskell"      -> LangHS
-        "C++"          -> LangCPP
-        "VBA"          -> LangVB
-        "Vim script"   -> LangShell
-        _              -> error $ "Unknown language: " ++ T.unpack a
+        "Dockerfile" -> LangDocker
+        "Tcl" -> LangTcl
+        "BlitzBasic" -> LangBlitzBasic
+        "Haskell" -> LangHS
+        "C++" -> LangCPP
+        "VBA" -> LangVB
+        "Vim script" -> LangShell
+        _ -> error $ "Unknown language: " <> T.unpack a
     parseJSON Null = return LangGeneric
     parseJSON _ = return LangGeneric
 
@@ -59,14 +59,14 @@ newtype Licence = Licence {
 } deriving (Eq, FromJSON, Generic, Show)
 
 data Repo = Repo {
-    name        :: String,
+    name :: String,
     description :: Maybe String,
-    fork        :: Bool,
-    language    :: Language,
-    source      :: Maybe String,
-    website     :: Maybe String,
-    licence     :: Maybe Licence,
-    stars       :: Int
+    fork :: Bool,
+    language :: Language,
+    source :: Maybe String,
+    website :: Maybe String,
+    licence :: Maybe Licence,
+    stars :: Int
 } deriving (Generic, Show)
 
 instance FromJSON Repo where

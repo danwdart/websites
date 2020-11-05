@@ -42,18 +42,18 @@ languageImage ∷ Language → AttributeValue
 languageImage l = fromMaybe genericImage (lookup l imagesFs)
 
 card ∷ AttributeValue → Html → Html → AttributeValue → Html
-card cardImage cardTitle cardText cardLink =  H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
+card cardImage cardTitle cardText cardLink =  (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
     img ! class_ "card-img-top" ! src cardImage
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
-    a ! class_ "btn btn-secondary" ! href cardLink ! target "_blank" ! rel "noopener" $ "Visit"
+    a ! class_ "btn btn-secondary" ! href cardLink ! target "_blank" ! rel "noopener" $ "Visit")
 
 cardDefunct ∷ Html → Html → Html
-cardDefunct cardTitle cardText = H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
+cardDefunct cardTitle cardText = (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
     img ! class_ "card-img-top" ! src "img/sample.png"
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
-    strong "Website defunct"
+    strong "Website defunct")
 
 licenceLink ∷ Licence → Html
 licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> fromString avOrHtmlSpdx <> ".html") ! target "_blank" $ fromString avOrHtmlSpdx
@@ -61,16 +61,16 @@ licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> fromString avO
 
 renderCard ∷ Repo → Html
 renderCard repo =
-    H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
+    (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
         img ! class_ "card-img-top-github" ! A.src (languageImage . language $ repo)
         h4 ! class_ "card-title" $ do
-            H.span ! class_ "name" $ fromString . GH.name $ repo
+            (H.span ! class_ "name") . fromString . GH.name $ repo
             " "
             H.span ! class_ "stars" $ "(" <> (fromString . show . stars $ repo) <> "★)"
-            when (fork repo) $ H.span ! class_ "fork" $ "⑂"
+            when (fork repo) . (H.span ! class_ "fork") $ "⑂"
         p ! class_ "card-text" $ do
-            H.span ! class_ "description" $ fromString . fromMaybe "" $ GH.description repo
+            (H.span ! class_ "description") . fromString . fromMaybe "" $ GH.description repo
             br
             maybe (small $ em "Not yet licenced") licenceLink (licence repo)
         maybe "" (\src' -> a ! class_ "btn btn-secondary mx-1" ! href (fromString src') ! target "_blank" $ "Source") (GH.source repo)
-        maybe "" (\site -> a ! class_ "btn btn-secondary mx-1" ! href (fromString site) ! target "_blank" $ "Website") $ website repo
+        maybe "" (\site -> a ! class_ "btn btn-secondary mx-1" ! href (fromString site) ! target "_blank" $ "Website") $ website repo)
