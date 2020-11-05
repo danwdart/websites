@@ -27,7 +27,7 @@ build = do
   posts <- sequence $ makeBlogPost <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
   let renderedPosts = foldMap renderPost sortedPosts
-  TIO.writeFile ".sites/blog/feed.rss" $ makeRSSFeed sortedPosts
+  TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed sortedPosts
   let renderedLinks = makeLinks sortedPosts
   make "blog" $ page renderedLinks renderedPosts
 

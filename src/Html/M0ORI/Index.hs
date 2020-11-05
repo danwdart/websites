@@ -13,10 +13,10 @@ import           Text.Blaze.Html5.Attributes as A
 pageHamRadio :: Html
 pageHamRadio = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! name "selected" ! A.id "Ham Radio" ! value "Ham Radio"
-    H.label ! class_ "mb-0" ! for "Ham Radio" $ a ! class_ "nav-link btn btn-sm" $ "Ham Radio"
+    (H.label ! class_ "mb-0" ! for "Ham Radio") . (a ! class_ "nav-link btn btn-sm") $ "Ham Radio"
     H.div ! class_ "page" ! A.id "ham" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Ham Radio"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Ham Radio"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light") $ (do
             p "I am a UK full-licenced radio amateur, and have been issued the callsign M0ORI."
             p $ do
                 "My nearest radio club is "
@@ -41,15 +41,15 @@ pageHamRadio = li ! class_ "nav-item" $ do
                 li "FM in mid-Somerset, UK (IO81)."
                 li "PSK on usually 20m"
                 li "JT modes on usually 20m"
-            p $ extLink "https://www.qrzcq.com/call/M0ORI" "My QRZCQ page"
+            p $ extLink "https://www.qrzcq.com/call/M0ORI" "My QRZCQ page")
 
 pageContact :: Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Contact" ! value "Contact"
-    H.label ! class_ "mb-0" ! for "Contact" $ a ! class_ "nav-link btn btn-sm" $ "Contact"
+    (H.label ! class_ "mb-0" ! for "Contact") . (a ! class_ "nav-link btn btn-sm") $ "Contact"
     H.div ! class_ "page" ! A.id "contact" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Contact"
-        H.div ! class_ "row" $ H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Contact"
+        (H.div ! class_ "row") . (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3") $ (do
             p "If you would like to contact Dan, please use this form:"
             H.form ! action "https://formspree.io/website@m0ori.com" ! method "post" $ do
                 H.div ! class_ "form-group" $ do
@@ -65,19 +65,18 @@ pageContact = li ! class_ "nav-item" $ do
                 H.div ! class_ "form-group" $ do
                     H.label ! for "message" $ "Your message"
                     textarea ! class_ "form-control" ! A.id "message" ! placeholder "Hello!..." ! rows "10" ! name "message" $ mempty
-                H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send"
+                H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send")
 
 htmlHeader :: Html
 htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
     a ! class_ "w-25 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#intro" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
         H.span ! class_ "title ml-2" $ "M0ORI: Dan Dart"
-    H.div $
-        ul ! class_ "navbar-nav px-3" $ do
+    H.div . (ul ! class_ "navbar-nav px-3") $ (do
             pageHamRadio
-            pageContact
+            pageContact)
 
 page :: Html
 page = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords
+    htmlHead descTitle keywords mempty
     htmlHeader

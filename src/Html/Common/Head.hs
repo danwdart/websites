@@ -25,10 +25,11 @@ metas descTitle keywords = do
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
-htmlHead ∷ String → [AttributeValue] → Html
-htmlHead descTitle keywords = H.head $ do
+htmlHead ∷ String → [AttributeValue] → Html → Html
+htmlHead descTitle keywords extraHead = H.head $ do
     H.title $ toHtml descTitle
     metas descTitle keywords
     commonCSS
+    extraHead
 
 

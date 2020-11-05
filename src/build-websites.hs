@@ -27,7 +27,7 @@ serve :: IO ()
 serve = do
     build
     putStrLn "Serving..."
-    runEnv 80 $ vhost [
+    (runEnv 80 . vhost [
         (
             isPrefixOf "blog" . fromMaybe "" . requestHeaderHost,
             staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = indices }
@@ -44,7 +44,7 @@ serve = do
             isPrefixOf "m0ori" . fromMaybe "" . requestHeaderHost,
             staticApp $ (defaultWebAppSettings ".sites/m0ori/"){ ssIndices = indices }
         )
-        ] $ staticApp $ defaultWebAppSettings ".sites/"
+        ]) . staticApp $ defaultWebAppSettings ".sites/"
     where indices = mapMaybe toPiece ["index.html"]
 
 main :: IO ()

@@ -1,10 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Blog.Link where
 
-import           Blog.Post                   (getPostId)
 import           Blog.Types
 import           Data.List
 import           Data.String
+import           Data.Text (Text)
 import qualified Data.Text                   as T
 import           Data.Time
 import           Text.Blaze.Html5            as H hiding (main)
@@ -12,21 +12,21 @@ import           Text.Blaze.Html5.Attributes as A
 import           Util.List
 import           Util.Time
 
-renderMetaLink :: BlogMetadata -> Html
-renderMetaLink m = a ! href (fromString ("#" <> getPostId m)) $ fromString (T.unpack (Blog.Types.title m))
+renderMetaLink :: Text -> BlogMetadata -> Html
+renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (Blog.Types.title m))
 
 renderLink :: BlogPost -> Html
-renderLink = renderMetaLink . metadata
+renderLink bp = renderMetaLink (postId bp) (metadata bp)
 
 makeLinks :: [BlogPost] -> Html
 makeLinks = foldMap ((
         \byYear -> do
             details ! customAttribute "open" "" ! class_ "pl-2" $ do
-                H.summary $ fromString . show . year . date . metadata . Data.List.head . Data.List.head $ byYear
+                H.summary . fromString . show . year . date . metadata . Data.List.head . Data.List.head $ byYear
                 p $ foldMap (
                     \byMonth -> details! customAttribute "open" "" ! class_ "pl-2" $ do
                         -- "%B" is Month
-                        H.summary $ fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
+                        H.summary . fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
                         p $ foldMap (\link' -> do
                             p ! class_ "pl-2" $ renderLink link'
                             br

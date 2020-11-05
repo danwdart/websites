@@ -55,15 +55,14 @@ getComments postId = do
         then getCommentsIfExists postId
         else return mempty
 
-
-commentForm :: FilePath -> Html
+commentForm :: Text -> Html
 commentForm postId = H.form
     ! A.class_ "form"
     ! enctype "application/x-www-form-urlencoded"
     ! action "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/comment"
     ! method "post"
     ! target "_result" $ do
-        H.input ! A.type_ "hidden" ! name "postId" ! value (fromString postId)
+        H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
         mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
             H.label ! for name_ $ label_
             H.input ! A.type_ type__ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_

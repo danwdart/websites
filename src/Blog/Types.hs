@@ -20,8 +20,8 @@ newtype BlogTag = BlogTag {
 
 instance FromJSON BlogTag where
     parseJSON (A.String a') = return $ BlogTag a'
-    parseJSON (A.Number a') = return $ BlogTag $ T.pack (show a')
-    parseJSON (A.Bool a')   = return $ BlogTag $ T.pack (show a')
+    parseJSON (A.Number a') = return . BlogTag $ T.pack (show a')
+    parseJSON (A.Bool a')   = return . BlogTag $ T.pack (show a')
     parseJSON e             = error (show e)
 
 data BlogMetadata = BlogMetadata {
@@ -46,6 +46,7 @@ instance FromJSON BlogCommentMetadata where
     parseJSON _ = error "Bad blog comment metadata"
 
 data BlogPost = BlogPost {
+    postId   :: Text,
     metadata :: BlogMetadata,
     html     :: Html,
     comments :: [ParseCommentResult]

@@ -296,14 +296,14 @@ socialIcons = H.div ! class_ "row social-row" $ H.div ! class_ "text-right socia
     -- +social('microsoft', 'Microsoft', 'url', 'black')
     socialIconB "https://mix.com/dandart" "Mix" "mix"
     socialIconB "https://www.npmjs.com/~dandart" "npm" "npm"
-    socialIconB "https://www.patreon.com/kathiedart" "Patreon" "patreon"
+    socialIconB "https://www.patreon.com/danwdart" "Patreon" "patreon"
     socialIconB "https://my.playstation.com/profile/MeowzorFnord" "PlayStation" "playstation"
     socialIconBBanned "" "No Pinterest" "pinterest"
     -- +social('raspberry-pi', 'Raspberry PI', 'url', 'black')
     socialIconB "https://www.reddit.com/user/jolharg" "Reddit" "reddit"
     socialIconB "skypeurl" "Skype" "skype"
     socialIconBBanned "" "No Snapchat" "snapchat"
-    socialIconB "https://soundcloud.com/kathiedart" "SoundCloud" "soundcloud"
+    socialIconB "https://soundcloud.com/danwdart" "SoundCloud" "soundcloud"
     socialIconB "spotify url" "Spotify" "spotify"
     socialIconB "https://stackoverflow.com/users/1764563/dan-dart" "Stack Overflow" "stack-overflow"
     socialIconB "https://steamcommunity.com/id/dandart" "Steam" "steam"
@@ -335,5 +335,5 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
 
 page :: Html
 page = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords
+    htmlHead descTitle keywords mempty
     htmlHeader

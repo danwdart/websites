@@ -15,16 +15,16 @@ import           Text.Blaze.Html5.Attributes as A
 pagePortfolio :: Html
 pagePortfolio = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! checked "checked" ! A.name "selected" ! A.id "Portfolio" ! value "Portfolio"
-    H.label ! class_ "mb-0" ! for "Portfolio" $ a ! class_ "nav-link btn btn-sm" $ "Portfolio"
+    (H.label ! class_ "mb-0" ! for "Portfolio") . (a ! class_ "nav-link btn btn-sm") $ "Portfolio"
     H.div ! class_ "page" ! A.id "portfolio" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Portfolio"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Portfolio"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
         H.div ! class_ "row" $ do
-            H.div ! class_ "card col-md-4 text-center" $ H.div ! class_ "card-body" $ do
+            (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
                 img ! class_ "card-img-top" ! src "img/sample.png"
                 h4 ! class_ "card-title" $ "You"
                 p ! class_ "card-text" $ "Make an enquiry for a website:"
-                a ! class_ "btn btn-primary" ! href "mailto:website@jolharg.com" ! target "_blank" ! rel "noopener" $ "Enquire"
+                a ! class_ "btn btn-primary" ! href "mailto:website@jolharg.com" ! target "_blank" ! rel "noopener" $ "Enquire")
             card "img/polaris.png" "Polaris Elements" "Hospitality software" "https://polaris-elements.co.uk/"
             cardDefunct "Plugin ASO" "Analytics dashboard for Shopify"
             card "img/faultfixers.png" "FaultFixers" "Facilities management" "https://faultfixers.com"
@@ -47,21 +47,21 @@ pagePortfolio = li ! class_ "nav-item" $ do
 pageFs :: Reader [Repo] Html
 pageFs = do
     repos <- ask
-    return $ li ! class_ "nav-item" $ do
+    return . (li ! class_ "nav-item") $ (do
         input ! type_ "radio" ! A.style "display:none" ! A.name "selected" ! A.id "Free Software" ! value "Free Software"
         H.label ! class_ "mb-0" ! for "Free Software" $ a ! class_ "nav-link btn btn-sm" $ "Free Software"
         H.div ! class_ "page" ! A.id "fs" $ do
             H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Free Software"
             H.div ! class_ "row" $ H.div ! class_ "col-md-12 text-center" $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
-            mapM_ renderCard repos
+            mapM_ renderCard repos)
 
 pageContact :: Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! A.name "selected" ! A.id "Contact" ! value "Contact"
-    H.label ! class_ "mb-0" ! for "Contact" $ a ! class_ "nav-link btn btn-sm" $ "Contact"
+    (H.label ! class_ "mb-0" ! for "Contact") . (a ! class_ "nav-link btn btn-sm") $ "Contact"
     H.div ! class_ "page" ! A.id "contact" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Contact"
-        H.div ! class_ "row" $ H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3" $ do
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Contact"
+        (H.div ! class_ "row") . (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3") $ (do
             p "If you would like to contact JolHarg or make an enquiry, please use this form:"
             H.form ! action "https://formspree.io/website@jolharg.com" ! method "post" $ do
                 H.div ! class_ "form-group" $ do
@@ -77,22 +77,22 @@ pageContact = li ! class_ "nav-item" $ do
                 H.div ! class_ "form-group" $ do
                     H.label ! for "message" $ "Your message"
                     textarea ! class_ "form-control" ! A.id "message" ! placeholder "I am interested in a website..." ! rows "10" ! A.name "message" $ mempty
-                H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send"
+                H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send")
 
 -- Todo Technologies, Pricing, Blog, About
 htmlHeader :: Reader [Repo] Html
 htmlHeader = do
     fs <- pageFs
-    return $ H.header $ nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
+    return . H.header $ (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
         a ! class_ "w-75 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "" $ img ! src "/img/jolharg.png" ! A.style "height:32px" ! alt ""
-        H.div $ ul ! class_ "navbar-nav px-3" $ do
+        H.div . (ul ! class_ "navbar-nav px-3") $ (do
             pagePortfolio
             fs
-            pageContact
+            pageContact))
 
 page :: Reader [Repo] Html
 page = do
     header' <- htmlHeader
-    return $ docTypeHtml ! lang "en-GB" $ do
-        htmlHead descTitle keywords
-        header'
+    return . (docTypeHtml ! lang "en-GB") $ (do
+        htmlHead descTitle keywords mempty
+        header')

@@ -19,8 +19,8 @@ import           Text.Blaze.Html5.Attributes as A
 
 parseFile :: Text -> ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r   -> ParseResult r $ toMarkup $ markdown def $ decodeUtf8 i'
-    Fail _ xs y -> error $ "Failure of " ++ show xs ++ y
+    Done i' r   -> ParseResult r . toMarkup $ markdown def (decodeUtf8 i')
+    Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
     _           -> error $ "What is " <> T.unpack contents'
 
 
@@ -28,25 +28,20 @@ makeBlogPost :: FilePath -> IO BlogPost
 makeBlogPost filename = do
     fileText <- TIO.readFile filename
     let (ParseResult metadata' html') = parseFile fileText
-    let postId = dropExtension $ takeFileName filename
-    comments' <- getComments postId
-    return $ BlogPost metadata' html' comments'
-
-
-getPostId :: BlogMetadata -> FilePath
-getPostId = dropExtension . takeFileName . Data.List.head . aliases
+    let postId' = dropExtension $ takeFileName filename
+    comments' <- getComments postId'
+    return $ BlogPost (T.pack postId') metadata' html' comments'
 
 renderPost :: BlogPost -> Html
-renderPost (BlogPost metadata' html' comments') = do
-    let postId = getPostId metadata'
-    a ! name (fromString postId) $ mempty
+renderPost (BlogPost postId' metadata' html' comments') = do
+    a ! name (fromString (T.unpack postId')) $ mempty
     -- Not working in Safari yet, so filter
-    img ! height "0" ! width "0" ! src ("/favicon.ico?" <> fromString postId) ! customAttribute "loading" "lazy"
-    h1 $ fromString $ T.unpack $ Blog.Types.title metadata'
+    img ! height "0" ! width "0" ! src ("/favicon.ico?" <> fromString (T.unpack postId')) ! customAttribute "loading" "lazy"
+    h1 . fromString . T.unpack $ Blog.Types.title metadata'
     small $ do
-        a ! href ("#" <> fromString postId) $ "Permalink"
+        a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
         " | Published: "
-        fromString $ show $ date metadata'
+        fromString . show . date $ metadata'
         " | Tags: "
         foldMap ((\str -> do
             a ! href "#" {-( <> fromString str)-} $ fromString str
@@ -63,6 +58,6 @@ renderPost (BlogPost metadata' html' comments') = do
         mapM_ renderComment comments'
     br
     details $ do
-        H.summary $ h4 ! A.class_ "d-inline-block" $ "Post a comment"
-        commentForm postId
+        H.summary . (h4 ! A.class_ "d-inline-block") $ "Post a comment"
+        commentForm postId'
     hr
