@@ -3,22 +3,26 @@
 
 module Site.Blog where
 
-import           Blog.Feed
-import           Blog.Link
-import           Blog.Post
-import           Blog.Types
-import           Build.Utils
-import           Control.Monad
-import           Data.List
-import           Data.Maybe
-import           Data.Ord
+import           Blog.Feed                      (makeRSSFeed)
+import           Blog.Link                      (makeLinks)
+import           Blog.Post                      (makeBlogPost, renderPost)
+import           Blog.Types                     (BlogMetadata (date, draft),
+                                                 BlogPost (metadata))
+import           Build.Utils                    (make)
+import           Control.Monad                  (filterM)
+import           Data.List                      (sortOn)
+import           Data.Maybe                     (mapMaybe)
+import           Data.Ord                       (Down (Down))
 import qualified Data.Text.IO                   as TIO
-import           Html.Blog.Index
-import           Network.Wai.Application.Static
-import           Network.Wai.Handler.Warp
-import           System.Directory
-import           System.FilePath
-import           WaiAppStatic.Types
+import           Html.Blog.Index                (page)
+import           Network.Wai.Application.Static (defaultWebAppSettings,
+                                                 staticApp)
+import           Network.Wai.Handler.Warp       (runEnv)
+import           System.Directory               (doesFileExist,
+                                                 getDirectoryContents)
+import           System.FilePath                ((</>))
+import           WaiAppStatic.Types             (StaticSettings (ssIndices),
+                                                 toPiece)
 
 build ∷ IO ()
 build = do

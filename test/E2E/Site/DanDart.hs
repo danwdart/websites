@@ -3,18 +3,18 @@
 
 module Test.E2E.Site.DanDart where
 
-import           Control.Monad.Base
-import           Control.Monad.IO.Class
-import           Control.Monad.Trans.State.Strict
-import           Data.Aeson
-import           Data.Default
-import           Data.Text
-import           System.Directory
-import           System.FilePath
-import           Test.QuickCheck
-import           Test.WebDriver
-import           Test.WebDriver.Config
-import           Test.WebDriver.Session
+import           Control.Monad.IO.Class (MonadIO (liftIO))
+import           Data.Text              (unpack)
+import           Site.DanDart           (serve)
+import           System.Directory       (createDirectoryIfMissing)
+import           System.Environment     (setEnv)
+import           System.FilePath        ((<.>), (</>))
+import           Test.Hspec
+import           Test.WebDriver         (Selector (ByLinkText), WDConfig,
+                                         chrome, click, closeSession,
+                                         defaultConfig, findElem, openPage,
+                                         runSession, saveScreenshot, useBrowser)
+import           Test.WebDriver.Config  (WDConfig, defaultConfig, useBrowser)
 
 -- prop_RevRev xs = reverse (reverse xs) == xs
 --   where types = xs::[Int]
@@ -22,14 +22,17 @@ import           Test.WebDriver.Session
 firefoxConfig ∷ WDConfig
 firefoxConfig = defaultConfig
 
+chromeConfig ∷ WDConfig
 chromeConfig = useBrowser chrome defaultConfig
 
 main ∷ IO ()
 main = do
-    putStrLn "Checking dandart.co.uk..."
+    setEnv "PORT" "8080"
+    serve
+    putStrLn "Checking dandart..."
     -- quickCheck prop_RevRev
     runSession chromeConfig $ do
-        openPage "https://dandart.co.uk"
+        openPage "http://localhost:8080"
         liftIO . createDirectoryIfMissing True $ "images"
         saveScreenshot "images/home.png"
         mapM_ (\linkName -> do
