@@ -11,4 +11,4 @@ spec ∷ Spec
 spec = do
     describe "JolHarg" .
         it "serves and checks sizes" $
-            runTest "jolharg" ["Free Software", "Contact"] serve
+            runTest "jolharg" serve

@@ -11,4 +11,4 @@ spec ∷ Spec
 spec = do
     describe "Blog" .
         it "serves and checks sizes" $
-            runTest "blog" ["Blog"] serve
+            runTest "blog" serve

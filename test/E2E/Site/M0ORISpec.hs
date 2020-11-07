@@ -11,4 +11,4 @@ spec ∷ Spec
 spec = do
     describe "M0ORI" .
         it "serves and checks sizes" $
-            runTest "m0ori" ["Ham Radio", "Contact"] serve
+            runTest "m0ori" serve

@@ -11,13 +11,4 @@ spec ∷ Spec
 spec = do
     describe "DanDart" .
         it "serves and checks sizes" $
-            runTest "dandart" [
-                "Characters",
-                "Favourites",
-                "Ham Radio",
-                "Health",
-                "Music",
-                "Maths",
-                "About This Site",
-                "Contact"
-                ] serve
+            runTest "dandart" serve
