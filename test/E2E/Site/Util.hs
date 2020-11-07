@@ -72,7 +72,7 @@ screenshotFile screenshotDir screenshotFilename =
 
 configs ∷ [(String, WDConfig)]
 configs = [
-    -- ("Firefox", firefoxConfig),
+    ("Firefox", firefoxConfig),
     ("Chrome", chromeConfig)
     ]
 
