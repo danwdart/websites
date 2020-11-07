@@ -20,13 +20,13 @@ spec = mapM_ (\(siteName, serve) ->
                 mapM_ (\((winWidth, winHeight), (_, navHeight), cardSizes) -> do
                     describe (show winWidth <> "x" <> show winHeight) . it "nav height is equal to 39" $ (
                             navHeight `shouldBe` 39)
-                    it "cards are only one size" $
+                    it "cards are only one size"
                         ((length . nub $ cardSizes )`shouldBe` 1)
                 ) sizeMap
             ) sizes
     ) [
         ("blog", B.serve),
         ("dandart", D.serve),
-        ("jolharg", J.serve)--,
+        ("jolharg", J.serve),
         ("m0ori", M.serve)
     ]

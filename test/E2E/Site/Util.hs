@@ -6,9 +6,12 @@ module E2E.Site.Util where
 import           Control.Concurrent               (forkIO, killThread,
                                                    threadDelay)
 import           Control.Monad.IO.Class           (MonadIO (liftIO))
-import           Data.Aeson                       (Object)
+import           Data.Aeson                       (Object,
+                                                   Value (Array, String),
+                                                   object)
 import           Data.Bifunctor                   (Bifunctor (bimap))
 import           Data.Text                        (Text, unpack)
+import           Data.Vector                      (fromList)
 import           System.Directory                 (createDirectoryIfMissing)
 import           System.Environment               (setEnv)
 import           System.FilePath                  ((<.>), (</>))
@@ -19,7 +22,8 @@ import           Test.WebDriver                   (Browser (chromeOptions),
                                                    Element,
                                                    Selector (ByCSS, ByClass),
                                                    WDConfig (wdCapabilities),
-                                                   chrome, click, closeSession,
+                                                   additionalCaps, chrome,
+                                                   click, closeSession,
                                                    currentWindow, defaultCaps,
                                                    defaultConfig, elemSize,
                                                    findElem, findElems, getText,
@@ -31,7 +35,15 @@ import           Test.WebDriver.Config            (WebDriverConfig)
 import           Test.WebDriver.JSON              (pair)
 
 firefoxConfig ∷ WDConfig
-firefoxConfig = defaultConfig
+firefoxConfig = defaultConfig {
+    wdCapabilities = defaultCaps {
+        additionalCaps = [
+            ("moz:firefoxOptions", object [
+                ("args", Array (fromList [String "--headless"]))
+            ])
+        ]
+    }
+}
 
 chromeConfig ∷ WDConfig
 chromeConfig = defaultConfig {
@@ -115,7 +127,7 @@ runForConfig siteName port (configName, config) = runSession config $ do
     pure (configName, results)
 
 
-runTest ∷ String → IO () -> IO [(FilePath, [((Word, Word), (Int, Int), [(Text, [(Int, Int)])])])]
+runTest ∷ String → IO () → IO [(FilePath, [((Word, Word), (Int, Int), [(Text, [(Int, Int)])])])]
 runTest siteName serve = do
     port <- randomRIO (49152, 65535) :: IO Int
     setEnv "PORT" (show port)

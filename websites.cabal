@@ -118,6 +118,7 @@ test-suite e2e
     , time
     , transformers
     , transformers-base
+    , vector
     , wai
     , wai-app-static
     , wai-extra
