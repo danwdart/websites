@@ -208,21 +208,22 @@ pageMaths = li ! class_ "nav-item" $ do
                 li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
                 li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477.")
 
-{-
 pageOrigami :: Html
 pageOrigami = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "origami" ! value "Origami"
-    H.label ! class_ "mb-0" ! for "irigami" $ a ! class_ "nav-link btn btn-sm" $ "Origami"
+    (H.label ! class_ "mb-0" ! for "origami") . (a ! class_ "nav-link btn btn-sm") $ "Origami"
     H.div ! class_ "page" ! A.id "origami" $ do
-        H.div ! class_ "row" $ H.div ! class_ "col my-md-3" $ small "» Origami"
-        H.div ! class_ "row" $ H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light" $ do
-            p "I've been doing origami from a very young age. I will give some instructions on how to make some models that I've invented later on when I've figured out how to digitise them, but for now, I'll give you some of my favourite origami resources."
+        (H.div ! class_ "row") . (H.div ! class_ "col my-md-3") $ small "» Origami"
+        (H.div ! class_ "row") . (H.div ! class_ "col-md-8 offset-md-2 py-3 bg-light") $ (do
+            p "I've been doing origami from a very young age. I will give some instructions on how to make some models that I've invented later on when I've figured out how to digitise them, but for now, I'll give you some of my favourite origami resources:"
             p $ do
                 extLink "https://amzn.to/2BWtHhY" "Complete Origami, a book by the late Eric Kenneway"
+                br
                 extLink "https://amzn.to/2BqLCO4" "Star Trek Paper Universe, a book by Andrew Pang"
+                br
                 extLink "https://amzn.to/2BspLWn" "Ultimate Origami Kit: The Complete Step-by-step Guide to the Art of Paper Folding, a book by John Morin"
-                extLink "https://amzn.to/2VzLzqe" "How to Make Origami Airplanes That Fly, a book by Gery Hsu"
--}
+                br
+                extLink "https://amzn.to/2VzLzqe" "How to Make Origami Airplanes That Fly, a book by Gery Hsu")
 
 pageAbout ∷ Html
 pageAbout = li ! class_ "nav-item" $ do
@@ -328,6 +329,7 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
             pageHealth
             pageMusic
             pageMaths
+            pageOrigami
             pageAbout
             pageSoftware
             pageBlog
