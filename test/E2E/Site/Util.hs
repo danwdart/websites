@@ -7,7 +7,8 @@ import           Control.Concurrent               (forkIO, killThread,
                                                    threadDelay)
 import           Control.Monad.IO.Class           (MonadIO (liftIO))
 import           Data.Aeson                       (Object)
-import           Data.Text                        (unpack)
+import           Data.Bifunctor                   (Bifunctor (bimap))
+import           Data.Text                        (Text, unpack)
 import           System.Directory                 (createDirectoryIfMissing)
 import           System.Environment               (setEnv)
 import           System.FilePath                  ((<.>), (</>))
@@ -15,15 +16,18 @@ import           System.Random                    (Random (randomRIO))
 import           Test.Hspec                       (HasCallStack)
 import           Test.WebDriver                   (Browser (chromeOptions),
                                                    Capabilities (browser),
-                                                   Selector (ByCSS), WD,
+                                                   Element,
+                                                   Selector (ByCSS, ByClass),
                                                    WDConfig (wdCapabilities),
                                                    chrome, click, closeSession,
                                                    currentWindow, defaultCaps,
-                                                   defaultConfig, findElems,
-                                                   getText, openPage,
-                                                   runSession, saveScreenshot)
+                                                   defaultConfig, elemSize,
+                                                   findElem, findElems, getText,
+                                                   openPage, runSession,
+                                                   saveScreenshot)
 import           Test.WebDriver.Class             (WebDriver, methodPost)
 import           Test.WebDriver.Commands.Internal (doWinCommand)
+import           Test.WebDriver.Config            (WebDriverConfig)
 import           Test.WebDriver.JSON              (pair)
 
 firefoxConfig ∷ WDConfig
@@ -43,50 +47,83 @@ setWindowSize ∷ (HasCallStack, WebDriver wd) ⇒ (Word, Word) → wd Object
 setWindowSize = doWinCommand methodPost currentWindow "/size"
                 . pair ("width", "height")
 
+showTuple ∷ (Show a) ⇒ (a, a) → String
+showTuple (a, b) = show a <> "x" <> show b
+
 resolutions ∷ [(Word, Word)]
 resolutions = [
     (360, 480),
     (480, 360),
     (480, 720),
     (720, 480),
-    (1024, 768),
-    (768, 1024),
-    (1280, 720),
     (720, 1280),
-    (1440, 900),
+    (768, 1024),
     (900, 1440),
-    (1920, 1080),
-    (1080, 1920)
+    (1024, 768),
+    (1080, 1920),
+    (1280, 720),
+    (1440, 900),
+    (1920, 1080)
     ]
 
-runTest ∷ FilePath → IO () → IO ()
-runTest name serve = do
-    port <- randomRIO (25915, 65535) :: IO Int
+screenshotFile ∷ FilePath → FilePath → FilePath
+screenshotFile screenshotDir screenshotFilename =
+    screenshotDir </> screenshotFilename <.> "png"
+
+configs ∷ [(String, WDConfig)]
+configs = [
+    -- ("Firefox", firefoxConfig),
+    ("Chrome", chromeConfig)
+    ]
+
+runForLink ∷ (WebDriver m, MonadIO m) ⇒ FilePath → [Char] → Element → m (Text, [(Int, Int)])
+runForLink screenshotDir res link = do
+    linkName <- getText link
+    let screenshotFilename = unpack linkName <> "-" <> res
+    click link
+    cards <- findElems $ ByClass "card"
+    cardSizes <- mapM elemSize cards
+    saveScreenshot $ screenshotFile screenshotDir screenshotFilename
+    pure (linkName, fmap (bimap round round) cardSizes)
+
+
+runForSize ∷ (MonadIO m, WebDriver m) ⇒ FilePath → (Word, Word) → m ((Word, Word), (Int, Int), [(Text, [(Int, Int)])])
+runForSize screenshotDir winSize = do
+    let res = showTuple winSize
+    _ <- setWindowSize winSize
+
+    let homeScreenshotFilename = "home-" <> res
+    saveScreenshot $ screenshotFile screenshotDir homeScreenshotFilename
+
+    navbar <- findElem $ ByClass "navbar-nav"
+    navbarSize <- elemSize navbar
+
+    links <- findElems $ ByCSS ".navbar-nav label a"
+    cardSizes <- mapM (runForLink screenshotDir res) links
+
+    pure (winSize, bimap round round navbarSize, cardSizes)
+
+
+runForConfig ∷ (WebDriverConfig conf, Show a) ⇒ String → a → (FilePath, conf) → IO (FilePath, [((Word, Word), (Int, Int), [(Text, [(Int, Int)])])])
+runForConfig siteName port (configName, config) = runSession config $ do
+    let screenshotDir = "images" </> configName </> siteName
+    liftIO . createDirectoryIfMissing True $ screenshotDir
+    openPage $ "http://" <> siteName <> ".localhost:" <> show port
+    results <- mapM (runForSize screenshotDir) resolutions
+    liftIO . putStrLn $ "Closing session"
+    closeSession
+    pure (configName, results)
+
+
+runTest ∷ String → IO () -> IO [(FilePath, [((Word, Word), (Int, Int), [(Text, [(Int, Int)])])])]
+runTest siteName serve = do
+    port <- randomRIO (49152, 65535) :: IO Int
     setEnv "PORT" (show port)
-    putStrLn $ "Serving " <> name <> " on port " <> show port
+
     thread <- forkIO serve
-    putStrLn "Waiting for server to start"
     threadDelay 3000000 -- Let it start
-    putStrLn $ "Checking " <> name <> "..."
-    runSession chromeConfig $ do
-        openPage $ "http://" <> name <> ".localhost:" <> show port
-        liftIO . createDirectoryIfMissing True $ "images/" <> name
-        mapM_ (\winSize -> (do
-            let res = show (fst winSize) <> "x" <> show (snd winSize)
-            liftIO . putStrLn $ "Setting resolution to " <> res
-            _ <- setWindowSize winSize
-            saveScreenshot $ "images/" <> name <> "/home-" <> res <> ".png"
-            links <- findElems $ ByCSS ".navbar-nav label a"
-            mapM_ (\link -> do
-                linkName <- getText link
-                let fileName = unpack linkName <> "-" <> res
-                liftIO . putStrLn $ "Clicking " <> unpack linkName
-                click link
-                liftIO . putStrLn $ "Saving screenshot of " <> fileName
-                saveScreenshot $ "images" </> name </> fileName <.> "png"
-                ) links)
-                :: WD ()) resolutions
-        liftIO . putStrLn $ "Closing session"
-        closeSession
-    putStrLn "Killing server"
+
+    results <- mapM (runForConfig siteName port) configs
+
     killThread thread
+    pure results

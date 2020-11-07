@@ -135,10 +135,7 @@ test-suite e2e
     , Data.DanDart
     , Data.JolHarg
     , Data.M0ORI
-    , E2E.Site.BlogSpec
-    , E2E.Site.DanDartSpec
-    , E2E.Site.JolHargSpec
-    , E2E.Site.M0ORISpec
+    , E2E.Site.CommonSpec
     , E2E.Site.Util
     , Html.Blog.Index
     , Html.Common.Audio
