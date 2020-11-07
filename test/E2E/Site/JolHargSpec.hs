@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module E2E.Site.BlogSpec where
+module E2E.Site.JolHargSpec where
 
 import           E2E.Site.Util (runTest)
-import           Site.Blog     (serve)
+import           Site.JolHarg  (serve)
 import           Test.Hspec    (Spec, describe, it)
 
 spec ∷ Spec
 spec = do
-    describe "Blog" .
+    describe "JolHarg" .
         it "serves and checks sizes" $
-            runTest "blog" ["Blog"] serve
+            runTest "jolharg" ["Free Software", "Contact"] serve

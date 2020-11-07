@@ -50,6 +50,7 @@ instance FromJSON Language where
         "C++" -> LangCPP
         "VBA" -> LangVB
         "Vim script" -> LangShell
+        "Vue" -> LangJS
         _ -> error $ "Unknown language: " <> T.unpack a
     parseJSON Null = return LangGeneric
     parseJSON _ = return LangGeneric
