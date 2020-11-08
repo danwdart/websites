@@ -70,7 +70,7 @@ pageContact = li ! class_ "nav-item" $ do
 
 htmlHeader ∷ Html
 htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
-    a ! class_ "w-25 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#intro" $ do
+    a ! class_ "p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#intro" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
         H.span ! class_ "title ml-2" $ "M0ORI: Dan Dart"
     H.div . (ul ! class_ "navbar-nav px-3") $ (do

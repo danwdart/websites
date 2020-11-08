@@ -22,7 +22,7 @@ pageBlog blogPostLinks blogPosts = li ! class_ "nav-item" $ do
 
 htmlHeader ∷ Html → Html → Html
 htmlHeader blogPostLinks blogPosts = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
-    a ! class_ "w-25 p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#blog" $ do
+    a ! class_ "p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#blog" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
         H.span ! class_ "title ml-2" $ "Dan Dart's Blog"
     H.div . (ul ! class_ "navbar-nav px-3") $

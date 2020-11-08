@@ -10,9 +10,17 @@ body {
     background-color: #eee;
 }
 
-/*p, ul {
+p, ul {
     margin: 0;
-}*/
+}
+
+a,
+a:hover,
+a:active,
+a:visited {
+    color: purple;
+}
+
 
 .bg-primary {
     background-color: #ddd !important;
@@ -40,12 +48,6 @@ body {
 
 .nav-link {
     transition: transform 0.5s ease-in-out !important;
-}
-
-@media(max-width: 576px) {
-    .container-fluid {
-        margin-top: 80px;
-    }
 }
 
 .row {
@@ -125,4 +127,27 @@ input:checked ~ .page {
 
 .title {
     color: purple;
+}
+
+.navbar-nav, .navbar > div {
+    overflow: auto hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.navbar-nav::-webkit-scrollbar,
+.navbar > div::-webkit-scrollbar {
+    display: none;
+}
+
+@media(max-width: 768px) {
+    .page {
+        margin-top: 30px;
+    }
+}
+
+@media(max-width: 576px) {
+    .container-fluid {
+        margin-top: 80px;
+    }
 }

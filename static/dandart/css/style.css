@@ -1,14 +1,3 @@
-p, ul {
-    margin: 0;
-}
-
-a,
-a:hover,
-a:active,
-a:visited {
-    color: purple;
-}
-
 a.social {
     font-size: 24px;
     margin: 0 4px;
@@ -34,30 +23,28 @@ a.social-pump img {
     text-align: right;
 }
 
-.social-inside {
-    width: 890px;
+.social-row {
+    overflow: auto hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.navbar-nav {
-    overflow: auto hidden;
+.social-row::-webkit-scrollbar {
+    display: none;
+}
+
+.social-inside {
+    display: flex;
 }
 
 @media(max-width: 768px) {
     .page {
-        margin-top: 30px;
-    }
-
-    .social-row, .navbar-nav, .navbar > div {
-        max-width: 90%;
+        margin-top: 40px;
     }
 }
 
 @media(max-width: 576px) {
-    .social-row, .navbar-nav, .navbar > div {
-        max-width: 100%;
-    }
-
-    .social-inside {
-        width: 880px;
+    .container-fluid {
+        margin-top: 80px;
     }
 }

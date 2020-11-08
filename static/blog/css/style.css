@@ -1,26 +1,9 @@
-p, ul {
-    margin: 0;
-}
-
-a,
-a:hover,
-a:active,
-a:visited {
-    color: purple;
-}
-
-.navbar-nav {
-    overflow: auto hidden;
+.page {
+    margin-top: 10px;
 }
 
 @media(max-width: 768px) {
     .page {
-        margin-top: 30px;
-    }
-}
-
-@media(max-width: 576px) {
-    .social-row, .navbar-nav, .navbar > div {
-        max-width: 100%;
+        margin-top: 10px;
     }
 }
