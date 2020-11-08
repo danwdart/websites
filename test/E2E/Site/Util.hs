@@ -122,7 +122,6 @@ runForConfig siteName port (configName, config) = runSession config $ do
     liftIO . createDirectoryIfMissing True $ screenshotDir
     openPage $ "http://" <> siteName <> ".localhost:" <> show port
     results <- mapM (runForSize screenshotDir) resolutions
-    liftIO . putStrLn $ "Closing session"
     closeSession
     pure (configName, results)
 
