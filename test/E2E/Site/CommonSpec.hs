@@ -23,8 +23,8 @@ spec = mapM_ (\(siteName, serve) ->
                         it "nav height is equal to 39" $
                             navHeight `shouldBe` 39
                         mapM_ (\(linkName, sizes) ->
-                            describe (unpack linkName) . it "cards are only one size" $ (
-                                length . nub $ sizes )`shouldSatisfy` (< 2)
+                            describe (unpack linkName) . it "visible cards are only one size" $ (
+                                (length . nub . filter (/= (0, 0)) $ sizes )`shouldSatisfy` (< 2))
                             ) cardSizes
                     ) sizeMap
             ) sizesAll

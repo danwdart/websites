@@ -1,7 +1,30 @@
+a.btn.btn-secondary,
+a.btn.btn-secondary:visited {
+  color: white;
+}
+
 .container-fluid {
   margin-top: 60px;
 }
 
 p, ul {
   margin: 10px;
+}
+
+/*
+.card-body {
+  min-height: 400px;
+}
+*/
+
+.description {
+  height: 70px;
+}
+
+.card-title {
+  height: 50px;
+}
+
+.card-text {
+  height: 70px;
 }
