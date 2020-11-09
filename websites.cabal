@@ -109,6 +109,8 @@ test-suite e2e
     , frontmatter
     , fsutils
     , hspec
+    , hspec-core
+    , hspec-webdriver
     , mmark
     , mtl
     , QuickCheck
@@ -137,7 +139,6 @@ test-suite e2e
     , Data.JolHarg
     , Data.M0ORI
     , E2E.Site.CommonSpec
-    , E2E.Site.Util
     , Html.Blog.Index
     , Html.Common.Audio
     , Html.Common.CSS

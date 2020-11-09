@@ -2,8 +2,11 @@ resolver: nightly-2020-11-04
 packages:
 - .
 extra-deps:
-  -
-    git: https://github.com/danwdart/fsutils.git
-    commit: a4167c212939f7b2b123072542ad305777943903
+-
+  git: https://github.com/danwdart/fsutils.git
+  commit: a4167c212939f7b2b123072542ad305777943903
+-
+  git: https://github.com/danwdart/hspec-webdriver.git
+  commit: d1fe99d0de90fd4ba4afdfb6c7b7176c7c6b4a22
 ghc-options:
   websites: -j16 -Wall -Werror
