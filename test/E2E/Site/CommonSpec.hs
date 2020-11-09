@@ -4,7 +4,8 @@
 module E2E.Site.CommonSpec where
 
 import Network.HTTP.Client
-import Network.HTTP.Client.TLS
+    ( Response(responseStatus), parseRequest, httpNoBody, newManager )
+import Network.HTTP.Client.TLS ( tlsManagerSettings )
 import Network.HTTP.Types.Status (statusCode)
 import qualified Site.Blog     as B
 import qualified Site.DanDart  as D
@@ -18,7 +19,7 @@ import Test.Hspec
       it,
       shouldBe,
       HasCallStack )
-import Test.Hspec.Expectations (shouldNotBe)
+import Test.Hspec.Expectations ( shouldNotBe, shouldNotContain )
 import           Data.List     (nub)
 import Data.Text ( unpack )
 import           Control.Concurrent               (forkIO, killThread,
@@ -42,13 +43,13 @@ import           Test.WebDriver                   (attr, Browser (chromeOptions)
 import           Test.WebDriver.Class             (WebDriver, methodPost)
 import           Test.WebDriver.Commands.Internal (doWinCommand)
 import           Test.WebDriver.JSON              (pair)
-import Test.WebDriver.Session
-import Test.WebDriver.Monad
+import Test.WebDriver.Session ( WDSessionState(getSession) )
+import Test.WebDriver.Monad ( runSession, runWD )
 import Data.Maybe (catMaybes)
-import Data.Functor.Compose
-import Test.Hspec.Expectations (shouldNotContain)
+import Data.Functor.Compose ( Compose(Compose, getCompose) )
 import Control.Exception (try, SomeException(SomeException))
-import Control.Concurrent.Async
+import Control.Concurrent.Async ( mapConcurrently )
+import Control.Monad (when)
 
 firefoxConfig ∷ WDConfig
 firefoxConfig = defaultConfig {
@@ -127,55 +128,54 @@ spec = parallel $ mapM_ (\(siteName, serve) ->
                 session <- runIO . runSession config $ do
                     openPage $ "http://" <> siteName <> ".localhost:" <> show myPort
                     getSession
-                
-                -- todo these don't have to happen every session
-                urls <- runIO . runWD session $ do
-                    as <- findElems (ByCSS "a[href^=http]")
-                    hrefs <- mapM (`attr` "href") as
-                    pure (catMaybes $ getCompose (unpack <$> Compose hrefs))
 
-                images <- runIO . runWD session $ do
-                    as <- findElems (ByCSS "img[src^=http]")
-                    srcs <- mapM (`attr` "src") as
-                    pure (catMaybes $ getCompose (unpack <$> Compose srcs))
+                -- only the first option
+                when ("Firefox" == configName) $ do
+                    urls <- runIO . runWD session $ do
+                        as <- findElems (ByCSS "a[href^=http]")
+                        hrefs <- mapM (`attr` "href") as
+                        pure (catMaybes $ getCompose (unpack <$> Compose hrefs))
 
-                parallel . describe "has no insecure images" $ mapM_ (\src ->
-                    describe src .
-                        it "is not insecure" $
-                            src `shouldNotContain` "http:"
-                    ) images
-                    
-                manager <- runIO $ newManager tlsManagerSettings
+                    images <- runIO . runWD session $ do
+                        as <- findElems (ByCSS "img[src^=http]")
+                        srcs <- mapM (`attr` "src") as
+                        pure (catMaybes $ getCompose (unpack <$> Compose srcs))
 
-                urlStatuses <- runIO $ mapConcurrently (\url -> ioDef (url, 0) $ do
-                    putStrLn $ "Checking " <> url            
-                    request <- parseRequest url
-                    response <- httpNoBody request manager
-                    pure (url, statusCode . responseStatus $ response)
-                    ) urls
+                    parallel . describe "has no insecure images" $ mapM_ (\src ->
+                        describe src .
+                            it "is not insecure" $
+                                src `shouldNotContain` "http:"
+                        ) images
 
-                imageStatuses <- runIO $ mapConcurrently (\src -> ioDef (src, 0) $ do
-                    putStrLn $ "Checking image " <> src            
-                    request <- parseRequest src
-                    response <- httpNoBody request manager
-                    pure (src, statusCode . responseStatus $ response)
-                    ) images
+                    manager <- runIO $ newManager tlsManagerSettings
 
-                parallel . describe "has no broken links" $ mapM_ (\(url, status) ->
-                    parallel . describe url $ do
-                        it "should not be failing" $
-                            status `shouldNotBe` 0
-                        it "should not 404" $
-                            status `shouldNotBe` 404
-                    ) urlStatuses
+                    urlStatuses <- runIO $ mapConcurrently (\url -> ioDef (url, 0) $ do
+                        request <- parseRequest url
+                        response <- httpNoBody request manager
+                        pure (url, statusCode . responseStatus $ response)
+                        ) urls
 
-                parallel . describe "has no missing images" $ mapM_ (\(src, status) ->
-                    parallel . describe src $ do
-                        it "should not be failing" $
-                            status `shouldNotBe` 0
-                        it "should not 404" $
-                            status `shouldNotBe` 404
-                    ) imageStatuses
+                    imageStatuses <- runIO $ mapConcurrently (\src -> ioDef (src, 0) $ do
+                        request <- parseRequest src
+                        response <- httpNoBody request manager
+                        pure (src, statusCode . responseStatus $ response)
+                        ) images
+
+                    parallel . describe "has no broken links" $ mapM_ (\(url, status) ->
+                        parallel . describe url $ do
+                            it "should not be failing" $
+                                status `shouldNotBe` 0
+                            it "should not 404" $
+                                status `shouldNotBe` 404
+                        ) urlStatuses
+
+                    parallel . describe "has no missing images" $ mapM_ (\(src, status) ->
+                        parallel . describe src $ do
+                            it "should not be failing" $
+                                status `shouldNotBe` 0
+                            it "should not 404" $
+                                status `shouldNotBe` 404
+                        ) imageStatuses
 
                 mapM_ (\winSize -> do
                     describe (showTuple winSize) $ do
@@ -188,19 +188,21 @@ spec = parallel $ mapM_ (\(siteName, serve) ->
                         it "nav height is equal to 39" $
                             navHeight `shouldBe` 39
 
-                        links <- runIO . runWD session . findElems $ ByCSS ".navbar-nav label a"
-                        mapM_ (\linkToClick -> do
-                            linkName <- runIO . runWD session $ getText linkToClick
-                            cardSizes <- runIO . runWD session $ do
-                                click linkToClick
-                                cards <- findElems $ ByClass "card"
-                                mapM elemSize cards
-                            
-                            parallel . describe (unpack linkName) . it "visible cards are only one size" $ (
-                                (length . nub . filter (/= (0, 0)) $ cardSizes )`shouldSatisfy` (< 2))
-                            ) links
+                        -- only care about cards in JolHarg, but it's an option later.
+                        when ("jolharg" == siteName) $ do
+                            links <- runIO . runWD session . findElems $ ByCSS ".navbar-nav label a"
+                            mapM_ (\linkToClick -> do
+                                linkName <- runIO . runWD session $ getText linkToClick
+                                cardSizes <- runIO . runWD session $ do
+                                    click linkToClick
+                                    cards <- findElems $ ByClass "card"
+                                    mapM elemSize cards
+
+                                parallel . describe (unpack linkName) . it "visible cards are only one size" $ (
+                                    (length . nub . filter (/= (0, 0)) $ cardSizes )`shouldSatisfy` (< 2))
+                                ) links
                         ) resolutions
                 runIO . runWD session $ closeSession
                 ) configs
-        runIO $ killThread thread                     
+        runIO $ killThread thread
     ) sites
