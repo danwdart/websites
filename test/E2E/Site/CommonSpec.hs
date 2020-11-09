@@ -18,7 +18,6 @@ import Test.Hspec
       it,
       shouldBe,
       HasCallStack )
-import Test.Hspec.Core.Util (safeTry)
 import Test.Hspec.Expectations (shouldNotBe)
 import           Data.List     (nub)
 import Data.Text ( unpack )
@@ -47,6 +46,9 @@ import Test.WebDriver.Session
 import Test.WebDriver.Monad
 import Data.Maybe (catMaybes)
 import Data.Functor.Compose
+import Test.Hspec.Expectations (shouldNotContain)
+import Control.Exception (try, SomeException(SomeException))
+import Control.Concurrent.Async
 
 firefoxConfig ∷ WDConfig
 firefoxConfig = defaultConfig {
@@ -106,6 +108,10 @@ sites = [
     ("m0ori", M.serve)
     ]
 
+-- in terms of safeTry / try?
+ioDef :: a -> IO a -> IO a
+ioDef d io = either (\(SomeException _) -> d) id <$> try io
+
 spec ∷ Spec
 spec = parallel $ mapM_ (\(siteName, serve) ->
     parallel . describe siteName $ do
@@ -122,25 +128,54 @@ spec = parallel $ mapM_ (\(siteName, serve) ->
                     openPage $ "http://" <> siteName <> ".localhost:" <> show myPort
                     getSession
                 
+                -- todo these don't have to happen every session
                 urls <- runIO . runWD session $ do
                     as <- findElems (ByCSS "a[href^=http]")
                     hrefs <- mapM (`attr` "href") as
                     pure (catMaybes $ getCompose (unpack <$> Compose hrefs))
+
+                images <- runIO . runWD session $ do
+                    as <- findElems (ByCSS "img[src^=http]")
+                    srcs <- mapM (`attr` "src") as
+                    pure (catMaybes $ getCompose (unpack <$> Compose srcs))
+
+                parallel . describe "has no insecure images" $ mapM_ (\src ->
+                    describe src .
+                        it "is not insecure" $
+                            src `shouldNotContain` "http:"
+                    ) images
                     
                 manager <- runIO $ newManager tlsManagerSettings
-                parallel . describe "has no broken links" $ mapM_ (\url ->
-                    parallel . describe url $ do
-                        status <- runIO . safeTry $ do
-                            putStrLn $ "Checking " <> url            
-                            request <- parseRequest url
-                            response <- httpNoBody request manager
-                            pure (statusCode . responseStatus $ response)
-                        let st = either (const 0) id status
-                        it "should not be failing" $
-                            st `shouldNotBe` 0
-                        it "should not 404" $
-                            st `shouldNotBe` 404
+
+                urlStatuses <- runIO $ mapConcurrently (\url -> ioDef (url, 0) $ do
+                    putStrLn $ "Checking " <> url            
+                    request <- parseRequest url
+                    response <- httpNoBody request manager
+                    pure (url, statusCode . responseStatus $ response)
                     ) urls
+
+                imageStatuses <- runIO $ mapConcurrently (\src -> ioDef (src, 0) $ do
+                    putStrLn $ "Checking image " <> src            
+                    request <- parseRequest src
+                    response <- httpNoBody request manager
+                    pure (src, statusCode . responseStatus $ response)
+                    ) images
+
+                parallel . describe "has no broken links" $ mapM_ (\(url, status) ->
+                    parallel . describe url $ do
+                        it "should not be failing" $
+                            status `shouldNotBe` 0
+                        it "should not 404" $
+                            status `shouldNotBe` 404
+                    ) urlStatuses
+
+                parallel . describe "has no missing images" $ mapM_ (\(src, status) ->
+                    parallel . describe src $ do
+                        it "should not be failing" $
+                            status `shouldNotBe` 0
+                        it "should not 404" $
+                            status `shouldNotBe` 404
+                    ) imageStatuses
 
                 mapM_ (\winSize -> do
                     describe (showTuple winSize) $ do
