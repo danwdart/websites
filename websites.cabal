@@ -98,6 +98,7 @@ test-suite e2e
   build-depends:       
     base >= 4.7 && < 5
     , aeson
+    , async
     , blaze-html
     , blaze-markup
     , bytestring
@@ -109,6 +110,11 @@ test-suite e2e
     , frontmatter
     , fsutils
     , hspec
+    , hspec-core
+    , hspec-expectations
+    , http-client
+    , http-client-tls
+    , http-types
     , mmark
     , mtl
     , QuickCheck
@@ -137,7 +143,6 @@ test-suite e2e
     , Data.JolHarg
     , Data.M0ORI
     , E2E.Site.CommonSpec
-    , E2E.Site.Util
     , Html.Blog.Index
     , Html.Common.Audio
     , Html.Common.CSS
