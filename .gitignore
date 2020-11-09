@@ -7,7 +7,6 @@ dist-newstyle
 google.json
 *.hi
 *.o
-images
-bootstrap
 submit-comment
 .env
+report
