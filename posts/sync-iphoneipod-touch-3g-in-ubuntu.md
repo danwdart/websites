@@ -33,7 +33,7 @@ sudo useradd -G fuse \[your\_user\_name\]
   
 To allow normal users to mount the FUSE filesystems, edit /etc/fuse.conf and uncomment the line (remove the hash from the start of it):  
   
-#user\_allow\_other  
+`\#user_allow_other`
   
 Log out and back in again, or spawn a new login shell. Mount the FUSE filesystem:  
   
