@@ -2,8 +2,13 @@ resolver: nightly-2020-11-04
 packages:
 - .
 extra-deps:
-  -
-    git: https://github.com/danwdart/fsutils.git
-    commit: a4167c212939f7b2b123072542ad305777943903
+-
+  git: https://github.com/danwdart/fsutils.git
+  commit: a4167c212939f7b2b123072542ad305777943903
+- pandoc-2.11.1.1@sha256:33a2092e86dc6c8cb9041b5b9bb12faa08c8508954815c79f1a4dfe240f5b499
+- citeproc-0.1.1.1@sha256:c03ab98aeceda7770eec3eb76f5e95a98e4908ba7c1cb3b43ff482e876b17456,5395
+- commonmark-0.1.1.2@sha256:c06ab05f0f224ab7982502a96e17952823a9b6dae8505fb35194b0baa9e2a975,3278
+- commonmark-extensions-0.2.0.4@sha256:6a437bcfa3c757af4262b71336513619990eafb5cfdc33e57a499c93ad225608,3184
+- commonmark-pandoc-0.2.0.1@sha256:529c6e2c6cabf61558b66a28123eafc1d90d3324be29819f59f024e430312c1f,1105
 ghc-options:
   websites: -j16 -Wall -Werror

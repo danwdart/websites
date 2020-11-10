@@ -15,6 +15,41 @@ packages:
   original:
     git: https://github.com/danwdart/fsutils.git
     commit: a4167c212939f7b2b123072542ad305777943903
+- completed:
+    hackage: pandoc-2.11.1.1@sha256:33a2092e86dc6c8cb9041b5b9bb12faa08c8508954815c79f1a4dfe240f5b499,39390
+    pantry-tree:
+      size: 114305
+      sha256: e905129cec9cabaace47ce95a7bbdc6553bf61931f99c76df0e1fef6bbe9973d
+  original:
+    hackage: pandoc-2.11.1.1@sha256:33a2092e86dc6c8cb9041b5b9bb12faa08c8508954815c79f1a4dfe240f5b499
+- completed:
+    hackage: citeproc-0.1.1.1@sha256:c03ab98aeceda7770eec3eb76f5e95a98e4908ba7c1cb3b43ff482e876b17456,5395
+    pantry-tree:
+      size: 78399
+      sha256: 306f732ddb5aae7c87f459108c9ecbfd7622a9a7156264d6a3da7ce75b0db56b
+  original:
+    hackage: citeproc-0.1.1.1@sha256:c03ab98aeceda7770eec3eb76f5e95a98e4908ba7c1cb3b43ff482e876b17456,5395
+- completed:
+    hackage: commonmark-0.1.1.2@sha256:c06ab05f0f224ab7982502a96e17952823a9b6dae8505fb35194b0baa9e2a975,3278
+    pantry-tree:
+      size: 1346
+      sha256: 6a187bbbfaf61b4b1bf87ee5027e7edb5b7157ad3380982b07b876e9a60cd63d
+  original:
+    hackage: commonmark-0.1.1.2@sha256:c06ab05f0f224ab7982502a96e17952823a9b6dae8505fb35194b0baa9e2a975,3278
+- completed:
+    hackage: commonmark-extensions-0.2.0.4@sha256:6a437bcfa3c757af4262b71336513619990eafb5cfdc33e57a499c93ad225608,3184
+    pantry-tree:
+      size: 2928
+      sha256: ac8993e356edabc65a40d6c6909696c5f2dfe2a5298089da820c29ca75852360
+  original:
+    hackage: commonmark-extensions-0.2.0.4@sha256:6a437bcfa3c757af4262b71336513619990eafb5cfdc33e57a499c93ad225608,3184
+- completed:
+    hackage: commonmark-pandoc-0.2.0.1@sha256:529c6e2c6cabf61558b66a28123eafc1d90d3324be29819f59f024e430312c1f,1105
+    pantry-tree:
+      size: 326
+      sha256: d9954a15f73c8fe55a5097e1cc0957fa626d340ef36e2beefb8caae66008c3dc
+  original:
+    hackage: commonmark-pandoc-0.2.0.1@sha256:529c6e2c6cabf61558b66a28123eafc1d90d3324be29819f59f024e430312c1f,1105
 snapshots:
 - completed:
     size: 544004

@@ -32,6 +32,7 @@ executable build-websites
     , fsutils
     , mmark
     , mtl
+    , pandoc
     , req
     , text
     , time
