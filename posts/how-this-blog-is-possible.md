@@ -5,3 +5,5 @@ draft: true
 aliases: [ "/2020/11/how-this-blog-is-possible.html" ]
 tags : [blog, cheapskate, pandoc, haskell]
 ---
+
+Hmm.
