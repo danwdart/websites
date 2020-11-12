@@ -16,3 +16,4 @@ Usage:
 
 TODO:
     Find a way not to rebuild stack programs in deploy so we can deploy as user.
+    Investigate a way not to use this library and use our own glibc's binaries or even an AppImage.

@@ -12,6 +12,8 @@ provider:
     GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
   logs:
     restApi: false
+  apiGateway:
+    shouldStartNameWithService: true
 
 functions:
   submit-comment:
