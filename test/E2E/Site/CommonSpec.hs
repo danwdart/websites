@@ -3,38 +3,41 @@
 
 module E2E.Site.CommonSpec where
 
-import Network.HTTP.Client
-    ( Response(responseStatus), parseRequest, httpNoBody, newManager )
-import Network.HTTP.Client.TLS ( tlsManagerSettings )
-import Network.HTTP.Types.Status (statusCode)
-import qualified Site.Blog     as B
-import qualified Site.DanDart  as D
-import qualified Site.JolHarg  as J
-import qualified Site.M0ORI    as M
-import Test.Hspec
-    (parallel,  shouldSatisfy,
-      runIO,
-      Spec,
-      describe,
-      it,
-      shouldBe,
-      HasCallStack )
-import Test.Hspec.Expectations ( shouldNotBe, shouldNotContain )
-import           Data.List     (nub)
-import Data.Text ( unpack )
 import           Control.Concurrent               (forkIO, killThread,
                                                    threadDelay)
+import           Control.Concurrent.Async         (mapConcurrently)
+import           Control.Exception                (SomeException (SomeException),
+                                                   try)
+import           Control.Monad                    (when)
 import           Data.Aeson                       (Object,
                                                    Value (Array, String),
                                                    object)
+import           Data.Functor.Compose             (Compose (Compose, getCompose))
+import           Data.List                        (nub)
+import           Data.Maybe                       (catMaybes)
+import           Data.Text                        (unpack)
 import           Data.Vector                      (fromList)
+import           Network.HTTP.Client              (Response (responseStatus),
+                                                   httpNoBody, newManager,
+                                                   parseRequest)
+import           Network.HTTP.Client.TLS          (tlsManagerSettings)
+import           Network.HTTP.Types.Status        (statusCode)
+import qualified Site.Blog                        as B
+import qualified Site.DanDart                     as D
+import qualified Site.JolHarg                     as J
+import qualified Site.M0ORI                       as M
 import           System.Environment               (setEnv)
 import           System.Random                    (Random (randomRIO))
-import           Test.WebDriver                   (attr, Browser (chromeOptions),
+import           Test.Hspec                       (HasCallStack, Spec, describe,
+                                                   it, parallel, runIO,
+                                                   shouldBe, shouldSatisfy)
+import           Test.Hspec.Expectations          (shouldNotBe,
+                                                   shouldNotContain)
+import           Test.WebDriver                   (Browser (chromeOptions),
                                                    Capabilities (browser),
                                                    Selector (ByCSS, ByClass),
                                                    WDConfig (wdCapabilities),
-                                                   additionalCaps, chrome,
+                                                   additionalCaps, attr, chrome,
                                                    click, closeSession,
                                                    currentWindow, defaultCaps,
                                                    defaultConfig, elemSize,
@@ -43,13 +46,8 @@ import           Test.WebDriver                   (attr, Browser (chromeOptions)
 import           Test.WebDriver.Class             (WebDriver, methodPost)
 import           Test.WebDriver.Commands.Internal (doWinCommand)
 import           Test.WebDriver.JSON              (pair)
-import Test.WebDriver.Session ( WDSessionState(getSession) )
-import Test.WebDriver.Monad ( runSession, runWD )
-import Data.Maybe (catMaybes)
-import Data.Functor.Compose ( Compose(Compose, getCompose) )
-import Control.Exception (try, SomeException(SomeException))
-import Control.Concurrent.Async ( mapConcurrently )
-import Control.Monad (when)
+import           Test.WebDriver.Monad             (runSession, runWD)
+import           Test.WebDriver.Session           (WDSessionState (getSession))
 
 firefoxConfig ∷ WDConfig
 firefoxConfig = defaultConfig {
@@ -101,7 +99,7 @@ configs = [
     ("Chrome", chromeConfig)
     ]
 
-sites :: [(String, IO ())]
+sites ∷ [(String, IO ())]
 sites = [
     ("blog", B.serve),
     ("dandart", D.serve),
@@ -110,7 +108,7 @@ sites = [
     ]
 
 -- in terms of safeTry / try?
-ioDef :: a -> IO a -> IO a
+ioDef ∷ a → IO a → IO a
 ioDef d io = either (\(SomeException _) -> d) id <$> try io
 
 spec ∷ Spec

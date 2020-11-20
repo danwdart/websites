@@ -22,21 +22,21 @@ newtype BlogTag = BlogTag {
 instance FromJSON BlogTag where
     parseJSON (A.String a') = return $ BlogTag a'
     parseJSON (A.Number a') = return . BlogTag $ T.pack (show a')
-    parseJSON (A.Bool a') = return . BlogTag $ T.pack (show a')
-    parseJSON e = error (show e)
+    parseJSON (A.Bool a')   = return . BlogTag $ T.pack (show a')
+    parseJSON e             = error (show e)
 
 data BlogMetadata = BlogMetadata {
-    title :: Text,
-    date :: UTCTime,
-    draft :: Bool,
+    title   :: Text,
+    date    :: UTCTime,
+    draft   :: Bool,
     aliases :: [FilePath],
-    tags :: [BlogTag] -- Doesn't like tags which are numbers... nor don't have tags
+    tags    :: [BlogTag] -- Doesn't like tags which are numbers... nor don't have tags
 } deriving (Generic, Show)
 
 data BlogCommentMetadata = BlogCommentMetadata {
-    author :: Text,
+    author      :: Text,
     authorEmail :: Text,
-    authorUrl :: Maybe Text
+    authorUrl   :: Maybe Text
 } deriving (Generic, Show)
 
 instance FromJSON BlogCommentMetadata where
@@ -47,21 +47,21 @@ instance FromJSON BlogCommentMetadata where
     parseJSON _ = error "Bad blog comment metadata"
 
 data BlogPost = BlogPost {
-    postId :: Text,
+    postId   :: Text,
     metadata :: BlogMetadata,
-    html :: Html,
+    html     :: Html,
     comments :: [ParseCommentResult]
 }
 
 data ParseResult = ParseResult {
     resultMetadata :: BlogMetadata,
-    resultHtml :: Html
+    resultHtml     :: Html
 }
 
 data ParseCommentResult = ParseCommentResult {
-    commentDate :: UTCTime,
+    commentDate     :: UTCTime,
     commentMetadata :: BlogCommentMetadata,
-    commentHtml :: Html
+    commentHtml     :: Html
 }
 
 instance FromJSON BlogMetadata where

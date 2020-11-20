@@ -208,7 +208,7 @@ pageMaths = li ! class_ "nav-item" $ do
                 li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
                 li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477.")
 
-pageOrigami :: Html
+pageOrigami ∷ Html
 pageOrigami = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "origami" ! value "Origami"
     (H.label ! class_ "mb-0" ! for "origami") . (a ! class_ "nav-link btn btn-sm") $ "Origami"

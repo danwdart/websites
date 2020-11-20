@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 module Main where
 
 import           AWSLambda.Events.APIGateway
@@ -45,30 +46,30 @@ instance Show CommentRecord where
   show CommentRecord { recName, recEmail, recUrl, recComment } =
     printf "---\nauthor: %s\nemail: %s\nurl: %s\n---\n\n%s" recName recEmail recUrl recComment
 
-owner :: Text
+owner ∷ Text
 owner = "danwdart"
 
-repo :: Text
+repo ∷ Text
 repo = "websites"
 
-title :: Text -> Text
+title ∷ Text → Text
 title = ("New Comment from " <>)
 
-baseBranch :: Text
+baseBranch ∷ Text
 baseBranch = "master"
 
-branchName :: UTCTime -> Text
+branchName ∷ UTCTime → Text
 branchName utcTime = T.filter isDigit $ pack (iso8601Show utcTime)
 
-main :: IO ()
+main ∷ IO ()
 main = apiGatewayMain handler
 
-lookupQueryString :: QueryString -> ByteString -> ByteString
+lookupQueryString ∷ QueryString → ByteString → ByteString
 lookupQueryString qs key =
   (\[QPair _ (QValue (Just b))] -> b) . Prelude.filter (\(QPair a _) -> a == key) $
   (\(QList x) -> x) qs
 
-handler :: APIGatewayProxyRequest Text -> IO (APIGatewayProxyResponse Text)
+handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse Text)
 handler request = do
     -- print $ request ^. agprqHeaders
     --print $ request ^. requestBody
@@ -95,10 +96,10 @@ handler request = do
         void $ pullRequest branch commentRecord
     pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:green\">OK</span>"
 
-commentToPRMessage :: CommentRecord -> Text
+commentToPRMessage ∷ CommentRecord → Text
 commentToPRMessage CommentRecord { recName, recComment } = recName <> ": " <> recComment
 
-getMasterSHA :: (MonadGitHubREST m) => m Text
+getMasterSHA ∷ (MonadGitHubREST m) ⇒ m Text
 getMasterSHA = sha . object <$> queryGitHub GHEndpoint
   { GH.method = GET
   , endpoint = "/repos/:owner/:repo/git/refs/heads/master"
@@ -109,7 +110,7 @@ getMasterSHA = sha . object <$> queryGitHub GHEndpoint
   , ghData = []
   }
 
-createBranch :: (MonadGitHubREST m) => Text -> Text -> m Value
+createBranch ∷ (MonadGitHubREST m) ⇒ Text → Text → m Value
 createBranch fromSHA branch = queryGitHub GHEndpoint
   { GH.method = POST
   , endpoint = "/repos/:owner/:repo/git/refs"
@@ -124,7 +125,7 @@ createBranch fromSHA branch = queryGitHub GHEndpoint
     ]
   }
 
-commitNewFile :: (MonadGitHubREST m) => Text -> Text -> Text -> CommentRecord -> m Value
+commitNewFile ∷ (MonadGitHubREST m) ⇒ Text → Text → Text → CommentRecord → m Value
 commitNewFile branch postId commentId commentRecord = queryGitHub GHEndpoint
   { GH.method = PUT
   , endpoint = "/repos/:owner/:repo/contents/:path"
@@ -144,7 +145,7 @@ commitNewFile branch postId commentId commentRecord = queryGitHub GHEndpoint
   ]
   }
 
-pullRequest :: (MonadGitHubREST m) => Text -> CommentRecord -> m Value
+pullRequest ∷ (MonadGitHubREST m) ⇒ Text → CommentRecord → m Value
 pullRequest branch commentRecord = queryGitHub GHEndpoint
   { GH.method = POST
   , endpoint = "/repos/:owner/:repo/pulls"

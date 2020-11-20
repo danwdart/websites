@@ -9,19 +9,19 @@ import           Cheapskate
 import           Data.Frontmatter
 import           Data.List
 import           Data.String
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
+import           Data.Text                    (Text)
+import qualified Data.Text                    as T
 import           Data.Text.Encoding
-import qualified Data.Text.IO                as TIO
+import qualified Data.Text.IO                 as TIO
 import           System.FilePath
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
-import Text.Pandoc.Class
+import           Text.Blaze.Html5             as H hiding (main)
+import           Text.Blaze.Html5.Attributes  as A
+import           Text.Pandoc.Class
 -- import Text.Pandoc.Readers.HTML
-import Text.Pandoc.Readers.Markdown
-import Text.Pandoc.Writers.HTML
-import Text.Blaze.Internal
-import Data.Either
+import           Data.Either
+import           Text.Blaze.Internal
+import           Text.Pandoc.Readers.Markdown
+import           Text.Pandoc.Writers.HTML
 -- import Text.Blaze.Renderer.Utf8
 
 parseFile ∷ Text → ParseResult
@@ -39,33 +39,33 @@ makeBlogPost filename = do
     comments' <- getComments postId'
     return $ BlogPost (T.pack postId') metadata' html' comments'
 
-tshowChoiceString :: ChoiceString -> Text
+tshowChoiceString ∷ ChoiceString → Text
 tshowChoiceString (Text s) = s
-tshowChoiceString _ = ""
+tshowChoiceString _        = ""
 
-isLink :: StaticString -> Bool
+isLink ∷ StaticString → Bool
 isLink ss1 = "a" == getText ss1
 
-isExternalLink :: ChoiceString -> Bool
+isExternalLink ∷ ChoiceString → Bool
 isExternalLink acs = "http" `T.isPrefixOf` tshowChoiceString acs
 
-isFeed :: ChoiceString -> Bool
+isFeed ∷ ChoiceString → Bool
 isFeed acs = ".xml" `T.isSuffixOf` tshowChoiceString acs
 
-setExternalLink :: MarkupM a -> MarkupM a
+setExternalLink ∷ MarkupM a → MarkupM a
 setExternalLink (AddAttribute ass1 ass2 acs res) =
     AddAttribute "target" "target=\"" "_blank" .
         AddAttribute "rel" "rel=\"" "noreferrer" $
             AddAttribute ass1 ass2 acs res
 setExternalLink as = as
 
-setDownload :: MarkupM a -> MarkupM a
+setDownload ∷ MarkupM a → MarkupM a
 setDownload (AddAttribute ass1 ass2 acs res) =
     AddAttribute "download" "download=\"" "" $
         AddAttribute ass1 ass2 acs res
 setDownload as = as
 
-fixExternalLinks :: MarkupM a -> MarkupM a
+fixExternalLinks ∷ MarkupM a → MarkupM a
 fixExternalLinks at@(AddAttribute _ _ acs (Parent ss1 _ _ _)) =
     if isLink ss1 then
         if isExternalLink acs
