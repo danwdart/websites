@@ -1,16 +1,16 @@
+cabal-version:       3.0
 name:                websites
 version:             0.1.0.0
 -- synopsis:
 -- description:
 homepage:            https://github.com/danwdart/projects#readme
-license:             PublicDomain
+license:             AGPL-3.0-only
 -- license-file:        LICENSE
 author:              Dan Dart
 maintainer:          cabal@dandart.co.uk
 copyright:           2019 Dan Dart
 category:            Web
 build-type:          Simple
-cabal-version:       >=1.10
 extra-source-files:  README.md
 
 executable build-websites
@@ -29,7 +29,7 @@ executable build-websites
     , feed
     , filepath
     , frontmatter
-    , fsutils
+    , fsutils >= 0.1.4
     , mmark
     , mtl
     , pandoc
@@ -109,7 +109,7 @@ test-suite e2e
     , feed
     , filepath
     , frontmatter
-    , fsutils
+    , fsutils >= 0.1.4
     , hspec
     , hspec-core
     , hspec-expectations
