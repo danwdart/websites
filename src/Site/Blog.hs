@@ -29,10 +29,10 @@ build = do
   files <- getDirectoryContents "posts"
   let fileNames = ("posts/" </>) <$> files -- if used in same line, use Compose
   validFiles <- filterM doesFileExist fileNames
-  posts <- sequence $ makeBlogPost <$> validFiles
+  posts <- sequence $ makeBlogPost "posts" <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
   let renderedPosts = foldMap (renderPost "comment") sortedPosts
-  TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed sortedPosts
+  TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed "https://blog.dandart.co.uk" "Dan Dart's Blog" sortedPosts
   let renderedLinks = makeLinks sortedPosts
   make "blog" $ page renderedLinks renderedPosts
 

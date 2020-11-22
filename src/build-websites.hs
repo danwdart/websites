@@ -32,6 +32,10 @@ serve = do
     putStrLn "Serving..."
     (runEnv 80 . vhost [
         (
+            isPrefixOf "madhacker" . fromMaybe "" . requestHeaderHost,
+            staticApp $ (defaultWebAppSettings ".sites/madhacker/"){ ssIndices = indices }
+        ),
+        (
             isPrefixOf "blog" . fromMaybe "" . requestHeaderHost,
             staticApp $ (defaultWebAppSettings ".sites/blog/"){ ssIndices = indices }
         ),
@@ -46,10 +50,6 @@ serve = do
         (
             isPrefixOf "m0ori" . fromMaybe "" . requestHeaderHost,
             staticApp $ (defaultWebAppSettings ".sites/m0ori/"){ ssIndices = indices }
-        ),
-        (
-            isPrefixOf "madhacker" . fromMaybe "" . requestHeaderHost,
-            staticApp $ (defaultWebAppSettings ".sites/madhacker/"){ ssIndices = indices }
         )
         ]) . staticApp $ defaultWebAppSettings ".sites/"
     where indices = mapMaybe toPiece ["index.html"]

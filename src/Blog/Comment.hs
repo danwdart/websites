@@ -39,28 +39,28 @@ parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') o
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
     _ -> error $ "What is " <> T.unpack contents'
 
-getCommentsIfExists ∷ FilePath → IO [ParseCommentResult]
-getCommentsIfExists postId = do
-    commentFiles <- getDirectoryContents $ "posts/" <> postId
-    let commentFileNames = ("posts/" </>) . (postId </>) <$> commentFiles
+getCommentsIfExists ∷ FilePath → FilePath → IO [ParseCommentResult]
+getCommentsIfExists postsDir postId = do
+    commentFiles <- getDirectoryContents $ postsDir </> postId
+    let commentFileNames = (postsDir </>) . (postId </>) <$> commentFiles
     validCommentFiles <- filterM doesFileExist commentFileNames
     let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
     commentTexts <- sequence $ TIO.readFile <$> validCommentFiles
     let commentData = zipWith parseComment dates commentTexts
     return $ sortOn (Down . commentDate) commentData
 
-getComments ∷ FilePath → IO [ParseCommentResult]
-getComments postId = do
-    dirExists <- doesDirectoryExist $ "posts/" <> postId
+getComments ∷ FilePath → FilePath → IO [ParseCommentResult]
+getComments postsDir postId = do
+    dirExists <- doesDirectoryExist $ postsDir </> postId
     if dirExists
-        then getCommentsIfExists postId
+        then getCommentsIfExists postsDir postId
         else return mempty
 
 commentForm ∷ Text → Text → Html
 commentForm endpoint postId = H.form
     ! A.class_ "form"
     ! enctype "application/x-www-form-urlencoded"
-    ! action "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/" <> endpoint
+    ! action ("https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/" <> fromString (T.unpack endpoint))
     ! method "post"
     ! target "_result" $ do
         H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))

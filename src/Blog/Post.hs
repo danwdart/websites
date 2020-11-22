@@ -31,12 +31,12 @@ parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
     _ -> error $ "What is " <> T.unpack contents'
 
 
-makeBlogPost ∷ FilePath → IO BlogPost
-makeBlogPost filename = do
+makeBlogPost ∷ FilePath → FilePath → IO BlogPost
+makeBlogPost postsDir filename = do
     fileText <- TIO.readFile filename
     let (ParseResult metadata' html') = parseFile fileText
     let postId' = dropExtension $ takeFileName filename
-    comments' <- getComments postId'
+    comments' <- getComments postsDir postId'
     return $ BlogPost (T.pack postId') metadata' html' comments'
 
 tshowChoiceString ∷ ChoiceString → Text

@@ -10,7 +10,7 @@ keywords = [
     "mad",
     "hacker",
     "tech",
-    "technology"
+    "technology",
     "reviews",
     "review",
     "dan",

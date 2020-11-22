@@ -3,6 +3,7 @@
 
 module Site.JolHarg where
 
+import Configuration.Dotenv
 import           Control.Monad.Reader
 
 import qualified Data.ByteString.Lazy.Char8     as BSL
@@ -26,6 +27,7 @@ import           WaiAppStatic.Types
 
 build ∷ IO ()
 build = do
+    void $ loadFile defaultConfig
     reposDan <- runReq defaultHttpConfig $ getRepos "danwdart"
     reposJH <- runReq defaultHttpConfig $ getRepos "jolharg"
     copyDir "static/common" ".sites/jolharg"
