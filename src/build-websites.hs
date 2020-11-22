@@ -16,6 +16,7 @@ import qualified Site.Blog                      as B
 import qualified Site.DanDart                   as D
 import qualified Site.JolHarg                   as J
 import qualified Site.M0ORI                     as M
+import qualified Site.MadHacker                 as R
 
 build ∷ IO ()
 build = do
@@ -23,6 +24,7 @@ build = do
     D.build
     J.build
     M.build
+    R.build
 
 serve ∷ IO ()
 serve = do
@@ -44,6 +46,10 @@ serve = do
         (
             isPrefixOf "m0ori" . fromMaybe "" . requestHeaderHost,
             staticApp $ (defaultWebAppSettings ".sites/m0ori/"){ ssIndices = indices }
+        ),
+        (
+            isPrefixOf "madhacker" . fromMaybe "" . requestHeaderHost,
+            staticApp $ (defaultWebAppSettings ".sites/madhacker/"){ ssIndices = indices }
         )
         ]) . staticApp $ defaultWebAppSettings ".sites/"
     where indices = mapMaybe toPiece ["index.html"]

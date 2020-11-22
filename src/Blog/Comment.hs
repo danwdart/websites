@@ -22,8 +22,8 @@ import           System.Directory
 import           System.FilePath
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
--- import Text.Blaze.Renderer.Utf8
 import           Util.Time
+
 {-
 {-}
 details $ do
@@ -56,11 +56,11 @@ getComments postId = do
         then getCommentsIfExists postId
         else return mempty
 
-commentForm ∷ Text → Html
-commentForm postId = H.form
+commentForm ∷ Text → Text → Html
+commentForm endpoint postId = H.form
     ! A.class_ "form"
     ! enctype "application/x-www-form-urlencoded"
-    ! action "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/comment"
+    ! action "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/" <> endpoint
     ! method "post"
     ! target "_result" $ do
         H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))

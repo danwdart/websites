@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Site.Blog where
+module Site.MadHacker where
 
 import           Blog.Feed                      (makeRSSFeed)
 import           Blog.Link                      (makeLinks)
@@ -26,19 +26,19 @@ import           WaiAppStatic.Types             (StaticSettings (ssIndices),
 
 build ∷ IO ()
 build = do
-  files <- getDirectoryContents "posts"
-  let fileNames = ("posts/" </>) <$> files -- if used in same line, use Compose
+  files <- getDirectoryContents "reviews"
+  let fileNames = ("reviews/" </>) <$> files -- if used in same line, use Compose
   validFiles <- filterM doesFileExist fileNames
-  posts <- sequence $ makeBlogPost <$> validFiles
-  let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-  let renderedPosts = foldMap (renderPost "comment") sortedPosts
-  TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed sortedPosts
+  reviews <- sequence $ makeBlogPost <$> validFiles
+  let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ reviews
+  let renderedPosts = foldMap (renderPost "review-comment") sortedPosts
+  TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed sortedPosts
   let renderedLinks = makeLinks sortedPosts
-  make "blog" $ page renderedLinks renderedPosts
+  make "madhacker" $ page renderedLinks renderedPosts
 
 serve ∷ IO ()
 serve = do
   putStrLn "Building..."
   build
   putStrLn "Serving..."
-  runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/blog/") {ssIndices = mapMaybe toPiece ["index.html"]}
+  runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/madhacker/") {ssIndices = mapMaybe toPiece ["index.html"]}
