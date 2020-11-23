@@ -54,6 +54,7 @@ executable build-websites
     , Data.DanDart
     , Data.JolHarg
     , Data.M0ORI
+    , Data.MadHacker
     , Html.Blog.Index
     , Html.Common.Audio
     , Html.Common.CSS

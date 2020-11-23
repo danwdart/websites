@@ -2,10 +2,19 @@ org: dandart
 app: websites
 service: websites
 
+package:
+  exclude:
+    - ./**
+  include:
+    - bootstrap
+    - .stack-work/dist/x86_64-linux-tinfo6/Cabal-3.2.0.0/build/submit-comment/submit-comment
+    - .stack-work/dist/x86_64-linux-tinfo6/Cabal-3.2.0.0/build/submit-review-comment/submit-review-comment
+  excludeDevDependencies: false
+
 provider:
   name: aws
   region: eu-west-2
-  runtime: haskell
+  runtime: provided
   environment:
     LANG: en_GB.UTF-8
     LC_ALL: en_GB.UTF-8
@@ -37,15 +46,10 @@ functions:
 
 plugins:
   - serverless-dotenv-plugin
-  - serverless-haskell
   - serverless-offline
 
 custom:
-  haskell:
-    docker: true
-    stackBuildArgs:
-      - --allow-different-user
   serverless-offline:
-    # useDocker: true
+    useDocker: true
     # useChildProcesses: true
     printOutput: true
