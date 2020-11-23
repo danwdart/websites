@@ -15,6 +15,7 @@ import           Data.Maybe                     (mapMaybe)
 import           Data.Ord                       (Down (Down))
 import qualified Data.Text.IO                   as TIO
 import           Html.MadHacker.Index                (page)
+import           Html.MadHacker.Suffix          (renderStars)
 import           Network.Wai.Application.Static (defaultWebAppSettings,
                                                  staticApp)
 import           Network.Wai.Handler.Warp       (runEnv)
@@ -31,7 +32,7 @@ build = do
   validFiles <- filterM doesFileExist fileNames
   reviews <- sequence $ makeBlogPost "reviews" <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ reviews
-  let renderedPosts = foldMap (renderPost "review-comment") sortedPosts
+  let renderedPosts = foldMap (renderPost "review-comment" renderStars) sortedPosts
   TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhacker.dandart.co.uk" "Mad Hacker Tech Reviews" sortedPosts
   let renderedLinks = makeLinks sortedPosts
   make "madhacker" $ page renderedLinks renderedPosts

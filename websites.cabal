@@ -37,6 +37,7 @@ executable build-websites
     , req
     , text
     , time
+    , unordered-containers
     , wai
     , wai-app-static
     , wai-extra
@@ -65,6 +66,8 @@ executable build-websites
     , Html.Common.Utils
     , Html.DanDart.Index
     , Html.JolHarg.Index
+    , Html.MadHacker.Index
+    , Html.MadHacker.Suffix
     , Html.M0ORI.Index
     , Site.Blog
     , Site.DanDart

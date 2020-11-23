@@ -14,7 +14,7 @@ import qualified Text.Atom.Feed.Export         as Export
 import           Text.Blaze.Html.Renderer.Text (renderHtml)
 
 toEntry ∷ Text → BlogPost → Atom.Entry
-toEntry domain (BlogPost postId (BlogMetadata title' date' _ _ _) html _) = (
+toEntry domain (BlogPost postId (BlogMetadata title' date' _ _ _ _) html _) = (
         Atom.nullEntry
         (domain <> "#" <> postId) -- The ID field. Must be a link to validate.
         (Atom.TextString title')

@@ -4,7 +4,7 @@
 
 module Blog.Types where
 
-import           Data.Aeson       (FromJSON, (.:), (.:?))
+import           Data.Aeson       (Value, FromJSON, (.:), (.:?))
 import qualified Data.Aeson       as A
 import           Data.Text        (Text)
 import qualified Data.Text        as T
@@ -30,7 +30,8 @@ data BlogMetadata = BlogMetadata {
     date    :: UTCTime,
     draft   :: Bool,
     aliases :: [FilePath],
-    tags    :: [BlogTag] -- Doesn't like tags which are numbers... nor don't have tags
+    tags    :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
+    scores  :: Maybe Value
 } deriving (Generic, Show)
 
 data BlogCommentMetadata = BlogCommentMetadata {
@@ -70,5 +71,6 @@ instance FromJSON BlogMetadata where
         o .: "date" <*>
         o .: "draft" <*>
         o .: "aliases" <*>
-        (concat <$> (o .:? "tags")) -- Maybe [a] -> [a]
+        (concat <$> (o .:? "tags")) <*> -- Maybe [a] -> [a]
+        o .:? "scores"
     parseJSON _ = error "Bad blog metadata"

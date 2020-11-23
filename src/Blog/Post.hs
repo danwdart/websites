@@ -83,8 +83,8 @@ fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
 
-renderPost ∷ Text → BlogPost → Html
-renderPost endpoint (BlogPost postId' metadata' html' comments') = do
+renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → Html
+renderPost endpoint renderSuffix (BlogPost postId' metadata' html' comments') = do
     a ! name (fromString (T.unpack postId')) $ mempty
     -- Not working in Safari yet, so filter
     img ! height "0" ! width "0" ! src ("/favicon.ico?" <> fromString (T.unpack postId')) ! customAttribute "loading" "lazy"
@@ -101,6 +101,8 @@ renderPost endpoint (BlogPost postId' metadata' html' comments') = do
     br
     br
     fixExternalLinks html'
+    br
+    renderSuffix metadata' 
     br
     h3 "Comments"
     if Data.List.null comments' then
