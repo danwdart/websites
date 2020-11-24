@@ -2,6 +2,13 @@ org: dandart
 app: websites
 service: websites
 
+package:
+  exclude:
+    - ./**
+  include:
+    - bootstrap
+    - submit-comment
+    
 provider:
   name: aws
   region: eu-west-2
