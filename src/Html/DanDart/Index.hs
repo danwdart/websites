@@ -340,3 +340,4 @@ page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
+    img ! src "http://localhost:3000/dev/visit.gif"

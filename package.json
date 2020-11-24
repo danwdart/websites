@@ -18,5 +18,8 @@
     "serverless-haskell": "^0.12.4",
     "serverless-offline": "^6.8.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "data-api-local-serverless": "^1.0.0-alpha.2",
+    "data-api-migrations-serverless": "^1.0.0-alpha.3"
+  }
 }

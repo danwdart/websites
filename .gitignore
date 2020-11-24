@@ -9,6 +9,7 @@ google.json
 *.o
 bootstrap
 submit-comment
+visit
 .env
 report
 

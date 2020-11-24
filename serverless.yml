@@ -8,6 +8,7 @@ package:
   include:
     - bootstrap
     - submit-comment
+    - visit
     
 provider:
   name: aws
@@ -32,8 +33,36 @@ functions:
           method: post
           cors: true
           private: false
+  visit:
+    handler: websites.visit
+    name: ${self:provider.stage}-visit
+    events:
+      - http:
+          path: /visit.gif
+          method: get
+          cors: true
+          private: false
+
+resources:
+  Resources:
+    visitsDB:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        MasterUsername: ${env:DB_LOGIN} 
+        MasterUserPassword: ${env:DB_PASSWORD}
+        Engine: aurora
+        EngineMode: serverless
+      ScalingConfiguration:
+        AutoPause: true
+        MaxCapacity: 2
+        MinCapacity: 1
+        SecondsUntilAutoPause: 300
+      # EnableHttpEndpoint: true
+      StorageEncrypted: true
 
 plugins:
+  # - data-api-migrations-serverless
+  # - data-api-local-serverless
   - serverless-dotenv-plugin
   - serverless-haskell
   - serverless-offline
@@ -44,3 +73,26 @@ custom:
   serverless-offline:
     useDocker: true
     printOutput: true
+  #data-api-local:
+  #  server:
+  #    port: 8081
+  #    hostname: localhost
+  #  database:
+  #    engine: postgres
+  #    connectionString: ${env.DB_LOGIN}@${env.DB_PASSWORD}
+  #data-api-migrations:
+  #  local:
+  #    region: ${self:provider.region}
+  #    endpoint: http://localhost:8081
+   #   maxRetries: 0
+   #   #secretArn: ${self:provider.environment.DATA_API_SECRET_ARN}
+  #    #resourceArn: ${self:provider.environment.DATA_API_RESOURCE_ARN}
+  #    database: "visits" #${self:provider.environment.DATA_API_DATABASE_NAME}
+  #    credentials:
+  #      accessKeyId: example
+  #      secretAccessKey: example
+  #  prod:
+  #    region: ${self:provider.region}
+  #    secretArn: #${self:provider.environment.DATA_API_SECRET_ARN}
+  #    resourceArn: #${self:provider.environment.DATA_API_RESOURCE_ARN}
+  #    database: "visits" # ${self:provider.environment.DATA_API_DATABASE_NAME}
