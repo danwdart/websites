@@ -60,7 +60,7 @@ commentForm ∷ Text → Text → Html
 commentForm postType postId = H.form
     ! A.class_ "form"
     ! enctype "application/x-www-form-urlencoded"
-    ! action "http://localhost:3000/dev/comment"
+    ! action "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/comment"
     ! method "post"
     ! target "_result" $ do
         H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
