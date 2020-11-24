@@ -67,11 +67,11 @@ favCharacters = [
     ),
     (
         "Darling in the FranXX",
-        wikipedia "Darling_in_the_FranXX",
+        wikipedia "Darling_in_the_Franxx",
         [
             (
                 "Hiro (016)",
-                fandom "darlinginthefranxx" "Hiro",
+                fandom "darling-in-the-franxx" "Hiro",
                 "Zero Two is waifu and I am oblivious"
             )
         ]
