@@ -32,7 +32,7 @@ build = do
   validFiles <- filterM doesFileExist fileNames
   reviews <- sequence $ makeBlogPost "reviews" <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ reviews
-  let renderedPosts = foldMap (renderPost "review-comment" renderStars) sortedPosts
+  let renderedPosts = foldMap (renderPost "review" renderStars) sortedPosts
   TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhacker.dandart.co.uk" "Mad Hacker Tech Reviews" sortedPosts
   let renderedLinks = makeLinks sortedPosts
   make "madhacker" $ page renderedLinks renderedPosts

@@ -32,7 +32,7 @@ build = do
   validFiles <- filterM doesFileExist fileNames
   posts <- sequence $ makeBlogPost postsDir <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-  let renderedPosts = foldMap (renderPost "comment" (const mempty)) sortedPosts
+  let renderedPosts = foldMap (renderPost "post" (const mempty)) sortedPosts
   TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed "https://blog.dandart.co.uk" "Dan Dart's Blog" sortedPosts
   let renderedLinks = makeLinks sortedPosts
   make "blog" $ page renderedLinks renderedPosts

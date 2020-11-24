@@ -25,15 +25,6 @@ functions:
           method: post
           cors: true
           private: false
-  submit-review-comment:
-    handler: websites.submit-review-comment
-    name: ${self:provider.stage}-submit-review-comment
-    events:
-      - http:
-          path: /review-comment
-          method: post
-          cors: true
-          private: false
 
 plugins:
   - serverless-dotenv-plugin
@@ -43,9 +34,6 @@ plugins:
 custom:
   haskell:
     docker: true
-    stackBuildArgs:
-      - --allow-different-user
   serverless-offline:
-    # useDocker: true
-    # useChildProcesses: true
+    useDocker: true
     printOutput: true

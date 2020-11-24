@@ -76,6 +76,7 @@ handler request = do
     githubAccessToken <- getEnv "GITHUB_ACCESS_TOKEN"
     let qs = parseQueryString . encodeUtf8 $ fromMaybe "" (request ^. requestBody)
     let lookupQS = decodeUtf8 . urlDecode True . lookupQueryString qs
+    let postType = lookupQS "postType"
     let name = lookupQS "name"
     let email = lookupQS "email"
     let website = lookupQS "website"
@@ -92,7 +93,7 @@ handler request = do
     runGitHubT state $ do
         masterSHA <- getMasterSHA
         void $ createBranch masterSHA branch
-        void $ commitNewFile branch postId commentId commentRecord
+        void $ commitNewFile branch postType postId commentId commentRecord
         void $ pullRequest branch commentRecord
     pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:green\">OK</span>"
 
@@ -125,14 +126,14 @@ createBranch fromSHA branch = queryGitHub GHEndpoint
     ]
   }
 
-commitNewFile ∷ (MonadGitHubREST m) ⇒ Text → Text → Text → CommentRecord → m Value
-commitNewFile branch postId commentId commentRecord = queryGitHub GHEndpoint
+commitNewFile ∷ (MonadGitHubREST m) ⇒ Text → Text → Text → Text → CommentRecord → m Value
+commitNewFile branch postType postId commentId commentRecord = queryGitHub GHEndpoint
   { GH.method = PUT
   , endpoint = "/repos/:owner/:repo/contents/:path"
   , endpointVals =
     [ "owner" := owner
     , "repo" := repo
-    , "path" := "posts/comments/" <> postId <> "/" <> commentId
+    , "path" := postType <> "s/comments/" <> postId <> "/" <> commentId
     ]
   , ghData =
     [ "message" := title (recName commentRecord)

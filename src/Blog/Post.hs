@@ -84,7 +84,7 @@ fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks
 fixExternalLinks as = as
 
 renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → Html
-renderPost endpoint renderSuffix (BlogPost postId' metadata' html' comments') = do
+renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = do
     a ! name (fromString (T.unpack postId')) $ mempty
     -- Not working in Safari yet, so filter
     img ! height "0" ! width "0" ! src ("/favicon.ico?" <> fromString (T.unpack postId')) ! customAttribute "loading" "lazy"
@@ -112,5 +112,5 @@ renderPost endpoint renderSuffix (BlogPost postId' metadata' html' comments') = 
     br
     details $ do
         H.summary . (h4 ! A.class_ "d-inline-block") $ "Post a comment"
-        commentForm endpoint postId'
+        commentForm postType postId'
     hr

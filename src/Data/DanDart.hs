@@ -66,6 +66,17 @@ favCharacters = [
         ]
     ),
     (
+        "Darling in the FranXX",
+        wikipedia "Darling_in_the_FranXX",
+        [
+            (
+                "Hiro (016)",
+                fandom "darlinginthefranxx" "Hiro",
+                "Zero Two is waifu and I am oblivious"
+            )
+        ]
+    ),
+    (
         "Danganronpa",
         wikipedia "Danganronpa",
         [

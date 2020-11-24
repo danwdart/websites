@@ -57,13 +57,14 @@ getComments postsDir postId = do
         else return mempty
 
 commentForm ∷ Text → Text → Html
-commentForm endpoint postId = H.form
+commentForm postType postId = H.form
     ! A.class_ "form"
     ! enctype "application/x-www-form-urlencoded"
-    ! action ("https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/" <> fromString (T.unpack endpoint))
+    ! action "http://localhost:3000/dev/comment"
     ! method "post"
     ! target "_result" $ do
         H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
+        H.input ! A.type_ "hidden" ! name "postType" ! value (fromString (T.unpack postType))
         mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
             H.label ! for name_ $ label_
             H.input ! A.type_ type__ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
