@@ -9,6 +9,7 @@ package:
     - bootstrap
     - submit-comment
     - visit
+    - visit-migrate
     
 provider:
   name: aws
@@ -33,6 +34,11 @@ functions:
           method: post
           cors: true
           private: false
+  
+  visit-migrate:
+    handler: websites.visit-migrate
+    name: ${self:provider.stage}-visit-migrate
+  
   visit:
     handler: websites.visit
     name: ${self:provider.stage}-visit
@@ -44,21 +50,44 @@ functions:
           private: false
 
 resources:
+  Parameters:
+    DBUsername:
+      NoEcho: 'true'
+      Default: ${env:DB_USERNAME}
+      Description: Username for MySQL database access
+      Type: String
+      MinLength: '1'
+      MaxLength: '16'
+      AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+      ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
+    DBPassword:
+      NoEcho: 'true'
+      Default: ${env:DB_PASSWORD}
+      Description: Password for MySQL database access
+      Type: String
+      MinLength: '8'
+      MaxLength: '41'
+      AllowedPattern: '[a-zA-Z0-9]*'
+      ConstraintDescription: must contain only alphanumeric characters.
   Resources:
     visitsDB:
-      Type: AWS::RDS::DBInstance
+      Type: AWS::RDS::DBCluster
       Properties:
-        MasterUsername: ${env:DB_LOGIN} 
-        MasterUserPassword: ${env:DB_PASSWORD}
+        MasterUsername: !Ref DBUsername
+        MasterUserPassword: !Ref DBPassword
+        DBClusterIdentifier: visits
         Engine: aurora
+        # EngineVersion: 5.6.10a
         EngineMode: serverless
-      ScalingConfiguration:
-        AutoPause: true
-        MaxCapacity: 2
-        MinCapacity: 1
-        SecondsUntilAutoPause: 300
-      # EnableHttpEndpoint: true
-      StorageEncrypted: true
+        ScalingConfiguration:
+          AutoPause: true
+          MaxCapacity: 2
+          MinCapacity: 1
+          SecondsUntilAutoPause: 300
+        EnableHttpEndpoint: true
+        StorageEncrypted: true
+    visitsTable:
+      Type: AWS::RDS::Table
 
 plugins:
   # - data-api-migrations-serverless

@@ -15,7 +15,7 @@ main = apiGatewayMain handler
 
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse ByteString)
 handler request = do
-    -- login <- getEnv "DB_LOGIN"
+    -- username <- getEnv "DB_USERNAME"
     -- password <- getEnv "DB_PASSWORD"
     time <- getCurrentTime
     print time
