@@ -88,8 +88,6 @@ resources:
           SecondsUntilAutoPause: 300
         EnableHttpEndpoint: true
         StorageEncrypted: true
-    visitsTable:
-      Type: AWS::RDS::Table
 
 plugins:
   # - data-api-migrations-serverless
