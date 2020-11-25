@@ -57,6 +57,10 @@ Best idea is to sync ~/.stack, ~/.aws and ~/.serverless with /root/
 
 Start offline: `sudo sls offline start`
 
+# Testing libraries
+
+Something to do with `docker run --rm -it lambci/lambda:build-provided.al2 bash`...
+
 # TODO
 
 Investigate a way not to use this library and use our own glibc's binaries or even an AppImage.

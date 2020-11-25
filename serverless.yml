@@ -10,6 +10,8 @@ package:
     - submit-comment
     - visit
     - visit-migrate
+    - init.sql
+    - lib/**
     
 provider:
   name: aws

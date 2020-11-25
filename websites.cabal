@@ -126,6 +126,7 @@ executable visit-migrate
     , bytestring
     , github-rest
     , http-types
+    , mysql
     , serverless-haskell
     , text
     , time
