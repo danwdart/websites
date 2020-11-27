@@ -19,11 +19,13 @@ handler _ = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
     sqlFile <- readFile "init.sql"
+    putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
         connectHost = "visits.cluster-c3bfry1faakf.eu-west-2.rds.amazonaws.com",
         connectUser = username,
         connectPassword = password,
         connectDatabase = "visits"
     }
+    putStrLn "Connected. Querying..."
     query conn $ B.pack sqlFile
     putStrLn "Done!"
