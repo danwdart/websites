@@ -2,6 +2,8 @@ org: dandart
 app: websites
 service: websites
 
+useDotenv: true
+
 package:
   exclude:
     - ./**
@@ -20,7 +22,6 @@ provider:
   environment:
     LANG: en_GB.UTF-8
     LC_ALL: en_GB.UTF-8
-    GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
   logs:
     restApi: false
   apiGateway:
@@ -30,6 +31,8 @@ functions:
   submit-comment:
     handler: websites.submit-comment
     name: ${self:provider.stage}-submit-comment
+    environment:
+      GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
     events:
       - http:
           path: /comment
@@ -40,10 +43,24 @@ functions:
   visit-migrate:
     handler: websites.visit-migrate
     name: ${self:provider.stage}-visit-migrate
+    timeout: 30
+    environment:
+      DB_USERNAME: ${env:DB_USERNAME}
+      DB_PASSWORD: ${env:DB_PASSWORD}
+    vpc:
+      securityGroupIds:
+        - Ref: visitsSecurityGroup
+      subnetIds:
+        - Ref: visitsSubnetA
+        - Ref: visitsSubnetB
+        - Ref: visitsSubnetC
   
   visit:
     handler: websites.visit
     name: ${self:provider.stage}-visit
+    environment:
+      DB_USERNAME: ${env:DB_USERNAME}
+      DB_PASSWORD: ${env:DB_PASSWORD}
     events:
       - http:
           path: /visit.gif
@@ -88,11 +105,84 @@ resources:
           SecondsUntilAutoPause: 300
         EnableHttpEndpoint: true
         StorageEncrypted: true
-
+        DBSubnetGroupName:
+          Ref: visitsSubnetGroup
+        VpcSecurityGroupIds:
+        - !Ref 'visitsSecurityGroup'
+    visitsSubnetGroup:
+      Type: AWS::RDS::DBSubnetGroup
+      Properties:
+        DBSubnetGroupDescription: "Visits Subnet Group"
+        SubnetIds:
+          - Ref: visitsSubnetA
+          - Ref: visitsSubnetB
+          - Ref: visitsSubnetC
+        Tags: 
+          - 
+            Key: "Name"
+            Value: "VisitsSubnetGroup"
+    visitsSubnetA:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: visitsVPC
+        AvailabilityZone: ${self:provider.region}a
+        CidrBlock: 10.0.0.0/24
+        Tags: 
+          - 
+            Key: "Name"
+            Value: "visitsSubnetA"
+    visitsSubnetB:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: visitsVPC
+        AvailabilityZone: ${self:provider.region}b
+        CidrBlock: 10.0.1.0/24
+        Tags: 
+          - 
+            Key: "Name"
+            Value: "visitsSubnetB"
+    visitsSubnetC:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: visitsVPC
+        AvailabilityZone: ${self:provider.region}c
+        CidrBlock: 10.0.2.0/24
+        Tags: 
+          - 
+            Key: "Name"
+            Value: "visitsSubnetC"
+    visitsVPC:
+      Type: AWS::EC2::VPC
+      Properties:
+        CidrBlock: 10.0.0.0/16
+        EnableDnsSupport: true
+        EnableDnsHostnames: true
+        InstanceTenancy: default
+        Tags: 
+          - 
+            Key: "Name"
+            Value: "visitsVPC"
+    visitsSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: SecurityGroup for Visits
+        VpcId:
+          Ref: visitsVPC
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: '0'
+            ToPort: '65535'
+            CidrIp: "0.0.0.0/0"
+        Tags: 
+          - 
+            Key: "Name"
+            Value: "visitsSecurityGroup"
 plugins:
   # - data-api-migrations-serverless
   # - data-api-local-serverless
-  - serverless-dotenv-plugin
   - serverless-haskell
   - serverless-offline
 
