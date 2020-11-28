@@ -15,7 +15,7 @@ handler ∷ Aeson.Value → IO ()
 handler _ = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
-    sqlFile <- readFile "init.sql"
+    sqlFile <- B.readFile "init.sql"
     putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
         connectHost = "websites-dev-visitsdb-wt73yj8godix.cluster-c3bfry1faakf.eu-west-2.rds.amazonaws.com",
@@ -24,5 +24,5 @@ handler _ = do
         connectDatabase = "mysql"
     }
     putStrLn "Connected. Querying..."
-    mapM_ (query conn . B.pack) $ lines sqlFile
+    mapM_ (query conn) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
     putStrLn "Done!"
