@@ -71,7 +71,7 @@ functions:
         - ./**
       include:
         - bootstrap
-        - visits
+        - visit
         - lib/**
       individually: true
     events:
