@@ -1,4 +1,4 @@
-CREATE DATABASE `visits`;
+CREATE DATABASE IF NOT EXISTS `visits`;
 GRANT ALL ON `visits`.`*` TO `visits`;
 CREATE TABLE IF NOT EXISTS `visits`.`visits` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
