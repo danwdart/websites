@@ -40,6 +40,7 @@ functions:
     handler: websites.visit-migrate
     name: ${self:provider.stage}-visit-migrate
     environment:
+      DB_HOST: ${env:DB_HOST}
       DB_USERNAME: ${env:DB_USERNAME}
       DB_PASSWORD: ${env:DB_PASSWORD}
     package:
@@ -64,6 +65,7 @@ functions:
     name: ${self:provider.stage}-visit
     timeout: 30
     environment:
+      DB_HOST: ${env:DB_HOST}
       DB_USERNAME: ${env:DB_USERNAME}
       DB_PASSWORD: ${env:DB_PASSWORD}
     package:

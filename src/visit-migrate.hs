@@ -15,10 +15,11 @@ handler ∷ Aeson.Value → IO ()
 handler _ = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
+    host <- getEnv "DB_HOST"
     sqlFile <- B.readFile "init.sql"
     putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
-        connectHost = "websites-dev-visitsdb-wt73yj8godix.cluster-c3bfry1faakf.eu-west-2.rds.amazonaws.com",
+        connectHost = host,
         connectUser = username,
         connectPassword = password,
         connectDatabase = "mysql"
