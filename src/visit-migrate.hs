@@ -1,20 +1,17 @@
+{-# LANGUAGE UnicodeSyntax #-}
 module Main where
 
-import AWSLambda ( lambdaMain )
-import qualified Data.Aeson as Aeson
-import Database.MySQL.Base
-    ( connect,
-      defaultConnectInfo,
-      query,
-      ConnectInfo(connectHost, connectUser, connectPassword,
-                  connectDatabase) )
-import System.Environment (getEnv)
+import           AWSLambda             (lambdaMain)
+import qualified Data.Aeson            as Aeson
 import qualified Data.ByteString.Char8 as B
+import           Database.MySQL.Base   (ConnectInfo (connectHost, connectPassword, connectUser),
+                                        connect, defaultConnectInfo, query)
+import           System.Environment    (getEnv)
 
-main :: IO ()
+main ∷ IO ()
 main = lambdaMain handler
 
-handler :: Aeson.Value -> IO ()
+handler ∷ Aeson.Value → IO ()
 handler _ = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
