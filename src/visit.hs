@@ -2,12 +2,20 @@
 {-# LANGUAGE UnicodeSyntax     #-}
 module Main where
 
-import           AWSLambda.Events.APIGateway (agprqRequestContext, APIGatewayProxyRequest,
-                                              APIGatewayProxyResponse,
-                                              agprqHeaders, agprsHeaders,
-                                              apiGatewayMain, responseBody,
-                                              responseOK)
+import AWSLambda
+    ( agprqHeaders,
+      agprqQueryStringParameters,
+      agprqRequestContext,
+      agprsHeaders,
+      apiGatewayMain,
+      prcIdentity,
+      responseBody,
+      responseOK,
+      riSourceIp,
+      APIGatewayProxyRequest,
+      APIGatewayProxyResponse )
 import           Data.ByteString.Char8       (ByteString)
+import qualified Data.ByteString.Char8       as B
 import           Data.Text                   as T (Text)
 import           Data.Time                   (getCurrentTime)
 import           Database.MySQL.Base         (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
@@ -16,9 +24,6 @@ import           Database.MySQL.Base         (ConnectInfo (connectDatabase, conn
 import           Network.AWS.Lens            ((&), (.~), (?~), (^.))
 import           System.Environment          (getEnv)
 import           Text.Printf                 (printf)
-import qualified Data.ByteString.Char8 as B
-import AWSLambda
-import Data.Maybe (fromMaybe)
 
 main ∷ IO ()
 main = apiGatewayMain handler
