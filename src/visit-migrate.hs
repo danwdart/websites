@@ -23,8 +23,7 @@ handler _ = do
     conn <- connect defaultConnectInfo {
         connectHost = "websites-dev-visitsdb-wt73yj8godix.cluster-c3bfry1faakf.eu-west-2.rds.amazonaws.com",
         connectUser = username,
-        connectPassword = password,
-        connectDatabase = "visits"
+        connectPassword = password
     }
     putStrLn "Connected. Querying..."
     query conn $ B.pack sqlFile
