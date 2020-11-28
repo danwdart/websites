@@ -10,6 +10,8 @@ google.json
 bootstrap
 submit-comment
 visit
+visit-migrate
+libmysqlclient.so.20
 .env
 report
 

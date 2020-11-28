@@ -109,6 +109,7 @@ executable visit
     , bytestring
     , github-rest
     , http-types
+    , mysql
     , serverless-haskell
     , text
     , time
