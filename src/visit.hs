@@ -35,7 +35,6 @@ handler request = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
     host <- getEnv "DB_HOST"
-    putStrLn $ username <> " " <> password <> " " <> host
     time <- formatToMySQL <$> getCurrentTime
     conn <- connect defaultConnectInfo {
         connectHost = host,
@@ -48,7 +47,6 @@ handler request = do
     surl <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "url"
     let ua = B.unpack sua
     let url = B.unpack surl
-    putStrLn $ printf "INSERT INTO `visits`.`visits` (url, ua, ip, time) values (\"%s\", \"%s\", \"%s\", \"%s\")" url ua ip time
     query conn . B.pack $ printf "INSERT INTO `visits`.`visits` (url, ua, ip, time) values (\"%s\", \"%s\", \"%s\", \"%s\")" url ua ip time
     pure $ responseOK
       & agprsHeaders .~ [("Content-Type", "text/plain")]
