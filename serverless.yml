@@ -4,17 +4,6 @@ service: websites
 
 useDotenv: true
 
-package:
-  exclude:
-    - ./**
-  include:
-    - bootstrap
-    - submit-comment
-    - visit
-    - visit-migrate
-    - init.sql
-    - lib/**
-    
 provider:
   name: aws
   region: eu-west-2
@@ -33,6 +22,13 @@ functions:
     name: ${self:provider.stage}-submit-comment
     environment:
       GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - submit-comment
+      individually: true
     events:
       - http:
           path: /comment
@@ -47,6 +43,15 @@ functions:
     environment:
       DB_USERNAME: ${env:DB_USERNAME}
       DB_PASSWORD: ${env:DB_PASSWORD}
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - visit-migrate
+        - init.sql
+        - lib/**
+      individually: true
     vpc:
       securityGroupIds:
         - Ref: visitsSecurityGroup
@@ -61,6 +66,14 @@ functions:
     environment:
       DB_USERNAME: ${env:DB_USERNAME}
       DB_PASSWORD: ${env:DB_PASSWORD}
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - visits
+        - lib/**
+      individually: true
     events:
       - http:
           path: /visit.gif
@@ -94,7 +107,7 @@ resources:
       Properties:
         MasterUsername: !Ref DBUsername
         MasterUserPassword: !Ref DBPassword
-        DBClusterIdentifier: visits
+        # DBClusterIdentifier: visits
         Engine: aurora
         # EngineVersion: 5.6.10a
         EngineMode: serverless
