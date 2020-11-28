@@ -4,7 +4,7 @@ module Main where
 import           AWSLambda             (lambdaMain)
 import qualified Data.Aeson            as Aeson
 import qualified Data.ByteString.Char8 as B
-import           Database.MySQL.Base   (ConnectInfo (connectHost, connectPassword, connectUser),
+import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
                                         connect, defaultConnectInfo, query)
 import           System.Environment    (getEnv)
 
@@ -20,8 +20,9 @@ handler _ = do
     conn <- connect defaultConnectInfo {
         connectHost = "websites-dev-visitsdb-wt73yj8godix.cluster-c3bfry1faakf.eu-west-2.rds.amazonaws.com",
         connectUser = username,
-        connectPassword = password
+        connectPassword = password,
+        connectDatabase = "mysql"
     }
     putStrLn "Connected. Querying..."
-    query conn $ B.pack sqlFile
+    mapM_ (query conn . B.pack) $ lines sqlFile
     putStrLn "Done!"
