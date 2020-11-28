@@ -17,7 +17,7 @@ import AWSLambda
 import           Data.ByteString.Char8       (ByteString)
 import qualified Data.ByteString.Char8       as B
 import           Data.Text                   as T (Text)
-import           Data.Time                   (getCurrentTime)
+import           Data.Time                   (defaultTimeLocale, formatTime, UTCTime, getCurrentTime)
 import           Database.MySQL.Base         (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
                                               connect, defaultConnectInfo,
                                               query)
@@ -28,11 +28,17 @@ import           Text.Printf                 (printf)
 main ∷ IO ()
 main = apiGatewayMain handler
 
+mysqlFormat :: String
+mysqlFormat = "%Y-%m-%d %H:%M:%S"
+
+formatToMySQL :: UTCTime -> String
+formatToMySQL = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S"
+
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse ByteString)
 handler request = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
-    time <- show <$> getCurrentTime
+    time <- formatToMySQL <$> getCurrentTime
     let ua = maybe "" B.unpack $ request ^. agprqHeaders & lookup "User-Agent"
     let ip = maybe "" show $ request ^. agprqRequestContext . prcIdentity . riSourceIp
     let url = maybe "" (maybe "" B.unpack) (request ^. agprqQueryStringParameters & lookup "url")
