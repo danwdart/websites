@@ -33,15 +33,9 @@ handler request = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
     time <- show <$> getCurrentTime
-    -- print time
-    print request
     let ua = maybe "" B.unpack $ request ^. agprqHeaders & lookup "User-Agent"
     let ip = maybe "" show $ request ^. agprqRequestContext . prcIdentity . riSourceIp
-    -- let url = maybe "" B.unpack $ request ^. agprqHeaders & lookup "Referrer"
     let url = maybe "" (maybe "" B.unpack) (request ^. agprqQueryStringParameters & lookup "url")
-    print ua
-    print ip
-    print url
     conn <- connect defaultConnectInfo {
         connectHost = "websites-dev-visitsdb-wt73yj8godix.cluster-c3bfry1faakf.eu-west-2.rds.amazonaws.com",
         connectUser = username,
