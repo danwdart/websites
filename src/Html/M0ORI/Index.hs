@@ -29,6 +29,9 @@ pageHamRadio = li ! class_ "nav-item" $ do
                     extLink "https://www.yaesu.com/indexVS.cfm?cmd=DisplayProducts&ProdCatID=102&encProdID=06014CD0AFA0702B25B12AB4DC9C0D27" "Yaesu FT-817"
                     " (5W, all-mode HF, VHF, UHF transceiver)"
                 li $ do
+                    extLink "https://www.amazon.co.uk/BaoFeng-UV-5R-Radio-Walkie-Talkie/dp/B072HXQ5GG" "Baofeng UV-5R 8W"
+                    " (8W, FM, VHF and UHF transceiver)"
+                li $ do
                     extLink "https://baofengtech.com/uv82" "Baofeng UV-82"
                     " (5W, FM, VHF and UHF transceiver)"
                 li $ do
