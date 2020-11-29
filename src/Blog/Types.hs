@@ -4,7 +4,7 @@
 
 module Blog.Types where
 
-import           Data.Aeson       (Value, FromJSON, (.:), (.:?))
+import           Data.Aeson       (FromJSON, Value, (.:), (.:?))
 import qualified Data.Aeson       as A
 import           Data.Text        (Text)
 import qualified Data.Text        as T

@@ -14,7 +14,7 @@ import           Data.List                      (sortOn)
 import           Data.Maybe                     (mapMaybe)
 import           Data.Ord                       (Down (Down))
 import qualified Data.Text.IO                   as TIO
-import           Html.MadHacker.Index                (page)
+import           Html.MadHacker.Index           (page)
 import           Html.MadHacker.Suffix          (renderStars)
 import           Network.Wai.Application.Static (defaultWebAppSettings,
                                                  staticApp)

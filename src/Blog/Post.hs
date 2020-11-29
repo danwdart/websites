@@ -102,7 +102,7 @@ renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = 
     br
     fixExternalLinks html'
     br
-    renderSuffix metadata' 
+    renderSuffix metadata'
     br
     h3 "Comments"
     if Data.List.null comments' then

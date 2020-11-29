@@ -25,8 +25,8 @@ toEntry domain (BlogPost postId (BlogMetadata title' date' _ _ _ _) html _) = (
     , Atom.entryContent = Just (Atom.HTMLContent . toStrict . renderHtml $ html)
     }
 
-dateUpdated :: [BlogPost] -> Text
-dateUpdated [] = ""
+dateUpdated ∷ [BlogPost] → Text
+dateUpdated []    = ""
 dateUpdated posts = T.pack . show . date . metadata . Prelude.head $ posts
 
 feed ∷ Text → Text → [BlogPost] → Atom.Feed

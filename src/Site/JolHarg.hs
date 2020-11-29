@@ -3,7 +3,7 @@
 
 module Site.JolHarg where
 
-import Configuration.Dotenv
+import           Configuration.Dotenv
 import           Control.Monad.Reader
 
 import qualified Data.ByteString.Lazy.Char8     as BSL
