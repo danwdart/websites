@@ -26,6 +26,7 @@ import qualified Site.Blog                        as B
 import qualified Site.DanDart                     as D
 import qualified Site.JolHarg                     as J
 import qualified Site.M0ORI                       as M
+import qualified Site.MadHacker                   as MH
 import           System.Environment               (setEnv)
 import           System.Random                    (Random (randomRIO))
 import           Test.Hspec                       (HasCallStack, Spec, describe,
@@ -104,6 +105,7 @@ sites = [
     ("blog", B.serve),
     ("dandart", D.serve),
     ("jolharg", J.serve),
+    ("madhacker", MH.serve),
     ("m0ori", M.serve)
     ]
 
