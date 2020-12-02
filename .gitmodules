@@ -10,3 +10,6 @@
 [submodule ".sites/blog"]
 	path = .sites/blog
 	url = git@github.com:danwdart/blog.git
+[submodule ".sites/madhacker"]
+	path = .sites/madhacker
+	url = git@github.com:danwdart/madhacker.git
