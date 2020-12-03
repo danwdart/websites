@@ -1,13 +1,9 @@
-resolver: lts-16.23 # 8.10 doesn't work in lts-13.30
+ghc-options:
+  websites: -j16 -Wall -Werror
 packages:
 - .
 extra-deps:
 - serverless-haskell-0.12.4
--
-  git: https://github.com/danwdart/fsutils.git
+- git: https://github.com/danwdart/fsutils.git
   commit: a4167c212939f7b2b123072542ad305777943903
-ghc-options:
-  websites: -j16 -Wall -Werror
-#docker:
-  #enable: true
-  #image: fpco/stack-build:lts-13.30 # for the serverless
+resolver: lts-16.24
