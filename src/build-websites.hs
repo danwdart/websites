@@ -17,6 +17,7 @@ import qualified Site.DanDart                   as D
 import qualified Site.JolHarg                   as J
 import qualified Site.M0ORI                     as M
 import qualified Site.MadHacker                 as R
+import           System.Environment             (lookupEnv)
 
 build ∷ IO ()
 build = do
@@ -29,7 +30,15 @@ build = do
 serve ∷ IO ()
 serve = do
     build
-    putStrLn "Serving..."
+    port <- fromMaybe "80" <$> lookupEnv "PORT"
+    putStrLn "Serving all websites:"
+    mapM_ (\host -> putStrLn $ "http://" <> host <> ".localhost:" <> port) [
+        "madhacker",
+        "blog",
+        "dandart",
+        "jolharg",
+        "m0ori"
+        ]
     (runEnv 80 . vhost [
         (
             isPrefixOf "madhacker" . fromMaybe "" . requestHeaderHost,

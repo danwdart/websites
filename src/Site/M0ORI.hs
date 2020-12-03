@@ -4,10 +4,11 @@
 module Site.M0ORI where
 
 import           Build.Utils
-import           Data.Maybe
+import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Html.M0ORI.Index
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
+import           System.Environment             (lookupEnv)
 import           WaiAppStatic.Types
 
 build ∷ IO ()
@@ -17,5 +18,6 @@ serve ∷ IO ()
 serve = do
     putStrLn "Building..."
     build
-    putStrLn "Serving..."
+    port <- fromMaybe "80" <$> lookupEnv "PORT"
+    putStrLn $ "Serving on http://localhost:" <> port
     runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/m0ori/"){ ssIndices = mapMaybe toPiece ["index.html"] }

@@ -8,7 +8,7 @@ import           Control.Monad.Reader
 
 import qualified Data.ByteString.Lazy.Char8     as BSL
 
-import           Data.Maybe
+import           Data.Maybe                     (fromMaybe, mapMaybe)
 
 import           Html.Common.GitHub
 
@@ -23,6 +23,7 @@ import           System.Path
 
 import           Text.Blaze.Html.Renderer.Utf8
 
+import           System.Environment             (lookupEnv)
 import           WaiAppStatic.Types
 
 build ∷ IO ()
@@ -39,5 +40,6 @@ serve ∷ IO ()
 serve = do
     putStrLn "Building..."
     build
-    putStrLn "Serving..."
+    port' <- fromMaybe "80" <$> lookupEnv "PORT"
+    putStrLn $ "Serving on http://localhost:" <> port'
     runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/jolharg/"){ ssIndices = mapMaybe toPiece ["index.html"] }

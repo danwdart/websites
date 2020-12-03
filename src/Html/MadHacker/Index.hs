@@ -25,8 +25,13 @@ htmlHeader reviewLinks reviews = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-fl
     a ! class_ "p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#reviews" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
         H.span ! class_ "title ml-2" $ "The Mad Hacker: Reviews"
-    H.div . (ul ! class_ "navbar-nav px-3") $
+    H.div . (ul ! class_ "navbar-nav px-3") $ do
+            li ! class_ "nav-item" $ do
+                a ! class_ "nav-link btn btn-sm" ! href "https://dandart.co.uk" $ "Dan Dart"
             pageReviews reviewLinks reviews
+            li ! class_ "nav-item" $ do
+                a ! class_ "nav-link btn btn-sm" ! customAttribute "download" "" ! href "/atom.xml" $ "Atom Feed"
+
 
 page ∷ Html → Html → Html
 page reviewLinks reviews = docTypeHtml ! lang "en-GB" $ do

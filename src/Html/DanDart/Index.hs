@@ -252,6 +252,10 @@ pageSoftware = (li ! class_ "nav-item") . (a ! class_ "nav-link btn btn-sm" ! hr
 pageBlog ∷ Html
 pageBlog = (li ! class_ "nav-item") . (a ! class_ "nav-link btn btn-sm" ! href "https://blog.dandart.co.uk" ! target "_blank") $ "Blog"
 
+pageReviews ∷ Html
+pageReviews = (li ! class_ "nav-item") . (a ! class_ "nav-link btn btn-sm" ! href "https://madhackerreviews.com" ! target "_blank") $ "Reviews"
+
+
 pageContact ∷ Html
 pageContact = li ! class_ "nav-item" $ do
     input ! type_ "radio" ! A.style "display:none" ! name "selected" ! A.id "Contact" ! value "Contact"
@@ -278,19 +282,18 @@ pageContact = li ! class_ "nav-item" $ do
 
 socialIcons ∷ Html
 socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right social-inside") $ (do
-    --  630 on mobile
-    socialIconBBanned "" "No Blogger" "blogger-b"
+    -- socialIconBBanned "" "No Blogger" "blogger-b"
     socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
     -- +social('discord', 'Discord', 'url', 'black')
-    socialIconBBanned "" "No Facebook" "facebook-f"
+    -- socialIconBBanned "" "No Facebook" "facebook-f"
     --  +social('firefox
     socialIconS "mailto:website@dandart.co.uk" "Email" "envelope"
     socialIconB "https://github.com/danwdart" "GitHub" "github"
-    socialIconBBanned "" "No Google" "google"
+    -- socialIconBBanned "" "No Google" "google"
     socialIconB "https://news.ycombinator.com/user?id=dandart" "Hacker News" "hacker-news"
     socialIconB "https://www.hackerrank.com/dandart" "HackerRank" "hackerrank"
     socialIconB "https://www.imdb.com/user/ur81806610" "ImDB" "imdb"
-    socialIconBBanned "" "No Instagram" "instagram"
+    -- socialIconBBanned "" "No Instagram" "instagram"
     -- +social('keybase', 'Keybase', 'url', 'black')
     socialIconB "https://www.last.fm/user/DanDart" "Last.fm" "lastfm"
     socialIconB "https://www.linkedin.com/in/dandart" "LinkedIn" "linkedin"
@@ -300,17 +303,17 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right so
     socialIconB "https://www.npmjs.com/~dandart" "npm" "npm"
     socialIconB "https://www.patreon.com/danwdart" "Patreon" "patreon"
     socialIconB "https://my.playstation.com/profile/MeowzorFnord" "PlayStation" "playstation"
-    socialIconBBanned "" "No Pinterest" "pinterest"
+    -- socialIconBBanned "" "No Pinterest" "pinterest"
     -- +social('raspberry-pi', 'Raspberry PI', 'url', 'black')
     socialIconB "https://www.reddit.com/user/jolharg" "Reddit" "reddit"
     socialIconB "skypeurl" "Skype" "skype"
-    socialIconBBanned "" "No Snapchat" "snapchat"
+    -- socialIconBBanned "" "No Snapchat" "snapchat"
     socialIconB "https://soundcloud.com/danwdart" "SoundCloud" "soundcloud"
     socialIconB "spotify url" "Spotify" "spotify"
     socialIconB "https://stackoverflow.com/users/1764563/dan-dart" "Stack Overflow" "stack-overflow"
     socialIconB "https://steamcommunity.com/id/dandart" "Steam" "steam"
-    socialIconB "https://floofyhacker.com" "Tumblr" "tumblr"
-    socialIconBBanned "" "No Twitter" "twitter"
+    socialIconB "https://yanderehiro.tumblr.com/" "Tumblr" "tumblr"
+    -- socialIconBBanned "" "No Twitter" "twitter"
     -- +social('ubuntu', 'Ubuntu', 'url', 'black')
     -- +social-no('windows', 'Windows', 'url', 'black')
     socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube")
@@ -333,6 +336,7 @@ htmlHeader = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand nav
             pageAbout
             pageSoftware
             pageBlog
+            pageReviews
             pageContact
         socialIcons
 
