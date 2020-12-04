@@ -34,7 +34,7 @@ build = do
   reviews <- sequence $ makeBlogPost "reviews" <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ reviews
   let renderedPosts = foldMap (renderPost "review" renderStars) sortedPosts
-  TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhacker.dandart.co.uk" "Mad Hacker Tech Reviews" sortedPosts
+  TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhackerreviews.com" "Mad Hacker Tech Reviews" sortedPosts
   let renderedLinks = makeLinks sortedPosts
   make "madhacker" $ page renderedLinks renderedPosts
 
