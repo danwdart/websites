@@ -282,7 +282,7 @@ page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
-    visit "dandart"
+    visit "https://dandart.co.uk/"
 
 page404 ∷ Html
-page404 = defaultPage404 descTitle keywords $ visit "dandart404"
+page404 = defaultPage404 descTitle keywords $ visit "https://dandart.co.uk/404.html"
