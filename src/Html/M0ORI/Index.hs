@@ -62,7 +62,7 @@ page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
-    visit "https://m0ori.com/"
+    visit "m0ori"
 
 page404 ∷ Html
-page404 = defaultPage404 descTitle keywords $ visit "https://m0ori.com/404.html"
+page404 = defaultPage404 descTitle keywords $ visit "m0ori404"
