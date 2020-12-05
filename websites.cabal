@@ -69,6 +69,7 @@ executable build-websites
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.Common.Visit
     , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
@@ -208,6 +209,7 @@ test-suite e2e
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.Common.Visit
     , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
