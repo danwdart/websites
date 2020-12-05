@@ -17,6 +17,7 @@ import Html.Common.Header
 import Html.Common.Contact
 import Html.Common.Error.NotFound
 import Html.Common.Bootstrap
+import Html.Common.Visit
 
 pagePortfolio ∷ Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
@@ -73,6 +74,7 @@ page = do
     return . (docTypeHtml ! lang "en-GB") $ do
         htmlHead descTitle keywords mempty
         header'
+        visit "https://jolharg.com/"
 
 page404 ∷ Html
-page404 = defaultPage404 descTitle keywords mempty
+page404 = defaultPage404 descTitle keywords $ visit "https://jolharg.com/404.html"

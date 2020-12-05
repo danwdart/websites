@@ -14,6 +14,7 @@ import Html.Common.Page
 import Html.Common.Header
 import Html.Common.Contact
 import Html.Common.Error.NotFound
+import Html.Common.Visit
 
 pageHamRadio ∷ Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
@@ -61,6 +62,7 @@ page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
+    visit "https://m0ori.co.uk"
 
 page404 ∷ Html
-page404 = defaultPage404 descTitle keywords mempty
+page404 = defaultPage404 descTitle keywords $ visit "https://m0ori.co.uk/"

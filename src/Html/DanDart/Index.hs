@@ -16,6 +16,7 @@ import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
 import Html.Common.Contact
 import Html.Common.Error.NotFound
+import Html.Common.Visit
 
 pageIntro ∷ Html
 pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
@@ -281,7 +282,7 @@ page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
-    img ! src "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/visit.gif?url=https://dandart.co.uk"
+    visit "https://dandart.co.uk/"
 
 page404 ∷ Html
-page404 = defaultPage404 descTitle keywords mempty
+page404 = defaultPage404 descTitle keywords $ visit "https://dandart.co.uk/404.html"
