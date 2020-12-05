@@ -133,7 +133,7 @@ commitNewFile branch postType postId commentId commentRecord = queryGitHub GHEnd
   , endpointVals =
     [ "owner" := owner
     , "repo" := repo
-    , "path" := postType <> "s/comments/" <> postId <> "/" <> commentId
+    , "path" := postType <> "s/" <> postId <> "/" <> commentId <> ".md"
     ]
   , ghData =
     [ "message" := title (recName commentRecord)
