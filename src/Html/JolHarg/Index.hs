@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.JolHarg.Index (page) where
+module Html.JolHarg.Index (page, page404) where
 
 import           Control.Monad.Reader
 
@@ -15,6 +15,7 @@ import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
 import Html.Common.Contact
+import Html.Common.Error.NotFound
 
 pagePortfolio ∷ Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
@@ -68,6 +69,9 @@ htmlHeader = do
 page ∷ Reader [Repo] Html
 page = do
     header' <- htmlHeader
-    return . (docTypeHtml ! lang "en-GB") $ (do
+    return . (docTypeHtml ! lang "en-GB") $ do
         htmlHead descTitle keywords mempty
-        header')
+        header'
+
+page404 ∷ Html
+page404 = defaultPage404 descTitle keywords mempty

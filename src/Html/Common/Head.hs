@@ -32,4 +32,3 @@ htmlHead descTitle keywords extraHead = H.head $ do
     commonCSS
     extraHead
 
-

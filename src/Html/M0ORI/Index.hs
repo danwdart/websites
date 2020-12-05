@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.M0ORI.Index (page) where
+module Html.M0ORI.Index (page, page404) where
 
 import           Data.M0ORI
 
@@ -13,6 +13,7 @@ import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Page
 import Html.Common.Header
 import Html.Common.Contact
+import Html.Common.Error.NotFound
 
 pageHamRadio ∷ Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
@@ -60,3 +61,6 @@ page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
+
+page404 ∷ Html
+page404 = defaultPage404 descTitle keywords mempty

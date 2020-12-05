@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.DanDart.Index (page) where
+module Html.DanDart.Index (page, page404) where
 
 import           Data.DanDart
 
@@ -15,6 +15,7 @@ import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
 import Html.Common.Contact
+import Html.Common.Error.NotFound
 
 pageIntro ∷ Html
 pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
@@ -276,9 +277,11 @@ htmlHeader = makeHeader "#intro" "Dan Dart" socialIcons $ do
     pageReviews
     pageContact
         
-
 page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty
     htmlHeader
     img ! src "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/visit.gif?url=https://dandart.co.uk"
+
+page404 ∷ Html
+page404 = defaultPage404 descTitle keywords mempty

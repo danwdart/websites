@@ -14,7 +14,7 @@ import           Data.List                      (sortOn)
 import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Data.Ord                       (Down (Down))
 import qualified Data.Text.IO                   as TIO
-import           Html.Blog.Index                (page)
+import           Html.Blog.Index                (page404, page)
 import           Network.Wai.Application.Static (defaultWebAppSettings,
                                                  staticApp)
 import           Network.Wai.Handler.Warp       (runEnv)
@@ -36,7 +36,7 @@ build = do
   let renderedPosts = foldMap (renderPost "post" (const mempty)) sortedPosts
   TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed "https://blog.dandart.co.uk" "Dan Dart's Blog" sortedPosts
   let renderedLinks = makeLinks sortedPosts
-  make "blog" $ page renderedLinks renderedPosts
+  make "blog" (page renderedLinks renderedPosts) page404
 
 serve ∷ IO ()
 serve = do

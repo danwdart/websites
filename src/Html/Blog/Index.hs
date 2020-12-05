@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Blog.Index (page) where
+module Html.Blog.Index (page, page404) where
 
 import           Data.Blog
 
@@ -11,6 +11,7 @@ import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
+import Html.Common.Error.NotFound
 
 pageBlog ∷ Html → Html → Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do
@@ -24,8 +25,13 @@ htmlHeader blogPostLinks blogPosts = makeHeader "#blog" "Dan Dart's Blog" mempty
     pageBlog blogPostLinks blogPosts
     dlNav "/atom.xml" "Atom Feed"
 
+extraHead ∷ Html
+extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan Dart's Blog" ! href "/atom.xml"
+
 page ∷ Html → Html → Html
 page blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords $ do
-        link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan Dart's Blog" ! href "/atom.xml"
+    htmlHead descTitle keywords extraHead
     htmlHeader blogPostLinks blogPosts
+
+page404 ∷ Html
+page404 = defaultPage404 descTitle keywords extraHead

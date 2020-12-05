@@ -14,7 +14,7 @@ import           Data.List                      (sortOn)
 import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Data.Ord                       (Down (Down))
 import qualified Data.Text.IO                   as TIO
-import           Html.MadHacker.Index           (page)
+import           Html.MadHacker.Index           (page404, page)
 import           Html.MadHacker.Suffix          (renderStars)
 import           Network.Wai.Application.Static (defaultWebAppSettings,
                                                  staticApp)
@@ -36,7 +36,7 @@ build = do
   let renderedPosts = foldMap (renderPost "review" renderStars) sortedPosts
   TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhackerreviews.com" "Mad Hacker Tech Reviews" sortedPosts
   let renderedLinks = makeLinks sortedPosts
-  make "madhacker" $ page renderedLinks renderedPosts
+  make "madhacker" (page renderedLinks renderedPosts) page404
 
 serve ∷ IO ()
 serve = do
