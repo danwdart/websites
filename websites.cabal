@@ -68,6 +68,7 @@ executable build-websites
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
     , Html.MadHacker.Index
@@ -205,6 +206,7 @@ test-suite e2e
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
     , Html.MadHacker.Index
