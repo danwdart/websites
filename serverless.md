@@ -64,3 +64,11 @@ Something to do with `docker run --rm -it lambci/lambda:build-provided.al2 bash`
 # TODO
 
 Investigate a way not to use this library and use our own glibc's binaries or even an AppImage.
+
+# Docker
+
+aws ecr create-repository --repository-name websites --image-scanning-configuration scanOnPush=true
+
+aws ecr get-login-password | docker login --username AWS --password-stdin 301653193521.dkr.ecr.eu-west-2.amazonaws.com/websites
+
+then push to url/repo.

@@ -7,7 +7,6 @@ useDotenv: true
 provider:
   name: aws
   region: eu-west-2
-  runtime: haskell
   environment:
     LANG: en_GB.UTF-8
     LC_ALL: en_GB.UTF-8
@@ -18,17 +17,9 @@ provider:
 
 functions:
   submit-comment:
-    handler: websites.submit-comment
     name: ${self:provider.stage}-submit-comment
     environment:
       GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
-    package:
-      exclude:
-        - ./**
-      include:
-        - bootstrap
-        - submit-comment
-      individually: true
     events:
       - http:
           path: /comment
@@ -37,21 +28,11 @@ functions:
           private: false
   
   visit-migrate:
-    handler: websites.visit-migrate
     name: ${self:provider.stage}-visit-migrate
     environment:
       DB_HOST: ${env:DB_HOST}
       DB_USERNAME: ${env:DB_USERNAME}
       DB_PASSWORD: ${env:DB_PASSWORD}
-    package:
-      exclude:
-        - ./**
-      include:
-        - bootstrap
-        - visit-migrate
-        - init.sql
-        - lib/**
-      individually: true
     vpc:
       securityGroupIds:
         - Ref: visitsSecurityGroup
@@ -68,14 +49,6 @@ functions:
       DB_HOST: ${env:DB_HOST}
       DB_USERNAME: ${env:DB_USERNAME}
       DB_PASSWORD: ${env:DB_PASSWORD}
-    package:
-      exclude:
-        - ./**
-      include:
-        - bootstrap
-        - visit
-        - lib/**
-      individually: true
     events:
       - http:
           path: /visit.gif
@@ -104,6 +77,11 @@ resources:
       AllowedPattern: '[a-zA-Z0-9]*'
       ConstraintDescription: must contain only alphanumeric characters.
   Resources:
+    websitesRepo:
+      Type: "AWS::ECR::Repository"
+      Properties:
+        ImageScanningConfiguration:
+          scanOnPush: true
     visitsDB:
       Type: AWS::RDS::DBCluster
       Properties:
