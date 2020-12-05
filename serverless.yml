@@ -49,7 +49,7 @@ functions:
       include:
         - bootstrap
         - visit-migrate
-        - init.sql
+        - sql/**
         - lib/**
       individually: true
     vpc:

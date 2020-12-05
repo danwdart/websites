@@ -16,7 +16,7 @@ handler _ = do
     username <- getEnv "DB_USERNAME"
     password <- getEnv "DB_PASSWORD"
     host <- getEnv "DB_HOST"
-    sqlFile <- B.readFile "init.sql"
+    sqlFile <- B.readFile "sql/init.sql"
     putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
         connectHost = host,
