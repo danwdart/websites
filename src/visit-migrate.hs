@@ -13,9 +13,7 @@ main = lambdaMain handler
 
 handler ∷ Aeson.Value → IO ()
 handler _ = do
-    username <- getEnv "DB_USERNAME"
-    password <- getEnv "DB_PASSWORD"
-    host <- getEnv "DB_HOST"
+    [username, password, host] <- sequence $ getEnv <$> ["DB_USERNAME", "DB_PASSWORD", "DB_HOST"]
     sqlFile <- B.readFile "sql/init.sql"
     putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
