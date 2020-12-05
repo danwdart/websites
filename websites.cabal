@@ -150,6 +150,7 @@ test-suite e2e
     , Cabal
     , cheapskate
     , directory
+    , dotenv
     , feed
     , filepath
     , frontmatter
@@ -162,6 +163,7 @@ test-suite e2e
     , http-types
     , mmark
     , mtl
+    , pandoc
     , QuickCheck
     , random
     , req
@@ -187,6 +189,7 @@ test-suite e2e
     , Data.DanDart
     , Data.JolHarg
     , Data.M0ORI
+    , Data.MadHacker
     , E2E.Site.CommonSpec
     , Html.Blog.Index
     , Html.Common.Audio
@@ -202,10 +205,13 @@ test-suite e2e
     , Html.Common.Utils
     , Html.DanDart.Index
     , Html.JolHarg.Index
+    , Html.MadHacker.Index
+    , Html.MadHacker.Suffix
     , Html.M0ORI.Index
     , Site.Blog
     , Site.DanDart
     , Site.JolHarg
+    , Site.MadHacker
     , Site.M0ORI
     , Util.List
     , Util.Time
