@@ -61,7 +61,9 @@ executable build-websites
     , Html.Common.Card
     , Html.Common.GitHub
     , Html.Common.Head
+    , Html.Common.Header
     , Html.Common.Link
+    , Html.Common.Page
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
@@ -192,7 +194,9 @@ test-suite e2e
     , Html.Common.Card
     , Html.Common.GitHub
     , Html.Common.Head
+    , Html.Common.Header
     , Html.Common.Link
+    , Html.Common.Page
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
