@@ -20,7 +20,6 @@ import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHos
 import           Network.AWS.Lens      ((&), (.~), (?~), (^.))
 import           System.Environment    (getEnv)
 import           Text.Printf           (printf)
-import Data.Functor.Compose
 
 main ∷ IO ()
 main = apiGatewayMain handler
@@ -33,6 +32,7 @@ formatToMySQL = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S"
 
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse ByteString)
 handler request = do
+    putStrLn "Getting envs..."
     [username, password, host] <- sequence $ getEnv <$> ["DB_USERNAME", "DB_PASSWORD", "DB_HOST"]
     time <- formatToMySQL <$> getCurrentTime
     putStrLn "Connecting..."

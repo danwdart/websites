@@ -76,6 +76,13 @@ functions:
         - visit
         - lib/**
       individually: true
+    vpc:
+      securityGroupIds:
+        - Ref: visitsSecurityGroup
+      subnetIds:
+        - Ref: visitsSubnetA
+        - Ref: visitsSubnetB
+        - Ref: visitsSubnetC
     events:
       - http:
           path: /visit.gif
