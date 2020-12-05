@@ -6,6 +6,7 @@ module Html.Common.Page (customLayout, contactLayout, defaultLayout, dlNav, extN
 import           Data.String                 (IsString (fromString))
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
+import Html.Common.Bootstrap
 
 navBtn ∷ Attribute
 navBtn = class_ "nav-link btn btn-sm"
@@ -33,11 +34,11 @@ notDefaultPage ∷ Attribute
 notDefaultPage = mempty
 
 defaultLayout ∷ Html → Html
-defaultLayout = (H.div ! class_ "row") .
+defaultLayout = row .
     (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light")
 
 contactLayout :: Html -> Html
-contactLayout = (H.div ! class_ "row") .
+contactLayout = row .
     (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3")
 
 customLayout ∷ Html → Html
@@ -63,7 +64,7 @@ makePage pageId label' layout extraParams content' = li ! class_ "nav-item" $ do
     H.div
         ! class_ "page"
         ! A.id pageId $ do
-            (H.div ! class_ "row") .
+            row .
                 (H.div ! class_ "col my-md-3") .
                     small $ "» " <> fromString label'
             layout content'

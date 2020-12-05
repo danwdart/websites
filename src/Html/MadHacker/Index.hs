@@ -11,10 +11,11 @@ import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Page
 import Html.Common.Error.NotFound
+import Html.Common.Bootstrap
 
 pageReviews ∷ Html → Html → Html
 pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
-    H.div ! class_ "row" $ do
+    row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
         H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ reviews
 

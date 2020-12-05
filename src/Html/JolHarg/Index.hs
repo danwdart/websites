@@ -16,11 +16,12 @@ import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
 import Html.Common.Contact
 import Html.Common.Error.NotFound
+import Html.Common.Bootstrap
 
 pagePortfolio ∷ Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
-    (H.div ! class_ "row") . (H.div ! class_ "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
-    H.div ! class_ "row" $ do
+    row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
+    row $ do
         (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"
             h4 ! class_ "card-title" $ "You"
@@ -49,7 +50,7 @@ pageFs ∷ Reader [Repo] Html
 pageFs = do
     repos <- ask
     return . makePage "fs" "Free Software" customLayout notDefaultPage $ do
-        (H.div ! class_ "row") . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
+        row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
         mapM_ renderCard repos
 
 pageContact ∷ Html

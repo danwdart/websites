@@ -12,10 +12,11 @@ import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
 import Html.Common.Error.NotFound
+import Html.Common.Bootstrap
 
 pageBlog ∷ Html → Html → Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do
-    H.div ! class_ "row" $ do
+    row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ blogPostLinks
         H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ blogPosts
 
