@@ -59,6 +59,7 @@ executable build-websites
     , Html.Common.Audio
     , Html.Common.CSS
     , Html.Common.Card
+    , Html.Common.Contact
     , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Header
@@ -195,6 +196,7 @@ test-suite e2e
     , Html.Common.Audio
     , Html.Common.CSS
     , Html.Common.Card
+    , Html.Common.Contact
     , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Header
