@@ -57,6 +57,7 @@ executable build-websites
     , Data.M0ORI
     , Html.Blog.Index
     , Html.Common.Audio
+    , Html.Common.Bootstrap
     , Html.Common.CSS
     , Html.Common.Card
     , Html.Common.Contact
@@ -195,6 +196,7 @@ test-suite e2e
     , E2E.Site.CommonSpec
     , Html.Blog.Index
     , Html.Common.Audio
+    , Html.Common.Bootstrap
     , Html.Common.CSS
     , Html.Common.Card
     , Html.Common.Contact
