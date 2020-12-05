@@ -14,6 +14,7 @@ import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
+import Html.Common.Contact
 
 pagePortfolio ∷ Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
@@ -53,21 +54,7 @@ pageFs = do
 pageContact ∷ Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact JolHarg or make an enquiry, please use this form:"
-    H.form ! action "https://formspree.io/website@jolharg.com" ! method "post" $ do
-        H.div ! class_ "form-group" $ do
-            H.label ! for "name" $ "Your name"
-            input ! class_ "form-control" ! A.id "name" ! type_ "text" ! placeholder "John Smith" ! A.name "name" ! autocomplete "name"
-        H.div ! class_ "form-group" $ do
-            H.label ! for "email" $ "Your email"
-            input ! class_ "form-control" ! A.id "email" ! type_ "email" ! placeholder "john@smith.com" ! A.name "email" ! autocomplete "email"
-            small ! class_ "form-text text-muted" ! A.id "emailHelp" $ "We'll never share your email with anyone else."
-        H.div ! class_ "form-group" $ do
-            H.label ! for "subject" $ "Summary"
-            input ! class_ "form-control" ! A.id "subject" ! type_ "text" ! placeholder "Website for me..." ! A.name "_subject"
-        H.div ! class_ "form-group" $ do
-            H.label ! for "message" $ "Your message"
-            textarea ! class_ "form-control" ! A.id "message" ! placeholder "I am interested in a website..." ! rows "10" ! A.name "message" $ mempty
-        H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send"
+    contactForm "website@jolharg.com" emailHelpPlural "Website for me..." "I am interested in a website..."
 
 -- Todo Technologies, Pricing, Blog, About
 htmlHeader ∷ Reader [Repo] Html

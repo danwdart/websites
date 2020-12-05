@@ -12,6 +12,7 @@ import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Page
 import Html.Common.Header
+import Html.Common.Contact
 
 pageHamRadio ∷ Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
@@ -45,24 +46,9 @@ pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
     p $ extLink "https://www.qrzcq.com/call/M0ORI" "My QRZCQ page"
 
 pageContact ∷ Html
-pageContact = makePage "contact" "Contact" customLayout notDefaultPage $ do
-    (H.div ! class_ "row") . (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3") $ (do
-        p "If you would like to contact Dan, please use this form:"
-        H.form ! action "https://formspree.io/website@m0ori.com" ! method "post" $ do
-            H.div ! class_ "form-group" $ do
-                H.label ! for "name" $ "Your name"
-                input ! class_ "form-control" ! A.id "name" ! type_ "text" ! placeholder "John Smith" ! name "name" ! autocomplete "name"
-            H.div ! class_ "form-group" $ do
-                H.label ! for "email" $ "Your email"
-                input ! class_ "form-control" ! A.id "email" ! type_ "email" ! placeholder "john@smith.com" ! name "email" ! autocomplete "email"
-                small ! class_ "form-text text-muted" ! A.id "emailHelp" $ "I'll never share your email with anyone else."
-            H.div ! class_ "form-group" $ do
-                H.label ! for "subject" $ "Summary"
-                input ! class_ "form-control" ! A.id "subject" ! type_ "text" ! placeholder "Greetings..." ! name "_subject"
-            H.div ! class_ "form-group" $ do
-                H.label ! for "message" $ "Your message"
-                textarea ! class_ "form-control" ! A.id "message" ! placeholder "Hello!..." ! rows "10" ! name "message" $ mempty
-            H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send")
+pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
+    p "If you would like to contact Dan, please use this form:"
+    contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
 
 htmlHeader ∷ Html
 htmlHeader = makeHeader "" "M0ORI: Dan Dart" mempty $ do

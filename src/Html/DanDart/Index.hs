@@ -14,6 +14,7 @@ import           Html.Common.Social
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 import Html.Common.Header
+import Html.Common.Contact
 
 pageIntro ∷ Html
 pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
@@ -219,21 +220,7 @@ pageReviews = extNav "https://madhackerreviews.com" "Reviews"
 pageContact ∷ Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact Dan, please use this form:"
-    H.form ! action "https://formspree.io/website@dandart.co.uk" ! method "post" $ do
-        H.div ! class_ "form-group" $ do
-            H.label ! for "name" $ "Your name"
-            input ! class_ "form-control" ! A.id "name" ! type_ "text" ! placeholder "John Smith" ! name "name" ! autocomplete "name"
-        H.div ! class_ "form-group" $ do
-            H.label ! for "email" $ "Your email"
-            input ! class_ "form-control" ! A.id "email" ! type_ "email" ! placeholder "john@smith.com" ! name "email" ! autocomplete "email"
-            small ! class_ "form-text text-muted" ! A.id "emailHelp" $ "I'll never share your email with anyone else."
-        H.div ! class_ "form-group" $ do
-            H.label ! for "subject" $ "Summary"
-            input ! class_ "form-control" ! A.id "subject" ! type_ "text" ! placeholder "Greetings..." ! name "_subject"
-        H.div ! class_ "form-group" $ do
-            H.label ! for "message" $ "Your message"
-            textarea ! class_ "form-control" ! A.id "message" ! placeholder "Hello!..." ! rows "10" ! name "message" $ mempty
-        H.div ! class_ "form-group" $ input ! class_ "btn btn-primary" ! type_ "submit" ! value "Send"
+    contactForm "website@dandart.co.uk" emailHelpSingular "Greetings..." "Hello!..."
 
 socialIcons ∷ Html
 socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right social-inside") $ (do
