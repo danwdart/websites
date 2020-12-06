@@ -239,7 +239,7 @@ plugins:
   # - data-api-local-serverless
   - serverless-haskell
   - serverless-offline
-  - serverless-domain-manager
+  # - serverless-domain-manager
 
 custom:
   haskell:
@@ -247,16 +247,18 @@ custom:
   serverless-offline:
     useDocker: true
     printOutput: true
-  customDomain:
-    domainName: api.jolharg.com
-    stage: ${self:provider.stage}
-    basePath: /
-    certificateName: 'api.jolharg.com'
-    createRoute53Record: true
-    endpointType: 'regional'
-    securityPolicy: tls_1_2
-    apiType: http
-    autoDomain: true
+
+  #customDomain:
+  #  enable: true
+  #  domainName: api.jolharg.com
+  #  stage: ${self:provider.stage}
+  #  basePath: /
+  #  certificateName: 'api.jolharg.com'
+  #  createRoute53Record: true
+  #  endpointType: 'regional'
+  #  securityPolicy: tls_1_2
+  #  apiType: http
+  #  autoDomain: false
   #data-api-local:
   #  server:
   #    port: 8081

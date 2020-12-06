@@ -23,5 +23,5 @@ handler _ = do
         connectDatabase = "mysql"
     }
     putStrLn "Connected. Querying..."
-    mapM_ (query conn) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
+    mapM_ (\q -> putStrLn ("Querying " <> B.unpack q) >> query conn q) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
     putStrLn "Done!"

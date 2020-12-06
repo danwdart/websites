@@ -40,6 +40,7 @@ formatToMySQL = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S"
 
 unauthorisedResponse ∷ APIGatewayProxyResponse B.ByteString
 unauthorisedResponse = response 401
+    & agprsHeaders .~ [("WWW-Authenticate", "Basic realm=\"JolHarg Visit Viewer\", charset=\"UTF-8\"")]
     & responseBody ?~ BL.toStrict (encode (object [
         "message" .= ("Oops, you need to authenticate." :: Text)
         ]))

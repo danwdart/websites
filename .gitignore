@@ -11,6 +11,7 @@ bootstrap
 submit-comment
 visit
 visit-migrate
+visit-viewer
 libmysqlclient.so.20
 .env
 report
