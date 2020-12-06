@@ -120,6 +120,26 @@ executable visit
     , text
     , time
 
+executable visit-viewer
+  hs-source-dirs:      src
+  main-is:             visit-viewer.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , github-rest
+    , http-types
+    , mysql
+    , serverless-haskell
+    , stringsearch
+    , text
+    , time
+    , transformers
+
 executable visit-migrate
   hs-source-dirs:      src
   main-is:             visit-migrate.hs

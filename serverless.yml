@@ -90,6 +90,38 @@ functions:
           cors: true
           private: false
 
+  visit-viewer:
+    handler: websites.visit-viewer
+    name: ${self:provider.stage}-visit-viewer
+    timeout: 30
+    environment:
+      DB_HOST: ${env:DB_HOST}
+      DB_USERNAME: ${env:DB_USERNAME}
+      DB_PASSWORD: ${env:DB_PASSWORD}
+      BASIC_USERNAME: ${env:BASIC_USERNAME}
+      BASIC_PASSWORD: ${env:BASIC_PASSWORD}
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - visit-viewer
+        - lib/**
+      individually: true
+    vpc:
+      securityGroupIds:
+        - Ref: visitsSecurityGroup
+      subnetIds:
+        - Ref: visitsSubnetA
+        - Ref: visitsSubnetB
+        - Ref: visitsSubnetC
+    events:
+      - http:
+          path: /visit/view
+          method: get
+          cors: true
+          private: false
+
 resources:
   Parameters:
     DBUsername:
@@ -207,6 +239,7 @@ plugins:
   # - data-api-local-serverless
   - serverless-haskell
   - serverless-offline
+  - serverless-domain-manager
 
 custom:
   haskell:
@@ -214,6 +247,16 @@ custom:
   serverless-offline:
     useDocker: true
     printOutput: true
+  customDomain:
+    domainName: api.jolharg.com
+    stage: ${self:provider.stage}
+    basePath: /
+    certificateName: 'api.jolharg.com'
+    createRoute53Record: true
+    endpointType: 'regional'
+    securityPolicy: tls_1_2
+    apiType: http
+    autoDomain: true
   #data-api-local:
   #  server:
   #    port: 8081

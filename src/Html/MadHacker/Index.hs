@@ -33,7 +33,6 @@ htmlHeader reviewLinks reviews = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-fl
 extraHead :: Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "The Mad Hacker: Reviews" ! href "/atom.xml"
     
-
 page ∷ Html → Html → Html
 page reviewLinks reviews = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords extraHead
