@@ -11,6 +11,9 @@ bootstrap
 submit-comment
 visit
 visit-migrate
+visit-viewer
+basic_auth.py
+s_BasicAuthenticator.py
 libmysqlclient.so.20
 .env
 report

@@ -13,6 +13,7 @@ import qualified Data.Text                   as T
 import           Text.Blaze.Html5
 import qualified Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
+import Html.Common.Bootstrap
 
 stars ∷ Text → Html
 stars score = do
@@ -25,7 +26,7 @@ renderStars (BlogMetadata _ _ _ _ _ (Just (Array scores))) = do
     h3 "Overall Scores"
     br
     mapM_ (\(Object [(name', String score)]) -> do
-        H.div ! class_ "row" $ do
+        row $ do
             (H.div ! class_ "col") . h4 $ (fromString . T.unpack $ name')
             H.div ! class_ "col" $ stars score
         ) scores

@@ -11,6 +11,7 @@ import           Data.Text              as T
 import           GHC.Generics
 import           Network.HTTP.Req
 import           System.Environment
+import qualified Data.ByteString.Char8 as B
 
 data Language = LangHS
     | LangJS
@@ -125,7 +126,7 @@ getRepos user = do
         "sort" =: ("pushed" :: Text) <> -- can't sort by stars
         "type" =: ("owner" :: Text) <>
         "direction" =: ("desc" :: Text) <>
-        "access_token" =: githubAccessToken <>
-        header "User-Agent" "Dan's Haskell Bot v1.0"
+        header "User-Agent" "Dan's Haskell Bot v1.0" <>
+        header "Authorization" (B.pack $ "Bearer " <> githubAccessToken)
         )
     return $ responseBody res

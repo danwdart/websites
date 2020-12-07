@@ -15,6 +15,14 @@ provider:
     restApi: false
   apiGateway:
     shouldStartNameWithService: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - apigateway:GET
+      Resource: "*"
+  apiKeys:
+    - viewer
+
 
 functions:
   submit-comment:
@@ -49,7 +57,7 @@ functions:
       include:
         - bootstrap
         - visit-migrate
-        - init.sql
+        - sql/**
         - lib/**
       individually: true
     vpc:
@@ -76,12 +84,50 @@ functions:
         - visit
         - lib/**
       individually: true
+    vpc:
+      securityGroupIds:
+        - Ref: visitsSecurityGroup
+      subnetIds:
+        - Ref: visitsSubnetA
+        - Ref: visitsSubnetB
+        - Ref: visitsSubnetC
     events:
       - http:
           path: /visit.gif
           method: get
           cors: true
           private: false
+
+  visit-viewer:
+    handler: websites.visit-viewer
+    name: ${self:provider.stage}-visit-viewer
+    timeout: 30
+    environment:
+      DB_HOST: ${env:DB_HOST}
+      DB_USERNAME: ${env:DB_USERNAME}
+      DB_PASSWORD: ${env:DB_PASSWORD}
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - visit-viewer
+        - lib/**
+        - basic_auth.py
+      individually: true
+    vpc:
+      securityGroupIds:
+        - Ref: visitsSecurityGroup
+      subnetIds:
+        - Ref: visitsSubnetA
+        - Ref: visitsSubnetB
+        - Ref: visitsSubnetC
+    events:
+      - http:
+          path: /visit/view
+          method: get
+          cors: true
+          private: true
 
 resources:
   Parameters:
@@ -104,6 +150,15 @@ resources:
       AllowedPattern: '[a-zA-Z0-9]*'
       ConstraintDescription: must contain only alphanumeric characters.
   Resources:
+    GatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.WWW-Authenticate: "'Basic'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'
     visitsDB:
       Type: AWS::RDS::DBCluster
       Properties:
@@ -200,6 +255,9 @@ plugins:
   # - data-api-local-serverless
   - serverless-haskell
   - serverless-offline
+  # - serverless-domain-manager
+  - serverless-add-api-key
+  - serverless-basic-authentication
 
 custom:
   haskell:
@@ -207,6 +265,22 @@ custom:
   serverless-offline:
     useDocker: true
     printOutput: true
+  custom:
+    apiKeys:
+      dev:
+        - name: viewer
+          value: ${env:API_KEY}
+  #customDomain:
+  #  enable: true
+  #  domainName: api.jolharg.com
+  #  stage: ${self:provider.stage}
+  #  basePath: /
+  #  certificateName: 'api.jolharg.com'
+  #  createRoute53Record: true
+  #  endpointType: 'regional'
+  #  securityPolicy: tls_1_2
+  #  apiType: http
+  #  autoDomain: false
   #data-api-local:
   #  server:
   #    port: 8081

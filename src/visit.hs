@@ -32,10 +32,10 @@ formatToMySQL = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S"
 
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse ByteString)
 handler request = do
-    username <- getEnv "DB_USERNAME"
-    password <- getEnv "DB_PASSWORD"
-    host <- getEnv "DB_HOST"
+    putStrLn "Getting envs..."
+    [username, password, host] <- sequence $ getEnv <$> ["DB_USERNAME", "DB_PASSWORD", "DB_HOST"]
     time <- formatToMySQL <$> getCurrentTime
+    putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
         connectHost = host,
         connectUser = username,
@@ -43,11 +43,14 @@ handler request = do
         connectDatabase = "visits"
     }
     let ip = maybe "" show $ request ^. agprqRequestContext . prcIdentity . riSourceIp
+    putStrLn "Escaping..."
     sua <- escape conn . fromMaybe "" $ request ^. agprqHeaders & lookup "User-Agent"
     surl <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "url"
     let ua = B.unpack sua
     let url = B.unpack surl
+    putStrLn "Querying..."
     query conn . B.pack $ printf "INSERT INTO `visits`.`visits` (url, ua, ip, time) values (\"%s\", \"%s\", \"%s\", \"%s\")" url ua ip time
+    putStrLn "Responding..."
     pure $ responseOK
       & agprsHeaders .~ [("Content-Type", "text/plain")]
       & responseBody ?~ "Hi!"

@@ -57,14 +57,20 @@ executable build-websites
     , Data.M0ORI
     , Html.Blog.Index
     , Html.Common.Audio
+    , Html.Common.Bootstrap
     , Html.Common.CSS
     , Html.Common.Card
+    , Html.Common.Contact
     , Html.Common.GitHub
     , Html.Common.Head
+    , Html.Common.Header
     , Html.Common.Link
+    , Html.Common.Page
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.Common.Visit
+    , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
     , Html.MadHacker.Index
@@ -114,6 +120,26 @@ executable visit
     , text
     , time
 
+executable visit-viewer
+  hs-source-dirs:      src
+  main-is:             visit-viewer.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , github-rest
+    , http-types
+    , mysql
+    , serverless-haskell
+    , stringsearch
+    , text
+    , time
+    , transformers
+
 executable visit-migrate
   hs-source-dirs:      src
   main-is:             visit-migrate.hs
@@ -148,6 +174,7 @@ test-suite e2e
     , Cabal
     , cheapskate
     , directory
+    , dotenv
     , feed
     , filepath
     , frontmatter
@@ -160,6 +187,7 @@ test-suite e2e
     , http-types
     , mmark
     , mtl
+    , pandoc
     , QuickCheck
     , random
     , req
@@ -185,23 +213,33 @@ test-suite e2e
     , Data.DanDart
     , Data.JolHarg
     , Data.M0ORI
+    , Data.MadHacker
     , E2E.Site.CommonSpec
     , Html.Blog.Index
     , Html.Common.Audio
+    , Html.Common.Bootstrap
     , Html.Common.CSS
     , Html.Common.Card
+    , Html.Common.Contact
     , Html.Common.GitHub
     , Html.Common.Head
+    , Html.Common.Header
     , Html.Common.Link
+    , Html.Common.Page
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
+    , Html.Common.Visit
+    , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
+    , Html.MadHacker.Index
+    , Html.MadHacker.Suffix
     , Html.M0ORI.Index
     , Site.Blog
     , Site.DanDart
     , Site.JolHarg
+    , Site.MadHacker
     , Site.M0ORI
     , Util.List
     , Util.Time

@@ -13,10 +13,8 @@ main = lambdaMain handler
 
 handler ∷ Aeson.Value → IO ()
 handler _ = do
-    username <- getEnv "DB_USERNAME"
-    password <- getEnv "DB_PASSWORD"
-    host <- getEnv "DB_HOST"
-    sqlFile <- B.readFile "init.sql"
+    [username, password, host] <- sequence $ getEnv <$> ["DB_USERNAME", "DB_PASSWORD", "DB_HOST"]
+    sqlFile <- B.readFile "sql/init.sql"
     putStrLn "Connecting..."
     conn <- connect defaultConnectInfo {
         connectHost = host,
@@ -25,5 +23,5 @@ handler _ = do
         connectDatabase = "mysql"
     }
     putStrLn "Connected. Querying..."
-    mapM_ (query conn) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
+    mapM_ (\q -> putStrLn ("Querying " <> B.unpack q) >> query conn q) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
     putStrLn "Done!"

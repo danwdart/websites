@@ -12,7 +12,7 @@ import           System.Environment             (lookupEnv)
 import           WaiAppStatic.Types
 
 build ∷ IO ()
-build = make "dandart" page
+build = make "dandart" page page404
 
 serve ∷ IO ()
 serve = do
