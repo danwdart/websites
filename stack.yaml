@@ -6,4 +6,4 @@ extra-deps:
 - serverless-haskell-0.12.4
 - git: https://github.com/danwdart/fsutils.git
   commit: a4167c212939f7b2b123072542ad305777943903
-resolver: lts-16.24
+resolver: lts-16.25
