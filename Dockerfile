@@ -1,6 +1,5 @@
-FROM fpco/stack-build:latest
-ENV STACK_ROOT=/home/stackage/.stack
+FROM nixos/nix
 WORKDIR /app
 COPY . .
-RUN stack build
-CMD ["stack", "run"]
+RUN nix-build
+CMD ["result/bin/build-websites"]
