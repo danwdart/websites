@@ -1,3 +1,5 @@
+with import <nixpkgs> {};
+
 { mkDerivation, aeson, amazonka-core, async, base, base64
 , blaze-html, blaze-markup, bytestring, Cabal, cheapskate
 , directory, dotenv, feed, filepath, frontmatter, fsutils
@@ -30,6 +32,12 @@ mkDerivation {
     transformers transformers-base vector wai wai-app-static wai-extra
     warp webdriver xml-conduit
   ];
+  buildDepends = [
+    bash git wget nodejs docker stack
+  ];
+  shellHook = ''
+    npm install
+  '';
   homepage = "https://github.com/danwdart/projects#readme";
   license = stdenv.lib.licenses.agpl3;
 }
