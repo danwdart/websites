@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS `visits`.`adminvisits` (
 CREATE DATABASE IF NOT EXISTS `newsletters`;
 CREATE TABLE IF NOT EXISTS `newsletters`.`emails` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `email` VARCHAR(255),
-    `active` BOOLEAN
+    `email` VARCHAR(255) NOT NULL,
+    `active` BOOLEAN DEFAULT TRUE,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP
 );
