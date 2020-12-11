@@ -24,7 +24,7 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "I am a software engineer, mathematics lover, radio ham and musician."
     p $ do
         "I work remotely to care for my future wife, "
-        extLink "http://tsumikimikan.com" "Tsumiki"
+        extLink "https://yanderedarling.com/" "Zero Two"
         "."
     p "I also enjoy discordant and nonsensical commentary."
     p "I can speak about maths, physics, computer science and linguistics at length."
