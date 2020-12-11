@@ -85,6 +85,25 @@ executable build-websites
     , Util.Time
     , Util.Triple
 
+executable send-newsletter
+  hs-source-dirs:      src
+  main-is:             send-newsletter.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , github-rest
+    , http-types
+    , mysql
+    , serverless-haskell
+    , text
+    , time
+    , transformers
+
 executable submit-comment
   hs-source-dirs:      src
   main-is:             submit-comment.hs
@@ -102,9 +121,66 @@ executable submit-comment
     , text
     , time
 
-executable visit
+executable subscribe-email-to-newsletter
   hs-source-dirs:      src
-  main-is:             visit.hs
+  main-is:             subscribe-email-to-newsletter.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , github-rest
+    , http-types
+    , mysql
+    , serverless-haskell
+    , text
+    , time
+    , transformers
+
+executable track-email-view
+  hs-source-dirs:      src
+  main-is:             track-email-view.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , github-rest
+    , http-types
+    , mysql
+    , serverless-haskell
+    , text
+    , time
+    , transformers
+
+executable unsubscribe-email-from-newsletter
+  hs-source-dirs:      src
+  main-is:             unsubscribe-email-from-newsletter.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , github-rest
+    , http-types
+    , mysql
+    , serverless-haskell
+    , text
+    , time
+    , transformers
+
+executable visit-migrate
+  hs-source-dirs:      src
+  main-is:             visit-migrate.hs
   default-language:    Haskell2010
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:       
@@ -135,14 +211,13 @@ executable visit-viewer
     , http-types
     , mysql
     , serverless-haskell
-    , stringsearch
     , text
     , time
     , transformers
 
-executable visit-migrate
+executable visit
   hs-source-dirs:      src
-  main-is:             visit-migrate.hs
+  main-is:             visit.hs
   default-language:    Haskell2010
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:       

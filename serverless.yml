@@ -23,8 +23,18 @@ provider:
   apiKeys:
     - viewer
 
-
 functions:
+  send-newsletter:
+    handler: websites.send-newsletter
+    name: ${self:provider.stage}-send-newsletter
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - send-newsletter
+      individually: true
+
   submit-comment:
     handler: websites.submit-comment
     name: ${self:provider.stage}-submit-comment
@@ -43,7 +53,58 @@ functions:
           method: post
           cors: true
           private: false
-  
+
+  subscribe-email-to-newsletter:
+    handler: websites.subscribe-email-to-newsletter
+    name: ${self:provider.stage}-subscribe-email-to-newsletter
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - subscribe-email-to-newsletter
+      individually: true
+    events:
+      - http:
+          path: /newsletter/subscribe
+          method: post
+          cors: true
+          private: false
+
+  track-email-view:
+    handler: websites.track-email-view
+    name: ${self:provider.stage}-track-email-view
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - track-email-view
+      individually: true
+    events:
+      - http:
+          path: /newsletter/track
+          method: get
+          cors: true
+          private: false
+
+  unsubscribe-email-from-newsletter:
+    handler: websites.unsubscribe-email-from-newsletter
+    name: ${self:provider.stage}-unsubscribe-email-from-newsletter
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - unsubscribe-email-from-newsletter
+      individually: true
+    events:
+      - http:
+          path: /newsletter/unsubscribe
+          method: post
+          cors: true
+          private: false
+
   visit-migrate:
     handler: websites.visit-migrate
     name: ${self:provider.stage}-visit-migrate
@@ -67,36 +128,6 @@ functions:
         - Ref: visitsSubnetA
         - Ref: visitsSubnetB
         - Ref: visitsSubnetC
-  
-  visit:
-    handler: websites.visit
-    name: ${self:provider.stage}-visit
-    timeout: 30
-    environment:
-      DB_HOST: ${env:DB_HOST}
-      DB_USERNAME: ${env:DB_USERNAME}
-      DB_PASSWORD: ${env:DB_PASSWORD}
-    package:
-      exclude:
-        - ./**
-      include:
-        - bootstrap
-        - visit
-        - lib/**
-      individually: true
-    vpc:
-      securityGroupIds:
-        - Ref: visitsSecurityGroup
-      subnetIds:
-        - Ref: visitsSubnetA
-        - Ref: visitsSubnetB
-        - Ref: visitsSubnetC
-    events:
-      - http:
-          path: /visit.gif
-          method: get
-          cors: true
-          private: false
 
   visit-viewer:
     handler: websites.visit-viewer
@@ -128,6 +159,36 @@ functions:
           method: get
           cors: true
           private: true
+
+  visit:
+    handler: websites.visit
+    name: ${self:provider.stage}-visit
+    timeout: 30
+    environment:
+      DB_HOST: ${env:DB_HOST}
+      DB_USERNAME: ${env:DB_USERNAME}
+      DB_PASSWORD: ${env:DB_PASSWORD}
+    package:
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - visit
+        - lib/**
+      individually: true
+    vpc:
+      securityGroupIds:
+        - Ref: visitsSecurityGroup
+      subnetIds:
+        - Ref: visitsSubnetA
+        - Ref: visitsSubnetB
+        - Ref: visitsSubnetC
+    events:
+      - http:
+          path: /visit.gif
+          method: get
+          cors: true
+          private: false
 
 resources:
   Parameters:

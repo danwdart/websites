@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 siteupdate() {
     git add .
     git commit -m 'Site update'

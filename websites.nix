@@ -5,7 +5,7 @@ with import <nixpkgs> {};
 , directory, dotenv, feed, filepath, frontmatter, fsutils
 , github-rest, hspec, hspec-core, hspec-expectations, http-client
 , http-client-tls, http-types, mmark, mtl, mysql, pandoc
-, QuickCheck, random, req, serverless-haskell, stdenv, stringsearch
+, QuickCheck, random, req, serverless-haskell, stdenv
 , text, time, transformers, transformers-base, unordered-containers
 , vector, wai, wai-app-static, wai-extra, warp, webdriver
 , xml-conduit
@@ -17,11 +17,14 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   doCheck = false;
+  buildDepends = [
+    bash git wget nodejs docker stack awscli2 ghcid hlint stylish-haskell ghc
+  ];
   executableHaskellDepends = [
     aeson amazonka-core base base64 blaze-html blaze-markup bytestring
     Cabal cheapskate directory dotenv feed filepath frontmatter fsutils
     github-rest http-types mmark mtl mysql pandoc req
-    serverless-haskell stringsearch text time transformers
+    serverless-haskell text time transformers
     unordered-containers wai wai-app-static wai-extra warp xml-conduit
   ];
   testHaskellDepends = [
@@ -32,10 +35,8 @@ mkDerivation {
     transformers transformers-base vector wai wai-app-static wai-extra
     warp webdriver xml-conduit
   ];
-  buildDepends = [
-    bash git wget nodejs docker stack awscli2
-  ];
   shellHook = ''
+    cabal update
     npm install
   '';
   homepage = "https://github.com/danwdart/projects#readme";
