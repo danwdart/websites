@@ -14,3 +14,9 @@ CREATE TABLE IF NOT EXISTS `visits`.`adminvisits` (
     `ip` TEXT NOT NULL,
     `time` TIMESTAMP NOT NULL
 );
+CREATE DATABASE IF NOT EXISTS `newsletters`;
+CREATE TABLE IF NOT EXISTS `newsletters`.`emails` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `email` VARCHAR(255),
+    `active` BOOLEAN
+);
