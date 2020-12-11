@@ -1,16 +1,27 @@
 {-# LANGUAGE BlockArguments    #-}
-{-# LANGUAGE DeriveAnyClass    #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 module Main where
+    
+import           AWSLambda             (APIGatewayProxyRequest,
+                                        APIGatewayProxyResponse, agprqHeaders,
+                                        agprqQueryStringParameters,
+                                        agprqRequestContext, agprsHeaders,
+                                        apiGatewayMain, prcIdentity,
+                                        responseBody, responseOK, riSourceIp)
+import           Data.ByteString.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as B
+import           Data.Maybe            (fromMaybe)
+import           Data.Text             as T (Text)
+import           Data.Time             (UTCTime, defaultTimeLocale, formatTime,
+                                        getCurrentTime)
+import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
+                                        connect, defaultConnectInfo, escape,
+                                        query)
+import           Network.AWS.Lens      ((&), (.~), (?~), (^.))
+import           System.Environment    (getEnv)
+import           Text.Printf           (printf)
 
-import           AWSLambda.Events.APIGateway
-import           Data.Text                   as T
-import           Data.Text.Encoding
-import           Network.AWS.Data.Query
-import           Network.AWS.Lens
 
 main ∷ IO ()
 main = apiGatewayMain handler
@@ -21,7 +32,7 @@ handler request = do
     let lookupQS = decodeUtf8 . urlDecode True . lookupQueryString qs
     let memail = lookupQS "email"
     
-    if (isJust memail) then do
+    if isJust memail then do
         [username, password, host] <- sequence $ getEnv <$> ["DB_USERNAME", "DB_PASSWORD", "DB_HOST"]
         conn <- connect defaultConnectInfo {
             connectHost = host,
