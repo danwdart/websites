@@ -33,7 +33,7 @@ mkDerivation {
     warp webdriver xml-conduit
   ];
   buildDepends = [
-    bash git wget nodejs docker stack
+    bash git wget nodejs docker stack awscli2
   ];
   shellHook = ''
     npm install
