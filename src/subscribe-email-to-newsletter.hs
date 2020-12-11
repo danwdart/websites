@@ -4,24 +4,28 @@
 
 module Main where
 
-import           AWSLambda             (APIGatewayProxyRequest,
-                                        APIGatewayProxyResponse, agprqHeaders,
-                                        agprqQueryStringParameters,
-                                        agprqRequestContext, agprsHeaders,
-                                        apiGatewayMain, prcIdentity,
-                                        responseBody, responseOK, riSourceIp)
+import           AWSLambda
+import           AWSLambda.Events.APIGateway
+import           Control.Monad
+import           Data.Aeson                  hiding (object)
 import           Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as B
-import           Data.Maybe            (fromMaybe)
-import           Data.Text             as T (Text)
-import           Data.Time             (UTCTime, defaultTimeLocale, formatTime,
-                                        getCurrentTime)
-import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
-                                        connect, defaultConnectInfo, escape,
-                                        query)
-import           Network.AWS.Lens      ((&), (.~), (?~), (^.))
-import           System.Environment    (getEnv)
-import           Text.Printf           (printf)
+import           Data.ByteString.Lazy.Base64
+import qualified Data.ByteString.Lazy.Char8  as BSL
+import           Data.Char
+import           Data.Maybe
+import           Data.Text             as T
+import           Data.Text.Encoding
+import           Data.Time
+import           Data.Time.Format.ISO8601
+import           Database.MySQL.Base
+import           GHC.Generics
+import           Network.AWS.Data.Query
+import           Network.AWS.Lens
+import           Network.HTTP.Types
+import           System.Environment
+import           Text.Printf
+import           Util.QueryString
 
 main ∷ IO ()
 main = apiGatewayMain handler

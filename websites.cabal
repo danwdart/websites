@@ -120,7 +120,9 @@ executable submit-comment
     , serverless-haskell
     , text
     , time
-
+  other-modules:
+      Util.QueryString
+      
 executable subscribe-email-to-newsletter
   hs-source-dirs:      src
   main-is:             subscribe-email-to-newsletter.hs
@@ -139,6 +141,8 @@ executable subscribe-email-to-newsletter
     , text
     , time
     , transformers
+  other-modules:
+      Util.QueryString
 
 executable track-email-view
   hs-source-dirs:      src
@@ -177,6 +181,8 @@ executable unsubscribe-email-from-newsletter
     , text
     , time
     , transformers
+  other-modules:
+      Util.QueryString
 
 executable visit-migrate
   hs-source-dirs:      src

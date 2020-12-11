@@ -26,6 +26,7 @@ import           Network.AWS.Lens
 import           Network.HTTP.Types
 import           System.Environment
 import           Text.Printf
+import           Util.QueryString
 
 newtype RefObject = RefObject {
     sha :: Text
@@ -63,11 +64,6 @@ branchName utcTime = T.filter isDigit $ pack (iso8601Show utcTime)
 
 main ∷ IO ()
 main = apiGatewayMain handler
-
-lookupQueryString ∷ QueryString → ByteString → ByteString
-lookupQueryString qs key =
-  (\[QPair _ (QValue (Just b))] -> b) . Prelude.filter (\(QPair a _) -> a == key) $
-  (\(QList x) -> x) qs
 
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse Text)
 handler request = do
