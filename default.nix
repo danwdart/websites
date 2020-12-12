@@ -1,16 +1,11 @@
 { nixpkgs ? import <nixpkgs> {},
   compiler ? "ghc884",
+  ghcjs ? "ghcjs884",
   node ? import ./nix/node/default.nix {} }:
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
-      mkDerivation = args: super.mkDerivation (args // {
-        doCheck = false;
-        doHaddock = false;
-        enableLibraryProfiling = false;
-        enableExecutableProfiling = false;
-      });
       websites = self.callCabal2nix "websites" (gitignore ./.) {};
       fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";

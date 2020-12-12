@@ -29,7 +29,7 @@ import qualified Site.M0ORI                       as M
 import qualified Site.MadHacker                   as MH
 import           System.Environment               (setEnv)
 import           System.Random                    (Random (randomRIO))
-import           Test.Hspec                       (HasCallStack, Spec, describe,
+import           Test.Hspec                       (HasCallStack, Spec, xdescribe, describe,
                                                    it, parallel, runIO,
                                                    shouldBe, shouldSatisfy)
 import           Test.Hspec.Expectations          (shouldNotBe,
@@ -115,7 +115,7 @@ ioDef d io = either (\(SomeException _) -> d) id <$> try io
 
 spec ∷ Spec
 spec = parallel $ mapM_ (\(siteName, serve) ->
-    parallel . describe siteName $ do
+    parallel . xdescribe siteName $ do
         myPort <- runIO (randomRIO (49152, 65535) :: IO Int)
         thread <- runIO $ do
             setEnv "PORT" (show myPort)
@@ -124,7 +124,7 @@ spec = parallel $ mapM_ (\(siteName, serve) ->
             pure thread
 
         mapM_ (\(configName, config) -> do
-            parallel . describe configName $ do
+            parallel . xdescribe configName $ do
                 session <- runIO . runSession config $ do
                     openPage $ "http://" <> siteName <> ".localhost:" <> show myPort
                     getSession
