@@ -1,7 +1,17 @@
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "ghc884" }:
+{ nixpkgs ? import <nixpkgs> {},
+  compiler ? "ghc884",
+  node ? import ./nix/node/default.nix {} }:
 let
+  gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
+      mkDerivation = args: super.mkDerivation (args // {
+        doCheck = false;
+        doHaddock = false;
+        enableLibraryProfiling = false;
+        enableExecutableProfiling = false;
+      });
+      websites = self.callCabal2nix "websites" (gitignore ./.) {};
       fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
         rev = "bd85f977a7499a936181a37f4c602bd8b4480d68";
@@ -12,5 +22,27 @@ let
       }) {};
     };
   };
+  shell = myHaskellPackages.shellFor {
+    packages = p: [
+      p.websites
+    ];
+    buildInputs = [
+      nixpkgs.haskellPackages.cabal-install
+      nixpkgs.haskellPackages.ghcid
+      nixpkgs.haskellPackages.stylish-haskell
+      nixpkgs.haskellPackages.hlint
+    ];
+    withHoogle = true;
+    inputsFrom = [
+      node.shell
+    ];
+  };
+  exe = nixpkgs.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
 in
-myHaskellPackages.callPackage ./websites.nix {}
+{
+  inherit shell;
+  inherit exe;
+  inherit myHaskellPackages;
+  inherit node;
+  websites = myHaskellPackages.websites;
+}
