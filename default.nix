@@ -1,7 +1,7 @@
 { nixpkgs ? import <nixpkgs> {},
   compiler ? "ghc884",
   ghcjs ? "ghcjs884",
-  node ? import ./nix/node/default.nix {} }:
+  node ? import ./node-default.nix {} }:
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
@@ -22,6 +22,8 @@ let
       p.websites
     ];
     buildInputs = [
+      nixpkgs.pkgs.wget
+      nixpkgs.pkgs.nodejs
       nixpkgs.haskellPackages.cabal-install
       nixpkgs.haskellPackages.ghcid
       nixpkgs.haskellPackages.stylish-haskell
