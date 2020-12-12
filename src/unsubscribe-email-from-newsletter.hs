@@ -33,9 +33,9 @@ handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse Text)
 handler request = do
     let qs = parseQueryString . encodeUtf8 $ fromMaybe "" (request ^. requestBody)
     let lookupQS = decodeUtf8 . urlDecode True . lookupQueryString qs
-    let memail = lookupQS "email"
+    let temail = lookupQS "email"
     
-    if isJust memail then do
+    if not . T.null $ temail then do
         [username, password, host] <- sequence $ getEnv <$> ["DB_USERNAME", "DB_PASSWORD", "DB_HOST"]
         conn <- connect defaultConnectInfo {
             connectHost = host,
@@ -44,9 +44,9 @@ handler request = do
             connectDatabase = "newsletters"
         }
 
-        email <- escape conn . maybe "" email
+        email <- escape conn $ encodeUtf8 temail
         putStrLn "Querying..."
-        query conn $ "UPDATE `newsletters`.`visits` SET active = FALSE WHERE email = \"" <> email <> "\""    
+        query conn $ "UPDATE `newsletters`.`emails` SET active = FALSE WHERE email = \"" <> email <> "\""    
 
         pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:green\">You have been unsubscribed. Sorry to see you go!</span>"
     else do

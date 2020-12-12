@@ -18,7 +18,7 @@ mkDerivation {
   isExecutable = true;
   doCheck = false;
   buildDepends = [
-    bash git wget nodejs docker stack awscli2 ghcid hlint stylish-haskell ghc
+    bash git wget nodejs docker stack awscli2 ghcid hlint stylish-haskell ghc cabal-install
   ];
   executableHaskellDepends = [
     aeson amazonka-core base base64 blaze-html blaze-markup bytestring
