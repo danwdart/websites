@@ -29,6 +29,7 @@ data Language = LangHS
     | LangTcl
     | LangVB
     | LangCPP
+    | LangNix
     | LangDocker deriving (Eq, Generic, Show)
 
 instance FromJSON Language where
@@ -52,6 +53,7 @@ instance FromJSON Language where
         "VBA"          -> LangVB
         "Vim script"   -> LangShell
         "Vue"          -> LangJS
+        "Nix"          -> LangNix
         _              -> error $ "Unknown language: " <> T.unpack a
     parseJSON Null = return LangGeneric
     parseJSON _ = return LangGeneric

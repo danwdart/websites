@@ -34,7 +34,8 @@ imagesFs = [
     (LangCPP, "https://upload.wikimedia.org/wikipedia/commons/5/5c/Images_200px-ISO_C%2B%2B_Logo_svg.png"),
     (LangHS, "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/1280px-Haskell-Logo.svg.png"),
     (LangVB, "https://upload.wikimedia.org/wikipedia/en/e/e4/Visual_Basic_6.0_logo.png"),
-    (LangDocker, "https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png")
+    (LangDocker, "https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png"),
+    (LangNix, "https://nixos.wiki/images/thumb/2/20/Home-nixos-logo.png/x414px-Home-nixos-logo.png.pagespeed.ic.LS-5j54coH.png")
     -- TODO Haskell, VB, Docker
     ]
 
