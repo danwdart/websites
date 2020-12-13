@@ -9,7 +9,7 @@ import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           System.Directory
 import           System.Environment             (lookupEnv)
-import           System.Path                    as H hiding (main)
+import           System.Path
 import           Text.Blaze.Html.Renderer.Utf8
 import           Text.Blaze.Html5
 import           WaiAppStatic.Types

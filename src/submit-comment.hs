@@ -9,7 +9,6 @@ module Main where
 import           AWSLambda.Events.APIGateway
 import           Control.Monad
 import           Data.Aeson                  hiding (object)
-import           Data.ByteString.Char8       (ByteString)
 import qualified Data.ByteString.Char8       as B
 import           Data.ByteString.Lazy.Base64
 import qualified Data.ByteString.Lazy.Char8  as BSL

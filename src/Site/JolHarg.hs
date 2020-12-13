@@ -6,26 +6,12 @@ module Site.JolHarg where
 import           Build.Utils                    (makeServe)
 import           Configuration.Dotenv
 import           Control.Monad.Reader
-
 import qualified Data.ByteString.Lazy.Char8     as BSL
-
-import           Data.Maybe                     (fromMaybe, mapMaybe)
-
 import           Html.Common.GitHub
-
 import           Html.JolHarg.Index
-
 import           Network.HTTP.Req
-
-import           Network.Wai.Application.Static
-import           Network.Wai.Handler.Warp
-
 import           System.Path
-
 import           Text.Blaze.Html.Renderer.Utf8
-
-import           System.Environment             (lookupEnv)
-import           WaiAppStatic.Types
 
 build ∷ IO ()
 build = do

@@ -4,26 +4,14 @@
 module Main where
     
 import           AWSLambda
-import           AWSLambda.Events.APIGateway
-import           Control.Monad
-import           Data.Aeson                  hiding (object)
-import           Data.ByteString.Char8 (ByteString)
-import qualified Data.ByteString.Char8 as B
-import           Data.ByteString.Lazy.Base64
-import qualified Data.ByteString.Lazy.Char8  as BSL
-import           Data.Char
 import           Data.Maybe
 import           Data.Text             as T
 import           Data.Text.Encoding
-import           Data.Time
-import           Data.Time.Format.ISO8601
 import           Database.MySQL.Base
-import           GHC.Generics
 import           Network.AWS.Data.Query
 import           Network.AWS.Lens
 import           Network.HTTP.Types
 import           System.Environment
-import           Text.Printf
 import           Util.QueryString
 
 main ∷ IO ()

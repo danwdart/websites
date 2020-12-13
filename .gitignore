@@ -8,7 +8,11 @@ google.json
 *.hi
 *.o
 bootstrap
+send-newsletter
+subscribe-email-to-newsletter
 submit-comment
+track-email-view
+unsubscribe-email-from-newsletter
 visit
 visit-migrate
 visit-viewer

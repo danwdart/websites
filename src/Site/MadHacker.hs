@@ -11,20 +11,13 @@ import           Blog.Types                     (BlogMetadata (date, draft),
 import           Build.Utils                    (make, makeServe)
 import           Control.Monad                  (filterM)
 import           Data.List                      (sortOn)
-import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Data.Ord                       (Down (Down))
 import qualified Data.Text.IO                   as TIO
 import           Html.MadHacker.Index           (page404, page)
 import           Html.MadHacker.Suffix          (renderStars)
-import           Network.Wai.Application.Static (defaultWebAppSettings,
-                                                 staticApp)
-import           Network.Wai.Handler.Warp       (runEnv)
 import           System.Directory               (doesFileExist,
                                                  getDirectoryContents)
-import           System.Environment             (lookupEnv)
 import           System.FilePath                ((</>))
-import           WaiAppStatic.Types             (StaticSettings (ssIndices),
-                                                 toPiece)
 
 build ∷ IO ()
 build = do
