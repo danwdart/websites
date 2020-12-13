@@ -3,6 +3,7 @@
 
 module Site.JolHarg where
 
+import           Build.Utils                    (makeServe)
 import           Configuration.Dotenv
 import           Control.Monad.Reader
 
@@ -37,9 +38,4 @@ build = do
     putStrLn "jolharg compiled."
 
 serve ∷ IO ()
-serve = do
-    putStrLn "Building..."
-    build
-    port' <- fromMaybe "80" <$> lookupEnv "PORT"
-    putStrLn $ "Serving on http://localhost:" <> port'
-    runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/jolharg/"){ ssIndices = mapMaybe toPiece ["index.html"] }
+serve = makeServe build "jolharg"

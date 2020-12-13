@@ -15,9 +15,4 @@ build ∷ IO ()
 build = make "dandart" page page404
 
 serve ∷ IO ()
-serve = do
-    putStrLn "Building..."
-    build
-    port <- fromMaybe "80" <$> lookupEnv "PORT"
-    putStrLn $ "Serving on http://localhost:" <> port
-    runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/dandart/"){ ssIndices = mapMaybe toPiece ["index.html"] }
+serve = makeServe build "dandart"

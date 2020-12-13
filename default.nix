@@ -24,7 +24,9 @@ let
     buildInputs = [
       nixpkgs.pkgs.wget
       nixpkgs.pkgs.nodejs
+      nixpkgs.pkgs.docker
       nixpkgs.haskellPackages.cabal-install
+      nixpkgs.haskellPackages.stack
       nixpkgs.haskellPackages.ghcid
       nixpkgs.haskellPackages.stylish-haskell
       nixpkgs.haskellPackages.hlint

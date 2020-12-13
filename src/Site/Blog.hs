@@ -8,7 +8,7 @@ import           Blog.Link                      (makeLinks)
 import           Blog.Post                      (makeBlogPost, renderPost)
 import           Blog.Types                     (BlogMetadata (date, draft),
                                                  BlogPost (metadata))
-import           Build.Utils                    (make)
+import           Build.Utils                    (make, makeServe)
 import           Control.Monad                  (filterM)
 import           Data.List                      (sortOn)
 import           Data.Maybe                     (fromMaybe, mapMaybe)
@@ -39,9 +39,4 @@ build = do
   make "blog" (page renderedLinks renderedPosts) page404
 
 serve ∷ IO ()
-serve = do
-  putStrLn "Building..."
-  build
-  port <- fromMaybe "80" <$> lookupEnv "PORT"
-  putStrLn $ "Serving on http://localhost:" <> port
-  runEnv 80 . staticApp $ (defaultWebAppSettings ".sites/blog/") {ssIndices = mapMaybe toPiece ["index.html"]}
+serve = makeServe build "blog"
