@@ -5,7 +5,7 @@ siteupdate() {
     git push
 }
 
-stack run build-websites
+cabal new-run build-websites
 
 cd .sites
 for site in */
