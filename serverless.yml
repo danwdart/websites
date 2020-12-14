@@ -144,7 +144,6 @@ functions:
         - bootstrap
         - visit-viewer
         - lib/**
-        - basic_auth.py
       individually: true
     vpc:
       securityGroupIds:
@@ -211,15 +210,6 @@ resources:
       AllowedPattern: '[a-zA-Z0-9]*'
       ConstraintDescription: must contain only alphanumeric characters.
   Resources:
-    GatewayResponse:
-      Type: 'AWS::ApiGateway::GatewayResponse'
-      Properties:
-        ResponseParameters:
-          gatewayresponse.header.WWW-Authenticate: "'Basic'"
-        ResponseType: UNAUTHORIZED
-        RestApiId:
-          Ref: 'ApiGatewayRestApi'
-        StatusCode: '401'
     visitsDB:
       Type: AWS::RDS::DBCluster
       Properties:
@@ -318,7 +308,6 @@ plugins:
   - serverless-offline
   # - serverless-domain-manager
   - serverless-add-api-key
-  - serverless-basic-authentication
 
 custom:
   haskell:
