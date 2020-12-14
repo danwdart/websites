@@ -1,6 +1,6 @@
 # Websites
 
-Generates dandart.co.uk, m0ori.co.uk and jolharg.com
+Generates dandart.co.uk, m0ori.co.uk, jolharg.com, blog and review sites.
 
 ## Run in Nix (recommended on Linux)
 
