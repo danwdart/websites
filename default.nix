@@ -25,6 +25,7 @@ let
       nixpkgs.pkgs.wget
       nixpkgs.pkgs.nodejs
       nixpkgs.pkgs.docker
+      nixpkgs.pkgs.awscli2
       nixpkgs.haskellPackages.cabal-install
       nixpkgs.haskellPackages.stack
       nixpkgs.haskellPackages.ghcid

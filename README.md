@@ -4,20 +4,18 @@ Generates dandart.co.uk, m0ori.co.uk and jolharg.com
 
 ## Run in Nix (recommended on Linux)
 
-All should be OK.
+All you should have to do is:
 
 `nix-shell`
 ## Run in Docker (recomended on non-Linux) - TODO fix bind mounts?
 
 (optional) `docker build -t dandart/websites .`
 
-`docker run -it --rm -v ~/.ssh:/root/.ssh -v ~/.stack:/root/.stack -v $PWD:/app -v /var/run/docker.sock:/var/run/docker.sock dandart/websites`
+For the sake of ~/.stack, ~/.ssh, ~/.aws, ~/.serverlessrc amd ~/.serverless, bind-mounting ~ is probably easiest.
+Even if you do these individually, you'll have issues sometimes when sls wants to rename something to ~/.serverlessrc.
 
-`docker run -it --rm -v ~/.ssh:/root/.ssh -v ~/.stack:/root/.stack -e HOME -v $PWD:$PWD -w $PWD -v /var/run/docker.sock:/var/run/docker.sock dandart/websites`
+`docker run -it --rm -v $HOME:$HOME -p8080:8080 -e HOME -w $PWD -v /var/run/docker.sock:/var/run/docker.sock --env-file=.env dandart/websites`
 
+Make sure also:
 
-Then inside, because of Docker..
-
-```shell
-stack --docker --docker-image=fpco/stack-build:lts-13.30 ls dependencies
-```
+`sls login` and `aws configure` have been run, before doing anything with the Lambdas.
