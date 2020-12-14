@@ -165,9 +165,9 @@ pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
         li $ do
             extLink (ghPagesProjects <> "js/maths/src/graphAndSound/") "Graph and Sound Demos"
             br
-            "(one of these is actually the answer similar to"
+            "(one of these is actually the answer similar to "
             extLink (yt <> "zSL8asTgpzA") "the riddle"
-            "I posed on my YouTube channel)"
+            " I posed on my YouTube channel)"
         li $ extLink (ghPagesProjects <> "js/rolling/") "Rolling Shutter effect example"
         li $ extLink (ghPages <> "heartish/cardint.html") "Interactive Cardioid (keyboard only)"
         li $ extLink (ghPages <> "heartish/card.html") "Random Cardioid"
