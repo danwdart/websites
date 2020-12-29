@@ -29,6 +29,11 @@ let
       nixpkgs.haskellPackages.cabal-install
       nixpkgs.openssh
       nixpkgs.wget
+      nixpkgs.selenium-server-standalone
+      nixpkgs.firefox
+      nixpkgs.geckodriver
+      nixpkgs.chromedriver
+      nixpkgs.chromium
       nixpkgs.haskellPackages.stack
       nixpkgs.haskellPackages.ghcid
       nixpkgs.haskellPackages.stylish-haskell

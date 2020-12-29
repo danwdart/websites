@@ -18,4 +18,4 @@ Even if you do these individually, you'll have issues sometimes when sls wants t
 
 Make sure also:
 
-`sls login` and `aws configure` have been run, before doing anything with the Lambdas.
+`npx sls login` and `aws configure` have been run, before doing anything with the Lambdas.
