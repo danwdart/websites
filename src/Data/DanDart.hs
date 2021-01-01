@@ -66,13 +66,24 @@ favCharacters = [
         ]
     ),
     (
+        "Kingdom Hearts",
+        wikipedia "Kingdom_Hearts",
+        [
+            (
+                "Sora",
+                fandom "kingdomhearts" "Sora",
+                "Kairi is my waifu and princess and I'm kinda new to this."
+            )
+        ]
+    ),
+    (
         "Darling in the FranXX",
         wikipedia "Darling_in_the_Franxx",
         [
             (
                 "Hiro (016)",
                 fandom "darling-in-the-franxx" "Hiro",
-                "Zero Two is waifu and I am oblivious"
+                "Zero Two is waifu and I am oblivious."
             )
         ]
     ),
@@ -94,6 +105,61 @@ favCharacters = [
                 "Shuichi Saihara",
                 fandom "danganronpa" "Shuichi_Saihara",
                 "he's cute, a little bit emo and evolves like I do."
+            )
+        ]
+    ),
+    (
+        "Koe no Katachi",
+        wikipedia "A_Silent_Voice_(film)",
+        [
+            (
+                "Shōya Ishida",
+                wikia "koenokatachi" "Shōya_Ishida",
+                "he was transformed into a kind boy, and Shoko is waifu.."
+            )
+        ]
+    ),
+    (
+        "Kimi no Na wa",
+        wikipedia "Your_Name",
+        [
+            (
+                "Taki Tachibana",
+                wikia "kiminonawa" "Taki_Tachibana",
+                "I just really relate to the lost / saving story."
+            )
+        ]
+    ),
+    (
+        "Boku dake ga Inai Machi",
+        wikipedia "Erased_(manga)#Anime",
+        [
+            (
+                "Satoru Fujinuma",
+                wikia "bokudakegainaimachi" "Satoru_Fujinuma",
+                "I love time travel and would totally do this."
+            )
+        ]
+    ),
+    (
+        "Tenki no Ko",
+        wikipedia "Weathering_with_You",
+        [
+            (
+                "Hodaka Morishima",
+                wikia "weatheringwithyou" "Hodaka_Morishima",
+                "my waifu is a weather goddess."
+            )
+        ]
+    ),
+    (
+        "Yuri on Ice",
+        wikipedia "Yuri_on_Ice",
+        [
+            (
+                "Yuuri Katsuki",
+                wikia "yurionice" "Yuuri_Katsuki",
+                "that story was so cute and I see myself as a noob that grows."
             )
         ]
     ),
