@@ -26,8 +26,10 @@ pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
         (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"
             h4 ! class_ "card-title" $ "You"
-            p ! class_ "card-text" $ "Make an enquiry for a website:"
+            p ! class_ "card-text" $ "Make an enquiry for a website or project:"
             a ! class_ "btn btn-primary" ! href "mailto:website@jolharg.com" ! target "_blank" ! rel "noopener" $ "Enquire")
+        card "img/techradar.png" "TechRadar" "Technology website" "https://techradar.com/"
+        card "img/feeld.png" "Feeld" "Dating app for singles and couples" "https://feeld.co/"
         card "img/polaris.png" "Polaris Elements" "Hospitality software" "https://polaris-elements.co.uk/"
         cardDefunct "Plugin ASO" "Analytics dashboard for Shopify"
         card "img/faultfixers.png" "FaultFixers" "Facilities management" "https://faultfixers.com"
