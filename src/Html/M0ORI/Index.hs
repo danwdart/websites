@@ -46,6 +46,10 @@ pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
         li "PSK on usually 20m"
         li "JT modes on usually 20m"
     p $ extLink "https://www.qrzcq.com/call/M0ORI" "My QRZCQ page"
+    br
+    (H.div ! A.id "rigref-solar-widget")
+        . (a ! href "https://rigreference.com/solar" ! target "_blank")
+        $ (img ! src "https://rigreference.com/solar/img/tall")
 
 pageContact ∷ Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
