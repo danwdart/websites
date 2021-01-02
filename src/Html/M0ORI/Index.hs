@@ -8,13 +8,13 @@ import           Data.M0ORI
 import           Html.Common.Head
 import           Html.Common.Link
 
+import           Html.Common.Contact
+import           Html.Common.Error.NotFound
+import           Html.Common.Header
+import           Html.Common.Page
+import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
-import Html.Common.Page
-import Html.Common.Header
-import Html.Common.Contact
-import Html.Common.Error.NotFound
-import Html.Common.Visit
 
 pageHamRadio ∷ Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do

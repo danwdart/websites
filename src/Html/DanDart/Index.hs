@@ -6,17 +6,17 @@ module Html.DanDart.Index (page, page404) where
 import           Data.DanDart
 
 import           Html.Common.Audio
+import           Html.Common.Contact
+import           Html.Common.Error.NotFound
 import           Html.Common.Head
+import           Html.Common.Header
 import           Html.Common.Link
 import           Html.Common.Page
 import           Html.Common.Shortcuts
 import           Html.Common.Social
+import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
-import Html.Common.Header
-import Html.Common.Contact
-import Html.Common.Error.NotFound
-import Html.Common.Visit
 
 pageIntro ∷ Html
 pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
@@ -277,7 +277,7 @@ htmlHeader = makeHeader "#intro" "Dan Dart" socialIcons $ do
     pageBlog
     pageReviews
     pageContact
-        
+
 page ∷ Html
 page = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords mempty

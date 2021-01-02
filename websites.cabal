@@ -81,6 +81,7 @@ executable build-websites
     , Site.JolHarg
     , Site.M0ORI
     , Site.MadHacker
+    , Site.Markdowns
     , Util.List
     , Util.Time
     , Util.Triple
@@ -336,6 +337,7 @@ test-suite e2e
     , Site.DanDart
     , Site.JolHarg
     , Site.MadHacker
+    , Site.Markdowns
     , Site.M0ORI
     , Util.List
     , Util.Time

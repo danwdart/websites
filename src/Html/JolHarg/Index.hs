@@ -10,14 +10,14 @@ import           Data.JolHarg
 import           Html.Common.Card
 import           Html.Common.Head
 
+import           Html.Common.Bootstrap
+import           Html.Common.Contact
+import           Html.Common.Error.NotFound
+import           Html.Common.Header
 import           Html.Common.Page
+import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
-import Html.Common.Header
-import Html.Common.Contact
-import Html.Common.Error.NotFound
-import Html.Common.Bootstrap
-import Html.Common.Visit
 
 pagePortfolio ∷ Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do

@@ -10,10 +10,10 @@ import           Data.Aeson
 import           Data.String                 (IsString (fromString))
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T
+import           Html.Common.Bootstrap
 import           Text.Blaze.Html5
 import qualified Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
-import Html.Common.Bootstrap
 
 stars ∷ Text → Html
 stars score = do
