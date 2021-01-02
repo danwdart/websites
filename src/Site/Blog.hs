@@ -6,7 +6,7 @@ module Site.Blog where
 import           Blog.Feed             (makeRSSFeed)
 import           Build.Utils           (make, makeServe)
 import qualified Data.Text.IO          as TIO
-import           Html.MadHacker.Index  (page, page404)
+import           Html.Blog.Index  (page, page404)
 import           Site.Markdowns
 
 build ∷ IO ()
