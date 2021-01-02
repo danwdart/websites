@@ -1,16 +1,16 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Common.Contact (contactForm, emailHelpSingular, emailHelpPlural) where
 
-import Text.Blaze.Html5 as H
-import Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5            as H
+import           Text.Blaze.Html5.Attributes as A
 
-emailHelpSingular, emailHelpPlural :: Html
+emailHelpSingular, emailHelpPlural ∷ Html
 emailHelpSingular = "I'll never share your email with anyone else."
 emailHelpPlural = "We'll never share your email with anyone else."
 
-contactForm :: AttributeValue -> Html -> AttributeValue -> AttributeValue -> Html
+contactForm ∷ AttributeValue → Html → AttributeValue → AttributeValue → Html
 contactForm email emailHelpMessage summaryPlaceholder messagePlaceholder = H.form ! action ("https://formspree.io/" <> email) ! method "post" $ do
     H.div ! class_ "form-group" $ do
         H.label ! for "name" $ "Your name"

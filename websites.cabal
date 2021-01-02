@@ -85,6 +85,21 @@ executable build-websites
     , Util.Time
     , Util.Triple
 
+executable get-subs
+  hs-source-dirs:      src
+  main-is:             get-subs.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+      base >= 4.7 && < 5
+    , dotenv
+    , gogol
+    , gogol-youtube
+    , http-client
+    , lens
+    , process
+    , text
+
 executable send-newsletter
   hs-source-dirs:      src
   main-is:             send-newsletter.hs

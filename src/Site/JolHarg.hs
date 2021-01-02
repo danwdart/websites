@@ -3,10 +3,10 @@
 
 module Site.JolHarg where
 
-import           Build.Utils                    (makeServe)
+import           Build.Utils                   (makeServe)
 import           Configuration.Dotenv
 import           Control.Monad.Reader
-import qualified Data.ByteString.Lazy.Char8     as BSL
+import qualified Data.ByteString.Lazy.Char8    as BSL
 import           Html.Common.GitHub
 import           Html.JolHarg.Index
 import           Network.HTTP.Req

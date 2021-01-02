@@ -1,10 +1,9 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax #-}
 
 module Util.QueryString where
 
-import           Network.AWS.Data.Query 
-import           Data.ByteString.Char8       (ByteString)
+import           Data.ByteString.Char8  (ByteString)
+import           Network.AWS.Data.Query
 
 lookupQueryString ∷ QueryString → ByteString → ByteString
 lookupQueryString qs key =

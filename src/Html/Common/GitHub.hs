@@ -6,12 +6,12 @@ module Html.Common.GitHub (Repo (..), Language (..), Licence (..), getRepos) whe
 
 import           Control.Monad.IO.Class
 import           Data.Aeson
+import qualified Data.ByteString.Char8  as B
 import           Data.Maybe
 import           Data.Text              as T
 import           GHC.Generics
 import           Network.HTTP.Req
 import           System.Environment
-import qualified Data.ByteString.Char8 as B
 
 data Language = LangHS
     | LangJS

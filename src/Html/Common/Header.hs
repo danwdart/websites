@@ -3,10 +3,10 @@
 
 module Html.Common.Header (makeHeader) where
 
-import Text.Blaze.Html5 as H
-import Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5            as H
+import           Text.Blaze.Html5.Attributes as A
 
-makeHeader :: AttributeValue -> String -> Html -> Html -> Html
+makeHeader ∷ AttributeValue → String → Html → Html → Html
 makeHeader mainLink title' extraHeaderContent content' =
     nav
     ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do

@@ -3,20 +3,19 @@
 
 module Site.Blog where
 
-import           Blog.Feed                      (makeRSSFeed)
-import           Blog.Link                      (makeLinks)
-import           Blog.Post                      (makeBlogPost, renderPost)
-import           Blog.Types                     (BlogMetadata (date, draft),
-                                                 BlogPost (metadata))
-import           Build.Utils                    (make, makeServe)
-import           Control.Monad                  (filterM)
-import           Data.List                      (sortOn)
-import           Data.Ord                       (Down (Down))
-import qualified Data.Text.IO                   as TIO
-import           Html.Blog.Index                (page404, page)
-import           System.Directory               (doesFileExist,
-                                                 getDirectoryContents)
-import           System.FilePath                ((</>))
+import           Blog.Feed        (makeRSSFeed)
+import           Blog.Link        (makeLinks)
+import           Blog.Post        (makeBlogPost, renderPost)
+import           Blog.Types       (BlogMetadata (date, draft),
+                                   BlogPost (metadata))
+import           Build.Utils      (make, makeServe)
+import           Control.Monad    (filterM)
+import           Data.List        (sortOn)
+import           Data.Ord         (Down (Down))
+import qualified Data.Text.IO     as TIO
+import           Html.Blog.Index  (page, page404)
+import           System.Directory (doesFileExist, getDirectoryContents)
+import           System.FilePath  ((</>))
 
 build ∷ IO ()
 build = do

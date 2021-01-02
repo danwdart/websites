@@ -25,7 +25,7 @@ make name page page404 = do
     BSL.writeFile (".sites/" <> (name <> "/404.html")) $ renderHtml page404
     putStrLn $ name <> " compiled."
 
-makeServe :: IO () -> FilePath -> IO ()
+makeServe ∷ IO () → FilePath → IO ()
 makeServe build dir = do
     putStrLn "Building..."
     build

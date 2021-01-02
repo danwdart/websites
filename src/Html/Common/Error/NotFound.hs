@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Common.Error.NotFound (defaultPage404) where
 
-import Text.Blaze.Html5 as H
-import Text.Blaze.Html5.Attributes as A
-import Html.Common.Head
-import Html.Common.Bootstrap
+import           Html.Common.Bootstrap
+import           Html.Common.Head
+import           Text.Blaze.Html5            as H
+import           Text.Blaze.Html5.Attributes as A
 
-defaultPage404 :: String -> [AttributeValue] -> Html -> Html
+defaultPage404 ∷ String → [AttributeValue] → Html → Html
 defaultPage404 descTitle keywords extraHead = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords extraHead
     body $ do

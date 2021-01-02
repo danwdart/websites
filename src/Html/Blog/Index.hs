@@ -7,13 +7,13 @@ import           Data.Blog
 
 import           Html.Common.Head
 
+import           Html.Common.Bootstrap
+import           Html.Common.Error.NotFound
+import           Html.Common.Header
 import           Html.Common.Page
+import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
-import Html.Common.Header
-import Html.Common.Error.NotFound
-import Html.Common.Bootstrap
-import Html.Common.Visit
 
 pageBlog ∷ Html → Html → Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do
@@ -29,7 +29,7 @@ htmlHeader blogPostLinks blogPosts = makeHeader "#blog" "Dan Dart's Blog" mempty
 
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan Dart's Blog" ! href "/atom.xml"
-    
+
 
 page ∷ Html → Html → Html
 page blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do

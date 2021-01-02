@@ -1,8 +1,8 @@
 {-# LANGUAGE UnicodeSyntax #-}
 module Main where
 
-import           AWSLambda             (lambdaMain)
-import qualified Data.Aeson            as Aeson
+import           AWSLambda  (lambdaMain)
+import qualified Data.Aeson as Aeson
 
 main ∷ IO ()
 main = lambdaMain handler
