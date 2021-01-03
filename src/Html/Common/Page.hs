@@ -6,7 +6,8 @@ module Html.Common.Page (customLayout, contactLayout, defaultLayout, dlNav, extN
 import           Data.String                 (IsString (fromString))
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
-import Html.Common.Bootstrap
+import           Html.Common.Bootstrap
+import           Html.Common.Visit 
 
 navBtn ∷ Attribute
 navBtn = class_ "nav-link btn btn-sm"
@@ -64,7 +65,9 @@ makePage pageId label' layout extraParams content' = li ! class_ "nav-item" $ do
     H.div
         ! class_ "page"
         ! A.id pageId $ do
+            visitPageSub "page" pageId "top"
             row .
                 (H.div ! class_ "col my-md-3") .
                     small $ "» " <> fromString label'
             layout content'
+            visitPageSub "page" pageId "bottom"

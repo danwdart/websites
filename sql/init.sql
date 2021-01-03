@@ -22,3 +22,6 @@ CREATE TABLE IF NOT EXISTS `newsletters`.`emails` (
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP
 );
+
+ALTER TABLE `visits`.`visits` ADD `page` TEXT;
+ALTER TABLE `visits`.`visits` ADD `sub` TEXT;

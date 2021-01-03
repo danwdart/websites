@@ -46,10 +46,14 @@ handler request = do
     putStrLn "Escaping..."
     sua <- escape conn . fromMaybe "" $ request ^. agprqHeaders & lookup "User-Agent"
     surl <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "u"
+    spage <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "p"
+    ssub <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "s"
     let ua = B.unpack sua
     let url = B.unpack surl
+    let page = B.unpack spage
+    let sub = B.unpack ssub
     putStrLn "Querying..."
-    query conn . B.pack $ printf "INSERT INTO `visits`.`visits` (url, ua, ip, time) values (\"%s\", \"%s\", \"%s\", \"%s\")" url ua ip time
+    query conn . B.pack $ printf "INSERT INTO `visits`.`visits` (url, page, sub, ua, ip, time) values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")" url page sub ua ip time
     putStrLn "Responding..."
     pure $ responseOK
       & agprsHeaders .~ [("Content-Type", "text/plain")]

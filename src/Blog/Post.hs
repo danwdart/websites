@@ -13,6 +13,7 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
+import           Html.Common.Visit
 import           System.FilePath
 import           Text.Blaze.Html5             as H hiding (main)
 import           Text.Blaze.Html5.Attributes  as A
@@ -87,7 +88,7 @@ renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → Html
 renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = do
     a ! name (fromString (T.unpack postId')) $ mempty
     -- Not working in Safari yet, so filter
-    img ! height "0" ! width "0" ! src ("/favicon.ico?" <> fromString (T.unpack postId')) ! customAttribute "loading" "lazy"
+    visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId') "top"
     h1 . fromString . T.unpack $ Blog.Types.title metadata'
     small $ do
         a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
@@ -114,3 +115,4 @@ renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = 
         H.summary . (h4 ! A.class_ "d-inline-block") $ "Post a comment"
         commentForm postType postId'
     hr
+    visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId') "bottom"
