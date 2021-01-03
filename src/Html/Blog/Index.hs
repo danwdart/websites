@@ -31,9 +31,9 @@ extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan Dart's Blog" ! href "/atom.xml"
 
 
-page ∷ Html → Html → Html
-page blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords extraHead
+page ∷ Bool → Html → Html → Html
+page dev blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do
+    htmlHead dev descTitle keywords extraHead
     htmlHeader blogPostLinks blogPosts
     visit "blog"
 

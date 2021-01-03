@@ -6,8 +6,8 @@ module Site.M0ORI where
 import           Build.Utils
 import           Html.M0ORI.Index
 
-build ∷ IO ()
-build = make "m0ori" page page404
+build ∷ Bool -> IO ()
+build dev = make "m0ori" (page dev) page404
 
-serve ∷ IO ()
-serve = makeServe build "m0ori"
+serve ∷ Bool -> IO ()
+serve dev = makeServe (build dev) "m0ori"

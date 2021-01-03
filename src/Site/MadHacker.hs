@@ -9,11 +9,11 @@ import qualified Data.Text.IO          as TIO
 import           Html.MadHacker.Index  (page, page404)
 import           Site.Markdowns
 
-build ∷ IO ()
-build = do
+build ∷ Bool -> IO ()
+build dev = do
   (sortedPosts, renderedPosts, renderedLinks) <- buildMD "reviews" "review"
   TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhackerreviews.com" "Mad Hacker Tech Reviews" sortedPosts
-  make "madhacker" (page renderedLinks renderedPosts) page404
+  make "madhacker" (page dev renderedLinks renderedPosts) page404
 
-serve ∷ IO ()
-serve = makeServe build "madhacker"
+serve ∷ Bool -> IO ()
+serve dev = makeServe (build dev) "madhacker"

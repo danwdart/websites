@@ -62,9 +62,9 @@ htmlHeader = makeHeader "" "M0ORI: Dan Dart" mempty $ do
     pageHamRadio
     pageContact
 
-page ∷ Html
-page = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords mempty
+page ∷ Bool -> Html
+page dev = docTypeHtml ! lang "en-GB" $ do
+    htmlHead dev descTitle keywords mempty
     htmlHeader
     visit "m0ori"
 

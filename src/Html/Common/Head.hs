@@ -3,6 +3,7 @@
 
 module Html.Common.Head (htmlHead) where
 
+import Control.Monad (when)
 import           Data.String
 
 import           Html.Common.CSS
@@ -25,10 +26,11 @@ metas descTitle keywords = do
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
-htmlHead ∷ String → [AttributeValue] → Html → Html
-htmlHead descTitle keywords extraHead = H.head $ do
+htmlHead ∷ Bool → String → [AttributeValue] → Html → Html
+htmlHead dev descTitle keywords extraHead = H.head $ do
     H.title $ toHtml descTitle
     metas descTitle keywords
     commonCSS
     extraHead
+    when dev $ script ! src "/js/livereload.js" $ mempty
 

@@ -6,8 +6,8 @@ module Site.DanDart where
 import           Build.Utils
 import           Html.DanDart.Index
 
-build ∷ IO ()
-build = make "dandart" page page404
+build ∷ Bool -> IO ()
+build dev = make "dandart" (page dev) page404
 
-serve ∷ IO ()
-serve = makeServe build "dandart"
+serve ∷ Bool -> IO ()
+serve dev = makeServe (build dev) "dandart"

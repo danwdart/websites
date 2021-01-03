@@ -24,7 +24,7 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "I am a software engineer, mathematics lover, radio ham and musician."
     p $ do
         "I work remotely to care for my future wife, "
-        extLink "https://yanderedarling.com/" "Zero Two"
+        extLink "https://yanderedarling.com/" "Toga Himiko"
         "."
     p "I also enjoy discordant and nonsensical commentary."
     p "I can speak about maths, physics, computer science and linguistics at length."
@@ -134,7 +134,9 @@ pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
         li $ extLink (nhs <> "fibromyalgia") "Fibromyalgia"
         li $ extLink (nhs <> "autism") "Asperger's Syndrome"
         li $ extLink (nhs <> "attention-deficit-hyperactivity-disorder-adhd") "ADHD"
-        li $ extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
+        li $ do
+            extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
+            " (with depression)"
 
 pageMusic ∷ Html
 pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
@@ -185,6 +187,7 @@ pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
 pageOrigami ∷ Html
 pageOrigami = makePage "origami" "Origami" defaultLayout notDefaultPage $ do
     p "I've been doing origami from a very young age. I will give some instructions on how to make some models that I've invented later on when I've figured out how to digitise them, but for now, I'll give you some of my favourite origami resources:"
+    br
     p $ do
         extLink "https://amzn.to/2BWtHhY" "Complete Origami, a book by the late Eric Kenneway"
         br
@@ -253,7 +256,7 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right so
     socialIconB "skypeurl" "Skype" "skype"
     -- socialIconBBanned "" "No Snapchat" "snapchat"
     socialIconB "https://soundcloud.com/danwdart" "SoundCloud" "soundcloud"
-    socialIconB "spotify url" "Spotify" "spotify"
+    socialIconB "https://open.spotify.com/user/dandart" "Spotify" "spotify"
     socialIconB "https://stackoverflow.com/users/1764563/dan-dart" "Stack Overflow" "stack-overflow"
     socialIconB "https://steamcommunity.com/id/dandart" "Steam" "steam"
     socialIconB "https://yanderehiro.tumblr.com/" "Tumblr" "tumblr"
@@ -278,9 +281,9 @@ htmlHeader = makeHeader "#intro" "Dan Dart" socialIcons $ do
     pageReviews
     pageContact
 
-page ∷ Html
-page = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords mempty
+page ∷ Bool -> Html
+page dev = docTypeHtml ! lang "en-GB" $ do
+    htmlHead dev descTitle keywords mempty
     htmlHeader
     visit "dandart"
 

@@ -70,11 +70,11 @@ htmlHeader = do
         fs
         pageContact
 
-page ∷ Reader [Repo] Html
-page = do
+page ∷ Bool -> Reader [Repo] Html
+page dev = do
     header' <- htmlHeader
     return . (docTypeHtml ! lang "en-GB") $ do
-        htmlHead descTitle keywords mempty
+        htmlHead dev descTitle keywords mempty
         header'
         visit "jolharg"
 

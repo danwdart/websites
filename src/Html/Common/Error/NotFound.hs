@@ -10,7 +10,7 @@ import           Text.Blaze.Html5.Attributes as A
 
 defaultPage404 ∷ String → [AttributeValue] → Html → Html
 defaultPage404 descTitle keywords extraHead = docTypeHtml ! lang "en-GB" $ do
-    htmlHead descTitle keywords extraHead
+    htmlHead False descTitle keywords extraHead
     body $ do
         row . (H.div ! class_ "col-12 text-center") $ do
             h1 "Oh no!"

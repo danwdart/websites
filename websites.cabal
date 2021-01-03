@@ -41,7 +41,9 @@ executable build-websites
     , wai
     , wai-app-static
     , wai-extra
+    , wai-websockets
     , warp
+    , websockets
     , xml-conduit
   other-modules:
       Blog.Comment

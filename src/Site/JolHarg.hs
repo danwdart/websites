@@ -13,15 +13,15 @@ import           Network.HTTP.Req
 import           System.Path
 import           Text.Blaze.Html.Renderer.Utf8
 
-build ∷ IO ()
-build = do
+build ∷ Bool -> IO ()
+build dev = do
     void $ loadFile defaultConfig
     reposDan <- runReq defaultHttpConfig $ getRepos "danwdart"
     reposJH <- runReq defaultHttpConfig $ getRepos "jolharg"
     copyDir "static/common" ".sites/jolharg"
     copyDir "static/jolharg" ".sites/jolharg"
-    BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ runReader page (reposDan <> reposJH)
+    BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ runReader (page dev) (reposDan <> reposJH)
     putStrLn "jolharg compiled."
 
-serve ∷ IO ()
-serve = makeServe build "jolharg"
+serve ∷ Bool -> IO ()
+serve dev = makeServe (build dev) "jolharg"
