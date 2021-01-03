@@ -32,5 +32,5 @@ htmlHead dev descTitle keywords extraHead = H.head $ do
     metas descTitle keywords
     commonCSS
     extraHead
-    when dev $ script ! src "/js/livereload.js" $ mempty
+    when dev . (script ! src "/js/livereload.js") $ mempty
 

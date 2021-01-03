@@ -29,6 +29,9 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "I also enjoy discordant and nonsensical commentary."
     p "I can speak about maths, physics, computer science and linguistics at length."
     p "You can find out more by using the links at the top."
+    br
+    p $ do
+        a ! href "/humans.txt" ! target "_blank" ! rel "noopener" $ img ! src "https://humanstxt.org/img/oficial-logos/humanstxt-isolated-blank.gif"
 
 pageCharacters ∷ Html
 pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do
