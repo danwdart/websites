@@ -7,18 +7,14 @@ import           Data.String                 (IsString (fromString))
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
 import           Html.Common.Bootstrap
+import           Html.Common.Link
 import           Html.Common.Visit 
 
 navBtn ∷ Attribute
 navBtn = class_ "nav-link btn btn-sm"
 
 extNav ∷ AttributeValue → Html -> Html
-extNav url = (li ! class_ "nav-item") .
-    (a
-        ! navBtn
-        ! href url
-        ! target "_blank"
-    )
+extNav url = (li ! class_ "nav-item") . (extLink url ! navBtn)
 
 dlNav ∷ AttributeValue → Html -> Html
 dlNav url = (li ! class_ "nav-item") .

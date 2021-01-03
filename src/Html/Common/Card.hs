@@ -9,6 +9,7 @@ import           Data.Maybe
 import           Data.String
 
 import           Html.Common.GitHub          as GH
+import Html.Common.Link
 
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
@@ -47,7 +48,7 @@ card cardImage cardTitle cardText cardLink =  (H.div ! class_ "card col-md-4 tex
     img ! class_ "card-img-top" ! src cardImage
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
-    a ! class_ "btn btn-secondary" ! href cardLink ! target "_blank" ! rel "noopener" $ "Visit")
+    extLink cardLink ! class_ "btn btn-secondary" $ "Visit")
 
 cardDefunct ∷ Html → Html → Html
 cardDefunct cardTitle cardText = (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do

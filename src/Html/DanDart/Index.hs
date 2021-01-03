@@ -31,7 +31,9 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "You can find out more by using the links at the top."
     br
     p $ do
-        a ! href "/humans.txt" ! target "_blank" ! rel "noopener" $ img ! src "https://humanstxt.org/img/oficial-logos/humanstxt-isolated-blank.gif"
+        extLink "https://html.spec.whatwg.org/" $ img ! A.style "height: 16px" !  src "https://upload.wikimedia.org/wikipedia/commons/a/a1/WHATWG_logo.svg"
+        extLink "/humans.txt" $ img ! src "https://humanstxt.org/img/oficial-logos/humanstxt-isolated-blank.gif"
+        
 
 pageCharacters ∷ Html
 pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do

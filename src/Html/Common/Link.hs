@@ -10,4 +10,4 @@ extLink ∷ AttributeValue → Html → Html
 extLink linkHref = a ! href linkHref ! target "_blank" ! rel "noopener"
 
 extLinkTitle ∷ AttributeValue → AttributeValue → Html → Html
-extLinkTitle linkHref linkTitle = a ! href linkHref ! target "_blank" ! rel "noopener" ! A.title linkTitle
+extLinkTitle linkHref linkTitle = extLink linkHref ! A.title linkTitle
