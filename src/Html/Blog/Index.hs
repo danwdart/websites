@@ -35,9 +35,9 @@ page ∷ Html → Html → Html
 page blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords extraHead
     htmlHeader blogPostLinks blogPosts
-    visit "https://blog.dandart.co.uk"
+    visit "blog"
 
 page404 ∷ Html
 page404 = defaultPage404 descTitle keywords $ do
     extraHead
-    visit "https://blog.dandart.co.uk/404.html"
+    visit "blog404"

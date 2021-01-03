@@ -184,7 +184,7 @@ functions:
         - Ref: visitsSubnetC
     events:
       - http:
-          path: /visit.gif
+          path: /v.gif
           method: get
           cors: true
           private: false

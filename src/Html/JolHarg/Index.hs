@@ -76,7 +76,7 @@ page = do
     return . (docTypeHtml ! lang "en-GB") $ do
         htmlHead descTitle keywords mempty
         header'
-        visit "https://jolharg.com/"
+        visit "jolharg"
 
 page404 ∷ Html
-page404 = defaultPage404 descTitle keywords $ visit "https://jolharg.com/404.html"
+page404 = defaultPage404 descTitle keywords $ visit "jolharg404"

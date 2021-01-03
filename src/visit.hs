@@ -45,7 +45,7 @@ handler request = do
     let ip = maybe "" show $ request ^. agprqRequestContext . prcIdentity . riSourceIp
     putStrLn "Escaping..."
     sua <- escape conn . fromMaybe "" $ request ^. agprqHeaders & lookup "User-Agent"
-    surl <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "url"
+    surl <- escape conn . maybe "" (fromMaybe "") $ request ^. agprqQueryStringParameters & lookup "u"
     let ua = B.unpack sua
     let url = B.unpack surl
     putStrLn "Querying..."

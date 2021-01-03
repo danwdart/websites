@@ -10,7 +10,6 @@ import           Control.Monad    (filterM)
 import           Data.List        (sortOn)
 import           Data.Ord         (Down (Down))
 import           Data.Text        (Text)
-import qualified Data.Text.IO     as TIO
 import           System.Directory (doesFileExist, getDirectoryContents)
 import           System.FilePath  ((</>))
 import           Text.Blaze.Html5 as H

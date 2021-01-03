@@ -37,9 +37,9 @@ page ∷ Html → Html → Html
 page reviewLinks reviews = docTypeHtml ! lang "en-GB" $ do
     htmlHead descTitle keywords extraHead
     htmlHeader reviewLinks reviews
-    visit "https://madhackerreviews.com/"
+    visit "madhacker"
 
 page404 ∷ Html
 page404 = defaultPage404 descTitle keywords $ do
     extraHead
-    visit "https://madhackerreviews.com/404.html"
+    visit "madhacker404"

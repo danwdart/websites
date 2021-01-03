@@ -1,12 +1,12 @@
 {- TODO: put this in a main file -}
-{-# LANGUAGE DataKinds      #-}
-{-# LANGUAGE KindSignatures #-}
-{-# LANGUAGE UnicodeSyntax  #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE KindSignatures    #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 import           Configuration.Dotenv
 import           Control.Lens
 import           Data.Maybe
-import           Data.Proxy                                         (Proxy (..))
 import           Data.Text                                          as T
 import           Data.Text.IO                                       as T
 import           GHC.TypeLits
@@ -33,7 +33,7 @@ redirectPrompt c p = do
 
 main ∷ IO ()
 main = do
-    loadFile defaultConfig
+    _ <- loadFile defaultConfig
     lgr <- newLogger Trace stdout
     oauthClient <- OAuthClient <$>
         (ClientId . T.pack <$> getEnv "GOOGLE_CLIENT_ID" ) <*>
