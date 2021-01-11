@@ -102,11 +102,11 @@ configs = [
 
 sites ∷ [(String, IO ())]
 sites = [
-    ("blog", B.serve),
-    ("dandart", D.serve),
-    ("jolharg", J.serve),
-    ("madhacker", MH.serve),
-    ("m0ori", M.serve)
+    ("blog", B.serve True),
+    ("dandart", D.serve True),
+    ("jolharg", J.serve True),
+    ("madhacker", MH.serve True),
+    ("m0ori", M.serve True)
     ]
 
 -- in terms of safeTry / try?
