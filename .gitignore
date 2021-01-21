@@ -22,4 +22,5 @@ libmysqlclient.so.20
 .env
 report
 result*
+
 .direnv
