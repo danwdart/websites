@@ -17,6 +17,7 @@ instance Show IconType where
     show B = "b"
     show S = "s"
 
+link' :: AttributeValue -> AttributeValue -> Html -> Html
 link' linkHref linkTitle = extLinkTitle linkHref linkTitle ! class_ "social" ! A.style "color:black"
 
 socialIcon :: IconType -> Href → Title → IconName → Html

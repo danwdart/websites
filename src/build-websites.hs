@@ -5,7 +5,6 @@ module Main where
 
 import           Data.ByteString                (isPrefixOf)
 import           Data.Maybe
-import Data.Text (Text)
 import           Network.Wai
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
@@ -32,7 +31,7 @@ build dev = do
 
 wsApp ∷ ServerApp
 wsApp pending_conn = do
-    conn <- acceptRequest pending_conn
+    _ <- acceptRequest pending_conn
     -- Just hang
     a <- newEmptyMVar
     readMVar a
