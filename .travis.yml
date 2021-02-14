@@ -1,5 +1,10 @@
 language: nix
 script:
-  nix-env -i cachix
-  cachix use websites
-  nix-build
+  - nix-env -i cachix
+  - cachix use websites
+  - nix-build
+git:
+  submodules: false
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//g' .gitmodules
+  - git submodule update --init --recursive
