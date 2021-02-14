@@ -15,10 +15,10 @@ let
         url = "https://github.com/seek-oss/serverless-haskell.git";
         rev = "249611a6f82f500691fbd55035b5ddb262a2962d";
       }) {};
-      servant = self.callCabal2nix "servant" (builtins.fetchGit {
+      servant = self.callCabal2nixWithOptions "servant" (builtins.fetchGit {
         url = "https://github.com/haskell-servant/servant.git";
         rev = "5285011233575354ded4df2a022af4b2ad24cf6b";
-      }) {};
+      }) "--subpath=servant" {};
     };
   };
   shell = myHaskellPackages.shellFor {
