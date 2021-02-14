@@ -1,0 +1,5 @@
+language: nix
+script:
+  nix-env -i cachix
+  cachix use websites
+  nix-build
