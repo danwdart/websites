@@ -1,5 +1,5 @@
 { nixpkgs ? import <nixpkgs> {},
-  compiler ? "ghc865",
+  compiler ? "ghc884",
   ghcjs ? "ghcjs884",
   node ? import ./node-default.nix {} }:
 let
@@ -15,10 +15,10 @@ let
         url = "https://github.com/seek-oss/serverless-haskell.git";
         rev = "249611a6f82f500691fbd55035b5ddb262a2962d";
       }) {};
-      servant = self.callCabal2nixWithOptions "servant" (builtins.fetchGit {
-        url = "https://github.com/haskell-servant/servant.git";
-        rev = "5285011233575354ded4df2a022af4b2ad24cf6b";
-      }) "--subpath=servant" {};
+      gogol-core = self.callCabal2nixWithOptions "gogol-core" (builtins.fetchGit {
+        url = "https://github.com/brendanhay/gogol";
+        rev = "d7c7d71fc985cd96fb5f05173da6c607da362b74";
+      }) "--subpath core" {};
     };
   };
   shell = myHaskellPackages.shellFor {
