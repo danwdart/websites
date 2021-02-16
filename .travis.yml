@@ -9,7 +9,6 @@ install:
   - sudo systemctl restart nix-daemon
   - nix-env -iA nixpkgs.cachix
   - cachix use websites
-  - sudo nix-env -iA nixpkgs.cachix
-  - sudo cachix use websites
 script:
+  - cachix use websites
   - nix-build
