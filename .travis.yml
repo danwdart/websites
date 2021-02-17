@@ -14,6 +14,7 @@ install:
   - cachix use websites
 before-script:
   - sudo mkdir -p /etc/nix && echo 'sandbox = true' | sudo tee -a /etc/nix/nix.conf
+  - sudo systemctl restart nix-daemon
 script:
   - cachix use websites
   - nix-build
