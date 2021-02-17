@@ -56,16 +56,16 @@ pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact Dan, please use this form:"
     contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
 
-htmlHeader ∷ Html
-htmlHeader = makeHeader "" "M0ORI: Dan Dart" mempty $ do
-    extNav "https://dandart.co.uk" "Dan Dart"
+htmlHeader ∷ Bool -> Html
+htmlHeader dev = makeHeader "" "M0ORI: Dan Dart" mempty $ do
+    extNav (if dev then "http://dandart.localhost:8080" else "https://dandart.co.uk") "Dan Dart"
     pageHamRadio
     pageContact
 
 page ∷ Bool -> Html
 page dev = docTypeHtml ! lang "en-GB" $ do
     htmlHead dev descTitle keywords mempty
-    htmlHeader
+    htmlHeader dev
     visit "m0ori"
 
 page404 ∷ Html

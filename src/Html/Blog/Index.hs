@@ -21,9 +21,9 @@ pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPa
         H.div ! class_ "col-md-2 py-3 mb-3" $ blogPostLinks
         H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ blogPosts
 
-htmlHeader ∷ Html → Html → Html
-htmlHeader blogPostLinks blogPosts = makeHeader "#blog" "Dan Dart's Blog" mempty $ do
-    extNav "https://dandart.co.uk" "Dan Dart"
+htmlHeader ∷ Bool -> Html → Html → Html
+htmlHeader dev blogPostLinks blogPosts = makeHeader "#blog" "Dan Dart's Blog" mempty $ do
+    extNav (if dev then "http://dandart.localhost:8080" else "https://dandart.co.uk") "Dan Dart"
     pageBlog blogPostLinks blogPosts
     dlNav "/atom.xml" "Atom Feed"
 
@@ -34,7 +34,7 @@ extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan
 page ∷ Bool → Html → Html → Html
 page dev blogPostLinks blogPosts = docTypeHtml ! lang "en-GB" $ do
     htmlHead dev descTitle keywords extraHead
-    htmlHeader blogPostLinks blogPosts
+    htmlHeader dev blogPostLinks blogPosts
     visit "blog"
 
 page404 ∷ Html

@@ -32,7 +32,7 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     br
     p $ do
         extLink "https://html.spec.whatwg.org/" $ img ! A.style "height: 16px" !  src "https://upload.wikimedia.org/wikipedia/commons/a/a1/WHATWG_logo.svg"
-        extLink "/humans.txt" $ img ! src "https://humanstxt.org/img/oficial-logos/humanstxt-isolated-blank.gif"
+        extLink "/humans.txt" $ img ! src "/img/humanstxt-isolated-blank.gif"
         
 
 pageCharacters ∷ Html
@@ -125,8 +125,9 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
             "All-time: "
             extLink "http://riscos.com/riscos/310/index.php" "RISC OS"
 
-pageHamRadio ∷ Html
-pageHamRadio = extNav "https://m0ori.com" "Ham Radio"
+pageHamRadio ∷ Bool -> Html
+pageHamRadio False = extNav "https://m0ori.com" "Ham Radio"
+pageHamRadio True = extNav "http://m0ori.localhost:8080" "Ham Radio"
 
 pageHealth ∷ Html
 pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
@@ -218,14 +219,17 @@ pageAbout = makePage "about" "About" defaultLayout notDefaultPage $ do
         strong "The font choice"
         " was difficult to make, as I was (and am still not quite happy enough with it, and so therefore still am) looking for a suitable, free software natural sans-serif font style, which has the single-storey \"a\", non-looped \"g\", and the double-seriffed I and J amongst other things. For now I've settled on Caudex, which whilst it is still serif, seems to be the closest I've yet to come across."
 
-pageSoftware ∷ Html
-pageSoftware = extNav "https://jolharg.com" "Software"
+pageSoftware ∷ Bool -> Html
+pageSoftware False = extNav "https://jolharg.com" "Software"
+pageSoftware True = extNav "http://jolharg.localhost:8080" "Software"
 
-pageBlog ∷ Html
-pageBlog = extNav "https://blog.dandart.co.uk" "Blog"
+pageBlog ∷ Bool -> Html
+pageBlog False = extNav "https://blog.dandart.co.uk" "Blog"
+pageBlog True = extNav "http://blog.localhost:8080" "Blog"
 
-pageReviews ∷ Html
-pageReviews = extNav "https://madhackerreviews.com" "Reviews"
+pageReviews ∷ Bool -> Html
+pageReviews False = extNav "https://madhackerreviews.com" "Reviews"
+pageReviews True = extNav "http://madhacker.localhost:8080" "Reviews"
 
 pageContact ∷ Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
@@ -270,26 +274,26 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right so
     -- +social-no('windows', 'Windows', 'url', 'black')
     socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube")
 
-htmlHeader ∷ Html
-htmlHeader = makeHeader "#intro" "Dan Dart" socialIcons $ do
+htmlHeader ∷ Bool -> Html
+htmlHeader dev = makeHeader "#intro" "Dan Dart" socialIcons $ do
     pageIntro
     pageCharacters
     pageFavourites
-    pageHamRadio
+    pageHamRadio dev
     pageHealth
     pageMusic
     pageMaths
     pageOrigami
     pageAbout
-    pageSoftware
-    pageBlog
-    pageReviews
+    pageSoftware dev
+    pageBlog dev
+    pageReviews dev
     pageContact
 
 page ∷ Bool -> Html
 page dev = docTypeHtml ! lang "en-GB" $ do
     htmlHead dev descTitle keywords mempty
-    htmlHeader
+    htmlHeader dev
     visit "dandart"
 
 page404 ∷ Html

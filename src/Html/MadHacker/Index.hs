@@ -20,13 +20,13 @@ pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defa
         H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
         H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ reviews
 
-htmlHeader ∷ Html → Html → Html
-htmlHeader reviewLinks reviews = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
+htmlHeader ∷ Bool -> Html → Html → Html
+htmlHeader dev reviewLinks reviews = nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary" $ do
     a ! class_ "p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#reviews" $ do
         img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
         H.span ! class_ "title ml-2" $ "The Mad Hacker: Reviews"
     H.div . (ul ! class_ "navbar-nav px-3") $ do
-            extNav  "https://dandart.co.uk" "Dan Dart"
+            extNav (if dev then "http://dandart.localhost:8080" else "https://dandart.co.uk") "Dan Dart"
             pageReviews reviewLinks reviews
             dlNav "/atom.xml" "Atom Feed"
 
@@ -36,7 +36,7 @@ extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "The
 page ∷ Bool -> Html → Html → Html
 page dev reviewLinks reviews = docTypeHtml ! lang "en-GB" $ do
     htmlHead dev descTitle keywords extraHead
-    htmlHeader reviewLinks reviews
+    htmlHeader dev reviewLinks reviews
     visit "madhacker"
 
 page404 ∷ Html
