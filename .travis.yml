@@ -1,4 +1,5 @@
 language: nix
+nix: 2.3.10
 git:
   submodules: false
 before_install:
