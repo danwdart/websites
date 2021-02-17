@@ -12,6 +12,8 @@ install:
   - sudo systemctl restart nix-daemon
   - nix-env -iA nixpkgs.cachix
   - cachix use websites
+before-script:
+  - sudo mkdir -p /etc/nix && echo 'sandbox = true' | sudo tee /etc/nix/nix.conf
 script:
   - cachix use websites
   - nix-build
