@@ -4,6 +4,8 @@ git:
 before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//g' .gitmodules
   - git submodule update --init --recursive
+  - nix-channel --add https://nixos.org/channels/nixos-20.09 nixpkgs
+  - nix-channel --update
 install:
   - echo "trusted-users = $USER" | sudo tee -a /etc/nix/nix.conf
   - sudo systemctl restart nix-daemon
