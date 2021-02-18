@@ -13,7 +13,7 @@ let
       }) {};
       serverless-haskell = self.callCabal2nix "serverless-haskell" (builtins.fetchGit {
         url = "https://github.com/seek-oss/serverless-haskell.git";
-        rev = "249611a6f82f500691fbd55035b5ddb262a2962d";
+        rev = "b9f0e4c644f70d2c46853a5033e3fd26a57be8f4";
       }) {};
       gogol-core = self.callCabal2nixWithOptions "gogol-core" (builtins.fetchGit {
         url = "https://github.com/brendanhay/gogol";
@@ -57,3 +57,4 @@ in
   inherit node;
   websites = myHaskellPackages.websites;
 }
+
