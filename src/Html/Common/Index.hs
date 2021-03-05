@@ -53,7 +53,7 @@ pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
 pageFs ∷ Reader [Repo] Html
 pageFs = do
     repos <- ask
-    return . makePage "fs" "Free Software" customLayout notDefaultPage $ do
+    pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do
         row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
         mapM_ renderCard repos
 
@@ -66,7 +66,7 @@ pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
 htmlHeader ∷ Reader [Repo] Html
 htmlHeader = do
     fs <- pageFs
-    return . makeHeader "" "" mempty $ do
+    pure . makeHeader "" "" mempty $ do
         pagePortfolio
         fs
         pageContact
@@ -74,7 +74,7 @@ htmlHeader = do
 page ∷ Bool -> Reader [Repo] Html
 page dev = do
     header' <- htmlHeader
-    return . (docTypeHtml ! lang "en-GB") $ do
+    pure . (docTypeHtml ! lang "en-GB") $ do
         htmlHead dev descTitle keywords mempty
         header'
         visit "jolharg"

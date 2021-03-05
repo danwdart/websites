@@ -20,9 +20,9 @@ newtype BlogTag = BlogTag {
  } deriving (Show)
 
 instance FromJSON BlogTag where
-    parseJSON (A.String a') = return $ BlogTag a'
-    parseJSON (A.Number a') = return . BlogTag $ T.pack (show a')
-    parseJSON (A.Bool a')   = return . BlogTag $ T.pack (show a')
+    parseJSON (A.String a') = pure $ BlogTag a'
+    parseJSON (A.Number a') = pure . BlogTag $ T.pack (show a')
+    parseJSON (A.Bool a')   = pure . BlogTag $ T.pack (show a')
     parseJSON e             = error (show e)
 
 data BlogMetadata = BlogMetadata {

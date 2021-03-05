@@ -38,7 +38,7 @@ makeBlogPost postsDir filename = do
     let (ParseResult metadata' html') = parseFile fileText
     let postId' = dropExtension $ takeFileName filename
     comments' <- getComments postsDir postId'
-    return $ BlogPost (T.pack postId') metadata' html' comments'
+    pure $ BlogPost (T.pack postId') metadata' html' comments'
 
 tshowChoiceString ∷ ChoiceString → Text
 tshowChoiceString (Text s) = s

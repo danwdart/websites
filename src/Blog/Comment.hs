@@ -47,14 +47,14 @@ getCommentsIfExists postsDir postId = do
     let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
     commentTexts <- sequence $ TIO.readFile <$> validCommentFiles
     let commentData = zipWith parseComment dates commentTexts
-    return $ sortOn (Down . commentDate) commentData
+    pure $ sortOn (Down . commentDate) commentData
 
 getComments ∷ FilePath → FilePath → IO [ParseCommentResult]
 getComments postsDir postId = do
     dirExists <- doesDirectoryExist $ postsDir </> postId
     if dirExists
         then getCommentsIfExists postsDir postId
-        else return mempty
+        else pure mempty
 
 commentForm ∷ Text → Text → Html
 commentForm postType postId = H.form

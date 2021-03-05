@@ -33,7 +33,7 @@ data Language = LangHS
     | LangDocker deriving (Eq, Generic, Show)
 
 instance FromJSON Language where
-    parseJSON (String a) = return $ case a of
+    parseJSON (String a) = pure $ case a of
         "JavaScript"   -> LangJS
         "HTML"         -> LangHTML
         "Python"       -> LangPython
@@ -55,8 +55,8 @@ instance FromJSON Language where
         "Vue"          -> LangJS
         "Nix"          -> LangNix
         _              -> error $ "Unknown language: " <> T.unpack a
-    parseJSON Null = return LangGeneric
-    parseJSON _ = return LangGeneric
+    parseJSON Null = pure LangGeneric
+    parseJSON _ = pure LangGeneric
 
 newtype Licence = Licence {
     spdx_id :: String
@@ -108,7 +108,7 @@ instance FromJSON Repo where
             then Nothing
             else licence'
 
-        return $ Repo {
+        pure $ Repo {
             name = name',
             description = desc,
             fork = fork',
@@ -131,4 +131,4 @@ getRepos user = do
         header "User-Agent" "Dan's Haskell Bot v1.0" <>
         header "Authorization" (B.pack $ "Bearer " <> githubAccessToken)
         )
-    return $ responseBody res
+    pure $ responseBody res
