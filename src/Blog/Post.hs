@@ -21,13 +21,20 @@ import           Text.Pandoc.Class
 -- import Text.Pandoc.Readers.HTML
 import           Data.Either
 import           Text.Blaze.Internal
+import Text.Pandoc.Extensions
+import Text.Pandoc.Highlighting
+import Text.Pandoc.Options
 import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
 -- import Text.Blaze.Renderer.Utf8
 
 parseFile ∷ Text → ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r -> ParseResult r (fromRight "" $ runPure (writeHtml5 def =<< readMarkdown def (decodeUtf8 i')))
+    Done i' r -> ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
+        writerHighlightStyle = Just haddock
+    }) =<< readMarkdown (def {
+        readerExtensions = githubMarkdownExtensions
+    }) (decodeUtf8 i')))
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
     _ -> error $ "What is " <> T.unpack contents'
 
