@@ -1,6 +1,6 @@
-{ nixpkgs ? import <nixpkgs> {},
-  compiler ? "ghc884",
-  ghcjs ? "ghcjs884",
+{ nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {},
+  compiler ? "ghc8104", # basement doesn't yet support 901
+  ghcjs ? "ghcjs86",
   node ? import ./node-default.nix {} }:
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
@@ -11,11 +11,11 @@ let
         url = "https://github.com/danwdart/fsutils.git";
         rev = "bd85f977a7499a936181a37f4c602bd8b4480d68";
       }) {};
-      serverless-haskell = self.callCabal2nix "serverless-haskell" (builtins.fetchGit {
-        url = "https://github.com/seek-oss/serverless-haskell.git";
-        rev = "b9f0e4c644f70d2c46853a5033e3fd26a57be8f4";
-      }) {};
-      gogol-core = self.callCabal2nixWithOptions "gogol-core" (builtins.fetchGit {
+      mmark = (self.callHackage "mmark" "0.0.7.2" {}).overrideDerivation(self: {
+        doCheck = false; # It fails but I don't care as it's nothing I use, just a dependency of a part of a package I don't use.
+      });
+      # https://github.com/brendanhay/gogol/issues/148
+      gogol-core = self.callCabal2nixWithOptions "gogol-core" (builtins.fetchGit { # not yet released
         url = "https://github.com/brendanhay/gogol";
         rev = "d7c7d71fc985cd96fb5f05173da6c607da362b74";
       }) "--subpath core" {};
