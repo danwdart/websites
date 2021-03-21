@@ -27,7 +27,7 @@ renderStars (BlogMetadata _ _ _ _ _ (Just (Array scores))) = do
     br
     mapM_ (\(Object [(name', String score)]) -> do
         row $ do
-            (H.div ! class_ "col") . h4 $ (fromString . T.unpack $ name')
+            ((H.div ! class_ "col") . h4) . fromString . T.unpack $ name'
             H.div ! class_ "col" $ stars score
         ) scores
 renderStars _ = mempty
