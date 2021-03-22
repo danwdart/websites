@@ -1,10 +1,12 @@
-{ nixpkgs ? import <nixpkgs> {},
+{ 
+  nixpkgs ? import <nixpkgs> {},
+  unstable ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {},
   compiler ? "ghc8104", # basement doesn't yet support 901
   ghcjs ? "ghcjs86",
   node ? import ./node-default.nix {} }:
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
-  myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
+  myHaskellPackages = unstable.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = self.callCabal2nix "websites" (gitignore ./.) {};
       fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
@@ -48,7 +50,7 @@ let
       node.shell
     ];
   };
-  exe = nixpkgs.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
+  exe = unstable.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
 in
 {
   inherit shell;
