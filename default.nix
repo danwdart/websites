@@ -1,4 +1,4 @@
-{ nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {},
+{ nixpkgs ? import <nixpkgs> {},
   compiler ? "ghc8104", # basement doesn't yet support 901
   ghcjs ? "ghcjs86",
   node ? import ./node-default.nix {} }:
