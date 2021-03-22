@@ -16,11 +16,11 @@ import           Network.Google.Resource.YouTube.Subscriptions.List
 import           Network.Google.YouTube
 import           System.Environment
 import           System.Exit                                        (exitFailure)
-import           System.Info                                        (os)
 import           System.IO
+import           System.Info                                        (os)
 import           System.Process                                     (rawSystem)
 
-redirectPrompt ∷ AllowScopes (s :: [Symbol]) ⇒ OAuthClient → proxy s → IO (OAuthCode s)
+redirectPrompt ∷ AllowScopes (s ∷ [Symbol]) ⇒ OAuthClient → proxy s → IO (OAuthCode s)
 redirectPrompt c p = do
   let url = formURL c p
   T.putStrLn $ "Opening URL " `T.append` url
