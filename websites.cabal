@@ -27,7 +27,6 @@ executable build-websites
     , blaze-markup
     , bytestring
     , Cabal
-    , cheapskate
     , dotenv
     , directory
     , feed
@@ -256,7 +255,6 @@ test-suite e2e
     , blaze-markup
     , bytestring
     , Cabal
-    , cheapskate
     , directory
     , dotenv
     , feed
@@ -272,6 +270,7 @@ test-suite e2e
     , mmark
     , mtl
     , pandoc
+    , process
     , QuickCheck
     , random
     , req

@@ -5,7 +5,6 @@ module Blog.Post where
 
 import           Blog.Comment
 import           Blog.Types
-import           Cheapskate
 import           Data.Frontmatter
 import           Data.List
 import           Data.String
@@ -31,10 +30,10 @@ import           Text.Pandoc.Writers.HTML
 parseFile ∷ Text → ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
     Done i' r -> ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
-        writerHighlightStyle = Just haddock
-    }) =<< readMarkdown (def {
-        readerExtensions = githubMarkdownExtensions
-    }) (decodeUtf8 i')))
+            writerHighlightStyle = Just haddock
+        }) =<< readMarkdown (def {
+            readerExtensions = githubMarkdownExtensions
+        }) (decodeUtf8 i')))
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
     _ -> error $ "What is " <> T.unpack contents'
 
