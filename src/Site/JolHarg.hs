@@ -18,14 +18,14 @@ import           Text.Blaze.Html.Renderer.Utf8
 
 build ∷ WebsiteIO ()
 build = do
-  dev' <- asks dev
+  page' <- page
   liftIO $ do
     void $ loadFile defaultConfig
     reposDan <- runReq defaultHttpConfig $ getRepos "danwdart"
     reposJH <- runReq defaultHttpConfig $ getRepos "jolharg"
     copyDir "static/common" ".sites/jolharg"
     copyDir "static/jolharg" ".sites/jolharg"
-    BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ runReader (page dev') (reposDan <> reposJH)
+    BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ runReader page' (reposDan <> reposJH)
     putStrLn "jolharg compiled."
 
 serve ∷ WebsiteIO ()

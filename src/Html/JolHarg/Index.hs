@@ -3,8 +3,8 @@
 
 module Html.JolHarg.Index (page, page404) where
 
-import           Control.Monad.Reader
-
+import Data.Env
+import Control.Monad.Trans.Reader
 import           Data.Site.JolHarg
 
 import           Html.Common.Card
@@ -71,13 +71,15 @@ htmlHeader = do
         fs
         pageContact
 
-page ∷ Bool -> Reader [Repo] Html
-page dev = do
-    header' <- htmlHeader
-    pure . (docTypeHtml ! lang "en-GB") $ do
-        htmlHead dev descTitle keywords mempty
-        header'
-        visit "jolharg"
+page ∷ WebsiteIO (Reader [Repo] Html)
+page = do
+    dev' <- asks dev
+    pure $ do
+        header' <- htmlHeader
+        pure . (docTypeHtml ! lang "en-GB") $ do
+            htmlHead dev' descTitle keywords mempty
+            header'
+            visit "jolharg"
 
 page404 ∷ Html
 page404 = defaultPage404 descTitle keywords $ visit "jolharg404"
