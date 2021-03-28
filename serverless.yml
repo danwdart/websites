@@ -3,11 +3,13 @@ app: websites
 service: websites
 
 useDotenv: true
+variablesResolutionMode: 20210219
 
 provider:
   name: aws
   region: eu-west-2
   runtime: haskell
+  stage: dev
   environment:
     LANG: en_GB.UTF-8
     LC_ALL: en_GB.UTF-8
@@ -15,18 +17,22 @@ provider:
     restApi: false
   apiGateway:
     shouldStartNameWithService: true
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - apigateway:GET
-      Resource: "*"
-  apiKeys:
-    - viewer
+    apiKeys:
+      - viewer
+  lambdaHashingVersion: 20201221
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - apigateway:GET
+          Resource: "*"
+  
 
 functions:
   send-newsletter:
     handler: websites.send-newsletter
-    name: ${self:provider.stage}-send-newsletter
+    name: ${opt:stage, self:provider.stage}-send-newsletter
     package:
       exclude:
         - ./**
@@ -37,7 +43,7 @@ functions:
 
   submit-comment:
     handler: websites.submit-comment
-    name: ${self:provider.stage}-submit-comment
+    name: ${opt:stage, self:provider.stage}-submit-comment
     environment:
       GITHUB_ACCESS_TOKEN: ${env:GITHUB_ACCESS_TOKEN}
     package:
@@ -56,7 +62,7 @@ functions:
 
   subscribe-email-to-newsletter:
     handler: websites.subscribe-email-to-newsletter
-    name: ${self:provider.stage}-subscribe-email-to-newsletter
+    name: ${opt:stage, self:provider.stage}-subscribe-email-to-newsletter
     package:
       exclude:
         - ./**
@@ -73,7 +79,7 @@ functions:
 
   track-email-view:
     handler: websites.track-email-view
-    name: ${self:provider.stage}-track-email-view
+    name: ${opt:stage, self:provider.stage}-track-email-view
     package:
       exclude:
         - ./**
@@ -90,7 +96,7 @@ functions:
 
   unsubscribe-email-from-newsletter:
     handler: websites.unsubscribe-email-from-newsletter
-    name: ${self:provider.stage}-unsubscribe-email-from-newsletter
+    name: ${opt:stage, self:provider.stage}-unsubscribe-email-from-newsletter
     package:
       exclude:
         - ./**
@@ -107,7 +113,7 @@ functions:
 
   visit-migrate:
     handler: websites.visit-migrate
-    name: ${self:provider.stage}-visit-migrate
+    name: ${opt:stage, self:provider.stage}-visit-migrate
     environment:
       DB_HOST: ${env:DB_HOST}
       DB_USERNAME: ${env:DB_USERNAME}
@@ -131,7 +137,7 @@ functions:
 
   visit-viewer:
     handler: websites.visit-viewer
-    name: ${self:provider.stage}-visit-viewer
+    name: ${opt:stage, self:provider.stage}-visit-viewer
     timeout: 30
     environment:
       DB_HOST: ${env:DB_HOST}
@@ -161,7 +167,7 @@ functions:
 
   visit:
     handler: websites.visit
-    name: ${self:provider.stage}-visit
+    name: ${opt:stage, self:provider.stage}-visit
     timeout: 30
     environment:
       DB_HOST: ${env:DB_HOST}
@@ -323,7 +329,7 @@ custom:
   #customDomain:
   #  enable: true
   #  domainName: api.jolharg.com
-  #  stage: ${self:provider.stage}
+  #  stage: ${opt:stage, self:provider.stage}
   #  basePath: /
   #  certificateName: 'api.jolharg.com'
   #  createRoute53Record: true

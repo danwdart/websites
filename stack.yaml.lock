@@ -5,12 +5,12 @@
 
 packages:
 - completed:
-    hackage: serverless-haskell-0.12.4@sha256:07a0168e4323c64aa93a8dfe473ce42ebdabc5a8c8ad5f109da186f2ade83b97,2630
+    hackage: serverless-haskell-0.12.5@sha256:38ad00a675487b25feb1a2252eeb85e81721e63afec58a1f701b47bbbe5e8bc6,2630
     pantry-tree:
       size: 1846
-      sha256: 8617644558d5fdf6cda81a4c939766b2753a44fe23b99ec6cdf760bd31c091dc
+      sha256: b9d6b0dac5c08be232cba0bc7616dc751ce667858f5eb02ff4ed133b66eaf5b2
   original:
-    hackage: serverless-haskell-0.12.4
+    hackage: serverless-haskell-0.12.5
 - completed:
     name: fsutils
     version: 0.1.4

@@ -3,7 +3,7 @@ ghc-options:
 packages:
 - .
 extra-deps:
-- serverless-haskell-0.12.4
+- serverless-haskell-0.12.5
 - git: https://github.com/danwdart/fsutils.git
   commit: a4167c212939f7b2b123072542ad305777943903
 - gogol-0.5.0
