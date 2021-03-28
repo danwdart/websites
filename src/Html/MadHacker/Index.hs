@@ -3,7 +3,7 @@
 
 module Html.MadHacker.Index (page, page404) where
 
-import           Data.MadHacker
+import           Data.Site.MadHacker
 
 import           Html.Common.Head
 

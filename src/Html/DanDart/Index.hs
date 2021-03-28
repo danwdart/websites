@@ -3,7 +3,7 @@
 
 module Html.DanDart.Index (page, page404) where
 
-import           Data.DanDart
+import           Data.Site.DanDart
 
 import           Html.Common.Audio
 import           Html.Common.Contact

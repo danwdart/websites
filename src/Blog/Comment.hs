@@ -6,39 +6,29 @@ module Blog.Comment where
 
 import           Blog.Types
 import           Control.Monad
+import           Data.Either
 import           Data.Frontmatter
 import           Data.List
 import           Data.Maybe
 import           Data.Ord
 import           Data.String
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
+import           Data.Text                    (Text)
+import qualified Data.Text                    as T
 import           Data.Text.Encoding
-import qualified Data.Text.IO                as TIO
+import qualified Data.Text.IO                 as TIO
 import           Data.Time
 import           Data.Time.Format.ISO8601
 import           System.Directory
 import           System.FilePath
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import           Text.Blaze.Html5             as H hiding (main)
+import           Text.Blaze.Html5.Attributes  as A
 import           Text.Pandoc.Class
--- import Text.Pandoc.Readers.HTML
-import           Data.Either
-import Text.Pandoc.Extensions
-import Text.Pandoc.Highlighting
-import Text.Pandoc.Options
+import           Text.Pandoc.Extensions
+import           Text.Pandoc.Highlighting
+import           Text.Pandoc.Options
 import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
 import           Util.Time
-
-{-
-{-}
-details $ do
-    H.summary "2020"
-    details  $ do
-        H.summary "08"
-        a ! class_ "pl-2" ! href "#" $ "The thing." -}
--}
 
 parseComment ∷ UTCTime → Text → ParseCommentResult
 parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') of

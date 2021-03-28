@@ -5,7 +5,7 @@ module Html.JolHarg.Index (page, page404) where
 
 import           Control.Monad.Reader
 
-import           Data.JolHarg
+import           Data.Site.JolHarg
 
 import           Html.Common.Card
 import           Html.Common.Head

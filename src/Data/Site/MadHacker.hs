@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Data.MadHacker (keywords, descTitle) where
+module Data.Site.MadHacker (keywords, descTitle) where
 
 import           Text.Blaze.Html5 as H hiding (main)
 

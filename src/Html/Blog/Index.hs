@@ -3,7 +3,7 @@
 
 module Html.Blog.Index (page, page404) where
 
-import           Data.Blog
+import           Data.Site.Blog
 
 import           Data.String
 import           Html.Common.Head

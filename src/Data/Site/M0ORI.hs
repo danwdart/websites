@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Data.M0ORI (keywords, descTitle) where
+module Data.Site.M0ORI (keywords, descTitle) where
 
 
 import           Text.Blaze.Html5 as H hiding (main)
