@@ -3,7 +3,11 @@
 
 module Main where
 
+import Control.Monad.Trans.Reader
+import Data.Env
+import Control.Monad.IO.Class
 import           Data.ByteString                (isPrefixOf)
+import Data.Map ((!))
 import           Data.Maybe
 import           Network.Wai
 import           Network.Wai.Application.Static
@@ -21,13 +25,15 @@ import qualified Site.MadHacker                 as R
 import           System.Environment             (lookupEnv)
 import Control.Concurrent
 
-build ∷ Bool -> IO ()
-build dev = do
-    B.build dev
-    D.build dev
-    J.build dev
-    M.build dev
-    R.build dev
+build ∷ WebsitesIO ()
+build = do
+    websites <- ask
+    liftIO $ do
+        runReaderT B.build $ websites ! "blog"
+        runReaderT D.build $ websites ! "dandart"
+        runReaderT J.build $ websites ! "jolharg"
+        runReaderT M.build $ websites ! "m0ori"
+        runReaderT R.build $ websites ! "madhacker"
 
 wsApp ∷ ServerApp
 wsApp pending_conn = do
@@ -38,7 +44,7 @@ wsApp pending_conn = do
 
 serve ∷ IO ()
 serve = do
-    build True
+    runReaderT build development
     port <- fromMaybe "80" <$> lookupEnv "PORT"
     putStrLn "Serving all websites:"
     mapM_ (\host -> putStrLn $ "http://" <> host <> ".localhost:" <> port) [
@@ -73,4 +79,4 @@ serve = do
     where indices = mapMaybe toPiece ["index.html"]
 
 main ∷ IO ()
-main = build False
+main = runReaderT build production

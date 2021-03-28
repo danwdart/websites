@@ -3,11 +3,15 @@
 
 module Site.DanDart where
 
+import Control.Monad.Trans.Reader
+import Data.Env
 import           Util.Build
 import           Html.DanDart.Index
 
-build ∷ Bool -> IO ()
-build dev = make "dandart" (page dev) page404
+build ∷ WebsiteIO ()
+build = do
+  dev' <- asks dev
+  make "dandart" (page dev') page404
 
-serve ∷ Bool -> IO ()
-serve dev = makeServe (build dev) "dandart"
+serve ∷ WebsiteIO ()
+serve = makeServe build "dandart"

@@ -3,11 +3,15 @@
 
 module Site.M0ORI where
 
+import Control.Monad.Trans.Reader
+import Data.Env
 import           Util.Build
 import           Html.M0ORI.Index
 
-build ∷ Bool -> IO ()
-build dev = make "m0ori" (page dev) page404
+build ∷ WebsiteIO ()
+build = do
+  dev' <- asks dev
+  make "m0ori" (page dev') page404
 
-serve ∷ Bool -> IO ()
-serve dev = makeServe (build dev) "m0ori"
+serve ∷ WebsiteIO ()
+serve = makeServe build "m0ori"
