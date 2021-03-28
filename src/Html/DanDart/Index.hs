@@ -3,8 +3,9 @@
 
 module Html.DanDart.Index (page, page404) where
 
+import Control.Monad.Trans.Reader
 import           Data.Site.DanDart
-
+import Data.Env
 import           Html.Common.Audio
 import           Html.Common.Contact
 import           Html.Common.Error.NotFound
@@ -275,26 +276,29 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right so
     socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube")
 
 htmlHeader ∷ Bool -> Html
-htmlHeader dev = makeHeader "#intro" "Dan Dart" socialIcons $ do
+htmlHeader dev' = makeHeader "#intro" "Dan Dart" socialIcons $ do
     pageIntro
     pageCharacters
     pageFavourites
-    pageHamRadio dev
+    pageHamRadio dev'
     pageHealth
     pageMusic
     pageMaths
     pageOrigami
     pageAbout
-    pageSoftware dev
-    pageBlog dev
-    pageReviews dev
+    pageSoftware dev'
+    pageBlog dev'
+    pageReviews dev'
     pageContact
 
-page ∷ Bool -> Html
-page dev = docTypeHtml ! lang "en-GB" $ do
-    htmlHead dev descTitle keywords mempty
-    htmlHeader dev
-    visit "dandart"
+page ∷ WebsiteIO Html
+page = do
+    dev' <- asks dev
+    pure $ do
+        docTypeHtml ! lang "en-GB" $ do
+            htmlHead dev' descTitle keywords mempty
+            htmlHeader dev'
+            visit "dandart"
 
 page404 ∷ Html
 page404 = defaultPage404 descTitle keywords $ visit "dandart404"

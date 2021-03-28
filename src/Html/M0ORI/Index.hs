@@ -4,6 +4,8 @@
 module Html.M0ORI.Index (page, page404) where
 
 import           Data.Site.M0ORI
+import Data.Env
+import Control.Monad.Trans.Reader
 
 import           Html.Common.Head
 import           Html.Common.Link
@@ -57,16 +59,18 @@ pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
 
 htmlHeader ∷ Bool -> Html
-htmlHeader dev = makeHeader "" "M0ORI: Dan Dart" mempty $ do
-    extNav (if dev then "http://dandart.localhost:8080" else "https://dandart.co.uk") "Dan Dart"
+htmlHeader dev' = makeHeader "" "M0ORI: Dan Dart" mempty $ do
+    extNav (if dev' then "http://dandart.localhost:8080" else "https://dandart.co.uk") "Dan Dart"
     pageHamRadio
     pageContact
 
-page ∷ Bool -> Html
-page dev = docTypeHtml ! lang "en-GB" $ do
-    htmlHead dev descTitle keywords mempty
-    htmlHeader dev
-    visit "m0ori"
+page ∷ WebsiteIO Html
+page = do
+    dev' <- asks dev    
+    pure $ docTypeHtml ! lang "en-GB" $ do
+        htmlHead dev' descTitle keywords mempty
+        htmlHeader dev'
+        visit "m0ori"
 
 page404 ∷ Html
 page404 = defaultPage404 descTitle keywords $ visit "m0ori404"
