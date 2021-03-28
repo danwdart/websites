@@ -1,4 +1,8 @@
-# Notes
+# Serverless
+
+## AWS
+
+### Notes
 
 Yes, the docker image does need to be based on lts-13.30 rather than the actual snapshot in use, as that's the newest version still compatible with AWS's libc. See: https://github.com/seek-oss/serverless-haskell
 
@@ -10,7 +14,7 @@ I guess it's pointless specifying the small image because the standard image is 
 
 TODO: see if this breaks 8.10.x
 
-# Offline
+### Offline
 
 Needs to run as system (rootful) docker as the provided image runs as user with no access to /var/task.
 
@@ -45,7 +49,7 @@ Configuring GHC ...
 ```
 
 
-## Running as root
+### Running as root
 
 It's also necessary recently to have some of the repo owned by root if running docker as root (TODO find out which).
 
@@ -53,14 +57,20 @@ Probably easiest to temporarily run as user in docker group for now (but not for
 
 Best idea is to sync ~/.stack, ~/.aws and ~/.serverless with /root/
 
-# Usage
+### Usage
 
 Start offline: `sudo sls offline start`
 
-# Testing libraries
+### Testing libraries
 
 Something to do with `docker run --rm -it lambci/lambda:build-provided.al2 bash`...
 
-# TODO
+### TODO
 
 Investigate a way not to use this library and use our own glibc's binaries or even an AppImage.
+
+Docker it manually.
+
+Nix docker it.
+
+Don't use AWS, critically.
