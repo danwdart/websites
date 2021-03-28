@@ -39,6 +39,7 @@ executable build-websites
     , req
     , text
     , time
+    , transformers
     , unordered-containers
     , wai
     , wai-app-static
@@ -54,11 +55,11 @@ executable build-websites
     , Blog.Post
     , Blog.Types
     , Build.Utils
-    , Data.Blog
-    , Data.DanDart
-    , Data.JolHarg
-    , Data.MadHacker
-    , Data.M0ORI
+    , Data.Site.Blog
+    , Data.Site.DanDart
+    , Data.Site.JolHarg
+    , Data.Site.MadHacker
+    , Data.Site.M0ORI
     , Html.Blog.Index
     , Html.Common.Audio
     , Html.Common.Bootstrap
@@ -292,11 +293,11 @@ test-suite e2e
     , Blog.Post
     , Blog.Types
     , Build.Utils
-    , Data.Blog
-    , Data.DanDart
-    , Data.JolHarg
-    , Data.M0ORI
-    , Data.MadHacker
+    , Data.Site.Blog
+    , Data.Site.DanDart
+    , Data.Site.JolHarg
+    , Data.Site.M0ORI
+    , Data.Site.MadHacker
     , E2E.Site.CommonSpec
     , Html.Blog.Index
     , Html.Common.Audio
