@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Build.Utils (mkdirp, make, makeServe) where
+module Util.Build (mkdirp, make, makeServe) where
 
 import qualified Data.ByteString.Lazy.Char8     as BSL
 import           Data.Maybe                     (fromMaybe, mapMaybe)

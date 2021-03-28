@@ -3,7 +3,7 @@
 
 module Site.M0ORI where
 
-import           Build.Utils
+import           Util.Build
 import           Html.M0ORI.Index
 
 build ∷ Bool -> IO ()

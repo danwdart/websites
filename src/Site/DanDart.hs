@@ -3,7 +3,7 @@
 
 module Site.DanDart where
 
-import           Build.Utils
+import           Util.Build
 import           Html.DanDart.Index
 
 build ∷ Bool -> IO ()

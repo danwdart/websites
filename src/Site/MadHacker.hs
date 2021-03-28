@@ -4,7 +4,7 @@
 module Site.MadHacker where
 
 import           Blog.Feed             (makeRSSFeed)
-import           Build.Utils           (make, makeServe)
+import           Util.Build           (make, makeServe)
 import qualified Data.Text.IO          as TIO
 import           Html.MadHacker.Index  (page, page404)
 import           Site.Markdowns

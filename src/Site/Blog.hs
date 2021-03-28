@@ -4,7 +4,7 @@
 module Site.Blog where
 
 import           Blog.Feed             (makeRSSFeed)
-import           Build.Utils           (make, makeServe)
+import           Util.Build           (make, makeServe)
 import qualified Data.Text.IO          as TIO
 import           Html.Blog.Index  (page, page404)
 import           Site.Markdowns

@@ -27,6 +27,7 @@ executable build-websites
     , blaze-markup
     , bytestring
     , Cabal
+    , containers
     , dotenv
     , directory
     , feed
@@ -54,7 +55,8 @@ executable build-websites
     , Blog.Link
     , Blog.Post
     , Blog.Types
-    , Build.Utils
+    , Util.Build
+    , Data.Env
     , Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg
@@ -292,7 +294,7 @@ test-suite e2e
     , Blog.Link
     , Blog.Post
     , Blog.Types
-    , Build.Utils
+    , Util.Build
     , Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg
