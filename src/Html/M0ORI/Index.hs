@@ -58,19 +58,22 @@ pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact Dan, please use this form:"
     contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
 
-htmlHeader ∷ Bool -> Html
-htmlHeader dev' = makeHeader "" "M0ORI: Dan Dart" mempty $ do
-    extNav (if dev' then "http://dandart.localhost:8080" else "https://dandart.co.uk") "Dan Dart"
-    pageHamRadio
-    pageContact
+htmlHeader ∷ WebsiteIO Html
+htmlHeader = do
+    urlDanDart' <- asks urlDanDart
+    pure . makeHeader "" "M0ORI: Dan Dart" mempty $ do
+        extNav (textValue urlDanDart') "Dan Dart"
+        pageHamRadio
+        pageContact
 
 page ∷ WebsiteIO Html
 page = do
-    dev' <- asks dev    
-    pure $ docTypeHtml ! lang "en-GB" $ do
-        htmlHead dev' descTitle keywords mempty
-        htmlHeader dev'
+    header' <- htmlHeader
+    head' <- htmlHead descTitle keywords mempty
+    pure . (docTypeHtml ! lang "en-GB") $ do
+        head'
+        header'
         visit "m0ori"
 
-page404 ∷ Html
+page404 ∷ WebsiteIO Html
 page404 = defaultPage404 descTitle keywords $ visit "m0ori404"

@@ -126,10 +126,6 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
             "All-time: "
             extLink "http://riscos.com/riscos/310/index.php" "RISC OS"
 
-pageHamRadio ∷ Bool -> Html
-pageHamRadio False = extNav "https://m0ori.com" "Ham Radio"
-pageHamRadio True = extNav "http://m0ori.localhost:8080" "Ham Radio"
-
 pageHealth ∷ Html
 pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
     p "Both my physical and mental health are very low at the moment, but I am always more than happy to talk about them."
@@ -220,17 +216,25 @@ pageAbout = makePage "about" "About" defaultLayout notDefaultPage $ do
         strong "The font choice"
         " was difficult to make, as I was (and am still not quite happy enough with it, and so therefore still am) looking for a suitable, free software natural sans-serif font style, which has the single-storey \"a\", non-looped \"g\", and the double-seriffed I and J amongst other things. For now I've settled on Caudex, which whilst it is still serif, seems to be the closest I've yet to come across."
 
-pageSoftware ∷ Bool -> Html
-pageSoftware False = extNav "https://jolharg.com" "Software"
-pageSoftware True = extNav "http://jolharg.localhost:8080" "Software"
+pageHamRadio ∷ WebsiteIO Html
+pageHamRadio = do
+    urlHamRadio' <- asks urlHamRadio    
+    pure $ extNav (textValue urlHamRadio') "Ham Radio"
 
-pageBlog ∷ Bool -> Html
-pageBlog False = extNav "https://blog.dandart.co.uk" "Blog"
-pageBlog True = extNav "http://blog.localhost:8080" "Blog"
+pageSoftware ∷ WebsiteIO Html
+pageSoftware = do
+    urlJolHarg' <- asks urlJolHarg
+    pure $ extNav (textValue urlJolHarg') "Software"
 
-pageReviews ∷ Bool -> Html
-pageReviews False = extNav "https://madhackerreviews.com" "Reviews"
-pageReviews True = extNav "http://madhacker.localhost:8080" "Reviews"
+pageBlog ∷ WebsiteIO Html
+pageBlog = do
+    urlBlog' <- asks urlBlog
+    pure $ extNav (textValue urlBlog') "Blog"
+
+pageReviews ∷ WebsiteIO Html
+pageReviews = do
+    urlMadHacker' <- asks urlMadHacker
+    pure $ extNav (textValue urlMadHacker') "Reviews"
 
 pageContact ∷ Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
@@ -275,30 +279,36 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right so
     -- +social-no('windows', 'Windows', 'url', 'black')
     socialIconB (ytChan <> "UCaHwNzu1IlQKWCQEXACflaw") "YouTube" "youtube")
 
-htmlHeader ∷ Bool -> Html
-htmlHeader dev' = makeHeader "#intro" "Dan Dart" socialIcons $ do
-    pageIntro
-    pageCharacters
-    pageFavourites
-    pageHamRadio dev'
-    pageHealth
-    pageMusic
-    pageMaths
-    pageOrigami
-    pageAbout
-    pageSoftware dev'
-    pageBlog dev'
-    pageReviews dev'
-    pageContact
+htmlHeader ∷ WebsiteIO Html
+htmlHeader = do
+    pageHamRadio' <- pageHamRadio
+    pageSoftware' <- pageSoftware
+    pageBlog' <- pageBlog
+    pageReviews' <- pageReviews
+    pure . makeHeader "#intro" "Dan Dart" socialIcons $ do
+        pageIntro
+        pageCharacters
+        pageFavourites
+        pageHamRadio'
+        pageHealth
+        pageMusic
+        pageMaths
+        pageOrigami
+        pageAbout
+        pageSoftware'
+        pageBlog'
+        pageReviews'
+        pageContact
 
 page ∷ WebsiteIO Html
 page = do
-    dev' <- asks dev
+    header' <- htmlHeader
+    head' <- htmlHead descTitle keywords mempty
     pure $ do
         docTypeHtml ! lang "en-GB" $ do
-            htmlHead dev' descTitle keywords mempty
-            htmlHeader dev'
+            head'
+            header'
             visit "dandart"
 
-page404 ∷ Html
+page404 ∷ WebsiteIO Html
 page404 = defaultPage404 descTitle keywords $ visit "dandart404"

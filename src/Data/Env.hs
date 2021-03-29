@@ -21,11 +21,15 @@ data Website = Website {
     title :: Text,
     -- keywords :: Set Text,
     url :: Text,
+    urlDanDart :: Text,
+    urlHamRadio :: Text,
+    urlBlog :: Text,
+    urlJolHarg :: Text,
+    urlMadHacker :: Text,
     siteType :: SiteType,
     livereload :: Bool,
     tracking :: Bool,
-    endpoint :: Text,
-    dev :: Bool -- temporary
+    endpoint :: Text
 }
 
 type Env = Map Text Website
@@ -47,12 +51,16 @@ development = [
         Website {
             slug = "blog",
             title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio Ham, Musician",
-            url = "http://blog.localhost:8000",
+            url = "http://blog.localhost:8080",
+            urlDanDart = "http://dandart.localhost:8080",
+            urlHamRadio = "http://m0ori.localhost:8080",
+            urlBlog = "http://blog.localhost:8080",
+            urlJolHarg = "http://jolharg.localhost:8080",
+            urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Blog "posts",
             livereload = True,
             tracking = False,
-            endpoint = "http://localhost:3000/dev",
-            dev = True
+            endpoint = "http://localhost:3000/dev"
         }
     ),
     (
@@ -60,12 +68,16 @@ development = [
         Website {
             slug = "dandart",
             title = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician",
-            url = "http://dandart.localhost:8000",
+            url = "http://dandart.localhost:8080",
+            urlDanDart = "http://dandart.localhost:8080",
+            urlHamRadio = "http://m0ori.localhost:8080",
+            urlBlog = "http://blog.localhost:8080",
+            urlJolHarg = "http://jolharg.localhost:8080",
+            urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Normal,
             livereload = True,
             tracking = False,
-            endpoint = "http://localhost:3000/dev",
-            dev = True
+            endpoint = "http://localhost:3000/dev"
         }
     ),
     (
@@ -73,12 +85,16 @@ development = [
         Website {
             slug = "jolharg",
             title = "JolHarg: Your Software Engineering Partner",
-            url = "http://jolharg.localhost:8000",
+            url = "http://jolharg.localhost:8080",
+            urlDanDart = "http://dandart.localhost:8080",
+            urlHamRadio = "http://m0ori.localhost:8080",
+            urlBlog = "http://blog.localhost:8080",
+            urlJolHarg = "http://jolharg.localhost:8080",
+            urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Normal,
             livereload = True,
             tracking = False,
-            endpoint = "http://localhost:3000/dev",
-            dev = True
+            endpoint = "http://localhost:3000/dev"
         }
     ),
     (
@@ -86,12 +102,16 @@ development = [
         Website {
             slug = "m0ori",
             title = "M0ORI call sign: Dan Dart, England",
-            url = "http://m0ori.localhost:8000",
+            url = "http://m0ori.localhost:8080",
+            urlDanDart = "http://dandart.localhost:8080",
+            urlHamRadio = "http://m0ori.localhost:8080",
+            urlBlog = "http://blog.localhost:8080",
+            urlJolHarg = "http://jolharg.localhost:8080",
+            urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Normal,
             livereload = True,
             tracking = False,
-            endpoint = "http://localhost:3000/dev",
-            dev = True
+            endpoint = "http://localhost:3000/dev"
         }
     ),
     (
@@ -99,12 +119,16 @@ development = [
         Website {
             slug = "m0ori",
             title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
-            url = "http://madhacker.localhost:8000",
+            url = "http://madhacker.localhost:8080",
+            urlDanDart = "http://dandart.localhost:8080",
+            urlHamRadio = "http://m0ori.localhost:8080",
+            urlBlog = "http://blog.localhost:8080",
+            urlJolHarg = "http://jolharg.localhost:8080",
+            urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Blog "reviews",
             livereload = True,
             tracking = False,
-            endpoint = "http://localhost:3000/dev",
-            dev = True
+            endpoint = "http://localhost:3000/dev"
         }
     )
     ]
@@ -117,11 +141,15 @@ production = [
             slug = "blog",
             title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio Ham, Musician",
             url = "https://blog.dandart.co.uk",
+            urlDanDart = "https://dandart.co.uk",
+            urlHamRadio = "https://m0ori.co.uk",
+            urlBlog = "https://blog.dandart.co.uk",
+            urlJolHarg = "https://jolharg.com",
+            urlMadHacker = "https://madhackerreviews.com",
             siteType = Blog "posts",
             livereload = True,
             tracking = False,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev",
-            dev = False
+            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
     (
@@ -130,11 +158,15 @@ production = [
             slug = "dandart",
             title = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician",
             url = "https://dandart.co.uk",
+            urlDanDart = "https://dandart.co.uk",
+            urlHamRadio = "https://m0ori.co.uk",
+            urlBlog = "https://blog.dandart.co.uk",
+            urlJolHarg = "https://jolharg.com",
+            urlMadHacker = "https://madhackerreviews.com",
             siteType = Normal,
             livereload = True,
             tracking = False,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev",
-            dev = False
+            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
     (
@@ -143,11 +175,15 @@ production = [
             slug = "jolharg",
             title = "JolHarg: Your Software Engineering Partner",
             url = "https://jolharg.com",
+            urlDanDart = "https://dandart.co.uk",
+            urlHamRadio = "https://m0ori.co.uk",
+            urlBlog = "https://blog.dandart.co.uk",
+            urlJolHarg = "https://jolharg.com",
+            urlMadHacker = "https://madhackerreviews.com",
             siteType = Normal,
             livereload = True,
             tracking = False,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev",
-            dev = False
+            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
     (
@@ -156,11 +192,15 @@ production = [
             slug = "m0ori",
             title = "M0ORI call sign: Dan Dart, England",
             url = "https://m0ori.co.uk",
+            urlDanDart = "https://dandart.co.uk",
+            urlHamRadio = "https://m0ori.co.uk",
+            urlBlog = "https://blog.dandart.co.uk",
+            urlJolHarg = "https://jolharg.com",
+            urlMadHacker = "https://madhackerreviews.com",
             siteType = Normal,
             livereload = True,
             tracking = False,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev",
-            dev = False
+            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
     (
@@ -169,11 +209,15 @@ production = [
             slug = "m0ori",
             title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
             url = "https://madhackerreviews.com",
+            urlDanDart = "https://dandart.co.uk",
+            urlHamRadio = "https://m0ori.co.uk",
+            urlBlog = "https://blog.dandart.co.uk",
+            urlJolHarg = "https://jolharg.com",
+            urlMadHacker = "https://madhackerreviews.com",
             siteType = Blog "reviews",
             livereload = True,
             tracking = False,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev",
-            dev = False
+            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     )
     ]

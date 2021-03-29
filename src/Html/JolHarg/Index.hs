@@ -73,13 +73,13 @@ htmlHeader = do
 
 page ∷ WebsiteIO (Reader [Repo] Html)
 page = do
-    dev' <- asks dev
+    head' <- htmlHead descTitle keywords mempty
     pure $ do
         header' <- htmlHeader
         pure . (docTypeHtml ! lang "en-GB") $ do
-            htmlHead dev' descTitle keywords mempty
+            head'
             header'
             visit "jolharg"
 
-page404 ∷ Html
+page404 ∷ WebsiteIO Html
 page404 = defaultPage404 descTitle keywords $ visit "jolharg404"

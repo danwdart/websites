@@ -19,14 +19,15 @@ import           WaiAppStatic.Types
 mkdirp ∷ String → IO ()
 mkdirp = createDirectoryIfMissing True
 
-make ∷ String → WebsiteIO Html → Html → WebsiteIO ()
+make ∷ String → WebsiteIO Html → WebsiteIO Html → WebsiteIO ()
 make name page page404 = do
     page' <- page
+    page404' <- page404
     liftIO $ do
         copyDir "static/common" $ ".sites/" <> name
         copyDir ("static/" <> name) (".sites/" <> name)
         BSL.writeFile (".sites/" <> (name <> "/index.html")) $ renderHtml page'
-        BSL.writeFile (".sites/" <> (name <> "/404.html")) $ renderHtml page404
+        BSL.writeFile (".sites/" <> (name <> "/404.html")) $ renderHtml page404'
         putStrLn $ name <> " compiled."
 
 makeServe ∷ WebsiteIO () → FilePath → WebsiteIO ()

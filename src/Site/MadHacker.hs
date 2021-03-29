@@ -14,7 +14,7 @@ import           Site.Markdowns
 build ∷ WebsiteIO ()
 build = do
   (sortedPosts, renderedPosts, renderedLinks) <- liftIO $buildMD "reviews" "review"
-  liftIO $ TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhackerreviews.com" "Mad Hacker Tech Reviews" sortedPosts
+  liftIO . TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed "https://madhackerreviews.com" "Mad Hacker Tech Reviews" sortedPosts
   make "madhacker" (page renderedLinks renderedPosts) page404
 
 serve ∷ WebsiteIO ()

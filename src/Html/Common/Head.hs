@@ -3,6 +3,8 @@
 
 module Html.Common.Head (htmlHead) where
 
+import Data.Env
+import Control.Monad.Trans.Reader
 import Control.Monad (when)
 import           Data.String
 
@@ -26,11 +28,13 @@ metas descTitle keywords = do
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
-htmlHead ∷ Bool → String → [AttributeValue] → Html → Html
-htmlHead dev descTitle keywords extraHead = H.head $ do
-    H.title $ toHtml descTitle
-    metas descTitle keywords
-    commonCSS
-    extraHead
-    when dev . (script ! src "/js/livereload.js") $ mempty
+htmlHead ∷ String → [AttributeValue] → Html → WebsiteIO Html
+htmlHead descTitle keywords extraHead = do
+    livereload' <- asks livereload
+    pure . H.head $ do
+        H.title $ toHtml descTitle
+        metas descTitle keywords
+        commonCSS
+        extraHead
+        when livereload' . (script ! src "/js/livereload.js") $ mempty
 
