@@ -106,6 +106,18 @@ executable get-subs
     , process
     , text
 
+executable remove-spam
+  import: shared-properties
+  main-is:             remove-spam.hs
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , base64
+    , bytestring
+    -- , github -- can't use? will have to use new project?
+    , github-rest
+    , text
+
 executable send-newsletter
   import: shared-properties
   main-is:             send-newsletter.hs
@@ -258,6 +270,7 @@ test-suite e2e
     , blaze-markup
     , bytestring
     , Cabal
+    , containers
     , directory
     , dotenv
     , feed
@@ -295,6 +308,7 @@ test-suite e2e
     , Blog.Post
     , Blog.Types
     , Util.Build
+    , Data.Env
     , Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg
