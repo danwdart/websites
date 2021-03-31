@@ -10,11 +10,14 @@ import           Control.Exception                (SomeException (SomeException)
                                                    try)
 import           Control.Monad                    (when)
 import           Control.Monad.IO.Class
+import Control.Monad.Trans.Reader
 import           Data.Aeson                       (Object,
                                                    Value (Array, String),
                                                    object)
+import Data.Env                                                   
 import           Data.Functor.Compose             (Compose (Compose, getCompose))
 import           Data.List                        (nub)
+import Data.Map ((!))
 import           Data.Maybe                       (catMaybes)
 import           Data.Text                        (Text, unpack)
 import           Data.Vector                      (fromList)
@@ -107,11 +110,11 @@ configs = [
 
 sites ∷ [(Text, IO ())]
 sites = [
-    ("blog", B.serve True),
-    ("dandart", D.serve True),
-    ("jolharg", J.serve True),
-    ("madhacker", MH.serve True),
-    ("m0ori", M.serve True)
+    ("blog", runReaderT B.serve (development ! "blog")),
+    ("dandart", runReaderT D.serve (development ! "dandart")),
+    ("jolharg", runReaderT J.serve (development ! "jolharg")),
+    ("madhacker", runReaderT MH.serve (development ! "madhacker")),
+    ("m0ori", runReaderT M.serve (development ! "m0ori"))
     ]
 
 -- in terms of safeTry / try?
@@ -152,18 +155,17 @@ testSecureLink src = describe src .
         src `shouldNotContain` "http:"
 
 getStatuses ∷ Manager → String → IO (String, Int)
-getStatuses manager url = ioDef (url, 0) $ do
-    request <- parseRequest url
+getStatuses manager url' = ioDef (url', 0) $ do
+    request <- parseRequest url'
     response <- httpNoBody request manager
-    pure (url, statusCode . responseStatus $ response)
+    pure (url', statusCode . responseStatus $ response)
 
 testNotBroken ∷ (String, Int) → Spec
-testNotBroken (url, status) = describe url $ do
+testNotBroken (url', status) = describe url' $ do
     it "should not be failing" $
         status `shouldNotBe` 0
     it "should not 404" $
         status `shouldNotBe` 404
-
 
 testForConfig ∷ WebDriverConfig conf ⇒ Int → Text → (Text, conf) → Spec
 testForConfig myPort siteName (configName, config) =
