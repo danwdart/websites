@@ -7,6 +7,8 @@ import           Blog.Post        (makeBlogPost, renderPost)
 import           Blog.Types       (BlogMetadata (date, draft),
                                    BlogPost (metadata))
 import           Control.Monad    (filterM)
+import Control.Monad.IO.Class
+import Data.Env
 import           Data.List        (sortOn)
 import           Data.Ord         (Down (Down))
 import           Data.Text        (Text)
@@ -14,15 +16,15 @@ import           System.Directory (doesFileExist, getDirectoryContents)
 import           System.FilePath  ((</>))
 import           Text.Blaze.Html5 as H
 
-buildMD ∷ FilePath → Text → IO ([BlogPost], Html, Html)
+buildMD ∷ FilePath → Text → WebsiteIO ([BlogPost], Html, Html)
 buildMD postsDir postType = do
-  files <- getDirectoryContents postsDir
+  files <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files -- if used in same line, use Compose
-  validFiles <- filterM doesFileExist fileNames
-  posts <- sequence $ makeBlogPost postsDir <$> validFiles
+  validFiles <- liftIO $ filterM doesFileExist fileNames
+  posts <- liftIO . sequence $ makeBlogPost postsDir <$> validFiles
 
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-  let renderedPosts = foldMap (renderPost postType (const mempty)) sortedPosts
+  renderedPosts <- foldMap (renderPost postType (const mempty)) sortedPosts
   let renderedLinks = makeLinks sortedPosts
 
   pure (sortedPosts, renderedPosts, renderedLinks)

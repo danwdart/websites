@@ -41,12 +41,15 @@ page ∷ Html → Html → WebsiteIO Html
 page blogPostLinks blogPosts = do
     header' <- htmlHeader blogPostLinks blogPosts
     head' <- htmlHead descTitle keywords extraHead
+    visit' <- visit "blog"
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
-        visit "blog"
+        visit'
 
 page404 ∷ WebsiteIO Html
-page404 = defaultPage404 descTitle keywords $ do
-    extraHead
-    visit "blog404"
+page404 = do
+    visit404 <- visit "blog404"
+    defaultPage404 descTitle keywords $ do
+        extraHead
+        visit404

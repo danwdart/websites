@@ -8,6 +8,8 @@ import           Blog.Types
 import           Control.Monad
 import           Data.Either
 import           Data.Frontmatter
+import Data.Env
+import Control.Monad.Trans.Reader
 import           Data.List
 import           Data.Maybe
 import           Data.Ord
@@ -57,29 +59,31 @@ getComments postsDir postId = do
         then getCommentsIfExists postsDir postId
         else pure mempty
 
-commentForm ∷ Text → Text → Html
-commentForm postType postId = H.form
-    ! A.class_ "form"
-    ! enctype "application/x-www-form-urlencoded"
-    ! action "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/comment"
-    ! method "post"
-    ! target "_result" $ do
-        H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
-        H.input ! A.type_ "hidden" ! name "postType" ! value (fromString (T.unpack postType))
-        mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
-            H.label ! for name_ $ label_
-            H.input ! A.type_ type__ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
-            ) [
-                ("text", "name", "Name", "John Smith"),
-                ("email", "email", "Email", "john@smith.com"),
-                ("text", "website", "Website", "https://mydomain.com")
-                ]
-        H.div ! A.class_ "form-group" $ do
-            H.label ! for "name" $ "Comment"
-            H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
-        H.div ! A.class_ "form-group" $ do
-            button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
-            H.iframe ! name "_result" ! height "30" ! width "200" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
+commentForm ∷ Text → Text → WebsiteIO Html
+commentForm postType postId = do
+    endpoint' <- asks endpoint
+    pure . (H.form
+        ! A.class_ "form"
+        ! enctype "application/x-www-form-urlencoded"
+        ! action (textValue (endpoint' <> "/comment"))
+        ! method "post"
+        ! target "_result") $ do
+            H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
+            H.input ! A.type_ "hidden" ! name "postType" ! value (fromString (T.unpack postType))
+            mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
+                H.label ! for name_ $ label_
+                H.input ! A.type_ type__ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
+                ) [
+                    ("text", "name", "Name", "John Smith"),
+                    ("email", "email", "Email", "john@smith.com"),
+                    ("text", "website", "Website", "https://mydomain.com")
+                    ]
+            H.div ! A.class_ "form-group" $ do
+                H.label ! for "name" $ "Comment"
+                H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
+            H.div ! A.class_ "form-group" $ do
+                button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
+                H.iframe ! name "_result" ! height "30" ! width "200" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
 
 renderComment ∷ ParseCommentResult → Html
 renderComment ParseCommentResult {

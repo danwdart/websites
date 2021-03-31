@@ -5,6 +5,8 @@ module Blog.Post where
 
 import           Blog.Comment
 import           Blog.Types
+import           Data.Either
+import           Data.Env
 import           Data.Frontmatter
 import           Data.List
 import           Data.String
@@ -16,16 +18,13 @@ import           Html.Common.Visit
 import           System.FilePath
 import           Text.Blaze.Html5             as H hiding (main)
 import           Text.Blaze.Html5.Attributes  as A
-import           Text.Pandoc.Class
--- import Text.Pandoc.Readers.HTML
-import           Data.Either
 import           Text.Blaze.Internal
-import Text.Pandoc.Extensions
-import Text.Pandoc.Highlighting
-import Text.Pandoc.Options
+import           Text.Pandoc.Class
+import           Text.Pandoc.Extensions
+import           Text.Pandoc.Highlighting
+import           Text.Pandoc.Options
 import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
--- import Text.Blaze.Renderer.Utf8
 
 parseFile ∷ Text → ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
@@ -90,35 +89,40 @@ fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
 
-renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → Html
+renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteIO Html
 renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = do
-    a ! name (fromString (T.unpack postId')) $ mempty
-    -- Not working in Safari yet, so filter
-    visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId') "top"
-    h1 . fromString . T.unpack $ Blog.Types.title metadata'
-    small $ do
-        a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
-        " | Published: "
-        fromString . show . date $ metadata'
-        " | Tags: "
-        foldMap ((\str -> do
-            a ! href "#" {-( <> fromString str)-} $ fromString str
-            " "
-            ) . T.unpack . getTag) (tags metadata')
-    br
-    br
-    fixExternalLinks html'
-    br
-    renderSuffix metadata'
-    br
-    h3 "Comments"
-    if Data.List.null comments' then
-        p "No comments at the moment. Be the first to comment!"
-    else
-        mapM_ renderComment comments'
-    br
-    details $ do
-        H.summary . (h4 ! A.class_ "d-inline-block") $ "Post a comment"
-        commentForm postType postId'
-    hr
-    visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId') "bottom"
+    commentForm' <- commentForm postType postId'
+    let visitPageSub' = visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId')
+    visitPageSubTop <- visitPageSub' "top"
+    visitPageSubBottom <- visitPageSub' "bottom"
+    pure $ do
+        a ! name (fromString (T.unpack postId')) $ mempty
+        -- Not working in Safari yet, so filter
+        visitPageSubTop
+        h1 . fromString . T.unpack $ Blog.Types.title metadata'
+        small $ do
+            a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
+            " | Published: "
+            fromString . show . date $ metadata'
+            " | Tags: "
+            foldMap ((\str -> do
+                a ! href "#" {-( <> fromString str)-} $ fromString str
+                " "
+                ) . T.unpack . getTag) (tags metadata')
+        br
+        br
+        fixExternalLinks html'
+        br
+        renderSuffix metadata'
+        br
+        h3 "Comments"
+        if Data.List.null comments' then
+            p "No comments at the moment. Be the first to comment!"
+        else
+            mapM_ renderComment comments'
+        br
+        details $ do
+            H.summary . (h4 ! A.class_ "d-inline-block") $ "Post a comment"
+            commentForm'
+        hr
+        visitPageSubBottom

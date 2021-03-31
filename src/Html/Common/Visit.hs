@@ -3,17 +3,27 @@
 
 module Html.Common.Visit where
 
+import Data.Env
+import Control.Monad.Trans.Reader
 import           Text.Blaze.Html5
 import           Text.Blaze.Html5.Attributes as A
 
-visitsUrl ∷ AttributeValue
-visitsUrl = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev/v.gif"
+visitsUrl ∷ WebsiteIO AttributeValue
+visitsUrl = do
+    endpoint' <- asks endpoint
+    pure $ textValue endpoint <> "/v.gif"
 
-visit ∷ AttributeValue → Html
-visit url = img ! src (visitsUrl <> "?u=" <> url) ! A.style "display: none"
+-- TODO functor?
+lazyPixelVisit :: (AttributeValue -> AttributeValue) -> WebsiteIO Html
+lazyPixelVisit f = do
+    visitsUrl' <- asks visitsUrl
+    img ! src (f visitsUrl') ! A.style "display: none" ! A.style "width: 0; height: 0" ! customAttribute "loading" "lazy"
 
-visitPage ∷ AttributeValue → AttributeValue → Html
-visitPage url page = img ! src (visitsUrl <> "?u=" <> url <> "&p=" <> page) ! A.style "width: 0; height: 0" ! customAttribute "loading" "lazy"
+visit ∷ AttributeValue → WebsiteIO Html
+visit url = lazyPixelVisit (<> "?u=" <> url)
 
-visitPageSub ∷ AttributeValue → AttributeValue → AttributeValue → Html
-visitPageSub url page sub' = img ! src (visitsUrl <> "?u=" <> url <> "&p=" <> page <> "&s=" <> sub') ! A.style "width: 0; height: 0" ! customAttribute "loading" "lazy"
+visitPage ∷ AttributeValue → AttributeValue → WebsiteIO Html
+visitPage url page = lazyPixelVisit (<> "?u=" <> url <> "&p=" <> page)
+
+visitPageSub ∷ AttributeValue → AttributeValue → AttributeValue → WebsiteIO Html
+visitPageSub url page sub' = lazyPixelVisit (<> "?u=" <> url <> "&p=" <> page <> "&s=" <> sub')

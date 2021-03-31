@@ -1,9 +1,12 @@
 {-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Data.Env where
 
+import Control.Applicative
 import Control.Monad.Trans.Reader
 -- import Data.Set (Set)
 import Data.String
@@ -39,6 +42,14 @@ type Env = Map Text Website
 type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website
 type WebsiteIO = WebsiteT IO
+
+-- todo Ap
+instance (Applicative f, Semigroup m) => Semigroup (ReaderT r f m) where
+    (<>) = liftA2 (<>)
+
+instance (Applicative f, Monoid m) => Monoid (ReaderT r f m) where
+    mempty = pure mempty
+    mappend = liftA2 mappend
 
 type WebsitesM = Reader Env
 type WebsitesT = ReaderT Env
