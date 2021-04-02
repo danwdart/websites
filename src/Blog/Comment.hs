@@ -83,7 +83,7 @@ commentForm postType postId = do
                 H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
             H.div ! A.class_ "form-group" $ do
                 button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
-                H.iframe ! name "_result" ! height "30" ! width "200" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
+                H.iframe ! name "_result" ! height "90" ! width "300" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
 
 renderComment ∷ ParseCommentResult → Html
 renderComment ParseCommentResult {
