@@ -90,7 +90,9 @@ handler request = do
         void $ createBranch masterSHA branch
         void $ commitNewFile branch postType postId commentId commentRecord
         void $ pullRequest branch commentRecord
-    pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:green\">OK</span>"
+    pure $ responseOK
+      & agprsHeaders .~ [("Content-Type", "text/html")]
+      & responseBody ?~ "<span style=\"color:green\">Thank you. Your comment will be reviewed for spam so may not show up immediately.</span>"
 
 commentToPRMessage ∷ CommentRecord → Text
 commentToPRMessage CommentRecord { recName, recComment } = recName <> ": " <> recComment
