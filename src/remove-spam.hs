@@ -7,6 +7,7 @@
 
 module Main where
 
+import Control.Monad.IO.Class
 import qualified Data.ByteString.Char8       as B
 import Data.Aeson
 import Data.Text (Text)
@@ -19,9 +20,14 @@ owner, repo :: Text
 owner = "danwdart"
 repo = "websites"
 
-data Pull = Pull {
+newtype Head = Head {
+  ref :: Text
+} deriving (Generic, FromJSON, ToJSON, Show)
+
+data Pull = Pull { -- branch is head.ref?
   number :: Int,
-  body :: Text
+  body :: Text,
+  head :: Head
 } deriving (Generic, FromJSON, ToJSON, Show)
 
 getAllPulls :: GitHubT IO [Pull]
@@ -48,6 +54,19 @@ deletePull n = queryGitHub GHEndpoint {
   ]
 }
 
+deleteBranch :: Text -> GitHubT IO Value -- refs/heads/branchName?
+deleteBranch ref' = queryGitHub GHEndpoint {
+  GH.method = DELETE,
+  endpoint = "/repos/:owner/:repo/git/refs/heads/:ref",
+  endpointVals = [
+      "owner" := owner,
+      "repo" := repo,
+      "ref" := ref'
+  ],
+  ghData = [
+  ]
+}
+
 main :: IO ()
 main = do
     githubAccessToken <- getEnv "GITHUB_ACCESS_TOKEN"
@@ -58,17 +77,19 @@ main = do
     }
     allPulls <- runGitHubT state getAllPulls
     
-    let spamPulls = number <$> filter (\x ->
+    let spamPulls = (\pull -> (number pull, ref . Main.head $ pull)) <$> filter (\x ->
             "Amoxi" `T.isInfixOf` body x ||
             "Como puedo iniciar sesion" `T.isInfixOf` body x ||
             "Esumec" `T.isInfixOf` body x ||
             "Aginxo" `T.isInfixOf` body x
           ) allPulls
 
-    mapM_ (\n -> do
-      putStrLn $ "Going to delete PR " <> show n
-      _ <- runGitHubT state $ deletePull n
-      putStrLn $ "Deleted " <> show n
+    mapM_ (\(prNumber, branch) -> runGitHubT state $ do
+        liftIO . putStrLn $ "Going to delete PR " <> show prNumber
+        _ <- deletePull prNumber
+        liftIO . putStrLn $ "PR " <> show prNumber <> " deleted. Going to delete branch " <> T.unpack branch
+        _ <- deleteBranch branch
+        liftIO . putStrLn $ "Deleted branch " <> T.unpack branch
       ) spamPulls
 
     -- filter by which are spam - search?
