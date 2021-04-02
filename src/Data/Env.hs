@@ -69,7 +69,7 @@ development = [
             urlJolHarg = "http://jolharg.localhost:8080",
             urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Blog "posts",
-            livereload = True,
+            livereload = False,
             tracking = False,
             endpoint = "http://localhost:3000/dev"
         }
@@ -86,7 +86,7 @@ development = [
             urlJolHarg = "http://jolharg.localhost:8080",
             urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Normal,
-            livereload = True,
+            livereload = False,
             tracking = False,
             endpoint = "http://localhost:3000/dev"
         }
@@ -103,7 +103,7 @@ development = [
             urlJolHarg = "http://jolharg.localhost:8080",
             urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Normal,
-            livereload = True,
+            livereload = False,
             tracking = False,
             endpoint = "http://localhost:3000/dev"
         }
@@ -120,7 +120,7 @@ development = [
             urlJolHarg = "http://jolharg.localhost:8080",
             urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Normal,
-            livereload = True,
+            livereload = False,
             tracking = False,
             endpoint = "http://localhost:3000/dev"
         }
@@ -137,7 +137,7 @@ development = [
             urlJolHarg = "http://jolharg.localhost:8080",
             urlMadHacker = "http://madhacker.localhost:8080",
             siteType = Blog "reviews",
-            livereload = True,
+            livereload = False,
             tracking = False,
             endpoint = "http://localhost:3000/dev"
         }
@@ -158,8 +158,8 @@ production = [
             urlJolHarg = "https://jolharg.com",
             urlMadHacker = "https://madhackerreviews.com",
             siteType = Blog "posts",
-            livereload = True,
-            tracking = False,
+            livereload = False,
+            tracking = True,
             endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
@@ -175,8 +175,8 @@ production = [
             urlJolHarg = "https://jolharg.com",
             urlMadHacker = "https://madhackerreviews.com",
             siteType = Normal,
-            livereload = True,
-            tracking = False,
+            livereload = False,
+            tracking = True,
             endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
@@ -192,8 +192,8 @@ production = [
             urlJolHarg = "https://jolharg.com",
             urlMadHacker = "https://madhackerreviews.com",
             siteType = Normal,
-            livereload = True,
-            tracking = False,
+            livereload = False,
+            tracking = True,
             endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
@@ -209,8 +209,8 @@ production = [
             urlJolHarg = "https://jolharg.com",
             urlMadHacker = "https://madhackerreviews.com",
             siteType = Normal,
-            livereload = True,
-            tracking = False,
+            livereload = False,
+            tracking = True,
             endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     ),
@@ -226,8 +226,8 @@ production = [
             urlJolHarg = "https://jolharg.com",
             urlMadHacker = "https://madhackerreviews.com",
             siteType = Blog "reviews",
-            livereload = True,
-            tracking = False,
+            livereload = False,
+            tracking = True,
             endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
         }
     )
