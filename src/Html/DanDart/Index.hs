@@ -311,4 +311,4 @@ page = do
 page404 ∷ WebsiteIO Html
 page404 = do
     visit' <- visit "dandart404"
-    defaultPage404 descTitle keywords $ visit'
+    defaultPage404 descTitle keywords visit'

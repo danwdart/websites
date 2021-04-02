@@ -22,8 +22,8 @@ build = do
     void $ loadFile defaultConfig
     copyDir "static/common" ".sites/jolharg"
     copyDir "static/jolharg" ".sites/jolharg"
-  reposDan <- liftIO $ runReq defaultHttpConfig $ getRepos "danwdart"
-  reposJH <- liftIO $ runReq defaultHttpConfig $ getRepos "jolharg"
+  reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
+  reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
   page' <- runReader page (reposDan <> reposJH)
   liftIO $ do
     BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ page'
