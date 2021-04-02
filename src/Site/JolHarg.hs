@@ -24,7 +24,7 @@ build = do
     copyDir "static/jolharg" ".sites/jolharg"
   reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
   reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
-  page' <- runReader page (reposDan <> reposJH)
+  page' <- websiteMToWebsiteIO $ runReader page (reposDan <> reposJH)
   liftIO $ do
     BSL.writeFile ".sites/jolharg/index.html" . renderHtml $ page'
     putStrLn "jolharg compiled."

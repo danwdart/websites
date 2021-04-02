@@ -89,7 +89,7 @@ fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
 
-renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteIO Html
+renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteM Html
 renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = do
     commentForm' <- commentForm postType postId'
     let visitPageSub' = visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId')

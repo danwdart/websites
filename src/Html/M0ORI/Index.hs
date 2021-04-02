@@ -18,7 +18,7 @@ import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageHamRadio ∷ WebsiteIO Html
+pageHamRadio ∷ WebsiteM Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
     p "I am a UK full-licenced radio amateur, and have been issued the callsign M0ORI."
     p $ do
@@ -53,12 +53,12 @@ pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
         . (a ! href "https://rigreference.com/solar" ! target "_blank")
         $ (img ! src "https://rigreference.com/solar/img/tall")
 
-pageContact ∷ WebsiteIO Html
+pageContact ∷ WebsiteM Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact Dan, please use this form:"
     contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
 
-htmlHeader ∷ WebsiteIO Html
+htmlHeader ∷ WebsiteM Html
 htmlHeader = do
     urlDanDart' <- asks urlDanDart
     pageHamRadio' <- pageHamRadio
@@ -68,7 +68,7 @@ htmlHeader = do
         pageHamRadio'
         pageContact'
 
-page ∷ WebsiteIO Html
+page ∷ WebsiteM Html
 page = do
     header' <- htmlHeader
     head' <- htmlHead descTitle keywords mempty
@@ -78,7 +78,7 @@ page = do
         header'
         visit'
 
-page404 ∷ WebsiteIO Html
+page404 ∷ WebsiteM Html
 page404 = do
     visit' <- visit "m0ori404"
     defaultPage404 descTitle keywords visit'

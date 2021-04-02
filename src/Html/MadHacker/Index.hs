@@ -15,13 +15,13 @@ import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageReviews ∷ Html → Html → WebsiteIO Html
+pageReviews ∷ Html → Html → WebsiteM Html
 pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
     row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
         H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ reviews
 
-htmlHeader ∷ Html → Html → WebsiteIO Html
+htmlHeader ∷ Html → Html → WebsiteM Html
 htmlHeader reviewLinks reviews = do
     urlDanDart' <- asks urlDanDart
     pageReviews' <- pageReviews reviewLinks reviews
@@ -37,7 +37,7 @@ htmlHeader reviewLinks reviews = do
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "The Mad Hacker: Reviews" ! href "/atom.xml"
 
-page ∷ Html → Html → WebsiteIO Html
+page ∷ Html → Html → WebsiteM Html
 page reviewLinks reviews = do
     header' <- htmlHeader reviewLinks reviews
     head' <- htmlHead descTitle keywords extraHead
@@ -47,7 +47,7 @@ page reviewLinks reviews = do
         header'
         visit'
 
-page404 ∷ WebsiteIO Html
+page404 ∷ WebsiteM Html
 page404 = do
     visit' <- visit "madhacker404"
     defaultPage404 descTitle keywords $ do

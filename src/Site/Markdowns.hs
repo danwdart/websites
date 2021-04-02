@@ -24,7 +24,7 @@ buildMD postsDir postType = do
   posts <- liftIO . sequence $ makeBlogPost postsDir <$> validFiles
 
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-  renderedPosts <- foldMap (renderPost postType (const mempty)) sortedPosts
+  renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost postType (const mempty)) sortedPosts
   let renderedLinks = makeLinks sortedPosts
 
   pure (sortedPosts, renderedPosts, renderedLinks)

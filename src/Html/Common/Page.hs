@@ -42,7 +42,7 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-makePage ∷ AttributeValue → String → (Html -> Html) -> Attribute -> Html -> WebsiteIO Html
+makePage ∷ AttributeValue → String → (Html -> Html) -> Attribute -> Html -> WebsiteM Html
 makePage pageId label' layout extraParams content' = do
     visitTop <- visitPageSub "page" pageId "top"
     visitBottom <- visitPageSub "page" pageId "bottom"

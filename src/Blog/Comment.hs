@@ -59,7 +59,7 @@ getComments postsDir postId = do
         then getCommentsIfExists postsDir postId
         else pure mempty
 
-commentForm ∷ Text → Text → WebsiteIO Html
+commentForm ∷ Text → Text → WebsiteM Html
 commentForm postType postId = do
     endpoint' <- asks endpoint
     pure . (H.form

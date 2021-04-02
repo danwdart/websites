@@ -20,7 +20,7 @@ import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pagePortfolio ∷ WebsiteIO Html
+pagePortfolio ∷ WebsiteM Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
     row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
     row $ do
@@ -50,20 +50,20 @@ pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
         card "img/smdaf.png" "Shepton Mallet Digital Arts Festival" "Local festival site" "http://sheptondigitalarts.co.uk"
         card "img/ssoha.png" "SSOHA" "Somerset School of Oriental Healing Arts" "http://ssoha.org.uk"
 
-pageFs ∷ Reader [Repo] (WebsiteIO Html)
+pageFs ∷ Reader [Repo] (WebsiteM Html)
 pageFs = do
     repos <- ask
     pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do
         row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
         mapM_ renderCard repos
 
-pageContact ∷ WebsiteIO Html
+pageContact ∷ WebsiteM Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact JolHarg or make an enquiry, please use this form:"
     contactForm "website@jolharg.com" emailHelpPlural "Website for me..." "I am interested in a website..."
 
 -- Todo Technologies, Pricing, Blog, About
-htmlHeader ∷ Reader [Repo] (WebsiteIO Html)
+htmlHeader ∷ Reader [Repo] (WebsiteM Html)
 htmlHeader = do
     pageFs' <- pageFs
     pure $ do
@@ -75,7 +75,7 @@ htmlHeader = do
             pageFs''
             pageContact'
 
-page ∷ Reader [Repo] (WebsiteIO Html)
+page ∷ Reader [Repo] (WebsiteM Html)
 page = do
     header' <- htmlHeader
     pure $ do
@@ -87,7 +87,7 @@ page = do
             header''
             visit'
 
-page404 ∷ WebsiteIO Html
+page404 ∷ WebsiteM Html
 page404 = do
     visit' <- visit "jolharg404"
     defaultPage404 descTitle keywords visit'

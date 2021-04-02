@@ -19,10 +19,10 @@ import           WaiAppStatic.Types
 mkdirp ∷ String → IO ()
 mkdirp = createDirectoryIfMissing True
 
-make ∷ String → WebsiteIO Html → WebsiteIO Html → WebsiteIO ()
+make ∷ String → WebsiteM Html → WebsiteM Html → WebsiteIO ()
 make name page page404 = do
-    page' <- page
-    page404' <- page404
+    page' <- websiteMToWebsiteIO page
+    page404' <- websiteMToWebsiteIO page404
     liftIO $ do
         copyDir "static/common" $ ".sites/" <> name
         copyDir ("static/" <> name) (".sites/" <> name)

@@ -8,6 +8,7 @@ module Data.Env where
 
 import Control.Applicative
 import Control.Monad.Trans.Reader
+import Data.Functor.Identity
 -- import Data.Set (Set)
 import Data.String
 import Data.Map (Map)
@@ -42,6 +43,9 @@ type Env = Map Text Website
 type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website
 type WebsiteIO = WebsiteT IO
+
+websiteMToWebsiteIO :: WebsiteM a -> WebsiteIO a
+websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
 
 -- todo Ap
 instance (Applicative f, Semigroup m) => Semigroup (ReaderT r f m) where

@@ -28,7 +28,7 @@ metas descTitle keywords = do
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
-htmlHead ∷ String → [AttributeValue] → Html → WebsiteIO Html
+htmlHead ∷ String → [AttributeValue] → Html → WebsiteM Html
 htmlHead descTitle keywords extraHead = do
     livereload' <- asks livereload
     pure . H.head $ do
