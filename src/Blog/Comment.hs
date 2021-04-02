@@ -9,7 +9,6 @@ import           Control.Monad
 import           Data.Either
 import           Data.Frontmatter
 import Data.Env
-import Control.Monad.Trans.Reader
 import           Data.List
 import           Data.Maybe
 import           Data.Ord

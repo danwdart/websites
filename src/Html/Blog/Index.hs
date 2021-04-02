@@ -4,8 +4,6 @@
 module Html.Blog.Index (page, page404) where
 
 import           Data.Site.Blog
-
-import Control.Monad.Trans.Reader
 import Data.Env
 import           Data.String
 import           Html.Common.Head

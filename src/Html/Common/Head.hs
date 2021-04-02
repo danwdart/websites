@@ -4,7 +4,6 @@
 module Html.Common.Head (htmlHead) where
 
 import Data.Env
-import Control.Monad.Trans.Reader
 import Control.Monad (when)
 import           Data.String
 

@@ -5,7 +5,6 @@ module Html.M0ORI.Index (page, page404) where
 
 import           Data.Site.M0ORI
 import Data.Env
-import Control.Monad.Trans.Reader
 
 import           Html.Common.Head
 import           Html.Common.Link

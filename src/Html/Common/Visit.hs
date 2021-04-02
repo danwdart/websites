@@ -4,7 +4,6 @@
 module Html.Common.Visit where
 
 import Data.Env
-import Control.Monad.Trans.Reader
 import           Text.Blaze.Html5
 import           Text.Blaze.Html5.Attributes as A
 

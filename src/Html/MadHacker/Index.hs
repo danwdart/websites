@@ -5,7 +5,6 @@ module Html.MadHacker.Index (page, page404) where
 
 import           Data.Site.MadHacker
 import Data.Env
-import Control.Monad.Trans.Reader
 import           Html.Common.Head
 
 import           Html.Common.Bootstrap

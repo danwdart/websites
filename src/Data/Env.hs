@@ -4,7 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module Data.Env where
+module Data.Env (module Data.Env, asks) where
 
 import Control.Applicative
 import Control.Monad.Trans.Reader

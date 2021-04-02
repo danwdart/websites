@@ -3,7 +3,6 @@
 
 module Html.DanDart.Index (page, page404) where
 
-import Control.Monad.Trans.Reader
 import           Data.Site.DanDart
 import Data.Env
 import           Html.Common.Audio
