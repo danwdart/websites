@@ -15,7 +15,7 @@ import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageReviews ∷ Html → Html → Html
+pageReviews ∷ Html → Html → WebsiteIO Html
 pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
     row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
@@ -24,13 +24,14 @@ pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defa
 htmlHeader ∷ Html → Html → WebsiteIO Html
 htmlHeader reviewLinks reviews = do
     urlDanDart' <- asks urlDanDart
+    pageReviews' <- pageReviews reviewLinks reviews
     pure . (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary") $ do
         a ! class_ "p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-left navbar-brand" ! href "#reviews" $ do
             img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
             H.span ! class_ "title ml-2" $ "The Mad Hacker: Reviews"
         H.div . (ul ! class_ "navbar-nav px-3") $ do
                 extNav (textValue urlDanDart') "Dan Dart"
-                pageReviews reviewLinks reviews
+                pageReviews'
                 dlNav "/atom.xml" "Atom Feed"
 
 extraHead ∷ Html
@@ -40,12 +41,15 @@ page ∷ Html → Html → WebsiteIO Html
 page reviewLinks reviews = do
     header' <- htmlHeader reviewLinks reviews
     head' <- htmlHead descTitle keywords extraHead
+    visit' <- visit "madhacker"
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
-        visit "madhacker"
+        visit'
 
 page404 ∷ WebsiteIO Html
-page404 = defaultPage404 descTitle keywords $ do
-    extraHead
-    visit "madhacker404"
+page404 = do
+    visit' <- visit "madhacker404"
+    defaultPage404 descTitle keywords $ do
+        extraHead
+        visit'

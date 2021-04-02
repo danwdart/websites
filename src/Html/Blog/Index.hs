@@ -19,7 +19,7 @@ import           Text.Blaze.Html5.Attributes as A
 
 import           Text.Pandoc.Highlighting
 
-pageBlog ∷ Html → Html → Html
+pageBlog ∷ Html → Html → WebsiteIO Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do
     row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ blogPostLinks
@@ -28,9 +28,10 @@ pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPa
 htmlHeader ∷ Html → Html → WebsiteIO Html
 htmlHeader blogPostLinks blogPosts = do
     urlDanDart' <- asks urlDanDart
+    pageBlog' <- pageBlog blogPostLinks blogPosts
     pure . makeHeader "#blog" "Dan Dart's Blog" mempty $ do
         extNav (textValue urlDanDart') "Dan Dart"
-        pageBlog blogPostLinks blogPosts
+        pageBlog'
         dlNav "/atom.xml" "Atom Feed"
         H.style . fromString $ styleToCss haddock
 

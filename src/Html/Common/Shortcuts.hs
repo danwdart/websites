@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Html.Common.Shortcuts (ghPages, ghPagesProjects, projectsSource, imdb, wikipedia, yt, ytChan, ytUser, nhs, oeis, wikia, fandom) where
+module Html.Common.Shortcuts where
 
+import Html.Common.Link
 import           Text.Blaze.Html5 as H hiding (main)
 
 ghPages, ghPagesProjects, projectsSource, imdb, yt, ytChan, ytUser, nhs, oeis :: AttributeValue
@@ -21,8 +22,11 @@ wiki name' subdomain article' = "https://" <> subdomain <> "." <> name' <> "/wik
 wikipedia :: AttributeValue -> AttributeValue
 wikipedia = wiki "wikipedia.org" "en"
 
-wikia:: AttributeValue -> AttributeValue -> AttributeValue
+wikia :: AttributeValue -> AttributeValue -> AttributeValue
 wikia = wiki "wikia.com"
 
 fandom :: AttributeValue -> AttributeValue -> AttributeValue
 fandom = wiki "fandom.com"
+
+babby :: Html -> Html
+babby = extLink "https://yanderedarling.com"

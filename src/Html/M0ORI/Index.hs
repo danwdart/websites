@@ -18,7 +18,7 @@ import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageHamRadio ∷ Html
+pageHamRadio ∷ WebsiteIO Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
     p "I am a UK full-licenced radio amateur, and have been issued the callsign M0ORI."
     p $ do
@@ -53,7 +53,7 @@ pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
         . (a ! href "https://rigreference.com/solar" ! target "_blank")
         $ (img ! src "https://rigreference.com/solar/img/tall")
 
-pageContact ∷ Html
+pageContact ∷ WebsiteIO Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact Dan, please use this form:"
     contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
@@ -61,19 +61,24 @@ pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
 htmlHeader ∷ WebsiteIO Html
 htmlHeader = do
     urlDanDart' <- asks urlDanDart
+    pageHamRadio' <- pageHamRadio
+    pageContact' <- pageContact
     pure . makeHeader "" "M0ORI: Dan Dart" mempty $ do
         extNav (textValue urlDanDart') "Dan Dart"
-        pageHamRadio
-        pageContact
+        pageHamRadio'
+        pageContact'
 
 page ∷ WebsiteIO Html
 page = do
     header' <- htmlHeader
     head' <- htmlHead descTitle keywords mempty
+    visit' <- visit "m0ori"
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
-        visit "m0ori"
+        visit'
 
 page404 ∷ WebsiteIO Html
-page404 = defaultPage404 descTitle keywords $ visit "m0ori404"
+page404 = do
+    visit' <- visit "m0ori404"
+    defaultPage404 descTitle keywords visit'

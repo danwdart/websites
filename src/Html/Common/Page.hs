@@ -3,6 +3,7 @@
 
 module Html.Common.Page (customLayout, contactLayout, defaultLayout, dlNav, extNav, defaultPage, notDefaultPage, makePage) where
 
+import Data.Env
 import           Data.String                 (IsString (fromString))
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
@@ -14,13 +15,13 @@ navBtn ∷ Attribute
 navBtn = class_ "nav-link btn btn-sm"
 
 extNav ∷ AttributeValue → Html -> Html
-extNav url = (li ! class_ "nav-item") . (extLink url ! navBtn)
+extNav url' = (li ! class_ "nav-item") . (extLink url' ! navBtn)
 
 dlNav ∷ AttributeValue → Html -> Html
-dlNav url = (li ! class_ "nav-item") .
+dlNav url' = (li ! class_ "nav-item") .
     (a
         ! navBtn
-        ! href url
+        ! href url'
         ! customAttribute "download" ""
     )
 
@@ -41,29 +42,32 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-makePage ∷ AttributeValue → String → (Html -> Html) -> Attribute -> Html -> Html
-makePage pageId label' layout extraParams content' = li ! class_ "nav-item" $ do
-    input
-        ! type_ "radio"
-        ! A.style "display:none"
-        ! name "selected"
-        ! A.id (fromString label')
-        ! value (fromString label')
-        ! extraParams
-    (
-        H.label
-            ! class_ "mb-0"
-            ! for (fromString label')
-        ) . (
-            a
-                ! navBtn
-        ) $ fromString label'
-    H.div
-        ! class_ "page"
-        ! A.id pageId $ do
-            visitPageSub "page" pageId "top"
-            row .
-                (H.div ! class_ "col my-md-3") .
-                    small $ "» " <> fromString label'
-            layout content'
-            visitPageSub "page" pageId "bottom"
+makePage ∷ AttributeValue → String → (Html -> Html) -> Attribute -> Html -> WebsiteIO Html
+makePage pageId label' layout extraParams content' = do
+    visitTop <- visitPageSub "page" pageId "top"
+    visitBottom <- visitPageSub "page" pageId "bottom"
+    pure . (li ! class_ "nav-item") $ do
+        input
+            ! type_ "radio"
+            ! A.style "display:none"
+            ! name "selected"
+            ! A.id (fromString label')
+            ! value (fromString label')
+            ! extraParams
+        (
+            H.label
+                ! class_ "mb-0"
+                ! for (fromString label')
+            ) . (
+                a
+                    ! navBtn
+            ) $ fromString label'
+        H.div
+            ! class_ "page"
+            ! A.id pageId $ do
+                visitTop
+                row .
+                    (H.div ! class_ "col my-md-3") .
+                        small $ "» " <> fromString label'
+                layout content'
+                visitBottom

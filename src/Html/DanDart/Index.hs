@@ -19,7 +19,7 @@ import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageIntro ∷ Html
+pageIntro ∷ WebsiteIO Html
 pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "Hello, my name is Dan."
     p "I am a software engineer, mathematics lover, radio ham and musician."
@@ -36,7 +36,7 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
         extLink "/humans.txt" $ img ! src "/img/humanstxt-isolated-blank.gif"
         
 
-pageCharacters ∷ Html
+pageCharacters ∷ WebsiteIO Html
 pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do
     p "Some of my favourite characters and characters that I identify with are:"
     ul $ mapM_ (\(fandom', fandomLink, characters) -> do
@@ -50,7 +50,7 @@ pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage
             ) characters
         ) favCharacters
 
-pageFavourites ∷ Html
+pageFavourites ∷ WebsiteIO Html
 pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do
     p "Here is a list of some of my favourite things."
     p $ strong "YouTube channels"
@@ -126,7 +126,7 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
             "All-time: "
             extLink "http://riscos.com/riscos/310/index.php" "RISC OS"
 
-pageHealth ∷ Html
+pageHealth ∷ WebsiteIO Html
 pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
     p "Both my physical and mental health are very low at the moment, but I am always more than happy to talk about them."
     p "I think I'm addicted to caffeine, which I wouldn't recommend."
@@ -141,7 +141,7 @@ pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
             extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
             " (with depression)"
 
-pageMusic ∷ Html
+pageMusic ∷ WebsiteIO Html
 pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
     p "I play the guitar, keyboard and synthesiser."
     p "I've created the following pieces of music/sound effects:"
@@ -149,7 +149,7 @@ pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
     audioFile "Shall It Be" "ShallItBe" "ShallItBe"
     audioFile "Swim Deep (take 1)" "SwimDeepTake1" "SwimDeepTake1"
 
-pageMaths ∷ Html
+pageMaths ∷ WebsiteIO Html
 pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
     p "Mathematics has always been a great pastime for me."
     p $ do
@@ -187,7 +187,7 @@ pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
         li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
         li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477."
 
-pageOrigami ∷ Html
+pageOrigami ∷ WebsiteIO Html
 pageOrigami = makePage "origami" "Origami" defaultLayout notDefaultPage $ do
     p "I've been doing origami from a very young age. I will give some instructions on how to make some models that I've invented later on when I've figured out how to digitise them, but for now, I'll give you some of my favourite origami resources:"
     br
@@ -200,7 +200,7 @@ pageOrigami = makePage "origami" "Origami" defaultLayout notDefaultPage $ do
         br
         extLink "https://amzn.to/2VzLzqe" "How to Make Origami Airplanes That Fly, a book by Gery Hsu"
 
-pageAbout ∷ Html
+pageAbout ∷ WebsiteIO Html
 pageAbout = makePage "about" "About" defaultLayout notDefaultPage $ do
     p "This website entailed a few design and code decisions which I would like to explain."
     p mempty
@@ -236,7 +236,7 @@ pageReviews = do
     urlMadHacker' <- asks urlMadHacker
     pure $ extNav (textValue urlMadHacker') "Reviews"
 
-pageContact ∷ Html
+pageContact ∷ WebsiteIO Html
 pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
     p "If you would like to contact Dan, please use this form:"
     contactForm "website@dandart.co.uk" emailHelpSingular "Greetings..." "Hello!..."
@@ -281,34 +281,34 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right so
 
 htmlHeader ∷ WebsiteIO Html
 htmlHeader = do
-    pageHamRadio' <- pageHamRadio
-    pageSoftware' <- pageSoftware
-    pageBlog' <- pageBlog
-    pageReviews' <- pageReviews
-    pure . makeHeader "#intro" "Dan Dart" socialIcons $ do
-        pageIntro
-        pageCharacters
-        pageFavourites
-        pageHamRadio'
-        pageHealth
-        pageMusic
-        pageMaths
-        pageOrigami
-        pageAbout
-        pageSoftware'
-        pageBlog'
-        pageReviews'
-        pageContact
+    pages <- do
+        pageIntro <>
+            pageCharacters <>
+            pageFavourites <>
+            pageHamRadio <>
+            pageHealth <>
+            pageMusic <>
+            pageMaths <>
+            pageOrigami <>
+            pageAbout <>
+            pageSoftware <>
+            pageBlog <>
+            pageReviews <>
+            pageContact
+    pure . makeHeader "#intro" "Dan Dart" socialIcons $ pages
 
 page ∷ WebsiteIO Html
 page = do
     header' <- htmlHeader
     head' <- htmlHead descTitle keywords mempty
+    visit' <- visit "dandart"
     pure $ do
         docTypeHtml ! lang "en-GB" $ do
             head'
             header'
-            visit "dandart"
+            visit'
 
 page404 ∷ WebsiteIO Html
-page404 = defaultPage404 descTitle keywords $ visit "dandart404"
+page404 = do
+    visit' <- visit "dandart404"
+    defaultPage404 descTitle keywords $ visit'

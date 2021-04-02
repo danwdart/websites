@@ -50,7 +50,7 @@ favCharacters = [
         [
             (
                 "Spock",
-                wikipedia "Spock",
+                wikia "memory-alpha" "Spock",
                 "I often think of the world logically"
             ),
             (
@@ -60,8 +60,18 @@ favCharacters = [
             ),
             (
                 "Data",
-                wikipedia "Data_%28Star_Trek%29",
+                wikia "memory-alpha" "Data",
                 "I am curious, confused and if he was human he'd probably be autistic"
+            ),
+            (
+                "EMH",
+                wikia "memory-alpha" "Emergency_Medical_Holographic_program",
+                "he's socially inept, evolves and gets into hilariously unfortunate situations a lot. Also, " <> babby "Seven" <> " is waifu."
+            ),
+            (
+                "Odo",
+                wikia "memory-alpha" "Odo",
+                "he's an outsider, is awesome and is sick."
             )
         ]
     ),
@@ -72,7 +82,7 @@ favCharacters = [
             (
                 "Sora",
                 fandom "kingdomhearts" "Sora",
-                "Kairi is my waifu and princess and I'm kinda new to this."
+                babby "Kairi" <> " is my waifu and princess and I'm kinda new to this."
             )
         ]
     ),
@@ -83,7 +93,7 @@ favCharacters = [
             (
                 "Hiro (016)",
                 fandom "darling-in-the-franxx" "Hiro",
-                "Zero Two is waifu and I am oblivious."
+                babby "Zero Two" <> " is waifu and I am oblivious."
             )
         ]
     ),
@@ -94,17 +104,39 @@ favCharacters = [
             (
                 "Chihiro Fujisaki",
                 fandom "danganronpa" "Chihiro_Fujisaki",
-                "I love programming and feel similar about life"
+                "I love programming and feel similar about life. " <> babby "Touko" <> " is waifu."
             ),
             (
                 "Nagito Komaeda",
                 fandom "danganronpa" "Nagito_Komaeda",
-                "I'm very lucky and obsessed with hope, and also trash"
+                "I'm very lucky and obsessed with hope, and also trash. " <> babby "Tsumiki" <> " is waifu."
             ),
             (
                 "Shuichi Saihara",
                 fandom "danganronpa" "Shuichi_Saihara",
-                "he's cute, a little bit emo and evolves like I do."
+                "he's cute, a little bit emo and evolves like I do. " <> babby "Himiko" <> " is waifu."
+            )
+        ]
+    ),
+    (
+        "Aku no Hana",
+        wikipedia "The_Flowers_of_Evil_(manga)",
+        [
+            (
+                "Takao Kasuga",
+                "https://myanimelist.net/character/62795/Takao_Kasuga",
+                "I live in a boring town and have been improved by my darling " <> babby "Nakamura"
+            )
+        ]
+    ),
+    (
+        "Soul Eater",
+        wikipedia "Soul_Eater_(manga)",
+        [
+            (
+                "Dr. Franken Stein",
+                wikia "souleater" "Franken_Stein",
+                "he is nutty and likes to spin in chairs. My waifu is " <> babby "Crona" <> "."
             )
         ]
     ),
@@ -115,7 +147,7 @@ favCharacters = [
             (
                 "Shōya Ishida",
                 wikia "koenokatachi" "Shōya_Ishida",
-                "he was transformed into a kind boy, and Shoko is waifu.."
+                "he was transformed into a kind boy, and " <> babby "Shoko" <> " is waifu..."
             )
         ]
     ),
@@ -180,7 +212,7 @@ favCharacters = [
             (
                 "Steven Universe (from the movie)",
                 wikia "steven-universe" "Steven_Universe_(character)",
-                "his evolution to this stage helps my waifu Spinel."
+                "his evolution to this stage helps my waifu " <> babby "Spinel" <> "."
             )
         ]
     ),
@@ -191,7 +223,7 @@ favCharacters = [
             (
                 "Fafnir",
                 wikia "maid-dragon" "Fafnir",
-                "he's dapper, awesome, interesting and acts hilariously"
+                "he's dapper, awesome, interesting and acts hilariously. My waifu is " <> babby "Kanna" <> "."
             )
         ]
     ),
@@ -202,7 +234,7 @@ favCharacters = [
             (
                 "Yukiteru Amano",
                 wikia "futurediary" "Yukiteru_Amano",
-                "my waifu is Yuno, and Yuki is depressed and I would act like he acts in the OVA"
+                "my waifu is " <> babby "Yuno" <> ", Yukki is depressed and I would act like he acts in the OVA"
             )
         ]
     ),
@@ -213,7 +245,7 @@ favCharacters = [
             (
                 "Griffith",
                 wikipedia "List_of_Berserk_characters#Griffith",
-                "he's sneaky and smart and he looks fabulous"
+                "he's sneaky and smart and he looks fabulous. " <> babby "Casca" <> " is waifu."
             )
         ]
     ),
@@ -235,7 +267,7 @@ favCharacters = [
             (
                 "Elias Ainsworth",
                 wikia "ancientmagusbride" "Elias_Ainsworth",
-                "he's caring, doesn't act like outrageous humans and Chise is my waifu"
+                "he's caring, doesn't act like outrageous humans and " <> babby "Chise" <> " is my waifu"
             )
         ]
     ),
@@ -246,7 +278,7 @@ favCharacters = [
             (
                 "Shinji Ikari",
                 wikipedia "Shinji_Ikari",
-                "existentialism, essentially. He's a whiner, but I like his thought patterns when he's being existential."
+                "existentialism, essentially. He's a whiner, but I like his thought patterns when he's being existential. " <> babby "Rei" <> " is waifu."
             )
         ]
     ),
@@ -257,7 +289,7 @@ favCharacters = [
             (
                 "Twilight Sparkle",
                 wikipedia "List_of_My_Little_Pony%3A_Friendship_Is_Magic_characters#Twilight_Sparkle",
-                "knowledge and being awesome"
+                "knowledge and being awesome. " <> babby "Fluttershy" <> " is waifu."
             )
         ]
     ),
@@ -301,7 +333,7 @@ favCharacters = [
             (
                 "The Doctor",
                 wikipedia "The_Doctor_(Doctor_Who)",
-                "of eccentricity, inventions and awesomeness"
+                "of eccentricity, inventions and awesomeness. My favourite Doctor is the fourth, played by Tom Baker."
             )
         ]
     ),
@@ -311,8 +343,8 @@ favCharacters = [
         [
             (
                 "Marquis",
-                "https://battleborn.com/en/battleborn/marquis/",
-                "those quotes are amazing, dunk dunk dunk!"
+                fandom "battleborn" "Marquis",
+                "those quotes are amazing, dunk dunk dunk! My waifu is " <> babby "Orendi" <> "."
             )
         ]
     )
