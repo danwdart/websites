@@ -1,6 +1,6 @@
 { 
   nixpkgs ? import <nixpkgs> {},
-  unstable ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {},
+  unstable ? import <unstable> {},
   compiler ? "ghc8104", # basement doesn't yet support 901
   ghcjs ? "ghcjs86",
   node ? import ./node-default.nix {} }:
