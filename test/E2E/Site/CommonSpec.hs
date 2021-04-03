@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -10,14 +11,14 @@ import           Control.Exception                (SomeException (SomeException)
                                                    try)
 import           Control.Monad                    (when)
 import           Control.Monad.IO.Class
-import Control.Monad.Trans.Reader
+import           Control.Monad.Trans.Reader
 import           Data.Aeson                       (Object,
                                                    Value (Array, String),
                                                    object)
-import Data.Env                                                   
+import           Data.Env
 import           Data.Functor.Compose             (Compose (Compose, getCompose))
 import           Data.List                        (nub)
-import Data.Map ((!))
+import           Data.Map                         ((!))
 import           Data.Maybe                       (catMaybes)
 import           Data.Text                        (Text, unpack)
 import           Data.Vector                      (fromList)
