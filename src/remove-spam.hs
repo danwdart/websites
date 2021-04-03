@@ -3,7 +3,6 @@
 {-# LANGUAGE DerivingVia       #-}
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeApplications  #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Main where
@@ -92,22 +91,3 @@ main = do
         _ <- deleteBranch branch
         liftIO . putStrLn $ "Deleted branch " <> T.unpack branch
       ) spamPulls
-
-    -- filter by which are spam - search?
-
-      {- Delete branch?
-    queryGitHub GHEndpoint
-    { GH.method = POST
-    , endpoint = "/repos/:owner/:repo/git/refs"
-    , endpointVals =
-      [ "owner" := owner
-      , "repo" := repo
-      ]
-    , ghData =
-      [
-        "ref" := "refs/heads/" <> branch
-      , "sha" := fromSHA
-      ]
-    }
-    -}
-    -- get it and then delete branch by ref head.ref
