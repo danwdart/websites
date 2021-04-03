@@ -1,22 +1,23 @@
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingVia #-}
-{-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE DerivingVia       #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE TypeApplications  #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Main where
 
-import Control.Monad.IO.Class
-import qualified Data.ByteString.Char8       as B
-import Data.Aeson
-import Data.Text (Text)
-import qualified Data.Text as T
-import GHC.Generics
-import           GitHub.REST                 as GH hiding ((.:))
-import System.Environment
+import           Control.Monad.IO.Class
+import           Data.Aeson
+import qualified Data.ByteString.Char8  as B
+import           Data.Text              (Text)
+import qualified Data.Text              as T
+import           GHC.Generics
+import           GitHub.REST            as GH hiding ((.:))
+import           System.Environment
 
-owner, repo :: Text
+owner, repo ∷ Text
 owner = "danwdart"
 repo = "websites"
 
@@ -26,11 +27,11 @@ newtype Head = Head {
 
 data Pull = Pull { -- branch is head.ref?
   number :: Int,
-  body :: Text,
-  head :: Head
+  body   :: Text,
+  head   :: Head
 } deriving (Generic, FromJSON, ToJSON, Show)
 
-getAllPulls :: GitHubT IO [Pull]
+getAllPulls ∷ GitHubT IO [Pull]
 getAllPulls = queryGitHub GHEndpoint {
     GH.method = GET,
     endpoint = "/repos/:owner/:repo/pulls?per_page=100",
@@ -41,7 +42,7 @@ getAllPulls = queryGitHub GHEndpoint {
     ghData = []
 }
 
-deletePull :: Int -> GitHubT IO Pull
+deletePull ∷ Int → GitHubT IO Pull
 deletePull n = queryGitHub GHEndpoint {
   GH.method = PATCH,
   endpoint = "/repos/:owner/:repo/pulls/" <> T.pack (show n), -- number
@@ -54,7 +55,7 @@ deletePull n = queryGitHub GHEndpoint {
   ]
 }
 
-deleteBranch :: Text -> GitHubT IO Value -- refs/heads/branchName?
+deleteBranch ∷ Text → GitHubT IO Value -- refs/heads/branchName?
 deleteBranch ref' = queryGitHub GHEndpoint {
   GH.method = DELETE,
   endpoint = "/repos/:owner/:repo/git/refs/heads/:ref",
@@ -67,7 +68,7 @@ deleteBranch ref' = queryGitHub GHEndpoint {
   ]
 }
 
-main :: IO ()
+main ∷ IO ()
 main = do
     githubAccessToken <- getEnv "GITHUB_ACCESS_TOKEN"
     let state = GitHubState {
@@ -76,7 +77,7 @@ main = do
         , apiVersion = "v3"
     }
     allPulls <- runGitHubT state getAllPulls
-    
+
     let spamPulls = (\pull -> (number pull, ref . Main.head $ pull)) <$> filter (\x ->
             "Amoxi" `T.isInfixOf` body x ||
             "Como puedo iniciar sesion" `T.isInfixOf` body x ||
@@ -93,7 +94,7 @@ main = do
       ) spamPulls
 
     -- filter by which are spam - search?
-    
+
       {- Delete branch?
     queryGitHub GHEndpoint
     { GH.method = POST
@@ -107,6 +108,6 @@ main = do
         "ref" := "refs/heads/" <> branch
       , "sha" := fromSHA
       ]
-    } 
+    }
     -}
     -- get it and then delete branch by ref head.ref

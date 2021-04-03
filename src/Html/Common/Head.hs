@@ -3,8 +3,8 @@
 
 module Html.Common.Head (htmlHead) where
 
-import Data.Env
-import Control.Monad (when)
+import           Control.Monad               (when)
+import           Data.Env
 import           Data.String
 
 import           Html.Common.CSS

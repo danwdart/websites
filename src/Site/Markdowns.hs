@@ -2,19 +2,19 @@
 
 module Site.Markdowns (buildMD) where
 
-import           Blog.Link        (makeLinks)
-import           Blog.Post        (makeBlogPost, renderPost)
-import           Blog.Types       (BlogMetadata (date, draft),
-                                   BlogPost (metadata))
-import           Control.Monad    (filterM)
-import Control.Monad.IO.Class
-import Data.Env
-import           Data.List        (sortOn)
-import           Data.Ord         (Down (Down))
-import           Data.Text        (Text)
-import           System.Directory (doesFileExist, getDirectoryContents)
-import           System.FilePath  ((</>))
-import           Text.Blaze.Html5 as H
+import           Blog.Link              (makeLinks)
+import           Blog.Post              (makeBlogPost, renderPost)
+import           Blog.Types             (BlogMetadata (date, draft),
+                                         BlogPost (metadata))
+import           Control.Monad          (filterM)
+import           Control.Monad.IO.Class
+import           Data.Env
+import           Data.List              (sortOn)
+import           Data.Ord               (Down (Down))
+import           Data.Text              (Text)
+import           System.Directory       (doesFileExist, getDirectoryContents)
+import           System.FilePath        ((</>))
+import           Text.Blaze.Html5       as H
 
 buildMD ∷ FilePath → Text → WebsiteIO ([BlogPost], Html, Html)
 buildMD postsDir postType = do

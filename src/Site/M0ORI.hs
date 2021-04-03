@@ -3,9 +3,9 @@
 
 module Site.M0ORI where
 
-import Data.Env
-import           Util.Build
+import           Data.Env
 import           Html.M0ORI.Index
+import           Util.Build
 
 build ∷ WebsiteIO ()
 build = make "m0ori" page page404

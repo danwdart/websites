@@ -3,14 +3,14 @@
 
 module Site.Blog where
 
-import           Blog.Feed             (makeRSSFeed)
-import Control.Monad.IO.Class
-import Control.Monad.Trans.Reader
-import Data.Env
-import           Util.Build            (make, makeServe)
-import qualified Data.Text.IO          as TIO
-import           Html.Blog.Index  (page, page404)
+import           Blog.Feed                  (makeRSSFeed)
+import           Control.Monad.IO.Class
+import           Control.Monad.Trans.Reader
+import           Data.Env
+import qualified Data.Text.IO               as TIO
+import           Html.Blog.Index            (page, page404)
 import           Site.Markdowns
+import           Util.Build                 (make, makeServe)
 
 build ∷ WebsiteIO ()
 build = do

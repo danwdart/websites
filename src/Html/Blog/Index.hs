@@ -3,12 +3,12 @@
 
 module Html.Blog.Index (page, page404) where
 
+import           Data.Env
 import           Data.Site.Blog
-import Data.Env
 import           Data.String
-import           Html.Common.Head
 import           Html.Common.Bootstrap
 import           Html.Common.Error.NotFound
+import           Html.Common.Head
 import           Html.Common.Header
 import           Html.Common.Page
 import           Html.Common.Visit

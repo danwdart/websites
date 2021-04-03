@@ -3,7 +3,7 @@
 
 module Html.Common.Error.NotFound (defaultPage404) where
 
-import Data.Env
+import           Data.Env
 import           Html.Common.Bootstrap
 import           Html.Common.Head
 import           Text.Blaze.Html5            as H

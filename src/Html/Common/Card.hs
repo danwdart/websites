@@ -9,7 +9,7 @@ import           Data.Maybe
 import           Data.String
 
 import           Html.Common.GitHub          as GH
-import Html.Common.Link
+import           Html.Common.Link
 
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A

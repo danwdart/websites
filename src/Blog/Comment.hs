@@ -7,8 +7,8 @@ module Blog.Comment where
 import           Blog.Types
 import           Control.Monad
 import           Data.Either
+import           Data.Env
 import           Data.Frontmatter
-import Data.Env
 import           Data.List
 import           Data.Maybe
 import           Data.Ord

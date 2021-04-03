@@ -3,7 +3,7 @@
 
 module Html.Common.Visit where
 
-import Data.Env
+import           Data.Env
 import           Text.Blaze.Html5
 import           Text.Blaze.Html5.Attributes as A
 
@@ -13,7 +13,7 @@ visitsUrl = do
     pure . textValue $ endpoint' <> "/v.gif"
 
 -- TODO functor?
-lazyPixelVisit :: (AttributeValue -> AttributeValue) -> WebsiteM Html
+lazyPixelVisit ∷ (AttributeValue → AttributeValue) → WebsiteM Html
 lazyPixelVisit f = do
     visitsUrl' <- visitsUrl
     pure $ img ! src (f visitsUrl') ! A.style "display: none" ! A.style "width: 0; height: 0" ! customAttribute "loading" "lazy"

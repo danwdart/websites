@@ -3,8 +3,8 @@
 
 module Html.DanDart.Index (page, page404) where
 
+import           Data.Env
 import           Data.Site.DanDart
-import Data.Env
 import           Html.Common.Audio
 import           Html.Common.Contact
 import           Html.Common.Error.NotFound
@@ -33,7 +33,7 @@ pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p $ do
         extLink "https://html.spec.whatwg.org/" $ img ! A.style "height: 16px" !  src "https://upload.wikimedia.org/wikipedia/commons/a/a1/WHATWG_logo.svg"
         extLink "/humans.txt" $ img ! src "/img/humanstxt-isolated-blank.gif"
-        
+
 
 pageCharacters ∷ WebsiteM Html
 pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do
@@ -217,7 +217,7 @@ pageAbout = makePage "about" "About" defaultLayout notDefaultPage $ do
 
 pageHamRadio ∷ WebsiteM Html
 pageHamRadio = do
-    urlHamRadio' <- asks urlHamRadio    
+    urlHamRadio' <- asks urlHamRadio
     pure $ extNav (textValue urlHamRadio') "Ham Radio"
 
 pageSoftware ∷ WebsiteM Html

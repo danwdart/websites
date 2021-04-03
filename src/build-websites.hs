@@ -3,27 +3,27 @@
 
 module Main where
 
-import Control.Monad.Trans.Reader
-import Data.Env
-import Control.Monad.IO.Class
+import           Control.Monad.IO.Class
+import           Control.Monad.Trans.Reader
 import           Data.ByteString                (isPrefixOf)
-import Data.Map ((!))
+import           Data.Env
+import           Data.Map                       ((!))
 import           Data.Maybe
 import           Network.Wai
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           Network.Wai.Handler.WebSockets
 import           Network.Wai.Middleware.Vhost
-import Network.WebSockets
+import           Network.WebSockets
 import           WaiAppStatic.Types
 
+import           Control.Concurrent
 import qualified Site.Blog                      as B
 import qualified Site.DanDart                   as D
 import qualified Site.JolHarg                   as J
 import qualified Site.M0ORI                     as M
 import qualified Site.MadHacker                 as R
 import           System.Environment             (lookupEnv)
-import Control.Concurrent
 
 build ∷ WebsitesIO ()
 build = do

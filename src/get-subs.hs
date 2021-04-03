@@ -16,8 +16,8 @@ import           Network.Google.Resource.YouTube.Subscriptions.List
 import           Network.Google.YouTube
 import           System.Environment
 import           System.Exit                                        (exitFailure)
-import           System.IO
 import           System.Info                                        (os)
+import           System.IO
 import           System.Process                                     (rawSystem)
 
 redirectPrompt ∷ AllowScopes (s ∷ [Symbol]) ⇒ OAuthClient → proxy s → IO (OAuthCode s)

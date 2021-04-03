@@ -3,8 +3,8 @@
 
 module Html.MadHacker.Index (page, page404) where
 
+import           Data.Env
 import           Data.Site.MadHacker
-import Data.Env
 import           Html.Common.Head
 
 import           Html.Common.Bootstrap

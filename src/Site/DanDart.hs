@@ -3,9 +3,9 @@
 
 module Site.DanDart where
 
-import Data.Env
-import           Util.Build
+import           Data.Env
 import           Html.DanDart.Index
+import           Util.Build
 
 build ∷ WebsiteIO ()
 build = make "dandart" page page404

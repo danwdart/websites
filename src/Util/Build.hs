@@ -3,9 +3,9 @@
 
 module Util.Build (mkdirp, make, makeServe) where
 
-import Control.Monad.IO.Class
-import Data.Env
+import           Control.Monad.IO.Class
 import qualified Data.ByteString.Lazy.Char8     as BSL
+import           Data.Env
 import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp

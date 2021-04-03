@@ -3,8 +3,8 @@
 
 module Html.M0ORI.Index (page, page404) where
 
+import           Data.Env
 import           Data.Site.M0ORI
-import Data.Env
 
 import           Html.Common.Head
 import           Html.Common.Link
