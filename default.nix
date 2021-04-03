@@ -27,23 +27,25 @@ let
     packages = p: [
       p.websites
     ];
-    buildInputs = [
-      nixpkgs.pkgs.wget
-      nixpkgs.pkgs.nodejs
-      nixpkgs.pkgs.docker
-      nixpkgs.pkgs.awscli2
-      nixpkgs.haskellPackages.cabal-install
-      nixpkgs.openssh
-      nixpkgs.wget
-      nixpkgs.selenium-server-standalone
-      nixpkgs.firefox
-      nixpkgs.geckodriver
-      nixpkgs.chromedriver
-      nixpkgs.chromium
-      nixpkgs.haskellPackages.stack
-      nixpkgs.haskellPackages.ghcid
-      nixpkgs.haskellPackages.stylish-haskell
-      nixpkgs.haskellPackages.hlint
+    buildInputs = with nixpkgs; [
+      pkgs.wget
+      pkgs.nodejs
+      pkgs.docker
+      pkgs.awscli2
+      haskellPackages.cabal-install
+      openssh
+      wget
+      selenium-server-standalone
+      firefox
+      geckodriver
+      chromedriver
+      chromium
+      parallel
+      haskellPackages.stack
+      haskellPackages.ghcid
+      haskellPackages.stylish-haskell
+      haskellPackages.hlint
+      haskellPackages.apply-refact
     ];
     withHoogle = true;
     inputsFrom = [
