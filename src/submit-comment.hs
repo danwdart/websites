@@ -66,8 +66,6 @@ main = apiGatewayMain handler
 
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse Text)
 handler request = do
-    -- print $ request ^. agprqHeaders
-    --print $ request ^. requestBody
     githubAccessToken <- getEnv "GITHUB_ACCESS_TOKEN"
     let qs = parseQueryString . encodeUtf8 $ fromMaybe "" (request ^. requestBody)
     let lookupQS = decodeUtf8 . urlDecode True . lookupQueryString qs

@@ -20,7 +20,6 @@ module Data.Env (
 import Control.Applicative
 import Control.Monad.Trans.Reader
 import Data.Functor.Identity
--- import Data.Set (Set)
 import Data.String
 import Data.Map (Map)
 import Data.Text (Text)
@@ -48,8 +47,6 @@ data Website = Website {
 }
 
 type Env = Map Text Website
-
--- mapReaderT
 
 type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website

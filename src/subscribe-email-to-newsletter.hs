@@ -37,9 +37,6 @@ handler request = do
         email <- escape conn $ encodeUtf8 temail
         putStrLn "Querying..."
         query conn $ "INSERT INTO `newsletters`.`emails` (email) values (\"" <> email <> "\")"
-
-        -- print $ request ^. agprqHeaders
-        --print $ request ^. requestBody
         pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:green\">You have been subscribed.</span>"
     else do
         pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/html")] & responseBody ?~ "<span style=\"color:orange\">You have entered an invalid email address Want to try again?.</span>"

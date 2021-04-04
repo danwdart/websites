@@ -25,7 +25,7 @@ newtype Head = Head {
   ref :: Text
 } deriving (Generic, FromJSON, ToJSON, Show)
 
-data Pull = Pull { -- branch is head.ref?
+data Pull = Pull {
   number :: Int,
   body   :: Text,
   head   :: Head
@@ -43,9 +43,9 @@ getAllPulls = queryGitHub GHEndpoint {
 }
 
 deletePull ∷ Int → GitHubT IO Pull
-deletePull n = queryGitHub GHEndpoint {
+deletePull number = queryGitHub GHEndpoint {
   GH.method = PATCH,
-  endpoint = "/repos/:owner/:repo/pulls/" <> T.pack (show n), -- number
+  endpoint = "/repos/:owner/:repo/pulls/" <> T.pack (show number),
   endpointVals = [
       "owner" := owner,
       "repo" := repo
@@ -55,7 +55,7 @@ deletePull n = queryGitHub GHEndpoint {
   ]
 }
 
-deleteBranch ∷ Text → GitHubT IO Value -- refs/heads/branchName?
+deleteBranch ∷ Text → GitHubT IO Value
 deleteBranch ref' = queryGitHub GHEndpoint {
   GH.method = DELETE,
   endpoint = "/repos/:owner/:repo/git/refs/heads/:ref",

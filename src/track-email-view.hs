@@ -12,6 +12,4 @@ main = apiGatewayMain handler
 
 handler ∷ APIGatewayProxyRequest Text → IO (APIGatewayProxyResponse Text)
 handler _ = do
-    -- print $ request ^. agprqHeaders
-    --print $ request ^. requestBody
     pure $ responseOK & agprsHeaders .~ [("Content-Type", "text/plain")] & responseBody ?~ "Hi!"

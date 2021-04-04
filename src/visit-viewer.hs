@@ -67,5 +67,3 @@ handler request = do
       & responseBody ?~ BL.toStrict (encode (object [
           "status" .= ("OK" :: Text)
       ]))
-      -- & agprsHeaders .~ [("Content-Type", "image/gif")]
-      -- & responseBody ?~ decodeBase64Lenient "R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
