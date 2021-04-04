@@ -2,7 +2,6 @@
 
 module Site.Markdowns (buildMD) where
 
-import           Blog.Link              (makeLinks)
 import           Blog.Post              (makeBlogPost, renderPost)
 import           Blog.Types             (BlogMetadata (date, draft),
                                          BlogPost (metadata))
@@ -16,7 +15,7 @@ import           System.Directory       (doesFileExist, getDirectoryContents)
 import           System.FilePath        ((</>))
 import           Text.Blaze.Html5       as H
 
-buildMD ∷ FilePath → Text → (BlogMetadata → Html) → WebsiteIO ([BlogPost], Html, Html)
+buildMD ∷ FilePath → Text → (BlogMetadata → Html) → WebsiteIO ([BlogPost], Html)
 buildMD postsDir postType renderSuffix = do
   files <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files -- if used in same line, use Compose
@@ -25,6 +24,5 @@ buildMD postsDir postType renderSuffix = do
 
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
   renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost postType renderSuffix) sortedPosts
-  let renderedLinks = makeLinks sortedPosts
 
-  pure (sortedPosts, renderedPosts, renderedLinks)
+  pure (sortedPosts, renderedPosts)

@@ -4,6 +4,7 @@
 module Site.MadHacker where
 
 import           Blog.Feed                  (makeRSSFeed)
+import           Blog.Link                  (makeLinks)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.Env
@@ -17,9 +18,9 @@ build ∷ WebsiteIO ()
 build = do
   url' <- asks url
   title' <- asks title
-  (sortedPosts, renderedPosts, renderedLinks) <- buildMD "reviews" "review" renderStars
+  (sortedPosts, renderedPosts) <- buildMD "reviews" "review" renderStars
   liftIO . TIO.writeFile ".sites/madhacker/atom.xml" $ makeRSSFeed url' title' sortedPosts
-  make "madhacker" (page renderedLinks renderedPosts) page404
+  make "madhacker" (page (makeLinks sortedPosts) renderedPosts) page404
 
 serve ∷ WebsiteIO ()
 serve = makeServe build "madhacker"
