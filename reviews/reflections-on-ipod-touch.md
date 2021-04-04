@@ -3,6 +3,7 @@ title: 'Reflections on the iPod Touch'
 date: 2009-10-18T23:37:00.000+01:00
 draft: false
 aliases: [ "/2009/10/reflections-on-ipod-touch.html" ]
+featuredImage: https://everymac.com/images/ipod_pictures/apple-ipod-touch-3g.jpg
 tags : [ipod, apple, windows, mac os x, itunes, store, communication, games, app, touch]
 ---
 
