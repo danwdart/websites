@@ -111,7 +111,7 @@ renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = 
                 ) . T.unpack . getTag) (tags metadata')
         br
         br
-        maybe mempty (\x -> H.div ! class_ "col text-center" $ img ! src (textValue x)) $ featuredImage metadata'
+        maybe mempty (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
         br
         fixExternalLinks html'
         br
