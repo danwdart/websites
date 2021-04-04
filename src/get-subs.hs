@@ -23,21 +23,21 @@ import           System.Process                                     (rawSystem)
 redirectPrompt ∷ AllowScopes (s ∷ [Symbol]) ⇒ OAuthClient → proxy s → IO (OAuthCode s)
 redirectPrompt c p = do
   let url = formURL c p
-  T.putStrLn $ "Opening URL " `T.append` url
+  putStrLn $ "Opening URL " <> url
   _ <- case os of
     "darwin" -> rawSystem "open"     [unpack url]
     "linux"  -> rawSystem "xdg-open" [unpack url]
-    _        -> T.putStrLn "Unsupported OS" >> exitFailure
-  T.putStrLn "Please input the authorisation code: "
-  OAuthCode <$> T.getLine
+    _        -> putStrLn "Unsupported OS" >> exitFailure
+  putStrLn "Please input the authorisation code: "
+  OAuthCode <$> getLine
 
 main ∷ IO ()
 main = do
     _ <- loadFile defaultConfig
     lgr <- newLogger Trace stdout
     oauthClient <- OAuthClient <$>
-        (ClientId . T.pack <$> getEnv "GOOGLE_CLIENT_ID" ) <*>
-        (GSecret . T.pack <$> getEnv "GOOGLE_CLIENT_SECRET")
+        (ClientId . pack <$> getEnv "GOOGLE_CLIENT_ID" ) <*>
+        (GSecret . pack <$> getEnv "GOOGLE_CLIENT_SECRET")
 
     oauthCode <- redirectPrompt oauthClient youTubeReadOnlyScope
     let creds = FromClient oauthClient oauthCode

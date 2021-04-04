@@ -4,6 +4,7 @@ module Main where
 import           AWSLambda             (lambdaMain)
 import qualified Data.Aeson            as Aeson
 import qualified Data.ByteString.Char8 as B
+import           Data.Text.IO
 import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
                                         connect, defaultConnectInfo, query)
 import           System.Environment    (getEnv)

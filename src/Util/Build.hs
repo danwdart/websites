@@ -1,12 +1,16 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Util.Build (mkdirp, make, makeServe) where
 
+import Prelude hiding (putStrLn)
 import           Control.Monad.IO.Class
 import qualified Data.ByteString.Lazy.Char8     as BSL
 import           Data.Env
 import           Data.Maybe                     (fromMaybe, mapMaybe)
+import qualified Data.Text as T
+import           Data.Text.IO
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           System.Directory
@@ -28,7 +32,7 @@ make name page page404 = do
         copyDir ("static/" <> name) (".sites/" <> name)
         BSL.writeFile (".sites/" <> (name <> "/index.html")) $ renderHtml page'
         BSL.writeFile (".sites/" <> (name <> "/404.html")) $ renderHtml page404'
-        putStrLn $ name <> " compiled."
+        putStrLn $ T.pack name <> " compiled."
 
 makeServe ∷ WebsiteIO () → FilePath → WebsiteIO ()
 makeServe build dir = do
@@ -36,5 +40,5 @@ makeServe build dir = do
     build
     liftIO $ do
         port <- fromMaybe "80" <$> lookupEnv "PORT"
-        putStrLn $ "Serving on http://localhost:" <> port
+        putStrLn $ "Serving on http://localhost:" <> T.pack port
         runEnv 80 . staticApp $ (defaultWebAppSettings $ ".sites/" <> dir <> "/"){ ssIndices = mapMaybe toPiece ["index.html"] }

@@ -16,7 +16,7 @@ build ∷ WebsiteIO ()
 build = do
   url' <- asks url
   title' <- asks title
-  (sortedPosts, renderedPosts, renderedLinks) <- buildMD "posts" "post"
+  (sortedPosts, renderedPosts, renderedLinks) <- buildMD "posts" "post" (const mempty)
   liftIO . TIO.writeFile ".sites/blog/atom.xml" $ makeRSSFeed url' title' sortedPosts
   make "blog" (page renderedLinks renderedPosts) page404
 

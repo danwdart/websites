@@ -1,29 +1,32 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Main where
 
+import           Control.Concurrent
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.ByteString                (isPrefixOf)
 import           Data.Env
 import           Data.Map                       ((!))
 import           Data.Maybe
+import qualified Data.Text                      as T
+import           Data.Text.IO
 import           Network.Wai
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           Network.Wai.Handler.WebSockets
 import           Network.Wai.Middleware.Vhost
 import           Network.WebSockets
-import           WaiAppStatic.Types
-
-import           Control.Concurrent
+import           Prelude                        hiding (putStrLn)
 import qualified Site.Blog                      as B
 import qualified Site.DanDart                   as D
 import qualified Site.JolHarg                   as J
 import qualified Site.M0ORI                     as M
 import qualified Site.MadHacker                 as R
 import           System.Environment             (lookupEnv)
+import           WaiAppStatic.Types
 
 build ∷ WebsitesIO ()
 build = do
@@ -47,7 +50,7 @@ serve = do
     runReaderT build development
     port <- fromMaybe "80" <$> lookupEnv "PORT"
     putStrLn "Serving all websites:"
-    mapM_ (\host -> putStrLn $ "http://" <> host <> ".localhost:" <> port) [
+    mapM_ (\host -> putStrLn $ "http://" <> T.pack host <> ".localhost:" <> T.pack port) [
         "madhacker",
         "blog",
         "dandart",

@@ -16,15 +16,15 @@ import           System.Directory       (doesFileExist, getDirectoryContents)
 import           System.FilePath        ((</>))
 import           Text.Blaze.Html5       as H
 
-buildMD ∷ FilePath → Text → WebsiteIO ([BlogPost], Html, Html)
-buildMD postsDir postType = do
+buildMD ∷ FilePath → Text → (BlogMetadata → Html) → WebsiteIO ([BlogPost], Html, Html)
+buildMD postsDir postType renderSuffix = do
   files <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files -- if used in same line, use Compose
   validFiles <- liftIO $ filterM doesFileExist fileNames
   posts <- liftIO . sequence $ makeBlogPost postsDir <$> validFiles
 
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-  renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost postType (const mempty)) sortedPosts
+  renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost postType renderSuffix) sortedPosts
   let renderedLinks = makeLinks sortedPosts
 
   pure (sortedPosts, renderedPosts, renderedLinks)

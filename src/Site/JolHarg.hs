@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -9,9 +10,11 @@ import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import qualified Data.ByteString.Lazy.Char8    as BSL
 import           Data.Env
+import           Data.Text.IO
 import           Html.Common.GitHub
 import           Html.JolHarg.Index
 import           Network.HTTP.Req
+import           Prelude                       hiding (putStrLn)
 import           System.Path
 import           Text.Blaze.Html.Renderer.Utf8
 import           Util.Build                    (makeServe)

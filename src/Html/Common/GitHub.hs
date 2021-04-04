@@ -118,7 +118,7 @@ instance FromJSON Repo where
             licence = licenceText,
             stars = stargazers
         }
-    parseJSON _ = error "Wrong object"
+    parseJSON _ = fail "Repo should be an object"
 
 getRepos ∷ Text → Req [Repo]
 getRepos user = do

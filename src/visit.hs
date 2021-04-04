@@ -12,6 +12,7 @@ import           Data.ByteString.Char8 (ByteString)
 import qualified Data.ByteString.Char8 as B
 import           Data.Maybe            (fromMaybe)
 import           Data.Text             as T (Text)
+import           Data.Text.IO
 import           Data.Time             (UTCTime, defaultTimeLocale, formatTime,
                                         getCurrentTime)
 import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),

@@ -20,6 +20,7 @@ import           Text.Blaze.Html5             as H hiding (main)
 import           Text.Blaze.Html5.Attributes  as A
 import           Text.Blaze.Internal
 import           Text.Pandoc.Class
+-- import           Text.Pandoc.Definitions
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Highlighting
 import           Text.Pandoc.Options
@@ -35,7 +36,6 @@ parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
         }) (decodeUtf8 i')))
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
     _ -> error $ "What is " <> T.unpack contents'
-
 
 makeBlogPost ∷ FilePath → FilePath → IO BlogPost
 makeBlogPost postsDir filename = do

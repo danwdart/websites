@@ -4,35 +4,44 @@
 
 module Blog.Types where
 
-import           Data.Aeson       (FromJSON, Value, (.:), (.:?))
+import           Data.Aeson       (FromJSON, (.:), (.:?))
 import qualified Data.Aeson       as A
 import           Data.Text        (Text)
 import qualified Data.Text        as T
 import           Data.Time
 import           GHC.Generics
--- import qualified Text.Atom.Feed as Atom
--- import qualified Text.Atom.Feed.Export as Export
 import           Text.Blaze.Html5 as H hiding (main)
--- import Text.Blaze.Renderer.Utf8
 
 newtype BlogTag = BlogTag {
     getTag :: Text
  } deriving (Show)
 
+data Score = Score {
+    rating :: Int,
+    outOf :: Int
+}
+
+instance FromJSON Score where
+    parseJSON (A.String a') = do
+        let [rating', outOf'] = T.splitOn "/" a'
+        pure $ Score (read (T.unpack rating')) (read (T.unpack outOf'))
+    parseJSON _ = fail "Problem parsing score."
+
 instance FromJSON BlogTag where
     parseJSON (A.String a') = pure $ BlogTag a'
     parseJSON (A.Number a') = pure . BlogTag $ T.pack (show a')
     parseJSON (A.Bool a')   = pure . BlogTag $ T.pack (show a')
-    parseJSON e             = error (show e)
+    parseJSON e             = fail (show e)
 
 data BlogMetadata = BlogMetadata {
     title   :: Text,
     date    :: UTCTime,
     draft   :: Bool,
-    aliases :: [FilePath],
+    aliases :: [FilePath], -- TODO make these files and use them for permalink?
+    featuredImage :: Maybe Text,
     tags    :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
-    scores  :: Maybe Value
-} deriving (Generic, Show)
+    scores  :: Maybe [(Text, Score)]
+} deriving (Generic)
 
 data BlogCommentMetadata = BlogCommentMetadata {
     author      :: Text,
@@ -45,7 +54,7 @@ instance FromJSON BlogCommentMetadata where
         o .: "author" <*>
         o .: "email" <*>
         o .: "url"
-    parseJSON _ = error "Bad blog comment metadata"
+    parseJSON _ = fail "Bad blog comment metadata"
 
 data BlogPost = BlogPost {
     postId   :: Text,
@@ -71,6 +80,7 @@ instance FromJSON BlogMetadata where
         o .: "date" <*>
         o .: "draft" <*>
         o .: "aliases" <*>
+        o .:? "featuredImage" <*>
         (concat <$> (o .:? "tags")) <*> -- Maybe [a] -> [a]
         o .:? "scores"
-    parseJSON _ = error "Bad blog metadata"
+    parseJSON _ = fail "Bad blog metadata"

@@ -7,6 +7,7 @@ import           AWSLambda
 import           Data.Maybe
 import           Data.Text              as T
 import           Data.Text.Encoding
+import           Data.Text.IO
 import           Database.MySQL.Base
 import           Network.AWS.Data.Query
 import           Network.AWS.Lens

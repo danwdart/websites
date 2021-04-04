@@ -6,10 +6,18 @@ aliases: [ "/2020/11/one-month-macbook-pro-13-2020.html" ]
 featuredImage: https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP818/sp818-mbp13touch-space-select-202005.png
 tags : [macbook, pro, review]
 scores :
-    - Hackability: 3/10
-    - Fun: 6/10
-    - Value for money: 3/10
-    - Overall: 5/10
+    -
+        - Hackability
+        - 3/10
+    -
+        - Fun
+        - 6/10
+    -
+        - Value for money
+        - 3/10
+    -
+        - Overall
+        - 5/10
 ---
 
 From mid-September to mid-October 2020, I had the perhaps-fortune-perhaps-misfortune of using the [MacBook Pro 13" 2020](https://support.apple.com/kb/SP819?locale=en_GB) (codenamed MacBookPro16,2).

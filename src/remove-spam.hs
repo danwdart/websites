@@ -12,6 +12,7 @@ import           Data.Aeson
 import qualified Data.ByteString.Char8  as B
 import           Data.Text              (Text)
 import qualified Data.Text              as T
+import           Data.Text.IO
 import           GHC.Generics
 import           GitHub.REST            as GH hiding ((.:))
 import           System.Environment
