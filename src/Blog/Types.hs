@@ -18,7 +18,7 @@ newtype BlogTag = BlogTag {
 
 data Score = Score {
     rating :: Int,
-    outOf :: Int
+    outOf  :: Int
 }
 
 instance FromJSON Score where
@@ -34,13 +34,13 @@ instance FromJSON BlogTag where
     parseJSON e             = fail (show e)
 
 data BlogMetadata = BlogMetadata {
-    title   :: Text,
-    date    :: UTCTime,
-    draft   :: Bool,
-    aliases :: [FilePath], -- TODO make these files and use them for permalink?
+    title         :: Text,
+    date          :: UTCTime,
+    draft         :: Bool,
+    aliases       :: [FilePath], -- TODO make these files and use them for permalink?
     featuredImage :: Maybe Text,
-    tags    :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
-    scores  :: Maybe [(Text, Score)]
+    tags          :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
+    scores        :: Maybe [(Text, Score)]
 } deriving (Generic)
 
 data BlogCommentMetadata = BlogCommentMetadata {

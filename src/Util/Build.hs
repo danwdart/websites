@@ -4,15 +4,15 @@
 
 module Util.Build (mkdirp, make, makeServe) where
 
-import Prelude hiding (putStrLn)
 import           Control.Monad.IO.Class
 import qualified Data.ByteString.Lazy.Char8     as BSL
 import           Data.Env
 import           Data.Maybe                     (fromMaybe, mapMaybe)
-import qualified Data.Text as T
+import qualified Data.Text                      as T
 import           Data.Text.IO
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
+import           Prelude                        hiding (putStrLn)
 import           System.Directory
 import           System.Environment             (lookupEnv)
 import           System.Path
