@@ -140,7 +140,7 @@ development = [
     (
         "madhacker",
         Website {
-            slug = "m0ori",
+            slug = "madhacker",
             title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
             url = "http://madhacker.localhost:8080",
             urlDanDart = "http://dandart.localhost:8080",
@@ -229,7 +229,7 @@ production = [
     (
         "madhacker",
         Website {
-            slug = "m0ori",
+            slug = "madhacker",
             title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
             url = "https://madhackerreviews.com",
             urlDanDart = "https://dandart.co.uk",
