@@ -1,6 +1,7 @@
 { 
   nixpkgs ? import <nixpkgs> {},
   unstable ? import <unstable> {},
+  oldNixPkgs ? import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/f0c230c2c7cc5c88b0d80b95ca61d86d1dfb700f.tar.gz") {},
   compiler ? "ghc8104", # basement doesn't yet support 901
   ghcjs ? "ghcjs86",
   node ? import ./node-default.nix {} }:
@@ -35,10 +36,10 @@ let
       haskellPackages.cabal-install
       openssh
       wget
-      selenium-server-standalone
+      oldNixPkgs.selenium-server-standalone
       firefox
       geckodriver
-      chromedriver
+      oldNixPkgs.chromedriver
       chromium
       parallel
       haskellPackages.stack
