@@ -1,4 +1,4 @@
-{-# LANGUAGE UnicodeSyntax     #-}
+{-# LANGUAGE UnicodeSyntax #-}
 
 module Site.DanDart where
 

@@ -16,8 +16,8 @@ import           GHC.Generics
 import           Network.AWS.Data.Query
 import           Network.AWS.Lens
 import           Network.HTTP.Types
-import Network.Mail.Mime
-import Network.Mail.SMTP
+import           Network.Mail.Mime
+import           Network.Mail.SMTP
 import           System.Environment
 import           Text.Printf
 import           Util.QueryString
@@ -45,8 +45,8 @@ handler request = do
     let message = lookupQS "message"
 
     sendMailWithLoginTLS' smtpServer smtpPort smtpUsername smtpPassword $
-      simpleMail email [toEmail] [] [] subject [plainTextPart message] 
-    
+      simpleMail email [toEmail] [] [] subject [plainTextPart message]
+
 
     pure $ responseOK
       & agprsHeaders .~ [("Content-Type", "text/html")]

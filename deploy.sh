@@ -5,6 +5,8 @@ siteupdate() {
     git push
 }
 
+# TODO - ensure master and clean
+
 cabal new-run build-websites
 
 cd .sites

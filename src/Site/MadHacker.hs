@@ -8,7 +8,7 @@ import           Blog.Link                  (makeLinks)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.Env
-import qualified Data.Text as T
+import qualified Data.Text                  as T
 import qualified Data.Text.IO               as TIO
 import           Html.MadHacker.Index       (page, page404)
 import           Html.MadHacker.Suffix
