@@ -12,6 +12,7 @@ before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//g' .gitmodules
   - git submodule update --init --recursive
   - nix-channel --add https://nixos.org/channels/nixos-20.09 nixpkgs
+  - nix-channel --add https://nixos.org/channels/nixos-unstable unstable
   - nix-channel --update
 before_cache:
   - mkdir -p $HOME/nix.store
