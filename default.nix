@@ -2,7 +2,8 @@
   nixpkgs ? import <nixpkgs> {},
   unstable ? import <unstable> {},
   compiler ? "ghc8104", # basement doesn't yet support 901
-  ghcjs ? "ghcjs86",
+  ghcjs ? "ghcjs86"
+} :
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
   myHaskellPackages = unstable.pkgs.haskell.packages.${compiler}.override {
