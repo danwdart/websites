@@ -94,7 +94,7 @@ executable build-websites
     , Util.Time
     , Util.Triple
 
-test-suite e2e
+test-suite websites-test
   import: shared-properties
   hs-source-dirs:      src, test
   type:                exitcode-stdio-1.0
@@ -102,7 +102,6 @@ test-suite e2e
   build-depends:       
     base >= 4.7 && < 5
     , aeson
-    , async
     , blaze-html
     , blaze-markup
     , bytestring
@@ -136,49 +135,4 @@ test-suite e2e
     , wai-app-static
     , wai-extra
     , warp
-    , webdriver
     , xml-conduit
-  other-modules:
-      Blog.Comment
-    , Blog.Feed
-    , Blog.Link
-    , Blog.Post
-    , Blog.Types
-    , Util.Build
-    , Data.Env
-    , Data.Site.Blog
-    , Data.Site.DanDart
-    , Data.Site.JolHarg
-    , Data.Site.M0ORI
-    , Data.Site.MadHacker
-    , E2E.Site.CommonSpec
-    , Html.Blog.Index
-    , Html.Common.Audio
-    , Html.Common.Bootstrap
-    , Html.Common.CSS
-    , Html.Common.Card
-    , Html.Common.Contact
-    , Html.Common.GitHub
-    , Html.Common.Head
-    , Html.Common.Header
-    , Html.Common.Link
-    , Html.Common.Page
-    , Html.Common.Shortcuts
-    , Html.Common.Social
-    , Html.Common.Utils
-    , Html.Common.Visit
-    , Html.Common.Error.NotFound
-    , Html.DanDart.Index
-    , Html.JolHarg.Index
-    , Html.MadHacker.Index
-    , Html.MadHacker.Suffix
-    , Html.M0ORI.Index
-    , Site.Blog
-    , Site.DanDart
-    , Site.JolHarg
-    , Site.MadHacker
-    , Site.Markdowns
-    , Site.M0ORI
-    , Util.List
-    , Util.Time
-    , Util.Triple
