@@ -1,10 +1,8 @@
 { 
   nixpkgs ? import <nixpkgs> {},
   unstable ? import <unstable> {},
-  oldNixPkgs ? import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/f0c230c2c7cc5c88b0d80b95ca61d86d1dfb700f.tar.gz") {},
   compiler ? "ghc8104", # basement doesn't yet support 901
   ghcjs ? "ghcjs86",
-  node ? import ./node-default.nix {} }:
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
   myHaskellPackages = unstable.pkgs.haskell.packages.${compiler}.override {
@@ -17,11 +15,6 @@ let
       mmark = (self.callHackage "mmark" "0.0.7.2" {}).overrideDerivation(self: {
         doCheck = false; # It fails but I don't care as it's nothing I use, just a dependency of a part of a package I don't use.
       });
-      # https://github.com/brendanhay/gogol/issues/148
-      gogol-core = self.callCabal2nixWithOptions "gogol-core" (builtins.fetchGit { # not yet released
-        url = "https://github.com/brendanhay/gogol";
-        rev = "d7c7d71fc985cd96fb5f05173da6c607da362b74";
-      }) "--subpath core" {};
     };
   };
   shell = myHaskellPackages.shellFor {
@@ -29,29 +22,16 @@ let
       p.websites
     ];
     buildInputs = with nixpkgs; [
-      pkgs.wget
-      pkgs.nodejs
-      pkgs.docker
-      pkgs.awscli2
+      wget
       haskellPackages.cabal-install
       openssh
-      wget
-      oldNixPkgs.selenium-server-standalone
-      firefox
-      geckodriver
-      oldNixPkgs.chromedriver
-      chromium
       parallel
-      haskellPackages.stack
       haskellPackages.ghcid
       haskellPackages.stylish-haskell
       haskellPackages.hlint
       haskellPackages.apply-refact
     ];
     withHoogle = true;
-    inputsFrom = [
-      node.shell
-    ];
   };
   exe = unstable.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
 in
@@ -59,7 +39,6 @@ in
   inherit shell;
   inherit exe;
   inherit myHaskellPackages;
-  inherit node;
   websites = myHaskellPackages.websites;
 }
 

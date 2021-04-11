@@ -25,5 +25,5 @@ renderStars BlogMetadata { scores = Just scores' } = do
         row $ do
             ((H.div ! class_ "col") . h4) . fromString . T.unpack $ name'
             H.div ! class_ "col" $ stars score
-        ) $ scores'
+        ) scores'
 renderStars _ = mempty

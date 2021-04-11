@@ -59,12 +59,10 @@ getComments postsDir postId = do
         else pure mempty
 
 commentForm ∷ Text → Text → WebsiteM Html
-commentForm postType postId = do
-    endpoint' <- asks endpoint
-    pure . (H.form
+commentForm postType postId = pure . (H.form
         ! A.class_ "form"
         ! enctype "application/x-www-form-urlencoded"
-        ! action (textValue (endpoint' <> "/comment"))
+        ! action ""
         ! method "post"
         ! target "_result") $ do
             H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))

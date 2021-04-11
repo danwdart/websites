@@ -5,7 +5,7 @@ module Html.Common.Visit where
 
 import           Data.Env
 import           Text.Blaze.Html5
-import           Text.Blaze.Html5.Attributes as A
+-- import           Text.Blaze.Html5.Attributes as A
 
 visitsUrl ∷ WebsiteM AttributeValue
 visitsUrl = do
@@ -14,9 +14,11 @@ visitsUrl = do
 
 -- TODO functor?
 lazyPixelVisit ∷ (AttributeValue → AttributeValue) → WebsiteM Html
-lazyPixelVisit f = do
-    visitsUrl' <- visitsUrl
-    pure $ img ! src (f visitsUrl') ! A.style "display: none" ! A.style "width: 0; height: 0" ! customAttribute "loading" "lazy"
+lazyPixelVisit _ = do
+    -- visitsUrl' <- visitsUrl
+    pure ""
+    -- Disabled for now
+    --  img ! src (f visitsUrl') ! A.style "display: none" ! A.style "width: 0; height: 0" ! customAttribute "loading" "lazy"
 
 visit ∷ AttributeValue → WebsiteM Html
 visit url' = lazyPixelVisit (<> "?u=" <> url')

@@ -8,7 +8,6 @@ import           Blog.Types
 import           Data.Either
 import           Data.Env
 import           Data.Frontmatter
-import           Data.List
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as T
@@ -90,8 +89,8 @@ fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks
 fixExternalLinks as = as
 
 renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteM Html
-renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = do
-    commentForm' <- commentForm postType postId'
+renderPost postType renderSuffix (BlogPost postId' metadata' html' _) = do
+    -- commentForm' <- commentForm postType postId'
     let visitPageSub' = visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId')
     visitPageSubTop <- visitPageSub' "top"
     visitPageSubBottom <- visitPageSub' "bottom"
@@ -116,15 +115,4 @@ renderPost postType renderSuffix (BlogPost postId' metadata' html' comments') = 
         fixExternalLinks html'
         br
         renderSuffix metadata'
-        br
-        h3 "Comments"
-        if Data.List.null comments' then
-            p "No comments at the moment. Be the first to comment!"
-        else
-            mapM_ renderComment comments'
-        br
-        details $ do
-            H.summary . (h4 ! A.class_ "d-inline-block") $ "Post a comment"
-            commentForm'
-        hr
         visitPageSubBottom

@@ -172,7 +172,7 @@ production = [
             siteType = Blog "posts",
             livereload = False,
             tracking = True,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
+            endpoint = "https://api.jolharg.com"
         }
     ),
     (
@@ -189,7 +189,7 @@ production = [
             siteType = Normal,
             livereload = False,
             tracking = True,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
+            endpoint = "https://api.jolharg,com"
         }
     ),
     (
@@ -206,7 +206,7 @@ production = [
             siteType = Normal,
             livereload = False,
             tracking = True,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
+            endpoint = "https://api.jolharg,com"
         }
     ),
     (
@@ -223,7 +223,7 @@ production = [
             siteType = Normal,
             livereload = False,
             tracking = True,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
+            endpoint = "https://api.jolharg,com"
         }
     ),
     (
@@ -240,7 +240,7 @@ production = [
             siteType = Blog "reviews",
             livereload = False,
             tracking = True,
-            endpoint = "https://kkeacv0mpj.execute-api.eu-west-2.amazonaws.com/dev"
+            endpoint = "https://api.jolharg,com"
         }
     )
     ]
