@@ -58,9 +58,11 @@ pageFs = do
         mapM_ renderCard repos
 
 pageContact ∷ WebsiteM Html
-pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
-    p "If you would like to contact JolHarg or make an enquiry, please use this form:"
-    contactForm "website@jolharg.com" emailHelpPlural "Website for me..." "I am interested in a website..."
+pageContact = do
+    contactForm' <- contactForm "website@jolharg.com" emailHelpPlural "Website for me..." "I am interested in a website..."
+    makePage "contact" "Contact" contactLayout notDefaultPage $ do
+        p "If you would like to contact JolHarg or make an enquiry, please use this form:"
+        contactForm'
 
 -- Todo Technologies, Pricing, Blog, About
 htmlHeader ∷ Reader [Repo] (WebsiteM Html)

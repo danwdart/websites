@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveAnyClass    #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE DerivingVia       #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -15,6 +16,7 @@ import qualified Data.Text              as T
 import           Data.Text.IO
 import           GHC.Generics
 import           GitHub.REST            as GH hiding ((.:))
+import           Prelude                hiding (putStrLn)
 import           System.Environment
 
 owner, repo ∷ Text
@@ -43,9 +45,9 @@ getAllPulls = queryGitHub GHEndpoint {
 }
 
 deletePull ∷ Int → GitHubT IO Pull
-deletePull number = queryGitHub GHEndpoint {
+deletePull number' = queryGitHub GHEndpoint {
   GH.method = PATCH,
-  endpoint = "/repos/:owner/:repo/pulls/" <> T.pack (show number),
+  endpoint = "/repos/:owner/:repo/pulls/" <> T.pack (show number'),
   endpointVals = [
       "owner" := owner,
       "repo" := repo
@@ -86,9 +88,9 @@ main = do
           ) allPulls
 
     mapM_ (\(prNumber, branch) -> runGitHubT state $ do
-        liftIO . putStrLn $ "Going to delete PR " <> show prNumber
+        liftIO . putStrLn $ "Going to delete PR " <> T.pack (show prNumber)
         _ <- deletePull prNumber
-        liftIO . putStrLn $ "PR " <> show prNumber <> " deleted. Going to delete branch " <> T.unpack branch
+        liftIO . putStrLn $ "PR " <> T.pack (show prNumber) <> " deleted. Going to delete branch " <> branch
         _ <- deleteBranch branch
-        liftIO . putStrLn $ "Deleted branch " <> T.unpack branch
+        liftIO . putStrLn $ "Deleted branch " <> branch
       ) spamPulls

@@ -1,12 +1,16 @@
-{-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 module Main where
 
 import           AWSLambda             (lambdaMain)
 import qualified Data.Aeson            as Aeson
 import qualified Data.ByteString.Char8 as B
+import           Data.Text.Encoding
 import           Data.Text.IO
 import           Database.MySQL.Base   (ConnectInfo (connectDatabase, connectHost, connectPassword, connectUser),
                                         connect, defaultConnectInfo, query)
+import           Prelude               hiding (putStrLn)
 import           System.Environment    (getEnv)
 
 main ∷ IO ()
@@ -24,5 +28,5 @@ handler _ = do
         connectDatabase = "mysql"
     }
     putStrLn "Connected. Querying..."
-    mapM_ (\q -> putStrLn ("Querying " <> B.unpack q) >> query conn q) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
+    mapM_ (\q -> putStrLn ("Querying " <> decodeUtf8 q) >> query conn q) . filter (not . B.null) . fmap (B.dropWhile (=='\n')) . B.split ';' $ sqlFile
     putStrLn "Done!"

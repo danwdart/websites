@@ -23,7 +23,7 @@ To use offline, you should run `docker pull lambci/lambda:build-provided` if you
 Error generated using 8.10:
 
 ```
-$ stack build --docker --docker-image fpco/stack-build:lts-13.30
+$ stack build --no-nix --docker --docker-image fpco/stack-build:lts-13.30
 Preparing to install GHC to an isolated location.
 This will not interfere with any system-level installation.
 Already downloaded.                 
@@ -74,3 +74,6 @@ Docker it manually.
 Nix docker it.
 
 Don't use AWS, critically.
+
+Ideas:
+    Use a convertor to convert any API to a serverless function. Upload it to a Docker provider. Manage the SQL provider later with cloudformation equivalents, Use *that* as the deploy step.

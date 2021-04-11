@@ -27,9 +27,34 @@ provider:
           Action:
             - apigateway:GET
           Resource: "*"
-  
 
 functions:
+  contact:
+    handler: websites.contact
+    name: ${opt:stage, self:provider.stage}-contact
+    environment:
+      SMTP_SERVER: ${env:SMTP_SERVER}
+      SMTP_PORT: ${env:SMTP_PORT}
+      SMTP_TLS: ${env:SMTP_TLS}
+      # IAM with "Statement": [{"Effect":"Allow","Action":"ses:SendRawEmail","Resource":"*"}]
+      SMTP_USERNAME: ${env:SMTP_USERNAME}
+      SMTP_PASSWORD: ${env:SMTP_PASSWORD}
+      # SMTP settings?
+    package:
+      # todo use patterns
+      exclude:
+        - ./**
+      include:
+        - bootstrap
+        - contact
+      individually: true
+    events:
+      - http:
+          path: /contact
+          method: post
+          cors: true
+          private: false
+
   send-newsletter:
     handler: websites.send-newsletter
     name: ${opt:stage, self:provider.stage}-send-newsletter
@@ -216,6 +241,7 @@ resources:
       AllowedPattern: '[a-zA-Z0-9]*'
       ConstraintDescription: must contain only alphanumeric characters.
   Resources:
+    # Manually set up SES domains & email addresses
     visitsDB:
       Type: AWS::RDS::DBCluster
       Properties:

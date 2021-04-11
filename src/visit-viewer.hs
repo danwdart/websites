@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 module Main where
@@ -23,6 +24,7 @@ import           Database.MySQL.Base        (ConnectInfo (connectDatabase, conne
                                              connect, defaultConnectInfo,
                                              escape, query)
 import           Network.AWS.Lens           ((&), (.~), (?~), (^.))
+import           Prelude                    hiding (putStrLn)
 import           System.Environment         (getEnv)
 import           Text.Printf                (printf)
 

@@ -53,9 +53,11 @@ pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
         $ (img ! src "https://rigreference.com/solar/img/tall")
 
 pageContact ∷ WebsiteM Html
-pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
-    p "If you would like to contact Dan, please use this form:"
-    contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
+pageContact = do
+    contactForm' <- contactForm "website@m0ori.com" emailHelpSingular "Greetings..." "Hello!..."
+    makePage "contact" "Contact" contactLayout notDefaultPage $ do
+        p "If you would like to contact Dan, please use this form:"
+        contactForm'
 
 htmlHeader ∷ WebsiteM Html
 htmlHeader = do

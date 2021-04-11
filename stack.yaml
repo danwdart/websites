@@ -1,5 +1,5 @@
 ghc-options:
-  websites: -j16 -Wall -Werror
+  websites: -Wall -Werror
 packages:
 - .
 extra-deps:
@@ -9,4 +9,5 @@ extra-deps:
 - gogol-0.5.0
 - gogol-core-0.5.0
 - gogol-youtube-0.5.0
+- smtp-mail-0.3.0.0@sha256:2e6d9cb29d09a5a04d77a905eb1b570b94b5654e24d40630ea96aa374474c12f,1239
 resolver: lts-16.25

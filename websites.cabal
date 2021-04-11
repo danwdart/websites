@@ -94,6 +94,23 @@ executable build-websites
     , Util.Time
     , Util.Triple
 
+executable contact
+  import: shared-properties
+  main-is:             contact.hs
+  build-depends:       
+      base >= 4.7 && < 5
+    , aeson
+    , amazonka-core
+    , base64
+    , bytestring
+    , http-types
+    , mime-mail
+    , serverless-haskell
+    , smtp-mail
+    , text
+  other-modules:
+      Util.QueryString
+
 executable get-subs
   import: shared-properties
   main-is:             get-subs.hs
@@ -115,7 +132,6 @@ executable remove-spam
     , aeson
     , base64
     , bytestring
-    -- , github -- can't use? will have to use new project?
     , github-rest
     , text
 

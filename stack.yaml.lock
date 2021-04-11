@@ -43,6 +43,13 @@ packages:
       sha256: 334a4f32e81f46f1d57722294f81f19c07258d09d624ba5b70575255ad66ab61
   original:
     hackage: gogol-youtube-0.5.0
+- completed:
+    hackage: smtp-mail-0.3.0.0@sha256:2e6d9cb29d09a5a04d77a905eb1b570b94b5654e24d40630ea96aa374474c12f,1239
+    pantry-tree:
+      size: 450
+      sha256: 4d319cb6c22b35ca043a83210cd09bfbf99eec3dca4945cd53ed5b7c96f7daca
+  original:
+    hackage: smtp-mail-0.3.0.0@sha256:2e6d9cb29d09a5a04d77a905eb1b570b94b5654e24d40630ea96aa374474c12f,1239
 snapshots:
 - completed:
     size: 533252

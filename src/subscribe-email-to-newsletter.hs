@@ -1,4 +1,5 @@
 {-# LANGUAGE BlockArguments    #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -13,6 +14,7 @@ import           Database.MySQL.Base
 import           Network.AWS.Data.Query
 import           Network.AWS.Lens
 import           Network.HTTP.Types
+import           Prelude                hiding (putStrLn)
 import           System.Environment
 import           Util.QueryString
 

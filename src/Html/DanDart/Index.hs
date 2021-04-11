@@ -236,9 +236,11 @@ pageReviews = do
     pure $ extNav (textValue urlMadHacker') "Reviews"
 
 pageContact ∷ WebsiteM Html
-pageContact = makePage "contact" "Contact" contactLayout notDefaultPage $ do
-    p "If you would like to contact Dan, please use this form:"
-    contactForm "website@dandart.co.uk" emailHelpSingular "Greetings..." "Hello!..."
+pageContact = do
+    contactForm' <- contactForm "website@dandart.co.uk" emailHelpSingular "Greetings..." "Hello!..."
+    makePage "contact" "Contact" contactLayout notDefaultPage $ do
+        p "If you would like to contact Dan, please use this form:"
+        contactForm'
 
 socialIcons ∷ Html
 socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right social-inside") $ (do
