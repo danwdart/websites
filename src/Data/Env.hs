@@ -46,6 +46,7 @@ data Website = Website {
     endpoint :: Text
 }
 
+-- TODO bring urls into website deduplicated
 type Env = Map Text Website
 
 type WebsiteM = Reader Website

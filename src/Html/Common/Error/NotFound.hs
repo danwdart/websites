@@ -15,7 +15,7 @@ defaultPage404 descTitle keywords extraHead = do
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         body $ do
-            row . (H.div ! class_ "col-12 text-center") $ do
+            row . (divClass "col-12 text-center") $ do
                 h1 "Oh no!"
                 p "Sorry, I couldn't find that."
                 p . (a ! href "/") $ "Back to main page"

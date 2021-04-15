@@ -22,9 +22,9 @@ import           Text.Blaze.Html5.Attributes as A
 
 pagePortfolio ∷ WebsiteM Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
-    row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
+    row . (divClass "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
     row $ do
-        (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
+        (divClass "card col-md-4 text-center") . (divClass "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"
             h4 ! class_ "card-title" $ "You"
             p ! class_ "card-text" $ "Make an enquiry for a website or project:"
@@ -54,7 +54,7 @@ pageFs ∷ Reader [Repo] (WebsiteM Html)
 pageFs = do
     repos <- ask
     pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do
-        row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
+        row . (divClass "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
         mapM_ renderCard repos
 
 pageContact ∷ WebsiteM Html

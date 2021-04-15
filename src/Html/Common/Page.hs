@@ -33,11 +33,11 @@ notDefaultPage = mempty
 
 defaultLayout ∷ Html → Html
 defaultLayout = row .
-    (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light")
+    (divClass "col-md-8 offset-md-2 py-3 mb-3 bg-light")
 
 contactLayout :: Html -> Html
 contactLayout = row .
-    (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3")
+    (divClass "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3")
 
 customLayout ∷ Html → Html
 customLayout = Prelude.id
@@ -67,7 +67,7 @@ makePage pageId label' layout extraParams content' = do
             ! A.id pageId $ do
                 visitTop
                 row .
-                    (H.div ! class_ "col my-md-3") .
+                    (divClass "col my-md-3") .
                         small $ "» " <> fromString label'
                 layout content'
                 visitBottom

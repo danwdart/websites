@@ -13,6 +13,7 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
+import Html.Common.Bootstrap
 import           Html.Common.Visit
 import           System.FilePath
 import           Text.Blaze.Html5             as H hiding (main)
@@ -110,7 +111,7 @@ renderPost postType renderSuffix (BlogPost postId' metadata' html' _) = do
                 ) . T.unpack . getTag) (tags metadata')
         br
         br
-        maybe mempty (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
+        maybe mempty (\x -> row . (divClass "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
         br
         fixExternalLinks html'
         br

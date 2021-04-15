@@ -19,7 +19,7 @@ common shared-properties
   
 executable build-websites
   import: shared-properties
-  main-is:             build-websites.hs
+  main-is:             Main.hs
   build-depends:       
       base >= 4.7 && < 5
     , aeson
@@ -84,12 +84,6 @@ executable build-websites
     , Html.MadHacker.Index
     , Html.MadHacker.Suffix
     , Html.M0ORI.Index
-    , Site.Blog
-    , Site.DanDart
-    , Site.JolHarg
-    , Site.M0ORI
-    , Site.MadHacker
-    , Site.Markdowns
     , Util.List
     , Util.Time
     , Util.Triple

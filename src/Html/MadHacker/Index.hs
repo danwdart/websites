@@ -17,8 +17,8 @@ import           Text.Blaze.Html5.Attributes as A
 pageReviews ∷ Html → Html → WebsiteM Html
 pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
     row $ do
-        H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
-        H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ reviews
+        divClass "col-md-2 py-3 mb-3" $ reviewLinks
+        divClass "col-md-8 py-3 mb-3 bg-light" $ reviews
 
 htmlHeader ∷ Html → Html → WebsiteM Html
 htmlHeader reviewLinks reviews = do

@@ -20,8 +20,8 @@ import           Text.Pandoc.Highlighting
 pageBlog ∷ Html → Html → WebsiteM Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do
     row $ do
-        H.div ! class_ "col-md-2 py-3 mb-3" $ blogPostLinks
-        H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ blogPosts
+        divClass "col-md-2 py-3 mb-3" $ blogPostLinks
+        divClass "col-md-8 py-3 mb-3 bg-light" $ blogPosts
 
 htmlHeader ∷ Html → Html → WebsiteM Html
 htmlHeader blogPostLinks blogPosts = do

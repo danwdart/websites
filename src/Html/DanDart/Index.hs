@@ -6,6 +6,7 @@ module Html.DanDart.Index (page, page404) where
 import           Data.Env
 import           Data.Site.DanDart
 import           Html.Common.Audio
+import Html.Common.Bootstrap
 import           Html.Common.Contact
 import           Html.Common.Error.NotFound
 import           Html.Common.Head
@@ -242,7 +243,7 @@ pageContact = do
         contactForm'
 
 socialIcons ∷ Html
-socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right social-inside") $ (do
+socialIcons = (divClass "row social-row") . (divClass "text-right social-inside") $ (do
     -- socialIconBBanned "" "No Blogger" "blogger-b"
     socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
     -- +social('discord', 'Discord', 'url', 'black')
