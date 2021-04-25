@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 SRCFILES=$(find src -name "*.hs")
 for SRCFILE in $SRCFILES
 do

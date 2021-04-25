@@ -1,0 +1,36 @@
+---
+title: "JolHarg: Your Software Engineering Partner"
+keywords:
+  - jolharg
+  - software
+  - dan
+  - dart
+  - software
+  - engineer
+  - mathematics
+  - haskell
+  - php
+  - javascript
+  - react
+  - react.js
+  - hoogle
+  - help
+  - computing
+  - computer
+  - serverless
+  - npm
+  - hask
+  - ask
+  - question
+  - css
+  - coffee
+  - coffeescript
+  - laravel
+  - zend
+  - framework
+  - linux
+  - gnu
+  - express.js
+  - ubuntu
+  - debian
+---
