@@ -14,7 +14,6 @@
             </div>
         </div>
         <div class="row">
-            $if(posts)$
             <div class="col-md-2 py-3 mb-3">
                 <details open class="pl-2">
                     $for(postssidebar)$
@@ -35,12 +34,9 @@
                     <p></p>
                 </details>
             </div>
-            $endif$
             <div class="col-md-8 offset-md-2 py-3 mb-3 bg-light">
                 ${body}
-                $if(posts)$
-                    ${posts()}
-                $endif$
+                ${posts}
             </div>
         </div>
     </div>

@@ -1,7 +1,5 @@
 ---
 label: Blog
 default: true
-posts: true
+insertPosts: true
 ---
-
-Blog posts should go here v
