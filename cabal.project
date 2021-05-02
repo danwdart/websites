@@ -1,6 +1,0 @@
-source-repository-package
-  type: git
-  location: git://github.com/danwdart/fsutils.git
-  tag: dd3bb2d8ad37f56436a0d3f09187d56ba88926f5
-
-packages: ./websites.cabal

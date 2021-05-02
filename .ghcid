@@ -1,1 +1,0 @@
--l -aT Main.serve --reload=posts --reload=reviews --reload=static --command=cabal repl websites:build-websites
