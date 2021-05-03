@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-8 offset-md-2 py-3 mb-3 bg-light">
                 ${body}
-                ${posts}
+                ${posts()}
             </div>
         </div>
     </div>
