@@ -32,3 +32,12 @@ All websites template (doctype, html, head, header)
         Individual site can define/include?
         e.g. dandart includes social template
 ```
+
+404 - individual titles
+Each post - put in folder
+Loop
+
+When posts exist use as metadata?
+
+Templates can take markdown, not end product
+so maybe then double $$ will work who knows
