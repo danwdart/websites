@@ -10,7 +10,7 @@ import           Util.Triple              (t1, t2)
 
 stringToTime ∷ String → UTCTime
 stringToTime s = fromJust (
-    (zonedTimeToUTC <$> (iso8601ParseM s :: Maybe ZonedTime)) <|>
+    (zonedTimeToUTC <$> (iso8601ParseM s :: Maybe ZonedTime)) <|>
     iso8601ParseM s
     )
 

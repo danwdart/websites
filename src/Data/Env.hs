@@ -1,7 +1,8 @@
-{-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE DerivingVia       #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Data.Env (
@@ -17,12 +18,12 @@ module Data.Env (
     asks
 ) where
 
-import Control.Applicative
-import Control.Monad.Trans.Reader
-import Data.Functor.Identity
-import Data.String
-import Data.Map (Map)
-import Data.Text (Text)
+import           Control.Applicative
+import           Control.Monad.Trans.Reader
+import           Data.Functor.Identity
+import           Data.Map                   (Map)
+import           Data.String
+import           Data.Text                  (Text)
 
 newtype PostsLocation = PostsLocation {
     getPostsLocation :: Text
@@ -31,19 +32,19 @@ newtype PostsLocation = PostsLocation {
 data SiteType = Normal | Blog PostsLocation
 
 data Website = Website {
-    slug :: Text,
-    title :: Text,
+    slug         :: Text,
+    title        :: Text,
     -- keywords :: Set Text,
-    url :: Text,
-    urlDanDart :: Text,
-    urlHamRadio :: Text,
-    urlBlog :: Text,
-    urlJolHarg :: Text,
+    url          :: Text,
+    urlDanDart   :: Text,
+    urlHamRadio  :: Text,
+    urlBlog      :: Text,
+    urlJolHarg   :: Text,
     urlMadHacker :: Text,
-    siteType :: SiteType,
-    livereload :: Bool,
-    tracking :: Bool,
-    endpoint :: Text
+    siteType     :: SiteType,
+    livereload   :: Bool,
+    tracking     :: Bool,
+    endpoint     :: Text
 }
 
 type Env = Map Text Website
@@ -52,7 +53,7 @@ type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website
 type WebsiteIO = WebsiteT IO
 
-websiteMToWebsiteIO :: WebsiteM a -> WebsiteIO a
+websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
 websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
 
 -- todo Ap
@@ -67,7 +68,7 @@ type WebsitesM = Reader Env
 type WebsitesT = ReaderT Env
 type WebsitesIO = WebsitesT IO
 
-development :: Env
+development ∷ Env
 development = [
     (
         "blog",
@@ -156,7 +157,7 @@ development = [
     )
     ]
 
-production :: Env
+production ∷ Env
 production = [
     (
         "blog",
