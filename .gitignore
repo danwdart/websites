@@ -8,3 +8,5 @@ dist-newstyle
 report
 result*
 .direnv
+.hie
+stan.html

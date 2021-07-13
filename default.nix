@@ -31,6 +31,8 @@ let
       haskellPackages.stylish-haskell
       haskellPackages.hlint
       haskellPackages.apply-refact
+      haskellPackages.stan
+      haskellPackages.weeder
     ];
     withHoogle = true;
   };

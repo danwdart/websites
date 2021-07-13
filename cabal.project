@@ -4,3 +4,6 @@ source-repository-package
   tag: dd3bb2d8ad37f56436a0d3f09187d56ba88926f5
 
 packages: ./websites.cabal
+
+package *
+  ghc-options: -fwrite-ide-info -hiedir=.hie
