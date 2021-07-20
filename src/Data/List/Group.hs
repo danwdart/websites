@@ -1,5 +1,5 @@
 {-# LANGUAGE UnicodeSyntax #-}
-module Util.List where
+module Data.List.Group where
 
 import           Data.Function (on)
 import           Data.List     (groupBy)

@@ -4,14 +4,14 @@ module Blog.Link where
 
 import           Blog.Types
 import           Data.List
+import           Data.List.Group
 import           Data.String
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T
 import           Data.Time
+import           Data.Time.Utils
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
-import           Util.List
-import           Util.Time
 
 renderMetaLink ∷ Text → BlogMetadata → Html
 renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (Blog.Types.title m))

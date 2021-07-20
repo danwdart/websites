@@ -25,6 +25,4 @@ build = do
   make slug' (page (makeLinks sortedPosts) renderedPosts) page404
 
 serve ∷ WebsiteIO ()
-serve = do
-  slug' <- asks slug
-  makeServe build slug'
+serve = asks slug >>= makeServe build

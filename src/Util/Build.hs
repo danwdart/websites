@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Util.Build (mkdirp, make, makeServe) where
+module Util.Build (make, makeServe) where
 
 import           Control.Monad.IO.Class
 import qualified Data.ByteString.Lazy.Char8     as BSL
@@ -14,7 +14,6 @@ import           Data.Text.IO
 import           Network.Wai.Application.Static
 import           Network.Wai.Handler.Warp
 import           Prelude                        hiding (putStrLn)
-import           System.Directory
 import           System.Environment             (lookupEnv)
 import           System.FilePath
 import           System.Path
@@ -22,8 +21,6 @@ import           Text.Blaze.Html.Renderer.Utf8
 import           Text.Blaze.Html5
 import           WaiAppStatic.Types
 
-mkdirp ∷ String → IO ()
-mkdirp = createDirectoryIfMissing True
 
 make ∷ Text → WebsiteM Html → WebsiteM Html → WebsiteIO ()
 make name page page404 = do

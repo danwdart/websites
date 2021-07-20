@@ -2,6 +2,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 

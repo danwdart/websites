@@ -13,13 +13,11 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
-import           Html.Common.Visit
 import           System.FilePath
 import           Text.Blaze.Html5             as H hiding (main)
 import           Text.Blaze.Html5.Attributes  as A
 import           Text.Blaze.Internal
 import           Text.Pandoc.Class
--- import           Text.Pandoc.Definitions
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Highlighting
 import           Text.Pandoc.Options
@@ -89,15 +87,11 @@ fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks
 fixExternalLinks as = as
 
 renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteM Html
-renderPost postType renderSuffix (BlogPost postId' metadata' html' _) = do
+renderPost _ renderSuffix (BlogPost postId' metadata' html' _) = do
     -- commentForm' <- commentForm postType postId'
-    let visitPageSub' = visitPageSub (fromString . T.unpack $ postType) (fromString . T.unpack $ postId')
-    visitPageSubTop <- visitPageSub' "top"
-    visitPageSubBottom <- visitPageSub' "bottom"
     pure $ do
         a ! name (fromString (T.unpack postId')) $ mempty
         -- Not working in Safari yet, so filter
-        visitPageSubTop
         h1 . fromString . T.unpack $ Blog.Types.title metadata'
         small $ do
             a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
@@ -115,4 +109,3 @@ renderPost postType renderSuffix (BlogPost postId' metadata' html' _) = do
         fixExternalLinks html'
         br
         renderSuffix metadata'
-        visitPageSubBottom

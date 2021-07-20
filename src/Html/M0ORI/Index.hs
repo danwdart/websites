@@ -13,7 +13,6 @@ import           Html.Common.Contact
 import           Html.Common.Error.NotFound
 import           Html.Common.Header
 import           Html.Common.Page
-import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
@@ -72,13 +71,9 @@ page ∷ WebsiteM Html
 page = do
     header' <- htmlHeader
     head' <- htmlHead descTitle keywords mempty
-    visit' <- visit "m0ori"
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
-        visit'
 
 page404 ∷ WebsiteM Html
-page404 = do
-    visit' <- visit "m0ori404"
-    defaultPage404 descTitle keywords visit'
+page404 = defaultPage404 descTitle keywords mempty

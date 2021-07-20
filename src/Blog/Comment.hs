@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns    #-}
+
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -7,29 +7,22 @@ module Blog.Comment where
 import           Blog.Types
 import           Control.Monad
 import           Data.Either
-import           Data.Env
 import           Data.Frontmatter
 import           Data.List
-import           Data.Maybe
 import           Data.Ord
-import           Data.String
 import           Data.Text                    (Text)
-import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
 import           Data.Time
-import           Data.Time.Format.ISO8601
+import           Data.Time.Utils
 import           System.Directory
 import           System.FilePath
-import           Text.Blaze.Html5             as H hiding (main)
-import           Text.Blaze.Html5.Attributes  as A
 import           Text.Pandoc.Class
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Highlighting
 import           Text.Pandoc.Options
 import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
-import           Util.Time
 
 parseComment ∷ UTCTime → Text → ParseCommentResult
 parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
@@ -39,7 +32,7 @@ parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') o
             readerExtensions = githubMarkdownExtensions
         }) (decodeUtf8 i')))
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
-    _ -> error $ "What is " <> T.unpack contents'
+    Partial _ -> error "Partial return indicative of failure"
 
 getCommentsIfExists ∷ FilePath → FilePath → IO [ParseCommentResult]
 getCommentsIfExists postsDir postId = do
@@ -58,6 +51,7 @@ getComments postsDir postId = do
         then getCommentsIfExists postsDir postId
         else pure mempty
 
+{-
 commentForm ∷ Text → Text → WebsiteM Html
 commentForm postType postId = pure . (H.form
         ! A.class_ "form"
@@ -102,3 +96,5 @@ renderComment ParseCommentResult {
             ":"
         p commentHtml
         br
+
+-}

@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveAnyClass    #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 module Html.Common.GitHub (Repo (..), Language (..), Licence (..), getRepos) where
 

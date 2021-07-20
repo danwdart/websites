@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Social (socialIconB, socialIconS, socialIconBBanned, socialIconSBanned) where
+module Html.Common.Social (socialIconB, socialIconS) where
 
 import           Data.String
 import           Html.Common.Link
@@ -29,16 +29,3 @@ socialIconB = socialIcon B
 
 socialIconS ∷ Href → Title → IconName → Html
 socialIconS = socialIcon S
-
-socialIconBanned ∷ IconType → Href → Title → IconName → Html
-socialIconBanned iconType linkHref linkTitle iconName = link' linkHref linkTitle .
-    (H.span ! class_ "fa-stack fa-1x" ! A.style "font-size: 0.5em; height: 2.6em") $ (
-    do
-        i ! class_ ("fa" <> fromString (show iconType) <> " fa-stack-1x fa-" <> iconName) $ mempty
-        i ! class_ "fas fa-ban fa-stack-2x" $ mempty)
-
-socialIconBBanned ∷ Href → Title → IconName → Html
-socialIconBBanned = socialIconBanned B
-
-socialIconSBanned ∷ Href → Title → IconName → Html
-socialIconSBanned = socialIconBanned S

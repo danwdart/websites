@@ -7,7 +7,6 @@ import           Data.Env
 import           Data.String                 (IsString (fromString))
 import           Html.Common.Bootstrap
 import           Html.Common.Link
-import           Html.Common.Visit
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
 
@@ -42,10 +41,8 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-makePage ∷ AttributeValue → String → (Html → Html) -> Attribute -> Html -> WebsiteM Html
+makePage ∷ AttributeValue → String → (Html → Html) → Attribute -> Html -> WebsiteM Html
 makePage pageId label' layout extraParams content' = do
-    visitTop <- visitPageSub "page" pageId "top"
-    visitBottom <- visitPageSub "page" pageId "bottom"
     pure . (li ! class_ "nav-item") $ do
         input
             ! type_ "radio"
@@ -65,9 +62,7 @@ makePage pageId label' layout extraParams content' = do
         H.div
             ! class_ "page"
             ! A.id pageId $ do
-                visitTop
                 row .
                     (H.div ! class_ "col my-md-3") .
                         small $ "» " <> fromString label'
                 layout content'
-                visitBottom

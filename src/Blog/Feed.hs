@@ -5,7 +5,6 @@ module Blog.Feed where
 
 import           Blog.Types
 import           Data.Text                     (Text)
-import qualified Data.Text                     as T
 import           Data.Text.Lazy                (toStrict)
 import qualified Data.Text.Lazy                as TL
 import           Data.Text.Show

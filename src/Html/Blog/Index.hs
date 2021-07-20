@@ -11,7 +11,6 @@ import           Html.Common.Error.NotFound
 import           Html.Common.Head
 import           Html.Common.Header
 import           Html.Common.Page
-import           Html.Common.Visit
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
@@ -40,15 +39,9 @@ page ∷ Html → Html → WebsiteM Html
 page blogPostLinks blogPosts = do
     header' <- htmlHeader blogPostLinks blogPosts
     head' <- htmlHead descTitle keywords extraHead
-    visit' <- visit "blog"
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
-        visit'
 
 page404 ∷ WebsiteM Html
-page404 = do
-    visit404 <- visit "blog404"
-    defaultPage404 descTitle keywords $ do
-        extraHead
-        visit404
+page404 = defaultPage404 descTitle keywords extraHead
