@@ -19,7 +19,7 @@ module Data.Env (
     asks
 ) where
 
-import           Control.Applicative
+import           Control.Applicative        (liftA2)
 import           Control.Monad.Trans.Reader
 import           Data.Functor.Identity
 import           Data.Map                   (Map)
@@ -54,16 +54,17 @@ type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website
 type WebsiteIO = WebsiteT IO
 
-websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
-websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
+-- avoid orphan instances by using the type here
 
--- todo Ap
-instance (Applicative f, Semigroup m) => Semigroup (ReaderT r f m) where
+instance (Semigroup a) => Semigroup (WebsiteM a) where
     (<>) = liftA2 (<>)
 
-instance (Applicative f, Monoid m) => Monoid (ReaderT r f m) where
+instance (Monoid a) => Monoid (WebsiteM a) where
     mempty = pure mempty
     mappend = liftA2 mappend
+
+websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
+websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
 
 type WebsitesM = Reader Env
 type WebsitesT = ReaderT Env

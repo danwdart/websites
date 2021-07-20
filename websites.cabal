@@ -56,7 +56,6 @@ executable build-websites
     , Blog.Link
     , Blog.Post
     , Blog.Types
-    , Util.Build
     , Data.Env
     , Data.List.Group
     , Data.Site.Blog
@@ -93,6 +92,7 @@ executable build-websites
     , Site.M0ORI
     , Site.MadHacker
     , Site.Markdowns
+    , Util.Build
 
 test-suite websites-test
   import: shared-properties

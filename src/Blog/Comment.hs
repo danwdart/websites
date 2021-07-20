@@ -25,8 +25,8 @@ import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
 
 parseComment ∷ UTCTime → Text → ParseCommentResult
-parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r -> ParseCommentResult date r (fromRight "" $ runPure (writeHtml5 (def {
+parseComment date' contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
+    Done i' r -> ParseCommentResult date' r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
@@ -35,9 +35,9 @@ parseComment date contents' = case parseYamlFrontmatter (encodeUtf8 contents') o
     Partial _ -> error "Partial return indicative of failure"
 
 getCommentsIfExists ∷ FilePath → FilePath → IO [ParseCommentResult]
-getCommentsIfExists postsDir postId = do
-    commentFiles <- getDirectoryContents $ postsDir </> postId
-    let commentFileNames = (postsDir </>) . (postId </>) <$> commentFiles
+getCommentsIfExists postsDir postId' = do
+    commentFiles <- getDirectoryContents $ postsDir </> postId'
+    let commentFileNames = (postsDir </>) . (postId' </>) <$> commentFiles
     validCommentFiles <- filterM doesFileExist commentFileNames
     let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
     commentTexts <- sequence $ TIO.readFile <$> validCommentFiles
@@ -45,10 +45,10 @@ getCommentsIfExists postsDir postId = do
     pure $ sortOn (Down . commentDate) commentData
 
 getComments ∷ FilePath → FilePath → IO [ParseCommentResult]
-getComments postsDir postId = do
-    dirExists <- doesDirectoryExist $ postsDir </> postId
+getComments postsDir postId' = do
+    dirExists <- doesDirectoryExist $ postsDir </> postId'
     if dirExists
-        then getCommentsIfExists postsDir postId
+        then getCommentsIfExists postsDir postId'
         else pure mempty
 
 {-
