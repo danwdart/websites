@@ -58,11 +58,15 @@ executable build-websites
     , Blog.Types
     , Util.Build
     , Data.Env
+    , Data.List.Group
     , Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg
     , Data.Site.MadHacker
     , Data.Site.M0ORI
+    , Data.Text.Show
+    , Data.Time.Utils
+    , Data.Tuple.Triple
     , Html.Blog.Index
     , Html.Common.Audio
     , Html.Common.Bootstrap
@@ -77,7 +81,6 @@ executable build-websites
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
-    , Html.Common.Visit
     , Html.Common.Error.NotFound
     , Html.DanDart.Index
     , Html.JolHarg.Index
@@ -90,9 +93,6 @@ executable build-websites
     , Site.M0ORI
     , Site.MadHacker
     , Site.Markdowns
-    , Util.List
-    , Util.Time
-    , Util.Triple
 
 test-suite websites-test
   import: shared-properties
