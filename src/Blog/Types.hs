@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE StrictData     #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Blog.Types where
@@ -24,7 +25,9 @@ data Score = Score {
 instance FromJSON Score where
     parseJSON (A.String a') = do
         let [rating', outOf'] = T.splitOn "/" a'
-        pure $ Score (read (T.unpack rating')) (read (T.unpack outOf'))
+        let rating'' = read . T.unpack $ rating'
+        let outOf'' = read . T.unpack $ outOf'
+        pure $ Score rating'' outOf''
     parseJSON _ = fail "Problem parsing score."
 
 instance FromJSON BlogTag where

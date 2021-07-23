@@ -32,7 +32,7 @@ parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
             readerExtensions = githubMarkdownExtensions
         }) (decodeUtf8 i')))
     Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
-    _ -> error $ "What is " <> T.unpack contents'
+    Partial _ -> error "Returned partial"
 
 makeBlogPost ∷ FilePath → FilePath → IO BlogPost
 makeBlogPost postsDir filename = do

@@ -6,7 +6,7 @@ import           Data.Maybe               (fromJust)
 import           Data.Time                (UTCTime, ZonedTime, toGregorian,
                                            utctDay, zonedTimeToUTC)
 import           Data.Time.Format.ISO8601 (iso8601ParseM)
-import           Data.Tuple.Triple        (t1, t2)
+import           Data.Tuple.Extra
 
 stringToTime ∷ String → UTCTime
 stringToTime s = fromJust (
@@ -15,7 +15,7 @@ stringToTime s = fromJust (
     )
 
 year ∷ UTCTime → Integer
-year = t1 . toGregorian . utctDay
+year = fst3 . toGregorian . utctDay
 
 month ∷ UTCTime → Int
-month = t2 . toGregorian . utctDay
+month = snd3 . toGregorian . utctDay

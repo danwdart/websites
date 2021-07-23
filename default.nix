@@ -22,17 +22,21 @@ let
     packages = p: [
       p.websites
     ];
+    shellHook = ''
+      gen-hie > hie.yaml
+    '';
     buildInputs = with nixpkgs; [
-      wget
+      haskellPackages.apply-refact
       haskellPackages.cabal-install
+      haskellPackages.ghcid
+      haskellPackages.hlint
+      haskellPackages.implicit-hie
+      haskellPackages.stan
+      haskellPackages.stylish-haskell
+      haskellPackages.weeder
       openssh
       parallel
-      haskellPackages.ghcid
-      haskellPackages.stylish-haskell
-      haskellPackages.hlint
-      haskellPackages.apply-refact
-      haskellPackages.stan
-      haskellPackages.weeder
+      wget
     ];
     withHoogle = true;
   };

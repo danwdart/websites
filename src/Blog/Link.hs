@@ -4,7 +4,7 @@ module Blog.Link where
 
 import           Blog.Types
 import           Data.List
-import           Data.List.Group
+import           Data.List.Extra
 import           Data.String
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T

@@ -7,9 +7,9 @@ module Html.Common.GitHub (Repo (..), Language (..), Licence (..), getRepos) whe
 
 import           Control.Monad.IO.Class
 import           Data.Aeson
-import qualified Data.ByteString.Char8  as B
 import           Data.Maybe
 import           Data.Text              as T
+import           Data.Text.Encoding
 import           GHC.Generics
 import           Network.HTTP.Req
 import           System.Environment
@@ -130,6 +130,6 @@ getRepos user = do
         "type" =: ("owner" :: Text) <>
         "direction" =: ("desc" :: Text) <>
         header "User-Agent" "Dan's Haskell Bot v1.0" <>
-        header "Authorization" (B.pack $ "Bearer " <> githubAccessToken)
+        header "Authorization" (encodeUtf8 . T.pack $ "Bearer " <> githubAccessToken)
         )
     pure $ responseBody res

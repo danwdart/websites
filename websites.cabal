@@ -30,6 +30,7 @@ executable build-websites
     , containers
     , dotenv
     , directory
+    , extra
     , feed
     , filepath
     , frontmatter
@@ -57,7 +58,6 @@ executable build-websites
     , Blog.Post
     , Blog.Types
     , Data.Env
-    , Data.List.Group
     , Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg
@@ -65,7 +65,6 @@ executable build-websites
     , Data.Site.M0ORI
     , Data.Text.Show
     , Data.Time.Utils
-    , Data.Tuple.Triple
     , Html.Blog.Index
     , Html.Common.Audio
     , Html.Common.Bootstrap
