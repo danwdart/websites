@@ -70,7 +70,7 @@ renderCard repo =
             H.span ! class_ "stars" $ "(" <> (fromString . show . stars $ repo) <> "★)"
             when (fork repo) . (H.span ! class_ "fork") $ "⑂"
         p ! class_ "card-text" $ do
-            (H.span ! class_ "description") . fromString . fromMaybe "" $ GH.description repo
+            (H.span ! class_ "description") . fromString . fromMaybe "No description yet given" $ GH.description repo
             br
             maybe (small $ em "Not yet licenced") licenceLink (licence repo)
         maybe "" (\src' -> a ! class_ "btn btn-secondary mx-1" ! href (fromString src') ! target "_blank" $ "Source") (GH.source repo)
