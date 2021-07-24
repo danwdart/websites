@@ -135,9 +135,9 @@ pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
         li $ extLink (nhs <> "fibromyalgia") "Fibromyalgia"
         li $ extLink (nhs <> "autism") "Asperger's Syndrome"
         li $ extLink (nhs <> "attention-deficit-hyperactivity-disorder-adhd") "ADHD"
-        li $ do
-            extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
-            " (with depression)"
+        li $ extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
+        li $ extLink (nhs <> "depression") "Depression"
+        li $ extLink (nhs <> "sleep-apnoea") "Sleep apnoea"
 
 pageMusic ∷ WebsiteM Html
 pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
