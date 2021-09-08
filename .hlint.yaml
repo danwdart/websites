@@ -80,7 +80,7 @@
   - {name: fromIntegral, within: []}
 
   # TODO
-  # - {name: 'read', within: []} # Partial, use `Text.Read.readMaybe` instead.
+  - {name: 'Prelude.read', within: []} # Partial, use `Text.Read.readMaybe` instead.
   
   # Deprecated, use `pure` instead.
   # See https://gitlab.haskell.org/ghc/ghc/-/wikis/proposal/monad-of-no-return
