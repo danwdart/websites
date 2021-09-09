@@ -16,17 +16,16 @@ common shared-properties
   build-depends:       base >= 4.7 && < 5
   ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
   ghcjs-options:       -dedupe
-  
+
 executable build-websites
   import: shared-properties
   main-is:             build-websites.hs
-  build-depends:       
+  build-depends:
       base >= 4.7 && < 5
     , aeson
     , blaze-html
     , blaze-markup
     , bytestring
-    , Cabal
     , containers
     , dotenv
     , directory
@@ -35,22 +34,18 @@ executable build-websites
     , filepath
     , frontmatter
     , fsutils >= 0.1.4
-    , mmark
     , mtl
     , pandoc
-    , pandoc-types
-    , req
+    , req >= 2.9.1
     , text
     , time
     , transformers
-    , unordered-containers
     , wai
     , wai-app-static
     , wai-extra
     , wai-websockets
     , warp
     , websockets
-    , xml-conduit
   other-modules:
       Blog.Comment
     , Blog.Feed
@@ -98,40 +93,8 @@ test-suite websites-test
   hs-source-dirs:      src, test
   type:                exitcode-stdio-1.0
   main-is:             Spec.hs
-  build-depends:       
-    base >= 4.7 && < 5
-    , aeson
-    , blaze-html
-    , blaze-markup
-    , bytestring
-    , Cabal
-    , containers
-    , directory
-    , dotenv
-    , feed
-    , filepath
-    , frontmatter
-    , fsutils >= 0.1.4
+  build-depends:
     , hspec
     , hspec-core
     , hspec-expectations
-    , http-client
-    , http-client-tls
-    , http-types
-    , mmark
-    , mtl
-    , pandoc
-    , process
     , QuickCheck
-    , random
-    , req
-    , text
-    , time
-    , transformers
-    , transformers-base
-    , vector
-    , wai
-    , wai-app-static
-    , wai-extra
-    , warp
-    , xml-conduit
