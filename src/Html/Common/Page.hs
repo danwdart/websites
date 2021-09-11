@@ -41,7 +41,7 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-makePage ∷ AttributeValue → String → (Html → Html) → Attribute -> Html -> WebsiteM Html
+makePage ∷ AttributeValue → String → (Html → Html) → Attribute → Html -> WebsiteM Html
 makePage pageId label' layout extraParams content' = do
     pure . (li ! class_ "nav-item") $ do
         input

@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE StrictData     #-}
+{-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Blog.Types where
