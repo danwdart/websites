@@ -7,13 +7,19 @@ let
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = self.callCabal2nix "websites" (gitignore ./.) {};
-      fsutils = nixpkgs.pkgs.haskell.lib.doJailbreak(self.callCabal2nix "fsutils" (builtins.fetchGit {
+      fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
-        rev = "bd85f977a7499a936181a37f4c602bd8b4480d68";
-      }) {});
+        rev = "324369ee5ff5d2c797b5d00d55e24e74d631c40f";
+      }) {};
       # Changes needed for 9.0.1
-      aeson-diff = nixpkgs.pkgs.haskell.lib.doJailbreak super.aeson-diff;
-      semialign = nixpkgs.pkgs.haskell.lib.doJailbreak super.semialign;
+      # Not yet pushed to hackage
+      aeson-diff = (self.callCabal2nix "aeson-diff" (builtins.fetchGit {
+        url = "https://github.com/thsutton/aeson-diff.git";
+        rev = "1d247f4f4a20f528be3ac75982b5927bc779082e";
+      }) {});
+      # not in nix
+      semialign = self.callHackage "semialign" "1.2" {};
+      # Depends on cabal-un-published http-client versions.
       req = nixpkgs.pkgs.haskell.lib.doJailbreak (self.callHackage "req" "3.9.1" {});
     };
   };
