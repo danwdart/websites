@@ -4,7 +4,7 @@ date: 2009-10-18T23:37:00.000+01:00
 draft: false
 aliases: [ "/2009/10/reflections-on-ipod-touch.html" ]
 featuredImage: https://everymac.com/images/ipod_pictures/apple-ipod-touch-3g.jpg
-tags : [ipod, apple, windows, mac os x, itunes, store, communication, games, app, touch]
+tags: [ipod, apple, windows, mac os x, itunes, store, communication, games, app, touch]
 ---
 
 I just bought a 32GB 3rd generation iPod Touch for £230. It's not bad for what you get:  

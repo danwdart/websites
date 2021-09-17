@@ -3,7 +3,7 @@ title: 'Xenon Web Desktop Alpha2 Released'
 date: 2010-02-01T22:17:00.000Z
 draft: false
 aliases: [ "/2010/02/xenon-web-desktop-alpha2-released.html" ]
-tags : [email, mysql, linux, cool, desktop, operating system, blog, php, web, xenon]
+tags: [email, mysql, linux, cool, desktop, operating system, blog, php, web, xenon]
 ---
 
 The web desktop Xenon released version Alpha2 today. The release announcement from the website reads:  

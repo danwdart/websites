@@ -3,7 +3,7 @@ title: 'Bibud Social Web Desktop Alpha5 Released'
 date: 2010-08-01T20:01:00.001+01:00
 draft: false
 aliases: [ "/2010/08/bibud-social-web-desktop-alpha5.html" ]
-tags : [friends, audio, media, sharing, desktop, web, bibud, html5, webos, alpha, files, video]
+tags: [friends, audio, media, sharing, desktop, web, bibud, html5, webos, alpha, files, video]
 ---
 
 The fifth bugfix update to the Bibud web desktop was released yesterday, and includes easier application installations, a better SDK, a clearer layout, better window management and removal of application previews not relevant to the web demo at this time.  

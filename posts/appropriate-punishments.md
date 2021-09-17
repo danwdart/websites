@@ -3,7 +3,7 @@ title: 'Appropriate punishments?'
 date: 2019-03-09T18:40:00.000Z
 draft: false
 aliases: [ "/2019/03/appropriate-punishments.html" ]
-tags : [murder, punishment, thief, death, killed, lawmaker, country, criminals, criminal, justice, law, stolen, thievery, accountant, victim, crime, kill, stole, jewel, killing]
+tags: [murder, punishment, thief, death, killed, lawmaker, country, criminals, criminal, justice, law, stolen, thievery, accountant, victim, crime, kill, stole, jewel, killing]
 ---
 
 I keep hearing about people complaining about the punishment for this or that crime is too little or too much. I've got a simple (ish) idea for the calculation of appropriate punishment. This is what I would probably (naively) implement, had I known no better if I ever were to create or edit a country. Hear me out.  

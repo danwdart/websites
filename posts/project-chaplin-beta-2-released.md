@@ -3,7 +3,7 @@ title: 'Project Chaplin Beta 2 Released'
 date: 2015-04-12T13:36:00.000+01:00
 draft: false
 aliases: [ "/2015/04/project-chaplin-beta-2-released.html" ]
-tags : [search, audio, floss, projectchaplin, youtube, sharing, appcache, cc, videos, oss, free software, chaplin, open source, open, import, creativecommons, html5, video, github, project]
+tags: [search, audio, floss, projectchaplin, youtube, sharing, appcache, cc, videos, oss, free software, chaplin, open source, open, import, creativecommons, html5, video, github, project]
 ---
 
 I'm pleased to announce the release of Project Chaplin Beta 2.  

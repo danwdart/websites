@@ -3,7 +3,7 @@ title: 'How to use SSH for an Internet Connection Sharing Proxy'
 date: 2010-11-13T13:10:00.000Z
 draft: false
 aliases: [ "/2010/11/how-to-use-ssh-for-internet-connection.html" ]
-tags : [ssh, tunnel, linux, sharing, connection, proxy, internet, internet connection sharing]
+tags: [ssh, tunnel, linux, sharing, connection, proxy, internet, internet connection sharing]
 ---
 
 I haven't made a blog in a long while, so I'd thought I'd share this, which I recently discovered how to do.  

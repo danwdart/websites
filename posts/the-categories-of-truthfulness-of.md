@@ -3,7 +3,7 @@ title: 'The categories of truthfulness of information'
 date: 2019-06-15T17:17:00.000+01:00
 draft: false
 aliases: [ "/2019/06/the-categories-of-truthfulness-of.html" ]
-tags : [truthfulness, danganronpa, falsehoods, nonsense, falsehood, kokichi, mistake, oma, unknown, detector, lies, lying, mistakes, truth, unknowns]
+tags: [truthfulness, danganronpa, falsehoods, nonsense, falsehood, kokichi, mistake, oma, unknown, detector, lies, lying, mistakes, truth, unknowns]
 ---
 
 I keep hearing so much about the distinction between truth and lies. People say that things that aren't objectively true are "obviously lies". This isn't so, and there's a lot of different levels of truth.  

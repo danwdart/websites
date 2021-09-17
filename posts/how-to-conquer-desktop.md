@@ -3,7 +3,7 @@ title: 'How to Conquer the Desktop'
 date: 2009-08-19T20:28:00.001+01:00
 draft: false
 aliases: [ "/2009/08/how-to-conquer-desktop.html" ]
-tags : [hardware, advertising, windows, gui, linux, packages, standard, change, command line, naming]
+tags: [hardware, advertising, windows, gui, linux, packages, standard, change, command line, naming]
 ---
 
 What does Sturmbahnfahrer mean? And who would have guessed the meaning of Stormbaan Coureur? They are different names for the same software: "a simulated obstacle course for automobiles".  

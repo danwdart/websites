@@ -3,7 +3,7 @@ title: 'The solution to clickbait: put the answer in the title'
 date: 2018-07-16T20:31:00.002+01:00
 draft: false
 aliases: [ "/2018/07/the-solution-to-clickbait-put-answer-in.html" ]
-tags : [click, sponsors, recommended, ads, solution, description, advertising, clickbait, history, depth, bait, relevant]
+tags: [click, sponsors, recommended, ads, solution, description, advertising, clickbait, history, depth, bait, relevant]
 ---
 
 ### And perhaps a short explanation or description of the details as a subtitle.

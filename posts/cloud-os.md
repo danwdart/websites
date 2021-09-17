@@ -3,7 +3,7 @@ title: 'Cloud OS'
 date: 2008-10-28T16:08:00.000Z
 draft: false
 aliases: [ "/2008/10/cloud-os.html" ]
-tags : [computer, windows, azure, cloud, operating system, os, blog]
+tags: [computer, windows, azure, cloud, operating system, os, blog]
 ---
 
 I've noticed that a lot of companies have decided the Cloud (applications on the Internet) is the future. For me, I use a fair few to the extent that I don't use OpenOffice any more, just Google Apps. What particularly provoked me is that big companies are now doing it the whole hog. (see http://www.linux.com/feed/151604 ) So I've decided to make one.  

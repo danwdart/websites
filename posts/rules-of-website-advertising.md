@@ -3,7 +3,7 @@ title: 'The Rules of Website Advertising'
 date: 2012-05-20T17:38:00.002+01:00
 draft: false
 aliases: [ "/2012/05/rules-of-website-advertising.html" ]
-tags : [rules, annoying, seo, ads, website, advertising, flash, adwords, dfp, relevant, adsense, content]
+tags: [rules, annoying, seo, ads, website, advertising, flash, adwords, dfp, relevant, adsense, content]
 ---
 
 I don't mind sensible advertising. Believe it or not I wouldn't mind if people advertised their wares to me if they did it in a reasonable way and it was interesting, but most people are doing it wrong.  

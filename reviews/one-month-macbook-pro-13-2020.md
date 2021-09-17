@@ -4,7 +4,7 @@ date: 2020-11-18T23:29:00Z
 draft: false
 aliases: [ "/2020/11/one-month-macbook-pro-13-2020.html" ]
 featuredImage: https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP818/sp818-mbp13touch-space-select-202005.png
-tags : [macbook, pro, review]
+tags: [macbook, pro, review]
 scores :
     -
         - Hackability

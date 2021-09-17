@@ -3,7 +3,7 @@ title: 'Linux''s Hardware Support'
 date: 2010-01-24T14:52:00.000Z
 draft: false
 aliases: [ "/2010/01/linuxs-hardware-support.html" ]
-tags : [ubuntu, 64 bit, hardware, intel, windows, linux, core, usb, i7, opensuse, support]
+tags: [ubuntu, 64 bit, hardware, intel, windows, linux, core, usb, i7, opensuse, support]
 ---
 
 Lately, I've been hearing a lot about "Linux needs to master .... to beat Windows". I'll now show you how that's completely false, and how it already has beaten it, by talking about hardware support.  

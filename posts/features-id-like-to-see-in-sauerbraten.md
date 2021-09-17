@@ -3,7 +3,7 @@ title: 'Features I''d like to see in Sauerbraten'
 date: 2010-02-08T00:38:00.000Z
 draft: false
 aliases: [ "/2010/02/features-id-like-to-see-in-sauerbraten.html" ]
-tags : [open, windows, linux, mac os x, opengl, games, 3d, sauerbraten]
+tags: [open, windows, linux, mac os x, opengl, games, 3d, sauerbraten]
 ---
 
 I love the game [Sauerbraten](http://sauerbraten.org/). But I can think of lots of ways I think it could be improved. I'll of course try to help this happen, and might update this list (and add suggestions!).  

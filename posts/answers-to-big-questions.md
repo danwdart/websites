@@ -3,7 +3,7 @@ title: 'Answers to the big questions'
 date: 2009-06-29T13:30:00.000+01:00
 draft: false
 aliases: [ "/2009/06/answers-to-big-questions.html" ]
-tags : [how, why, universe, life, creation, where, robots]
+tags: [how, why, universe, life, creation, where, robots]
 ---
 
 Questions like "Why is the universe made mostly of matter?", "Why are we here?", "Is there a god?", and "Is there life on other planets?" are answered scientifically here.  

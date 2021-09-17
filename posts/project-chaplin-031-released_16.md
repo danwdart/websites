@@ -3,7 +3,7 @@ title: 'Project Chaplin 0.3.1 Released'
 date: 2016-09-16T15:23:00.002+01:00
 draft: false
 aliases: [ "/2016/09/project-chaplin-031-released_16.html" ]
-tags : [css, youtube, dailymotion, media, sharing, javascript, cc, dart, videos, vimeo, free software, chaplin, open source, creativecommons, html5, video, php, project]
+tags: [css, youtube, dailymotion, media, sharing, javascript, cc, dart, videos, vimeo, free software, chaplin, open source, creativecommons, html5, video, php, project]
 ---
 
 Introducing the first bugfix release for the 0.3 release of Project Chaplin.  

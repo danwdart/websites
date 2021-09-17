@@ -3,7 +3,7 @@ title: 'New Project: View and Share Media Online'
 date: 2011-10-01T22:58:00.000+01:00
 draft: false
 aliases: [ "/2011/10/new-project-view-and-share-media-online.html" ]
-tags : [audio, bsd, open source, recording, media, sharing, broadcasting, mit, video, gpl, free software]
+tags: [audio, bsd, open source, recording, media, sharing, broadcasting, mit, video, gpl, free software]
 ---
 
 I'm announcing a new media viewing and sharing framework called ShareAV.  

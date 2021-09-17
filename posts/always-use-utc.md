@@ -3,7 +3,7 @@ title: 'Always use UTC'
 date: 2020-12-05T07:39:00Z
 draft: false
 aliases: [ "/2020/12/always-use-utc.html" ]
-tags : [time, utc]
+tags: [time, utc]
 ---
 
 As a radio ham, I am used to writing times in [Universal Coordinated Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time), and it is my strong opinion that everybody should know how far away they are from UTC at any time.

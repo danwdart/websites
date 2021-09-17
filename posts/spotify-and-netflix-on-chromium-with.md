@@ -3,7 +3,7 @@ title: 'Spotify (and Netflix) on Chromium, with help from Steam, without root!'
 date: 2018-08-07T12:30:00.000+01:00
 draft: false
 aliases: [ "/2018/08/spotify-and-netflix-on-chromium-with.html" ]
-tags : [netflix, library, steam, spotify, chromium, widevine, drm, libraries, chrome, copy, protected]
+tags: [netflix, library, steam, spotify, chromium, widevine, drm, libraries, chrome, copy, protected]
 ---
 
 Users of Chromium will have trouble listening to Spotify, even if "protected content" (another word for "we own you") is on. This is because there are missing Widevine libraries.  

@@ -3,7 +3,7 @@ title: 'You''re Doing It Wrong: How to report a bug'
 date: 2016-10-19T20:45:00.000+01:00
 draft: false
 aliases: [ "/2016/10/youre-doing-it-wrong-how-to-report-bug.html" ]
-tags : [search, pester, again, error, on, report, english, printer, programmer, power, google, off, wrong, linux, turn, bug, information, request, message, support]
+tags: [search, pester, again, error, on, report, english, printer, programmer, power, google, off, wrong, linux, turn, bug, information, request, message, support]
 ---
 
 \[Taken from a Google+ post\]  

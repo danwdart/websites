@@ -3,7 +3,7 @@ title: 'Algebra is not hard'
 date: 2018-07-10T12:30:00.000+01:00
 draft: false
 aliases: [ "/2018/07/algebra-is-not-hard.html" ]
-tags : [numbers, letters, shorthand, variable, arithmetic, manipulation, apples, fruit, algebra, difficulty, oranges, counting, mathematics, maths]
+tags: [numbers, letters, shorthand, variable, arithmetic, manipulation, apples, fruit, algebra, difficulty, oranges, counting, mathematics, maths]
 ---
 
 If I were to tell you that I was taking two apples and three oranges home, you'd know what I mean.  

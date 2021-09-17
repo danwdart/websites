@@ -3,7 +3,7 @@ title: 'Play.com compromised, names and emails taken'
 date: 2011-03-21T23:40:00.000Z
 draft: false
 aliases: [ "/2011/03/playcom-compromised-names-and-emails.html" ]
-tags : [security, cracker, compromise, emai, rakuten, com, hacker, l, play]
+tags: [security, cracker, compromise, emai, rakuten, com, hacker, l, play]
 ---
 
 The popular UK online shop Play.com has reportedly been compromised, revealing its database of usernames and email addresses of its customers to its attackers. An email appearing to be from play.com to its customers reads:

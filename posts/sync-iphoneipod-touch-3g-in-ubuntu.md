@@ -3,7 +3,7 @@ title: 'Sync iPhone/iPod Touch 3G in Ubuntu'
 date: 2009-11-29T03:47:00.000Z
 draft: false
 aliases: [ "/2009/11/sync-iphoneipod-touch-3g-in-ubuntu.html" ]
-tags : [ipod, ubuntu, linux, itunes]
+tags: [ipod, ubuntu, linux, itunes]
 ---
 
 A lot of people have been trying very hard to get iPhone and iPod Touch syncing to work correctly in Linux. Some have been doing a FUSE filesystem (which accesses the iPod) and some the database and syncing. Remember this is pre-alpha quality, but I found it synced my tunes nicely from Linux. But due to the database version being old (but quite good enough for the iPod), iTunes does not play nice with it - and will just resync the tracks and may delete them. Also the iPod must have been previosly initialised with a version of iTunes. If you cannot acquire it, or it will not run, contact teuf on #gtkpod in irc.freenode.net. You have been warned!  

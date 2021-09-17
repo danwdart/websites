@@ -3,7 +3,7 @@ title: 'What Free Software needs'
 date: 2009-07-05T14:21:00.000+01:00
 draft: false
 aliases: [ "/2009/07/what-free-software-needs.html" ]
-tags : [standardisation, bsd. competition, windows, free, linux, packages]
+tags: [standardisation, bsd. competition, windows, free, linux, packages]
 ---
 
 When I was young, I remember wanting SUSE 9.2 Professional. It seemed like a good stable system with many good reviews. Afterwards (luckily) the distribution switched to GPL and I managed to acquire a copy of 9.3. It was very good for its time, its acheivements vastly outstepping anything I had previously seen. With instant search, good photo management, and all the rest, it seemed to be a good stepping stone onto which further development could be put upon.  

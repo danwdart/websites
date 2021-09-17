@@ -3,7 +3,7 @@ title: 'Xenon Alpha released!'
 date: 2009-12-29T13:20:00.001Z
 draft: false
 aliases: [ "/2009/12/xenon-alpha-released.html" ]
-tags : [css, social, javascript, cloud, html, desktop, sql, xenon, ajax, gui, linux, html5, networking, api, fast, operating system, os, php, apps]
+tags: [css, social, javascript, cloud, html, desktop, sql, xenon, ajax, gui, linux, html5, networking, api, fast, operating system, os, php, apps]
 ---
 
 An alpha version of the Xenon Desktop has been released. A description of the project follows.  

@@ -3,7 +3,7 @@ title: 'Best Security Practices For Your Personal Computer'
 date: 2009-11-11T00:51:00.001Z
 draft: false
 aliases: [ "/2009/11/best-security-practices-for-your.html" ]
-tags : [xp, virus, rootkit, password, worm, anti, avast, firewall, trojan, vista, windows, linux, live]
+tags: [xp, virus, rootkit, password, worm, anti, avast, firewall, trojan, vista, windows, linux, live]
 ---
 
 Many of you may be worried or concerned about the security of your computer. With threats of viruses, spyware, bank details being stolen, accounts cracked and vulnerabilities everywhere, it is natural to be paranoid.  

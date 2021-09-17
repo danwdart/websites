@@ -3,7 +3,7 @@ title: 'New Review Site'
 date: 2020-12-04T00:01:00Z
 draft: false
 aliases: [ "/2020/12/new-review-site.html" ]
-tags : [new, review, site]
+tags: [new, review, site]
 ---
 
 Hey folks,

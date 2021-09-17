@@ -3,7 +3,7 @@ title: 'Ephemeral system with NixOS'
 date: 2021-03-20T13:01:00Z
 draft: false
 aliases: [ "/2021/03/ephemeral-system-with-nixos.html" ]
-tags : [ephemeral, system, nixos, delete]
+tags: [ephemeral, system, nixos, delete]
 ---
 
 Recently, I discovered the following reddit post and blog posts:

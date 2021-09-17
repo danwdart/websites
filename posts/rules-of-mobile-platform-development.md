@@ -3,7 +3,7 @@ title: 'Rules of Mobile Platform Development'
 date: 2010-10-09T15:51:00.000+01:00
 draft: false
 aliases: [ "/2010/10/rules-of-mobile-platform-development.html" ]
-tags : [htc, phone, apple, motorola, app, android]
+tags: [htc, phone, apple, motorola, app, android]
 ---
 
 A lot of things annoy me about mobiles. Here are some handy tips to you carriers, manufacturers, OS and app developers to make sure you do it right.  

@@ -3,7 +3,7 @@ title: 'Retro dial-up network fun'
 date: 2018-07-27T01:46:00.000+01:00
 draft: false
 aliases: [ "/2018/07/retro-dial-up-network-fun.html" ]
-tags : [98, address, serial, protocol, routing, server, kernel, nostalgia, dial-up, nat, windows, linux, modem, internet, emulation, isp, dialup, emulate, network]
+tags: [98, address, serial, protocol, routing, server, kernel, nostalgia, dial-up, nat, windows, linux, modem, internet, emulation, isp, dialup, emulate, network]
 ---
 
 I remember those days when your computer hissed and made strange noises in order to connect to the Internet. Today, most of us look back at those days in disdain. But for some, we want to repeat the same kind of experiences that we used to, just for the pure nostalgia of it. Some of the most remembered operating systems can take us back to those days.  

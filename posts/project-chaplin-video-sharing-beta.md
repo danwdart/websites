@@ -3,7 +3,7 @@ title: 'Project Chaplin Video Sharing Beta Released'
 date: 2015-04-04T22:52:00.000+01:00
 draft: false
 aliases: [ "/2015/04/project-chaplin-video-sharing-beta.html" ]
-tags : [client, youtube, sharing, webm, chaplin, hiatus, eggs, import, easter, html5, video, project]
+tags: [client, youtube, sharing, webm, chaplin, hiatus, eggs, import, easter, html5, video, project]
 ---
 
 Announcing the release of Project Chaplin.  

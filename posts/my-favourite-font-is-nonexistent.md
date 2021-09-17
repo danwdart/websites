@@ -3,7 +3,7 @@ title: 'My favourite font is nonexistent!'
 date: 2016-10-19T18:59:00.000+01:00
 draft: false
 aliases: [ "/2016/10/my-favourite-font-is-nonexistent.html" ]
-tags : [font, sans, serif, typeface, letters, ocd, type, quirky, writing, preschool, source, educational, weird, open, education, free, software, picky, fonts, text]
+tags: [font, sans, serif, typeface, letters, ocd, type, quirky, writing, preschool, source, educational, weird, open, education, free, software, picky, fonts, text]
 ---
 
 I think I'm a bit OCD. When I was growing up, I was shown a way of writing and since have always preferred it. However, there seems to be no such font. This is very particular of me, and the font I'm looking for is close to a "natural" font, or so I've been told.  

@@ -3,7 +3,7 @@ title: 'Xenon Project looking for helpers!'
 date: 2009-10-14T15:17:00.000+01:00
 draft: false
 aliases: [ "/2009/10/xenon-project-looking-for-helpers.html" ]
-tags : [css, mysql, hardware, javascript, html, xhtml, sql, web, xenon, windows, design, linux, software, internet, php, project]
+tags: [css, mysql, hardware, javascript, html, xhtml, sql, web, xenon, windows, design, linux, software, internet, php, project]
 ---
 
 I started a project some time ago, which is for now called "Codename: Project Xenon".  
