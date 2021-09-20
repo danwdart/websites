@@ -5,11 +5,9 @@
 module Main where
 
 import           Control.Concurrent
-import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.ByteString                (isPrefixOf)
 import           Data.Env
-import           Data.Map                       ((!))
 import           Data.Maybe
 import qualified Data.Text                      as T
 import           Data.Text.IO
@@ -20,23 +18,9 @@ import           Network.Wai.Handler.WebSockets
 import           Network.Wai.Middleware.Vhost
 import           Network.WebSockets
 import           Prelude                        hiding (putStrLn)
-import qualified Site.Blog                      as B
-import qualified Site.DanDart                   as D
-import qualified Site.JolHarg                   as J
-import qualified Site.M0ORI                     as M
-import qualified Site.MadHacker                 as R
+import           Site.Build
 import           System.Environment             (lookupEnv)
 import           WaiAppStatic.Types
-
-build ∷ WebsitesIO ()
-build = do
-    websites <- ask
-    liftIO $ do
-        runReaderT B.build $ websites ! "blog"
-        runReaderT D.build $ websites ! "dandart"
-        runReaderT J.build $ websites ! "jolharg"
-        runReaderT M.build $ websites ! "m0ori"
-        runReaderT R.build $ websites ! "madhacker"
 
 wsApp ∷ ServerApp
 wsApp pending_conn = do
@@ -45,8 +29,8 @@ wsApp pending_conn = do
     a <- newEmptyMVar
     readMVar a
 
-serve ∷ IO ()
-serve = do
+main ∷ IO ()
+main = do
     runReaderT build development
     port <- fromMaybe "80" <$> lookupEnv "PORT"
     putStrLn "Serving all websites:"
@@ -80,6 +64,3 @@ serve = do
         )
         ] . staticApp $ defaultWebAppSettings ".sites/")
     where indices = mapMaybe toPiece ["index.html"]
-
-main ∷ IO ()
-main = runReaderT build production

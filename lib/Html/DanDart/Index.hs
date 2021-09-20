@@ -241,7 +241,7 @@ pageContact = do
         contactForm'
 
 socialIcons ∷ Html
-socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-right social-inside") $ (do
+socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-end social-inside") $ (do
     -- socialIconBBanned "" "No Blogger" "blogger-b"
     socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
     -- +social('discord', 'Discord', 'url', 'black')

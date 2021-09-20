@@ -22,14 +22,14 @@ renderLink bp = renderMetaLink (postId bp) (metadata bp)
 makeLinks ∷ [BlogPost] → Html
 makeLinks = foldMap ((
         \byYear -> do
-            details ! customAttribute "open" "" ! class_ "pl-2" $ do
+            details ! customAttribute "open" "" ! class_ "ps-2" $ do
                 H.summary . fromString . show . year . date . metadata . Data.List.head . Data.List.head $ byYear
                 p $ foldMap (
-                    \byMonth -> details! customAttribute "open" "" ! class_ "pl-2" $ do
+                    \byMonth -> details! customAttribute "open" "" ! class_ "ps-2" $ do
                         -- "%B" is Month
                         H.summary . fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
                         p $ foldMap (\link' -> do
-                            p ! class_ "pl-2" $ renderLink link'
+                            p ! class_ "ps-2" $ renderLink link'
                             br
                             ) byMonth
                     ) byYear

@@ -4,13 +4,10 @@
 module Html.Common.Card (Language (..), imagesFs, Repo (..), card, cardDefunct, renderCard) where
 
 import           Control.Monad
-
 import           Data.Maybe
 import           Data.String
-
 import           Html.Common.GitHub          as GH
 import           Html.Common.Link
-
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
@@ -36,7 +33,7 @@ imagesFs = [
     (LangHS, "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/1280px-Haskell-Logo.svg.png"),
     (LangVB, "https://upload.wikimedia.org/wikipedia/en/e/e4/Visual_Basic_6.0_logo.png"),
     (LangDocker, "https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png"),
-    (LangNix, "https://nixos.wiki/images/thumb/2/20/Home-nixos-logo.png/x414px-Home-nixos-logo.png.pagespeed.ic.LS-5j54coH.png")
+    (LangNix, "https://nixos.wiki/images/thumb/2/20/Home-nixos-logo.png/x207px-Home-nixos-logo.png.pagespeed.ic.38jujIAhx5.png")
     ]
 
 languageImage ∷ Language → AttributeValue

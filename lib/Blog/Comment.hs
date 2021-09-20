@@ -61,7 +61,7 @@ commentForm postType postId = pure . (H.form
         ! target "_result") $ do
             H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
             H.input ! A.type_ "hidden" ! name "postType" ! value (fromString (T.unpack postType))
-            mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "form-group" $ do
+            mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "group" $ do
                 H.label ! for name_ $ label_
                 H.input ! A.type_ type__ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
                 ) [
@@ -69,10 +69,10 @@ commentForm postType postId = pure . (H.form
                     ("email", "email", "Email", "john@smith.com"),
                     ("text", "website", "Website", "https://mydomain.com")
                     ]
-            H.div ! A.class_ "form-group" $ do
+            H.div ! A.class_ "group" $ do
                 H.label ! for "name" $ "Comment"
                 H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
-            H.div ! A.class_ "form-group" $ do
+            H.div ! A.class_ "group" $ do
                 button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
                 H.iframe ! name "_result" ! height "90" ! width "300" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
 
