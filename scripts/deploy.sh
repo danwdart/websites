@@ -7,9 +7,9 @@ siteupdate() {
 
 # TODO - ensure master and clean
 
-# cabal new-run build-websites
+# cabal new-run build
 nix-build
-result/bin/build-websites
+result/bin/build
 
 cd .sites
 for site in */
