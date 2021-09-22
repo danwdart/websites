@@ -23,15 +23,14 @@ htmlHeader ∷ Html → Html → WebsiteM Html
 htmlHeader reviewLinks reviews = do
     urlDanDart' <- asks urlDanDart
     pageReviews' <- pageReviews reviewLinks reviews
-    pure . (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary") $
-        H.div ! class_ "container-fluid my-0" $ do
+    (pure . (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary")) . (H.div ! class_ "container-fluid my-0") $ (do
             a ! class_ "p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-start navbar-brand" ! href "#reviews" $ do
                 img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
                 H.span ! class_ "title ms-2" $ "The Mad Hacker: Reviews"
             H.div . (ul ! class_ "navbar-nav px-3") $ do
                     extNav (textValue urlDanDart') "Dan Dart"
                     pageReviews'
-                    dlNav "/atom.xml" "Atom Feed"
+                    dlNav "/atom.xml" "Atom Feed")
 
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "The Mad Hacker: Reviews" ! href "/atom.xml"
