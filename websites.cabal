@@ -110,15 +110,38 @@ executable serve
     , websockets
     , websites
 
+executable testgogol
+  import: shared-properties
+  hs-source-dirs:      src
+  main-is:             testgogol.hs
+  build-depends:
+      base >= 4.7 && < 5
+    , gogol-youtube
+
 test-suite websites-test
   import: shared-properties
   hs-source-dirs:      test
   type:                exitcode-stdio-1.0
   main-is:             Spec.hs
+  other-modules:
+    E2E.Site.CommonSpec
   build-depends:
       base >= 4.7 && < 5
     , websites
+    , aeson
+    , async
+    , containers
     , hspec
     , hspec-core
     , hspec-expectations
+    , http-client
+    , http-client-tls
+    , http-types
+    , process
     , QuickCheck
+    , random
+    , text
+    , transformers
+    , vector
+    , webdriver
+    -- , which
