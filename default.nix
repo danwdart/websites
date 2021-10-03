@@ -27,7 +27,6 @@ let
         url = "https://github.com/danwdart/hs-webdriver.git";
         rev = "52a82be322cbb8ee8e65f87056827a3b89277e2a";
       }) {};
-      gogol-core = self.callHackage "gogol-core" "0.5.0" {};
     };
   };
   shell = myHaskellPackages.shellFor {
