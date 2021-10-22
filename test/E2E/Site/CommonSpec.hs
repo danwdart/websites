@@ -36,6 +36,7 @@ import qualified Site.JolHarg                     as J
 import qualified Site.M0ORI                       as M
 import qualified Site.MadHacker                   as MH
 import           System.Environment               (setEnv)
+import           System.Process
 import           System.Random
 -- import           System.Which
 import           Test.Hspec                       (HasCallStack, Spec, describe,
@@ -218,4 +219,6 @@ testForSite (siteName, serve) = describe (unpack siteName) $ do
 
 
 spec ∷ Spec
-spec = runIO $ hspec $ mapM_ testForSite sites
+spec = runIO $ withCreateProcess (shell "selenium-server") $ \_ _ _ _ -> do
+    threadDelay 5000000
+    hspec $ mapM_ testForSite sites
