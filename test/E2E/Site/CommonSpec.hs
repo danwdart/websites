@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
+
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module E2E.Site.CommonSpec where
@@ -50,14 +50,11 @@ import           Test.WebDriver                   (Browser (chromeOptions),
                                                    Selector (ByCSS, ByClass),
                                                    WD,
                                                    WDConfig (wdCapabilities),
-                                                   -- additionalCaps,
-                                                   attr, chrome,
-                                                   -- chromeBinary,
-                                                   click, currentWindow,
-                                                   defaultCaps, defaultConfig,
-                                                   elemSize, finallyClose,
-                                                   findElem, findElems, getText,
-                                                   openPage)
+                                                   attr, chrome, click,
+                                                   currentWindow, defaultCaps,
+                                                   defaultConfig, elemSize,
+                                                   finallyClose, findElem,
+                                                   findElems, getText, openPage)
 import           Test.WebDriver.Class             (WebDriver, methodPost)
 import           Test.WebDriver.Commands.Internal (doWinCommand)
 import           Test.WebDriver.Config            (WebDriverConfig)
@@ -147,9 +144,9 @@ testForResolution siteName winSize = do
         (_, navHeight) <- elemSize navbar
         pure navHeight
 
-    liftIO . hspec $ describe (showTuple winSize) $
+    (liftIO . hspec) . describe (showTuple winSize) $ (
         it "nav height is equal to 39" $
-            navHeight `shouldBe` 39
+            navHeight `shouldBe` 39)
 
     -- only care about cards in JolHarg, but it's an option later.
     when ("jolharg" == siteName) $ do
@@ -219,6 +216,6 @@ testForSite (siteName, serve) = describe (unpack siteName) $ do
 
 
 spec ∷ Spec
-spec = runIO $ withCreateProcess (shell "selenium-server") $ \_ _ _ _ -> do
+spec = runIO . withCreateProcess (shell "selenium-server") $ (\_ _ _ _ -> do
     threadDelay 5000000
-    hspec $ mapM_ testForSite sites
+    hspec $ mapM_ testForSite sites)
