@@ -8,6 +8,11 @@ source-repository-package
   location: git://github.com/thsutton/aeson-diff.git
   tag: 1d247f4f4a20f528be3ac75982b5927bc779082e
 
+source-repository-package
+  type: git
+  location: git://github.com/danwdart/hs-webdriver.git
+  tag: 52a82be322cbb8ee8e65f87056827a3b89277e2a
+
 packages: ./websites.cabal
 
 package *
