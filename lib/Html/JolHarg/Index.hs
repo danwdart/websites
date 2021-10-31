@@ -21,7 +21,8 @@ import           Text.Blaze.Html5.Attributes as A
 
 pagePortfolio ∷ WebsiteM Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
-    row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the websites and projects JolHarg Ltd has been involved with are:"
+    row . (H.div ! class_ "col-md-12 text-center") $
+        p "Some of the websites and projects JolHarg Ltd has been involved with are:"
     row $ do
         (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"

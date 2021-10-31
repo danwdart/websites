@@ -10,9 +10,12 @@ makeHeader ∷ AttributeValue → String → Html → Html → Html
 makeHeader mainLink title' extraHeaderContent content' =
     (nav
     ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary") .
-        (H.div ! class_ "row my-0 w-100") $ (do
+        (H.div ! class_ "row my-0 w-100 w-sm-75") $ (do
             a
-                ! class_ ((if title' == "" then "w-100 " else "") <> "col p-0 pt-1 pt-sm-0 w-sm-auto text-center text-sm-start navbar-brand")
+                ! class_ (
+                    (if title' == "" then "w-100 " else "") <>
+                    "col p-0 pt-1 pt-sm-0 w-sm-auto w-100 text-center text-sm-start navbar-brand"
+                    )
                 ! href mainLink $ do
                     img
                         ! src "/img/header.png"
