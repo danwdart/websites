@@ -116,7 +116,6 @@ test-suite websites-test
   type:                exitcode-stdio-1.0
   main-is:             Spec.hs
   other-modules:
-    E2E.Site.CommonSpec
   build-depends:
       base >= 4.7 && < 5
     , websites
@@ -135,5 +134,3 @@ test-suite websites-test
     , text
     , transformers
     , vector
-    , webdriver
-    -- , which

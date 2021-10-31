@@ -1,0 +1,5 @@
+- [ ] Test links not broken
+- [ ] Test links secure
+- [ ] Test images not broken
+- [ ] Test images secure
+- [ ] Test layouts on all resolutions
