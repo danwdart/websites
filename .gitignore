@@ -11,3 +11,5 @@ result*
 .hie
 stan.html
 hie.yaml
+template
+build

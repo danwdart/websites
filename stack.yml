@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: https://0e6a361e-2c50-4819-878d-e978fb15caf3.k8s.ondigitalocean.com
+functions:
+  websites:
+    lang: dockerfile
+    handler: ./websites
+    image: websites:latest
+

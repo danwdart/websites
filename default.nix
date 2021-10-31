@@ -32,6 +32,8 @@ let
       gen-hie > hie.yaml
     '';
     buildInputs = with nixpkgs; [
+      doctl
+      faas-cli
       haskellPackages.apply-refact
       haskellPackages.cabal-install
       haskellPackages.ghcid
