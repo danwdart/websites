@@ -1,1 +1,1 @@
--l -aTMain.main --reload=posts --reload=reviews --reload=static --command=cabal repl websites:serve
+-l -aTMain.main --reload=src --reload=lib --reload=posts --reload=reviews --reload=static --command=cabal repl websites:serve
