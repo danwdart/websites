@@ -1,2 +1,4 @@
 {-# LANGUAGE UnicodeSyntax #-}
-{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
+{- OPTIONS_GHC -F -pgmF hspec-discover -}
+main :: IO ()
+main = pure ()
