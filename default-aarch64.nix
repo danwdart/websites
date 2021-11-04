@@ -5,6 +5,7 @@
 let
   crossPkgs = nixpkgs.pkgsCross.aarch64-multiplatform;
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
+  lib = nixpkgs.pkgs.haskell.lib;
   myHaskellPackages = crossPkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = self.callCabal2nix "websites" (gitignore ./.) {};
@@ -21,7 +22,7 @@ let
       # not in nix
       semialign = self.callHackage "semialign" "1.2" {};
       # Depends on cabal-un-published http-client versions.
-      req = nixpkgs.pkgs.haskell.lib.doJailbreak (self.callHackage "req" "3.9.1" {});
+      req = lib.doJailbreak (self.callHackage "req" "3.9.1" {});
     };
   };
   shell = myHaskellPackages.shellFor {
@@ -32,7 +33,7 @@ let
     ];
     withHoogle = false;
   };
-  exe = nixpkgs.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
+  exe = lib.justStaticExecutables (myHaskellPackages.websites);
 in
 {
   inherit shell;
