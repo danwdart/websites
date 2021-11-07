@@ -33,4 +33,5 @@ The kernel seems to not like modules from a past or future kernel, mainly becaus
   
 A hopeful fix  
 I'm in the process of creating a browser-based desktop environment that will hopefully overcome all that, and allow for major cool features as well as ultra compatibility and ease of use for new users. It isn't Linux, or anything to do with current free software but it can lie on top of Linux/Solaris/BSD/Windows/Mac/whatever if the user so wishes.  
-[Xenon](http://xenon.kevinghadyani.com)
+
+https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/ (edit 2021: archived)

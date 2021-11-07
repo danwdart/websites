@@ -8,7 +8,7 @@ tags: [ubuntu, 64 bit, hardware, intel, windows, linux, core, usb, i7, opensuse,
 
 Lately, I've been hearing a lot about "Linux needs to master .... to beat Windows". I'll now show you how that's completely false, and how it already has beaten it, by talking about hardware support.  
   
-Linux has been proved to have the best hardware support around - see [this interview](http://howsoftwareisbuilt.com/2009/11/18/interview-with-greg-kroah-hartman-linux-kernel-devmaintainer/#hardware) with Greg KH who's a kernel dev to see in-depth information. Linux had most support for hardware first, including:  
+Linux has been proved to have the best hardware support around - see [this interview](https://web.archive.org/web/20210224170701/https://howsoftwareisbuilt.com/2009/11/18/interview-with-greg-kroah-hartman-linux-kernel-devmaintainer/) (edit 2021: archived) with Greg KH who's a kernel dev to see in-depth information. Linux had most support for hardware first, including:  
 \* 64 bit  
 \* USB 3.0  
 \* Core i7  

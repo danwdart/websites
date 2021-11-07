@@ -11,7 +11,7 @@ The web desktop Xenon released version Alpha2 today. The release announcement fr
 "Changes from Alpha include many security fixes (including SQL injection), the addition of the Chatroom app,  
 Pictures app, width autoscaling, new tab launching, easier installation and various visual tweaks.  
   
-Please either use the [online version](http://xenon.kevinghadyani.com/desktop), or [download to your server](http://xenon.kevinghadyani.com/xenon_alpha2.tar.bz2). Please help by submitting bugs, patches,  
+Please either use the https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/ (edit 2021: archived), or ddownload to your server at xenon.kevinghadyani.com/xenon_alpha2.tar.bz2 (edit 2021: not archived). Please help by submitting bugs, patches,  
 new apps, icons, etc to xenon@dandart.co.uk. Thank you."  
   
   
@@ -38,8 +38,8 @@ Upcoming features include:
 \* A small footprint netbook/touchbook operating system to run on  
 \* Many others  
   
-To try the system out for yourself, you can [try the demo](http://xenon.kevinghadyani.com/desktop) or [download the software](http://xenon.kevinghadyani.com/xenon_alpha2.tar.bz2) to your server.  
+To try the system out for yourself, you can [try the demo](https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/) (edit 2021: archived) or download the software at xenon.kevinghadyani.com/xenon_alpha2.tar.bz2 (edit 2021: not archived) to your server.  
   
 Please send patches, icons, ideas, apps, et al to [xenon@dandart.co.uk](mailto:xenon@dandart.co.uk)  
   
-The project's website is at [http://xenon.kevinghadyani.com](http://xenon.kevinghadyani.com) or a shorter version: [http://hackerlanes.com](http://hackerlanes.com)
+The project's website is at [http://xenon.kevinghadyani.com](https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/) (edit 2021: archived) or a shorter version: [http://hackerlanes.com](https://web.archive.org/web/20091220083328/http://hackerlanes.com/) (edit 2021: archived)

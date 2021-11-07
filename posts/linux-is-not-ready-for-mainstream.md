@@ -17,4 +17,4 @@ To really make it, a product should be the same on all sides, easy to use, and h
   
 That is why, sadly, while the individual people who use Linux may like it, but Linux is simply too free to be for the mainstream.  
   
-To try to solve this, an ongoing project to create a standard easy-to-use small whole system, primarily for new small less-powerful devices, merging the gap between your computer and the cloud is encouraging developers to come and join. It is called Xenon, and is located at http://xenon.kevinghadyani.com . And it has absolutely nothing to do with Linux.
+To try to solve this, an ongoing project to create a standard easy-to-use small whole system, primarily for new small less-powerful devices, merging the gap between your computer and the cloud is encouraging developers to come and join. It is called Xenon, and is located at https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/ (edit 2021: archived). And it has absolutely nothing to do with Linux.

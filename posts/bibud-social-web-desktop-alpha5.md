@@ -12,7 +12,7 @@ If you've not come across Bibud before, it is a desktop and window manager inclu
   
 Bibud is the name of the entire project, but a demo of what the desktop will look like is available to demo on the web at http://bibud.com - later on it will come preinstalled inaide a GNU/Linux distribution enabling computers to connect and share data with each other in an as easy way as possible.  
   
-Technologies in use in Bibud are HTML5 for the audio and video elements, AJAX for most of the desktop, and the backends are programmed in PHP and MySQL, enabling any user with the LAMP stack installed (Linux, Apache, MySQL, PHP) to easily download and install the software. The git repository is available on [Github](http://github.com/bibud/Bibud).  
+Technologies in use in Bibud are HTML5 for the audio and video elements, AJAX for most of the desktop, and the backends are programmed in PHP and MySQL, enabling any user with the LAMP stack installed (Linux, Apache, MySQL, PHP) to easily download and install the software. The git repository is available on [Github](https://github.com/danwdart/Bibud/) (edit 2021: changed organisation).  
   
 Currently, the following applications are available to try out:  
 

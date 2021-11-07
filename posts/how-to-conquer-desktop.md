@@ -42,4 +42,4 @@ for File Server. And so on.
 Let's all work on this and soon we'll have a user friendly system, easy to use, ready for the enterprise.  
   
 There is an ongoing project to conquer this challenge. Its codename is Xenon and it tries to do all this in the browser. It can be used on all devices and will be installed on small devices. To catch up with development or contribute, please visit:  
-http://xenon.kevinghadyani.com
+https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/ (edit 2021: archived)

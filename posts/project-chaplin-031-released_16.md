@@ -12,7 +12,7 @@ Introducing the first bugfix release for the 0.3 release of Project Chaplin.
   
 Project Chaplin is the first fully free software and open source video streaming service, installable locally or usable online. It has been in development for a few years now, and has had significant development, and a new design added a couple of years ago.  
   
-The software is available through GitHub at[ ](https://www.blogger.com/goog_1096986118)[https://github.com/danwdart/projectchaplin/releases](https://github.com/danwdart/projectchaplin/releases).  
+The software is available through GitHub at [https://github.com/danwdart/projectchaplin/releases](https://github.com/danwdart/projectchaplin/releases).  
   
 The project is always looking for new developers, designers and ideas people. Please contact "viablog031 att projectchaplin dott com" if you are looking for a new project to join. The list of new bugs, feature requests, etc is available at [https://github.com/danwdart/projectchaplin/issues](https://github.com/danwdart/projectchaplin/issues)  
   

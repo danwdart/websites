@@ -18,8 +18,8 @@ If you have any ideas to help the project along, then please give us feedback!
   
 To apply, simply email: [dan.dart@googlemail.com](mailto:dan.dart@googlemail.com)  
   
-To visit the main website of the project, click here: [http://xenon.kevinghadyani.com](http://xenon.kevinghadyani.com)  
-To try out the web based desktop for yourself, click here: [Try The Desktop](http://xenon.kevinghadyani.com/desktop) . Please note that it is nowhere near finished at the moment.  
-To view the SDK and programming procedures to help you, click here: [Xenon SDK](http://xenon.kevinghadyani.com/wiki/index.php/Developing_Apps)  
+To visit the main website of the project, click here: https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/ (edit 2021: archived)
+To try out the web based desktop for yourself, click here: [Try The Desktop](https://web.archive.org/web/20100224082039/https://xenon.kevinghadyani.com/desktop) (edit 2021: archived partially). Please note that it is nowhere near finished at the moment.  
+To view the SDK and programming procedures to help you, click here: Xenon SDK at xenon.kevinghadyani.com/wiki/index.php/Developing_Apps (edit 2021: not archived)
   
 Thank you, and have a good day!
