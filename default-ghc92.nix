@@ -72,7 +72,7 @@ let
       }) {});
       cabal-doctest = lib.doJailbreak (self.callCabal2nix "cabal-doctest" (builtins.fetchGit {
         url = "https://github.com/haskellari/cabal-doctest.git";
-        rev = "e379c5ed78bad33b145f71ae5ca147a9ae2f2430";
+        rev = "2338f86cbba06366fca42f7c9640bc408c940e0b";
       }) {});
       wai-logger = lib.doJailbreak super.wai-logger;
       cereal = lib.doJailbreak (super.cereal);
