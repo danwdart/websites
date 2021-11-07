@@ -40,14 +40,14 @@ languageImage ∷ Language → AttributeValue
 languageImage l = fromMaybe genericImage (lookup l imagesFs)
 
 card ∷ AttributeValue → Html → Html → AttributeValue → Html
-card cardImage cardTitle cardText cardLink =  (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
+card cardImage cardTitle cardText cardLink =  (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
     img ! class_ "card-img-top" ! src cardImage
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
     extLink cardLink ! class_ "btn btn-secondary" $ "Visit")
 
 cardDefunct ∷ Html → Html → Html
-cardDefunct cardTitle cardText = (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
+cardDefunct cardTitle cardText = (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
     img ! class_ "card-img-top" ! src "img/sample.png"
     h4 ! class_ "card-title" $ cardTitle
     p ! class_ "card-text" $ cardText
@@ -59,7 +59,7 @@ licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> fromString avO
 
 renderCard ∷ Repo → Html
 renderCard repo =
-    (H.div ! class_ "card col-md-4 text-center") . (H.div ! class_ "card-body") $ (do
+    (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
         img ! class_ "card-img-top-github" ! A.src (languageImage . language $ repo)
         h4 ! class_ "card-title" $ do
             (H.span ! class_ "name") . fromString . GH.name $ repo
