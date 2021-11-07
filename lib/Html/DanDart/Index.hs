@@ -115,7 +115,7 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
         li $ do
             extLink "http://www.gnu.org/gnu/why-gnu-linux.en.html" "GNU/Linux"
             ": "
-            extLink "http://kubuntu.org" "Kubuntu"
+            extLink "http://nixos.org" "NixOS"
         li $ do
             extLink (wikipedia "Blue_Screen_of_Death") "Windows"
             ": "
@@ -130,11 +130,14 @@ pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
     p "I think I'm addicted to caffeine, which I wouldn't recommend."
     p "I have been diagnosed with the following things, both physical and mental intermingling:"
     ul $ do
-        li $ extLink (nhs <> "memory-loss-amnesia/") "short-term memory loss"
+        
         li $ extLinkTitle (nhs <> "post-traumatic-stress-disorder-ptsd") "Post-traumatic Stress Disorder" "PTSD"
         li $ extLink (nhs <> "fibromyalgia") "Fibromyalgia"
         li $ extLink (nhs <> "autism") "Asperger's Syndrome"
-        li $ extLink (nhs <> "attention-deficit-hyperactivity-disorder-adhd") "ADHD"
+        li $ do
+            extLink (nhs <> "attention-deficit-hyperactivity-disorder-adhd") "ADHD"
+            ", including "
+            extLink (nhs <> "memory-loss-amnesia/") "short-term memory loss"
         li $ extLink (nhs <> "generalised-anxiety-disorder") "Anxiety"
         li $ extLink (nhs <> "depression") "Depression"
         li $ extLink (nhs <> "sleep-apnoea") "Sleep apnoea"
@@ -243,15 +246,18 @@ pageContact = do
 socialIcons ∷ Html
 socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-end social-inside") $ (do
     -- socialIconBBanned "" "No Blogger" "blogger-b"
-    socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
+    -- Not using
+    -- socialIconB "https://joindiaspora.com/people/08b11e5f4fff2a8b" "Diaspora" "diaspora"
     -- +social('discord', 'Discord', 'url', 'black')
     -- socialIconBBanned "" "No Facebook" "facebook-f"
     --  +social('firefox
     socialIconS "mailto:website@dandart.co.uk" "Email" "envelope"
     socialIconB "https://github.com/danwdart" "GitHub" "github"
     -- socialIconBBanned "" "No Google" "google"
-    socialIconB "https://news.ycombinator.com/user?id=dandart" "Hacker News" "hacker-news"
-    socialIconB "https://www.hackerrank.com/dandart" "HackerRank" "hackerrank"
+    -- Not using
+    -- socialIconB "https://news.ycombinator.com/user?id=dandart" "Hacker News" "hacker-news"
+    -- Not using
+    -- socialIconB "https://www.hackerrank.com/dandart" "HackerRank" "hackerrank"
     socialIconB "https://www.imdb.com/user/ur81806610" "ImDB" "imdb"
     -- socialIconBBanned "" "No Instagram" "instagram"
     -- +social('keybase', 'Keybase', 'url', 'black')
@@ -259,16 +265,18 @@ socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-end soci
     socialIconB "https://www.linkedin.com/in/dandart" "LinkedIn" "linkedin"
     -- +social('linux', 'Linux', 'url', 'black')
     -- +social('microsoft', 'Microsoft', 'url', 'black')
-    socialIconB "https://mix.com/dandart" "Mix" "mix"
+    -- Not using
+    -- socialIconB "https://mix.com/dandart" "Mix" "mix"
     socialIconB "https://www.npmjs.com/~dandart" "npm" "npm"
-    socialIconB "https://www.patreon.com/danwdart" "Patreon" "patreon"
-    socialIconB "https://my.playstation.com/profile/MeowzorFnord" "PlayStation" "playstation"
+    -- socialIconB "https://www.patreon.com/danwdart" "Patreon" "patreon"
+    -- socialIconB "https://my.playstation.com/profile/MeowzorFnord" "PlayStation" "playstation"
     -- socialIconBBanned "" "No Pinterest" "pinterest"
     -- +social('raspberry-pi', 'Raspberry PI', 'url', 'black')
     socialIconB "https://www.reddit.com/user/jolharg" "Reddit" "reddit"
-    socialIconB "skypeurl" "Skype" "skype"
+    socialIconB "skype:dandart?userinfo" "Skype" "skype"
     -- socialIconBBanned "" "No Snapchat" "snapchat"
-    socialIconB "https://soundcloud.com/danwdart" "SoundCloud" "soundcloud"
+    -- Can't update this bc soundcloud is broken!
+    socialIconB "https://soundcloud.com/kathiedart" "SoundCloud" "soundcloud"
     socialIconB "https://open.spotify.com/user/dandart" "Spotify" "spotify"
     socialIconB "https://stackoverflow.com/users/1764563/dan-dart" "Stack Overflow" "stack-overflow"
     socialIconB "https://steamcommunity.com/id/dandart" "Steam" "steam"
