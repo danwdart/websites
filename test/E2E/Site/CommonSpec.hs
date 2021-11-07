@@ -100,8 +100,8 @@ resolutions = [
 
 configs ∷ [(Text, WDConfig)]
 configs = [
-    ("Firefox", firefoxConfig)
-    --("Chrome", chromeConfig)
+    ("Firefox", firefoxConfig),
+    ("Chrome", chromeConfig)
     ]
 
 sites ∷ [(Text, IO ())]
@@ -136,8 +136,8 @@ testForLink linkToClick = do
     liftIO . hspec . describe (unpack linkName) . it "visible cards are only one size" $ (
         (length . nub . filter (/= (0, 0)) $ cardSizes )`shouldSatisfy` (< 2))
 
-testForResolution ∷ Text → (Float, Float) → WD ()
-testForResolution siteName winSize@(width, height) = do
+testForResolution ∷ (Float, Float) → WD ()
+testForResolution winSize@(width, height) = do
     let rect = Rect {
         rectX = 0,
         rectY = 0,
@@ -154,10 +154,8 @@ testForResolution siteName winSize@(width, height) = do
         it "nav height is equal to 39" $
             navHeight `shouldBe` 39
 
-    -- only care about cards in JolHarg, but it's an option later.
-    when ("jolharg" == siteName) $ do
-        links <- findElems $ ByCSS ".navbar-nav label a"
-        mapM_ testForLink links
+    links <- findElems $ ByCSS ".navbar-nav label a"
+    mapM_ testForLink links
 
 testSecureLink ∷ String → Spec
 testSecureLink src = describe src .
@@ -192,13 +190,13 @@ brokenExceptions = [
 testNotBroken ∷ (String, Int) → Spec
 testNotBroken (url', status) = describe url' .
     unless (url' `elem` brokenExceptions) $ do
-    it "should not be failing" $
-        status `shouldNotBe` 0
+    -- it "should not be failing" $
+    --     status `shouldNotBe` 0
     it "should not 404" $
         status `shouldNotBe` 404
 
 testForConfig ∷ WebDriverConfig conf ⇒ Int → Text → (Text, conf) → Spec
-testForConfig myPort siteName (configName, config) =
+testForConfig myPort siteName (configName, config) = describe (unpack siteName) .
     describe (unpack configName) $ do
         runIO . runSession config . finallyClose $ do
             liftIO . putStrLn $ "Opening page"
@@ -230,7 +228,7 @@ testForConfig myPort siteName (configName, config) =
                     describe "has no broken links" $ mapM_ testNotBroken urlStatuses
                     describe "has no missing images" $ mapM_ testNotBroken imageStatuses
 
-            mapM_ (testForResolution siteName) resolutions
+            mapM_ testForResolution resolutions
 
 testForSite ∷ (Text, IO ()) → Spec
 testForSite (siteName, serve) = describe (unpack siteName) $ do
