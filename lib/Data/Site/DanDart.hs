@@ -254,8 +254,8 @@ favCharacters = [
         wikipedia "Black_Butler",
         [
             (
-                "Grell Sutcliff",
-                fandom "kuroshitsuji" "Grell_Sutcliff",
+                "Grelle Sutcliff",
+                fandom "kuroshitsuji" "Grelle_Sutcliff",
                 "he's hysterical, fabulous and has good taste in butlers"
             )
         ]
