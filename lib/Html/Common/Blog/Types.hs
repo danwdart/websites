@@ -3,7 +3,7 @@
 {-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Blog.Types where
+module Html.Common.Blog.Types where
 
 import           Data.Aeson       (FromJSON, (.:), (.:?))
 import qualified Data.Aeson       as A

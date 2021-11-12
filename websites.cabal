@@ -42,26 +42,28 @@ library
     , transformers
     , wai-app-static
     , warp
-  exposed-modules:
-      Blog.Comment
-    , Blog.Feed
-    , Blog.Link
-    , Blog.Post
-    , Blog.Types
-    , Data.Env
-    , Data.Site.Blog
+  other-modules:
+      Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg
-    , Data.Site.MadHacker
     , Data.Site.M0ORI
+    , Data.Site.MadHacker
     , Data.Text.Show
     , Data.Time.Utils
+    , Html.Blog.Header
     , Html.Blog.Index
+    , Html.Blog.Page.Blog
     , Html.Common.Audio
+    , Html.Common.Blog.Comment
+    , Html.Common.Blog.Feed
+    , Html.Common.Blog.Link
+    , Html.Common.Blog.Post
+    , Html.Common.Blog.Types
     , Html.Common.Bootstrap
     , Html.Common.CSS
     , Html.Common.Card
     , Html.Common.Contact
+    , Html.Common.Error.NotFound
     , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Header
@@ -70,20 +72,40 @@ library
     , Html.Common.Shortcuts
     , Html.Common.Social
     , Html.Common.Utils
-    , Html.Common.Error.NotFound
+    , Html.DanDart.Header
     , Html.DanDart.Index
+    , Html.DanDart.Page.About
+    , Html.DanDart.Page.Characters
+    , Html.DanDart.Page.Contact
+    , Html.DanDart.Page.Favourites
+    , Html.DanDart.Page.Health
+    , Html.DanDart.Page.Intro
+    , Html.DanDart.Page.Maths
+    , Html.DanDart.Page.Music
+    , Html.DanDart.Page.Origami
+    , Html.DanDart.Social
+    , Html.JolHarg.Header
     , Html.JolHarg.Index
-    , Html.MadHacker.Index
-    , Html.MadHacker.Suffix
+    , Html.JolHarg.Page.Contact
+    , Html.JolHarg.Page.FreeSoftware
+    , Html.JolHarg.Page.Portfolio
+    , Html.M0ORI.Header
     , Html.M0ORI.Index
-    , Site.Build
-    , Site.Blog
-    , Site.DanDart
-    , Site.JolHarg
-    , Site.M0ORI
-    , Site.MadHacker
-    , Site.Markdowns
-    , Util.Build
+    , Html.M0ORI.Page.Contact
+    , Html.M0ORI.Page.HamRadio
+    , Html.MadHacker.Header
+    , Html.MadHacker.Index
+    , Html.MadHacker.Page.Reviews
+    , Html.MadHacker.Suffix
+    , Make
+  exposed-modules:
+      Build
+    , Build.Blog
+    , Build.DanDart
+    , Build.JolHarg
+    , Build.M0ORI
+    , Build.MadHacker
+    , Data.Env
 
 executable build
   import: shared-properties
@@ -136,3 +158,4 @@ test-suite websites-test
     , transformers
     , vector
     , webdriver
+    , websites

@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
-module Html.Common.GitHub (Repo (..), Language (..), Licence (..), getRepos) where
+module Html.Common.GitHub where
 
 import           Control.Monad.IO.Class
 import           Data.Aeson

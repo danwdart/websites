@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Page (customLayout, contactLayout, defaultLayout, dlNav, extNav, defaultPage, notDefaultPage, makePage) where
+module Html.Common.Page where
 
 import           Data.Env
 import           Data.String                 (IsString (fromString))

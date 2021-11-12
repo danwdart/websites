@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Data.Site.DanDart (keywords, descTitle, musicalStyles, favCharacters, musicList) where
+module Data.Site.DanDart where
 
 import           Html.Common.Shortcuts
 import           Text.Blaze.Html5      as H hiding (main)

@@ -1,5 +1,5 @@
 {-# LANGUAGE UnicodeSyntax #-}
-module Html.Common.Utils (intercalateAttr) where
+module Html.Common.Utils where
 
 import           Text.Blaze.Html5 as H hiding (main)
 

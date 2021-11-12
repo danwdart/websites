@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Error.NotFound (defaultPage404) where
+module Html.Common.Error.NotFound where
 
 import           Data.Env
 import           Html.Common.Bootstrap

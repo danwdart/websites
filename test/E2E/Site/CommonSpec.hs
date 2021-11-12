@@ -4,59 +4,45 @@
 
 module E2E.Site.CommonSpec where
 
-import           Control.Concurrent               (forkIO, killThread,
-                                                   threadDelay)
-import           Control.Concurrent.Async         (mapConcurrently)
-import           Control.Exception                (SomeException (SomeException),
-                                                   try)
-import           Control.Monad                    (when, unless)
+import           Control.Concurrent         (forkIO, killThread, threadDelay)
+import           Control.Concurrent.Async   (mapConcurrently)
+import           Control.Exception          (SomeException (SomeException), try)
+import           Control.Monad              (unless, when)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
--- ,
---                                                    Value (Array, String),
---                                                    object)
 import           Data.Env
-import           Data.Functor.Compose             (Compose (Compose, getCompose))
-import           Data.List                        (nub)
-import           Data.Map                         ((!))
-import           Data.Maybe                       (catMaybes)
-import           Data.Text                        (Text, unpack)
--- import           Data.Vector                      (fromList)
-import           Network.HTTP.Client              (Manager,
-                                                   Response (responseStatus),
-                                                   httpNoBody, newManager,
-                                                   parseRequest)
-import           Network.HTTP.Client.TLS          (tlsManagerSettings)
-import           Network.HTTP.Types.Status        (statusCode)
-import qualified Site.Blog                        as B
-import qualified Site.DanDart                     as D
-import qualified Site.JolHarg                     as J
-import qualified Site.M0ORI                       as M
-import qualified Site.MadHacker                   as MH
-import           System.Environment               (setEnv)
+import           Data.Functor.Compose       (Compose (Compose, getCompose))
+import           Data.List                  (nub)
+import           Data.Map                   ((!))
+import           Data.Maybe                 (catMaybes)
+import           Data.Text                  (Text, unpack)
+import qualified Build.Blog                 as B
+import qualified Build.DanDart              as D
+import qualified Build.JolHarg              as J
+import qualified Build.M0ORI                as M
+import qualified Build.MadHacker            as MH
+import           Network.HTTP.Client        (Manager, Response (responseStatus),
+                                             httpNoBody, newManager,
+                                             parseRequest)
+import           Network.HTTP.Client.TLS    (tlsManagerSettings)
+import           Network.HTTP.Types.Status  (statusCode)
+import           System.Environment         (setEnv)
 import           System.Process
 import           System.Random
--- import           System.Which
-import           Test.Hspec                       (Spec, describe,
-                                                   hspec, it, runIO, shouldBe,
-                                                   shouldSatisfy)
-import           Test.Hspec.Expectations          (shouldNotBe,
-                                                   shouldNotContain)
-import           Test.WebDriver                   (Browser (chromeOptions),
-                                                   Capabilities (browser),
-                                                   Element,
-                                                   Selector(..),
-                                                   WD,
-                                                   WDConfig (wdCapabilities),
-                                                   attr, chrome, click,
-                                                   defaultCaps,
-                                                   defaultConfig, elemRect,
-                                                   Rect(..), setWindowRect,
-                                                   finallyClose, findElem,
-                                                   findElems, getText, openPage)
-import           Test.WebDriver.Class             (WebDriver)
-import           Test.WebDriver.Config            (WebDriverConfig)
-import           Test.WebDriver.Monad             (runSession)
+import           Test.Hspec                 (Spec, describe, hspec, it, runIO,
+                                             shouldBe, shouldSatisfy)
+import           Test.Hspec.Expectations    (shouldNotBe, shouldNotContain)
+import           Test.WebDriver             (Browser (chromeOptions),
+                                             Capabilities (browser), Element,
+                                             Rect (..), Selector (..), WD,
+                                             WDConfig (wdCapabilities), attr,
+                                             chrome, click, defaultCaps,
+                                             defaultConfig, elemRect,
+                                             finallyClose, findElem, findElems,
+                                             getText, openPage, setWindowRect)
+import           Test.WebDriver.Class       (WebDriver)
+import           Test.WebDriver.Config      (WebDriverConfig)
+import           Test.WebDriver.Monad       (runSession)
 
 firefoxConfig ∷ WDConfig
 firefoxConfig = defaultConfig {-} {
@@ -118,7 +104,7 @@ ioDef ∷ a → IO a → IO a
 ioDef d io = either (\(SomeException _) -> d) id <$> try io
 
 -- @TODO use the real elemRect and remove this
-elemSize :: WebDriver m => Element -> m (Float, Float)
+elemSize ∷ WebDriver m ⇒ Element → m (Float, Float)
 elemSize x = do
     r <- elemRect x
     pure (rectWidth r, rectHeight r)
@@ -132,7 +118,7 @@ testForLink linkToClick = do
         mapM elemSize cards
 
     liftIO . print $ cardSizes
-    
+
     liftIO . hspec . describe (unpack linkName) . it "visible cards are only one size" $ (
         (length . nub . filter (/= (0, 0)) $ cardSizes )`shouldSatisfy` (< 2))
 
@@ -168,7 +154,7 @@ getStatuses manager url' = ioDef (url', 0) $ do
     response <- httpNoBody request manager
     pure (url', statusCode . responseStatus $ response)
 
-brokenExceptions :: [String]
+brokenExceptions ∷ [String]
 brokenExceptions = [
     "http://dandart.localhost:8080", -- appears in tests only
     "http://blog.localhost:8080", -- appears in tests only
@@ -205,7 +191,7 @@ testForConfig myPort siteName (configName, config) = describe (unpack siteName) 
             liftIO . putStrLn $ "Opened page"
             -- only the first option
             when ("Firefox" == configName) $ do
-                urls <- do
+                urls' <- do
                     liftIO . putStrLn $ "Finding external links"
                     as <- findElems (ByCSS "a[href^=http]")
                     liftIO . putStrLn $ "Going through external links"
@@ -219,7 +205,7 @@ testForConfig myPort siteName (configName, config) = describe (unpack siteName) 
 
                 manager <- liftIO $ newManager tlsManagerSettings
 
-                urlStatuses <- liftIO $ mapConcurrently (getStatuses manager) urls
+                urlStatuses <- liftIO $ mapConcurrently (getStatuses manager) urls'
 
                 imageStatuses <- liftIO $ mapConcurrently (getStatuses manager) images
 

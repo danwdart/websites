@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.JolHarg.Index where
+module Html.JolHarg.Page.FreeSoftware where
 
 import           Control.Monad.Reader
 import           Data.Env
@@ -15,19 +15,12 @@ import           Html.Common.Head
 import           Html.Common.Header
 import           Html.Common.Link
 import           Html.Common.Page
-import           Html.JolHarg.Header
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-page ∷ Reader [Repo] (WebsiteM Html)
-page = do
-    header' <- htmlHeader
-    pure $ do
-        head' <- htmlHead descTitle keywords mempty
-        header'' <- header'
-        pure . (docTypeHtml ! lang "en-GB") $ do
-            head'
-            header''
-
-page404 ∷ WebsiteM Html
-page404 = defaultPage404 descTitle keywords mempty
+pageFs ∷ Reader [Repo] (WebsiteM Html)
+pageFs = do
+    repos <- ask
+    pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do
+        row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects JolHarg Ltd has created or contributed to are:"
+        mapM_ renderCard repos

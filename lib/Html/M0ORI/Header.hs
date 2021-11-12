@@ -1,8 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.M0ORI.Index where
+module Html.M0ORI.Header where
 
+import           Control.Monad.Trans.Reader
 import           Data.Env
 import           Data.Site.M0ORI
 import           Html.Common.Contact
@@ -11,17 +12,17 @@ import           Html.Common.Head
 import           Html.Common.Header
 import           Html.Common.Link
 import           Html.Common.Page
-import           Html.M0ORI.Header
+import           Html.M0ORI.Page.Contact
+import           Html.M0ORI.Page.HamRadio
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-page ∷ WebsiteM Html
-page = do
-    header' <- htmlHeader
-    head' <- htmlHead descTitle keywords mempty
-    pure . (docTypeHtml ! lang "en-GB") $ do
-        head'
-        header'
-
-page404 ∷ WebsiteM Html
-page404 = defaultPage404 descTitle keywords mempty
+htmlHeader ∷ WebsiteM Html
+htmlHeader = do
+    urlDanDart' <- asks (urlDanDart . urls)
+    pageHamRadio' <- pageHamRadio
+    pageContact' <- pageContact
+    pure . makeHeader "" "M0ORI: Dan Dart" mempty $ do
+        extNav (textValue urlDanDart') "Dan Dart"
+        pageHamRadio'
+        pageContact'

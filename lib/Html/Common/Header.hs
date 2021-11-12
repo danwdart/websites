@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Header (makeHeader) where
+module Html.Common.Header where
 
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A

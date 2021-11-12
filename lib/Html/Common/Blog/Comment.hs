@@ -2,9 +2,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Blog.Comment where
+module Html.Common.Blog.Comment where
 
-import           Blog.Types
+import           Html.Common.Blog.Types
 import           Control.Monad
 import           Data.Either
 import           Data.Frontmatter

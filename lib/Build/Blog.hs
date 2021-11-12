@@ -1,19 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Site.Blog where
+module Build.Blog where
 
-import           Blog.Feed                  (makeRSSFeed)
-import           Blog.Link                  (makeLinks)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.Env
 import qualified Data.Text                  as T
 import qualified Data.Text.IO               as TIO
-import           Html.Blog.Index            (page, page404)
-import           Site.Markdowns
+import           Html.Blog.Index
+import           Html.Common.Blog.Feed
+import           Html.Common.Blog.Link
+import           Make
 import           System.FilePath
-import           Util.Build                 (make, makeServe)
 
 build ∷ WebsiteIO ()
 build = do

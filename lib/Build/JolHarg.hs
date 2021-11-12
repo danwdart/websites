@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Site.JolHarg where
+module Build.JolHarg where
 
 import           Configuration.Dotenv
 import           Control.Monad.IO.Class
@@ -10,9 +10,9 @@ import           Control.Monad.Trans.Reader
 import           Data.Env
 import           Html.Common.GitHub
 import           Html.JolHarg.Index
+import           Make
 import           Network.HTTP.Req
 import           Prelude                    hiding (putStrLn)
-import           Util.Build                 (make, makeServe)
 
 build ∷ WebsiteIO ()
 build = do

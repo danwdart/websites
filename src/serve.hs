@@ -4,6 +4,7 @@
 
 module Main where
 
+import           Build
 import           Control.Concurrent
 import           Control.Monad.Trans.Reader
 import           Data.ByteString                (isPrefixOf)
@@ -18,7 +19,6 @@ import           Network.Wai.Handler.WebSockets
 import           Network.Wai.Middleware.Vhost
 import           Network.WebSockets
 import           Prelude                        hiding (putStrLn)
-import           Site.Build
 import           System.Environment             (lookupEnv)
 import           WaiAppStatic.Types
 
@@ -41,6 +41,7 @@ main = do
         "jolharg",
         "m0ori"
         ]
+    -- @TODO check env
     runEnv 80 $ websocketsOr defaultConnectionOptions wsApp (vhost [
         (
             isPrefixOf "madhacker" . fromMaybe "" . requestHeaderHost,

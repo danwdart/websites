@@ -1,10 +1,11 @@
 {-# LANGUAGE UnicodeSyntax #-}
 
-module Site.DanDart where
+module Build.M0ORI where
 
+import           Control.Monad.Trans.Reader
 import           Data.Env
-import           Html.DanDart.Index
-import           Util.Build
+import           Html.M0ORI.Index
+import           Make
 
 build ∷ WebsiteIO ()
 build = do

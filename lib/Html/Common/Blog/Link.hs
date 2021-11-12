@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
-module Blog.Link where
 
-import           Blog.Types
+module Html.Common.Blog.Link where
+
 import           Data.List
 import           Data.List.Extra
 import           Data.String
@@ -10,11 +10,12 @@ import           Data.Text                   (Text)
 import qualified Data.Text                   as T
 import           Data.Time
 import           Data.Time.Utils
+import           Html.Common.Blog.Types      as BT
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
 renderMetaLink ∷ Text → BlogMetadata → Html
-renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (Blog.Types.title m))
+renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
 
 renderLink ∷ BlogPost → Html
 renderLink bp = renderMetaLink (postId bp) (metadata bp)

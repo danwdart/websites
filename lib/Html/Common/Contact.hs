@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Contact (contactForm, emailHelpSingular, emailHelpPlural) where
+module Html.Common.Contact where
 
 import           Data.Env
 import           Text.Blaze.Html5            as H

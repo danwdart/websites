@@ -1,12 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.MadHacker.Suffix (renderStars) where
+module Html.MadHacker.Suffix where
 
-import           Blog.Types
 import           Control.Monad               (replicateM_)
 import           Data.String                 (IsString (fromString))
 import qualified Data.Text                   as T
+import           Html.Common.Blog.Types
 import           Html.Common.Bootstrap
 import           Text.Blaze.Html5
 import qualified Text.Blaze.Html5            as H

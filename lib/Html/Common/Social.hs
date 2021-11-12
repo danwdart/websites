@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Social (socialIconB, socialIconS) where
+module Html.Common.Social where
 
 import           Data.String
 import           Html.Common.Link

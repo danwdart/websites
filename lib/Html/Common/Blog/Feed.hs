@@ -1,9 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Blog.Feed where
+module Html.Common.Blog.Feed where
 
-import           Blog.Types
+import           Html.Common.Blog.Types
 import           Data.Text                     (Text)
 import           Data.Text.Lazy                (toStrict)
 import qualified Data.Text.Lazy                as TL

@@ -1,10 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Blog.Post where
+module Html.Common.Blog.Post where
 
-import           Blog.Comment
-import           Blog.Types
 import           Data.Either
 import           Data.Env
 import           Data.Frontmatter
@@ -13,6 +11,8 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
+import           Html.Common.Blog.Comment
+import           Html.Common.Blog.Types       as BT
 import           System.FilePath
 import           Text.Blaze.Html5             as H hiding (main)
 import           Text.Blaze.Html5.Attributes  as A
@@ -92,7 +92,7 @@ renderPost _ renderSuffix (BlogPost postId' metadata' html' _) = do
     pure $ do
         a ! name (fromString (T.unpack postId')) $ mempty
         -- Not working in Safari yet, so filter
-        h1 . fromString . T.unpack $ Blog.Types.title metadata'
+        h1 . fromString . T.unpack $ BT.title metadata'
         small $ do
             a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
             " | Published: "

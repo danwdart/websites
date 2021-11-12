@@ -38,7 +38,7 @@ let
       apply-refact
       cabal-install
       chromedriver
-      firefox
+      # firefox # 
       geckodriver
       ghcid
       hlint
@@ -47,7 +47,7 @@ let
       selenium-server-standalone
       stan
       stylish-haskell
-      ungoogled-chromium
+      # ungoogled-chromium # 
       weeder
     ];
     withHoogle = false;

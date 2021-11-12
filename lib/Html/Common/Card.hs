@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
-module Html.Common.Card (Language (..), imagesFs, Repo (..), card, cardDefunct, renderCard) where
+module Html.Common.Card where
 
 import           Control.Monad
 import           Data.Maybe
