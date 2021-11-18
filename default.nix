@@ -33,6 +33,7 @@ let
     ];
     shellHook = ''
       gen-hie > hie.yaml
+      for i in $(find -type f); do krank $i; done
     '';
     buildInputs = with nixpkgs; with haskellPackages; [
       apply-refact
