@@ -19,7 +19,6 @@ data Language = LangHS
     | LangHTML
     | LangPHP
     | LangASM
-    | LangGNU
     | LangTS
     | LangCoffee
     | LangShell
