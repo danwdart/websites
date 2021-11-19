@@ -38,7 +38,7 @@ makeBlogPost ∷ FilePath → FilePath → IO BlogPost
 makeBlogPost postsDir filename = do
     fileText <- TIO.readFile filename
     let (ParseResult metadata' html') = parseFile fileText
-    let postId' = dropExtension $ takeFileName filename
+    let postId' = dropExtension . takeFileName . Prelude.head . aliases $ metadata'
     comments' <- getComments postsDir postId'
     pure $ BlogPost (T.pack postId') metadata' html' comments'
 
