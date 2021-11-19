@@ -14,46 +14,46 @@ import           GHC.Generics
 import           Network.HTTP.Req
 import           System.Environment
 
-data Language = LangHS
-    | LangJS
-    | LangHTML
-    | LangPHP
-    | LangASM
-    | LangTS
-    | LangCoffee
-    | LangShell
-    | LangGeneric
-    | LangPython
+data Language = LangASM
     | LangBlitzBasic
     | LangC
-    | LangTcl
-    | LangVB
+    | LangCoffee
     | LangCPP
+    | LangDocker
+    | LangGeneric
+    | LangHS
+    | LangHTML
+    | LangJS
     | LangNix
-    | LangDocker deriving (Eq, Generic, Show)
+    | LangPHP
+    | LangPython
+    | LangShell
+    | LangTcl
+    | LangTS
+    | LangVB deriving (Eq, Generic, Show)
 
 instance FromJSON Language where
     parseJSON (String a) = pure $ case a of
+        "Assembly"     -> LangASM
+        "BlitzBasic"   -> LangBlitzBasic
+        "C"            -> LangC
+        "CoffeeScript" -> LangCoffee
+        "C++"          -> LangCPP
+        "Dockerfile"   -> LangDocker
         "JavaScript"   -> LangJS
+        "Vue"          -> LangJS
+        "Haskell"      -> LangHS
         "HTML"         -> LangHTML
+        "Nix"          -> LangNix
         "Python"       -> LangPython
         "PHP"          -> LangPHP
-        "TypeScript"   -> LangTS
-        "CoffeeScript" -> LangCoffee
-        "Shell"        -> LangShell
-        "Assembly"     -> LangASM
-        "C"            -> LangC
         "Makefile"     -> LangShell
-        "Visual Basic" -> LangVB
-        "Dockerfile"   -> LangDocker
-        "Tcl"          -> LangTcl
-        "BlitzBasic"   -> LangBlitzBasic
-        "Haskell"      -> LangHS
-        "C++"          -> LangCPP
-        "VBA"          -> LangVB
+        "Shell"        -> LangShell
         "Vim script"   -> LangShell
-        "Vue"          -> LangJS
-        "Nix"          -> LangNix
+        "Tcl"          -> LangTcl
+        "TypeScript"   -> LangTS
+        "VBA"          -> LangVB
+        "Visual Basic" -> LangVB
         _              -> error $ "Unknown language: " <> T.unpack a
     parseJSON Null = pure LangGeneric
     parseJSON _ = pure LangGeneric
