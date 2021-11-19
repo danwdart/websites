@@ -22,11 +22,10 @@ pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
     row . (H.div ! class_ "col-md-12 text-center") $
         p "Some of the websites, projects and companies JolHarg Ltd has been involved with are:"
     row $ do
-        (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
+        (H.div ! class_ "card col-md-4 col-12 text-center") . extLink "mailto:website@jolharg.com" . (H.div ! class_ "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"
             h4 ! class_ "card-title" $ "You"
-            p ! class_ "card-text" $ "Make an enquiry for a website or project:"
-            extLink "mailto:website@jolharg.com" ! class_ "btn btn-primary" $ "Enquire")
+            p ! class_ "card-text" $ "Make an enquiry for a website or project.")
         card "img/timezap.png" "TimeZap" "Set-and-forget accurate time tracking" "https://timezap.ai"
         card "img/eppiq.png" "Eppiq Marketing" "Digital marketing agency" "https://eppiq.co.uk"
         card "img/penta.png" "Penta Consulting" "Web Agency" "https://www.pentaconsulting.com/"

@@ -78,6 +78,11 @@ input:checked ~ .page {
     display: inline-block;
 }
 
+.card > a {
+    color: black;
+    text-decoration: none;
+}
+
 .card-body {
     margin: 0 15px;
     background-color: white;

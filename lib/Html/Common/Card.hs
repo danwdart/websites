@@ -39,18 +39,16 @@ languageImage ∷ Language → AttributeValue
 languageImage l = fromMaybe genericImage (lookup l imagesFs)
 
 card ∷ AttributeValue → Html → Html → AttributeValue → Html
-card cardImage cardTitle cardText cardLink =  (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
+card cardImage cardTitle cardText cardLink = (H.div ! class_ "card col-md-4 col-12 text-center") . extLink cardLink . (H.div ! class_ "card-body") $ (do
     img ! class_ "card-img-top" ! src cardImage
     h4 ! class_ "card-title" $ cardTitle
-    p ! class_ "card-text" $ cardText
-    extLink cardLink ! class_ "btn btn-secondary" $ "Visit")
+    p ! class_ "card-text" $ cardText)
 
 cardDefunct ∷ Html → Html → Html
 cardDefunct cardTitle cardText = (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
     img ! class_ "card-img-top" ! src "img/sample.png"
     h4 ! class_ "card-title" $ cardTitle
-    p ! class_ "card-text" $ cardText
-    strong "Website defunct")
+    p ! class_ "card-text" $ cardText)
 
 licenceLink ∷ Licence → Html
 licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> fromString avOrHtmlSpdx <> ".html") ! target "_blank" $ fromString avOrHtmlSpdx
