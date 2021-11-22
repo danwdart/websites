@@ -35,20 +35,17 @@ let
       gen-hie > hie.yaml
       for i in $(find -type f | grep -v dist-newstyle); do krank $i; done
     '';
-    buildInputs = with nixpkgs; with haskellPackages; [
+    buildInputs = with myHaskellPackages; with nixpkgs; with haskellPackages; [
       apply-refact
       cabal-install
-      chromedriver
-      # firefox # 
-      geckodriver
       ghcid
+      ghcide
+      haskell-language-server
       hlint
       implicit-hie
       krank
-      selenium-server-standalone
-      stan
+      haskellPackages.stan # issue with 9.0.1
       stylish-haskell
-      # ungoogled-chromium # 
       weeder
     ];
     withHoogle = false;
