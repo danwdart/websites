@@ -4,17 +4,9 @@
 module Html.DanDart.Header where
 
 import           Control.Monad.Trans.Reader
-import           Data.Env
-import           Data.Site.DanDart
-import           Html.Common.Audio
-import           Html.Common.Contact
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
+import           Data.Env.Types
 import           Html.Common.Header
-import           Html.Common.Link
 import           Html.Common.Page
-import           Html.Common.Shortcuts
-import           Html.Common.Social
 import           Html.DanDart.Page.About
 import           Html.DanDart.Page.Characters
 import           Html.DanDart.Page.Contact
@@ -26,7 +18,6 @@ import           Html.DanDart.Page.Music
 import           Html.DanDart.Page.Origami
 import           Html.DanDart.Social
 import           Text.Blaze.Html5             as H hiding (main)
-import           Text.Blaze.Html5.Attributes  as A
 
 linkHamRadio ∷ WebsiteM Html
 linkHamRadio = do

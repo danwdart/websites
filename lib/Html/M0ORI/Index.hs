@@ -3,14 +3,10 @@
 
 module Html.M0ORI.Index where
 
-import           Data.Env
+import           Data.Env.Types
 import           Data.Site.M0ORI
-import           Html.Common.Contact
 import           Html.Common.Error.NotFound
 import           Html.Common.Head
-import           Html.Common.Header
-import           Html.Common.Link
-import           Html.Common.Page
 import           Html.M0ORI.Header
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A

@@ -25,6 +25,7 @@ let
         url = "https://github.com/danwdart/hs-webdriver.git";
         rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
       }) {};
+      http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
     };
   };
   shell = myHaskellPackages.shellFor {
@@ -34,17 +35,24 @@ let
     shellHook = ''
       gen-hie > hie.yaml
       for i in $(find -type f | grep -v dist-newstyle); do krank $i; done
+      cabal update
     '';
     buildInputs = with myHaskellPackages; with nixpkgs; with haskellPackages; [
       apply-refact
       cabal-install
+      doctest
+      ghci-dap
       ghcid
       ghcide
+      haskell-dap
+      haskell-debug-adapter
       haskell-language-server
+      hasktags
       hlint
       implicit-hie
       krank
       haskellPackages.stan # issue with 9.0.1
+      # selenium-server
       stylish-haskell
       weeder
     ];

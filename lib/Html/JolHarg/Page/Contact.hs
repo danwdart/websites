@@ -3,19 +3,10 @@
 
 module Html.JolHarg.Page.Contact where
 
-import           Control.Monad.Reader
-import           Data.Env
-import           Data.Site.JolHarg
-import           Html.Common.Bootstrap
-import           Html.Common.Card
+import           Data.Env.Types
 import           Html.Common.Contact
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Html.Common.Header
-import           Html.Common.Link
 import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
 
 pageContact ∷ WebsiteM Html
 pageContact = do

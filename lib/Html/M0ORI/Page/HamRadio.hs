@@ -3,12 +3,7 @@
 
 module Html.M0ORI.Page.HamRadio where
 
-import           Data.Env
-import           Data.Site.M0ORI
-import           Html.Common.Contact
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Html.Common.Header
+import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)

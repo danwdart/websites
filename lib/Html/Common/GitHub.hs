@@ -30,31 +30,31 @@ data Language = LangASM
     | LangShell
     | LangTcl
     | LangTS
-    | LangVB deriving (Eq, Generic, Show)
+    | LangVB
+    deriving (Eq, Generic, Show)
 
 instance FromJSON Language where
-    parseJSON (String a) = pure $ case a of
-        "Assembly"     -> LangASM
-        "BlitzBasic"   -> LangBlitzBasic
-        "C"            -> LangC
-        "CoffeeScript" -> LangCoffee
-        "C++"          -> LangCPP
-        "Dockerfile"   -> LangDocker
-        "JavaScript"   -> LangJS
-        "Vue"          -> LangJS
-        "Haskell"      -> LangHS
-        "HTML"         -> LangHTML
-        "Nix"          -> LangNix
-        "Python"       -> LangPython
-        "PHP"          -> LangPHP
-        "Makefile"     -> LangShell
-        "Shell"        -> LangShell
-        "Vim script"   -> LangShell
-        "Tcl"          -> LangTcl
-        "TypeScript"   -> LangTS
-        "VBA"          -> LangVB
-        "Visual Basic" -> LangVB
-        _              -> error $ "Unknown language: " <> T.unpack a
+    parseJSON (String "Assembly") = pure LangASM
+    parseJSON (String "BlitzBasic") = pure LangBlitzBasic
+    parseJSON (String "C") = pure LangC
+    parseJSON (String "CoffeeScript") = pure LangCoffee
+    parseJSON (String "C++") = pure LangCPP
+    parseJSON (String "Dockerfile") = pure LangDocker
+    parseJSON (String "JavaScript") = pure LangJS
+    parseJSON (String "Vue") = pure LangJS
+    parseJSON (String "Haskell") = pure LangHS
+    parseJSON (String "HTML") = pure LangHTML
+    parseJSON (String "Nix") = pure LangNix
+    parseJSON (String "Python") = pure LangPython
+    parseJSON (String "PHP") = pure LangPHP
+    parseJSON (String "Makefile") = pure LangShell
+    parseJSON (String "Shell") = pure LangShell
+    parseJSON (String "Vim script") = pure LangShell
+    parseJSON (String "Tcl") = pure LangTcl
+    parseJSON (String "TypeScript") = pure LangTS
+    parseJSON (String "VBA") = pure LangVB
+    parseJSON (String "Visual Basic") = pure LangVB
+    parseJSON (String a) = fail $ "Unknown language: " <> T.unpack a
     parseJSON Null = pure LangGeneric
     parseJSON _ = pure LangGeneric
 

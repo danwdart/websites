@@ -3,17 +3,11 @@
 
 module Html.Blog.Page.Blog where
 
-import           Data.Env
-import           Data.Site.Blog
-import           Data.String
+import           Data.Env.Types
 import           Html.Common.Bootstrap
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Html.Common.Header
 import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
-import           Text.Pandoc.Highlighting
 
 pageBlog ∷ Html → Html → WebsiteM Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do

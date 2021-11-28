@@ -5,7 +5,7 @@ module Html.Common.Head where
 
 import           Control.Monad               (when)
 import           Control.Monad.Trans.Reader
-import           Data.Env
+import           Data.Env.Types
 import           Data.String
 import           Html.Common.CSS
 import           Html.Common.Utils

@@ -7,7 +7,7 @@ module Build.JolHarg where
 import           Configuration.Dotenv
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
-import           Data.Env
+import           Data.Env.Types
 import           Html.Common.GitHub
 import           Html.JolHarg.Index
 import           Make
@@ -26,4 +26,4 @@ build = do
   make slug' page' page404
 
 serve ∷ WebsiteIO ()
-serve = asks slug >>= makeServe build
+serve = asks slug >>= makeServe Build.JolHarg.build

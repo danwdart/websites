@@ -5,7 +5,7 @@ module Build.Blog where
 
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
-import           Data.Env
+import           Data.Env.Types
 import qualified Data.Text                  as T
 import qualified Data.Text.IO               as TIO
 import           Html.Blog.Index
@@ -24,4 +24,4 @@ build = do
   make slug' (page (makeLinks sortedPosts) renderedPosts) page404
 
 serve ∷ WebsiteIO ()
-serve = asks slug >>= makeServe build
+serve = asks slug >>= makeServe Build.Blog.build
