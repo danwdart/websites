@@ -2,12 +2,9 @@
 dist
 dist-newstyle
 .ghc.*
+google.json
 *.hi
 *.o
-.env
-report
 result*
 .direnv
-.hie
-stan.html
 hie.yaml
