@@ -12,6 +12,7 @@ import qualified Build.DanDart as D
 import qualified Build.JolHarg as J
 import qualified Build.M0ORI as M
 import qualified Build.MadHacker as MH
+import Control.Monad.IO.Class
 import           Data.Env.Types
 
 developmentUrls, productionUrls :: Urls
@@ -43,8 +44,12 @@ development = [
             siteType = Blog "posts",
             livereload = False,
             endpoint = "http://localhost:3000/dev",
-            build = B.build,
-            serve = B.serve
+            build = do
+                liftIO . putStrLn $ "B.build dev"
+                B.build,
+            serve = do
+                liftIO . putStrLn $ "B.serve dev"
+                B.serve
         }
     ),
     (
@@ -57,8 +62,12 @@ development = [
             siteType = Normal,
             livereload = False,
             endpoint = "http://localhost:3000/dev",
-            build = D.build,
-            serve = D.serve
+            build = do
+                liftIO . putStrLn $ "D.build dev"
+                D.build,
+            serve = do
+                liftIO . putStrLn $ "D.serve dev"
+                D.serve
         }
     ),
     (
@@ -71,8 +80,12 @@ development = [
             siteType = Normal,
             livereload = False,
             endpoint = "http://localhost:3000/dev",
-            build = J.build,
-            serve = J.serve
+            build = do
+                liftIO . putStrLn $ "J.build dev"
+                J.build,
+            serve = do
+                liftIO . putStrLn $ "J.serve dev"
+                J.serve
         }
     ),
     (
@@ -85,8 +98,12 @@ development = [
             siteType = Normal,
             livereload = False,
             endpoint = "http://localhost:3000/dev",
-            build = M.build,
-            serve = M.serve
+            build = do
+                liftIO . putStrLn $ "M.build dev"
+                M.build,
+            serve = do
+                liftIO . putStrLn $ "M.serve dev"
+                M.serve
         }
     ),
     (
@@ -99,8 +116,12 @@ development = [
             siteType = Blog "reviews",
             livereload = False,
             endpoint = "http://localhost:3000/dev",
-            build = MH.build,
-            serve = MH.serve
+            build = do
+                liftIO . putStrLn $ "MH.build dev"
+                MH.build,
+            serve = do
+                liftIO . putStrLn $ "MH.serve dev"
+                MH.serve
         }
     )
     ]
@@ -116,8 +137,12 @@ production = [
             siteType = Blog "posts",
             livereload = False,
             endpoint = "https://api.jolharg.com",
-            build = B.build,
-            serve = B.serve
+            build = do
+                liftIO . putStrLn $ "B.build prod"
+                B.build,
+            serve = do
+                liftIO . putStrLn $ "B.serve prod"
+                B.serve
         }
     ),
     (
@@ -130,8 +155,12 @@ production = [
             siteType = Normal,
             livereload = False,
             endpoint = "https://api.jolharg,com",
-            build = D.build,
-            serve = D.serve
+            build = do
+                liftIO . putStrLn $ "D.build prod"
+                D.build,
+            serve = do
+                liftIO . putStrLn $ "D.serve prod"
+                D.serve
         }
     ),
     (
@@ -144,8 +173,12 @@ production = [
             siteType = Normal,
             livereload = False,
             endpoint = "https://api.jolharg,com",
-            build = J.build,
-            serve = J.serve
+            build = do
+                liftIO . putStrLn $ "J.build prod"
+                J.build,
+            serve = do
+                liftIO . putStrLn $ "J.serve prod"
+                J.serve
         }
     ),
     (
@@ -158,8 +191,12 @@ production = [
             siteType = Normal,
             livereload = False,
             endpoint = "https://api.jolharg,com",
-            build = M.build,
-            serve = M.serve
+            build = do
+                liftIO . putStrLn $ "M.build prod"
+                M.build,
+            serve = do
+                liftIO . putStrLn $ "M.serve prod"
+                M.serve
         }
     ),
     (
@@ -172,8 +209,12 @@ production = [
             siteType = Blog "reviews",
             livereload = False,
             endpoint = "https://api.jolharg,com",
-            build = MH.build,
-            serve = MH.serve
+            build = do
+                liftIO . putStrLn $ "MH.build prod"
+                MH.build,
+            serve = do
+                liftIO . putStrLn $ "MH.serve prod"
+                MH.serve
         }
     )
     ]
