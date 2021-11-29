@@ -28,7 +28,7 @@ makeLinks = foldMap ((
                 p $ foldMap (
                     \byMonth -> details! customAttribute "open" "" ! class_ "ps-2" $ do
                         -- "%B" is Month
-                        H.summary . fromString . formatTime defaultTimeLocale "%B" . date . metadata . Data.List.head $ byMonth
+                        H.summary . fromString . formatTime defaultTimeLocale "%B" . date . metadata . L.head $ byMonth
                         p $ foldMap (\link' -> do
                             p ! class_ "ps-2" $ renderLink link'
                             br
