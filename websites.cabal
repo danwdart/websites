@@ -157,3 +157,14 @@ test-suite websites-test
     , vector
     , webdriver
     , websites
+
+benchmark websites-bench
+  import: shared-properties
+  hs-source-dirs:      bench
+  type:                exitcode-stdio-1.0
+  main-is:             Main.hs
+  other-modules:       
+  build-depends:
+      base >= 4.15 && < 5
+    , criterion
+    , websites
