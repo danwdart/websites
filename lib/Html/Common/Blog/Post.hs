@@ -4,13 +4,12 @@
 module Html.Common.Blog.Post where
 
 import           Data.Either
-import           Data.Env
+import           Data.Env.Types
 import           Data.Frontmatter
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
-import qualified Data.Text.IO                 as TIO
 import           Html.Common.Blog.Comment
 import           Html.Common.Blog.Types       as BT
 import           System.FilePath
@@ -36,7 +35,8 @@ parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
 
 makeBlogPost ∷ FilePath → FilePath → IO BlogPost
 makeBlogPost postsDir filename = do
-    fileText <- TIO.readFile filename
+    fileString <- readFile filename
+    let fileText = T.pack fileString
     let (ParseResult metadata' html') = parseFile fileText
     let postId' = dropExtension . takeFileName . Prelude.head . aliases $ metadata'
     comments' <- getComments postsDir postId'

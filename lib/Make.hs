@@ -6,11 +6,9 @@ module Make where
 
 import           Control.Monad
 import           Control.Monad.IO.Class
-import           Control.Monad.Trans.Reader
 import qualified Data.ByteString.Lazy.Char8     as BSL
-import           Data.Env
+import           Data.Env.Types
 import           Data.List                      (sortOn)
-import           Data.Map                       ((!))
 import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Data.Ord                       (Down (Down))
 import           Data.Text                      (Text)
@@ -43,9 +41,9 @@ make name page page404 = do
         putStrLn $ name <> " compiled."
 
 makeServe ∷ WebsiteIO () → Text → WebsiteIO ()
-makeServe build slug' = do
+makeServe build' slug' = do
     liftIO $ putStrLn "Building..."
-    build
+    build'
     liftIO $ do
         port <- fromMaybe "80" <$> lookupEnv "PORT"
         putStrLn $ "Serving on http://localhost:" <> T.pack port
@@ -53,8 +51,8 @@ makeServe build slug' = do
 
 buildMD ∷ FilePath → Text → (BlogMetadata → Html) → WebsiteIO ([BlogPost], Html)
 buildMD postsDir postType renderSuffix = do
-  files <- liftIO $ getDirectoryContents postsDir
-  let fileNames = (postsDir </>) <$> files -- if used in same line, use Compose
+  files' <- liftIO $ getDirectoryContents postsDir
+  let fileNames = (postsDir </>) <$> files' -- if used in same line, use Compose
   validFiles <- liftIO $ filterM doesFileExist fileNames
   posts <- liftIO . sequence $ makeBlogPost postsDir <$> validFiles
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts

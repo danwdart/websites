@@ -7,57 +7,12 @@
 
 module Data.Env where
 
-import           Control.Applicative        (liftA2)
-import           Control.Monad.Trans.Reader
-import           Data.Functor.Identity
-import           Data.Map                   (Map)
-import           Data.String
-import           Data.Text                  (Text)
-
-newtype PostsLocation = PostsLocation {
-    getPostsLocation :: Text
-} deriving IsString via Text
-
-data SiteType = Normal | Blog PostsLocation
-
-data Urls = Urls {
-    urlDanDart :: Text,
-    urlHamRadio :: Text,
-    urlBlog :: Text,
-    urlJolHarg :: Text,
-    urlMadHacker :: Text
-}
-
-data Website = Website {
-    slug         :: Text,
-    title        :: Text,
-    -- keywords :: Set Text,
-    url          :: Text,
-    urls         :: Urls,
-    siteType     :: SiteType,
-    livereload   :: Bool,
-    endpoint     :: Text
-}
-
-type Env = Map Text Website
-
-type WebsiteM = Reader Website
-type WebsiteT = ReaderT Website
-type WebsiteIO = WebsiteT IO
-
-instance (Semigroup a) => Semigroup (WebsiteM a) where
-    (<>) = liftA2 (<>)
-
-instance (Monoid a) => Monoid (WebsiteM a) where
-    mempty = pure mempty
-    mappend = liftA2 mappend
-
-websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
-websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
-
-type WebsitesM = Reader Env
-type WebsitesT = ReaderT Env
-type WebsitesIO = WebsitesT IO
+import qualified Build.Blog as B
+import qualified Build.DanDart as D
+import qualified Build.JolHarg as J
+import qualified Build.M0ORI as M
+import qualified Build.MadHacker as MH
+import           Data.Env.Types
 
 developmentUrls, productionUrls :: Urls
 developmentUrls = Urls {
@@ -87,7 +42,9 @@ development = [
             urls = developmentUrls,
             siteType = Blog "posts",
             livereload = False,
-            endpoint = "http://localhost:3000/dev"
+            endpoint = "http://localhost:3000/dev",
+            build = B.build,
+            serve = B.serve
         }
     ),
     (
@@ -99,7 +56,9 @@ development = [
             urls = developmentUrls,
             siteType = Normal,
             livereload = False,
-            endpoint = "http://localhost:3000/dev"
+            endpoint = "http://localhost:3000/dev",
+            build = D.build,
+            serve = D.serve
         }
     ),
     (
@@ -111,7 +70,9 @@ development = [
             urls = developmentUrls,
             siteType = Normal,
             livereload = False,
-            endpoint = "http://localhost:3000/dev"
+            endpoint = "http://localhost:3000/dev",
+            build = J.build,
+            serve = J.serve
         }
     ),
     (
@@ -123,7 +84,9 @@ development = [
             urls = developmentUrls,
             siteType = Normal,
             livereload = False,
-            endpoint = "http://localhost:3000/dev"
+            endpoint = "http://localhost:3000/dev",
+            build = M.build,
+            serve = M.serve
         }
     ),
     (
@@ -135,7 +98,9 @@ development = [
             urls = developmentUrls,
             siteType = Blog "reviews",
             livereload = False,
-            endpoint = "http://localhost:3000/dev"
+            endpoint = "http://localhost:3000/dev",
+            build = MH.build,
+            serve = MH.serve
         }
     )
     ]
@@ -150,7 +115,9 @@ production = [
             urls = productionUrls,
             siteType = Blog "posts",
             livereload = False,
-            endpoint = "https://api.jolharg.com"
+            endpoint = "https://api.jolharg.com",
+            build = B.build,
+            serve = B.serve
         }
     ),
     (
@@ -162,7 +129,9 @@ production = [
             urls = productionUrls,
             siteType = Normal,
             livereload = False,
-            endpoint = "https://api.jolharg,com"
+            endpoint = "https://api.jolharg,com",
+            build = D.build,
+            serve = D.serve
         }
     ),
     (
@@ -174,7 +143,9 @@ production = [
             urls = productionUrls,
             siteType = Normal,
             livereload = False,
-            endpoint = "https://api.jolharg,com"
+            endpoint = "https://api.jolharg,com",
+            build = J.build,
+            serve = J.serve
         }
     ),
     (
@@ -186,7 +157,9 @@ production = [
             urls = productionUrls,
             siteType = Normal,
             livereload = False,
-            endpoint = "https://api.jolharg,com"
+            endpoint = "https://api.jolharg,com",
+            build = M.build,
+            serve = M.serve
         }
     ),
     (
@@ -198,7 +171,9 @@ production = [
             urls = productionUrls,
             siteType = Blog "reviews",
             livereload = False,
-            endpoint = "https://api.jolharg,com"
+            endpoint = "https://api.jolharg,com",
+            build = MH.build,
+            serve = MH.serve
         }
     )
     ]

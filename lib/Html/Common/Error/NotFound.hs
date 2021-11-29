@@ -3,7 +3,7 @@
 
 module Html.Common.Error.NotFound where
 
-import           Data.Env
+import           Data.Env.Types
 import           Html.Common.Bootstrap
 import           Html.Common.Head
 import           Text.Blaze.Html5            as H

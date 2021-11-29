@@ -10,17 +10,14 @@ import           Control.Exception          (SomeException (SomeException), try)
 import           Control.Monad              (unless, when)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
-import           Data.Env
+import           Data.Env                   as Env
+import           Data.Env.Types             as Env
 import           Data.Functor.Compose       (Compose (Compose, getCompose))
 import           Data.List                  (nub)
-import           Data.Map                   ((!))
+import           Data.Map                   (Map)
+import qualified Data.Map                   as M
 import           Data.Maybe                 (catMaybes)
 import           Data.Text                  (Text, unpack)
-import qualified Build.Blog                 as B
-import qualified Build.DanDart              as D
-import qualified Build.JolHarg              as J
-import qualified Build.M0ORI                as M
-import qualified Build.MadHacker            as MH
 import           Network.HTTP.Client        (Manager, Response (responseStatus),
                                              httpNoBody, newManager,
                                              parseRequest)
@@ -90,14 +87,11 @@ configs = [
     ("Chrome", chromeConfig)
     ]
 
-sites ∷ [(Text, IO ())]
-sites = [
-    ("blog", runReaderT B.serve (development ! "blog")),
-    ("dandart", runReaderT D.serve (development ! "dandart")),
-    ("jolharg", runReaderT J.serve (development ! "jolharg")),
-    ("madhacker", runReaderT MH.serve (development ! "madhacker")),
-    ("m0ori", runReaderT M.serve (development ! "m0ori"))
-    ]
+sites ∷ Map Text (IO ())
+sites = fmap (
+        \website -> 
+            runReaderT ((Env.serve :: Website -> WebsiteIO ()) (website :: Website) :: WebsiteIO ()) website :: IO ()
+    ) development
 
 -- in terms of safeTry / try?
 ioDef ∷ a → IO a → IO a
@@ -136,9 +130,9 @@ testForResolution winSize@(width, height) = do
         (_, navHeight) <- elemSize navbar
         pure navHeight
 
-    (liftIO . hspec) . describe (showTuple winSize) $
-        it "nav height is equal to 39" $
-            navHeight `shouldBe` 39
+    ((liftIO . hspec) . describe (showTuple winSize))
+        . it "nav height is equal to 39"
+            $ (navHeight `shouldBe` 39)
 
     links <- findElems $ ByCSS ".navbar-nav label a"
     mapM_ testForLink links
@@ -217,11 +211,11 @@ testForConfig myPort siteName (configName, config) = describe (unpack siteName) 
             mapM_ testForResolution resolutions
 
 testForSite ∷ (Text, IO ()) → Spec
-testForSite (siteName, serve) = describe (unpack siteName) $ do
+testForSite (siteName, serve') = describe (unpack siteName) $ do
     myPort <- runIO (randomRIO (49152, 65535) :: IO Int)
     thread <- runIO $ do
         setEnv "PORT" (show myPort)
-        thread <- forkIO serve
+        thread <- forkIO serve'
         threadDelay 5000000 -- Let it start
         pure thread
 
@@ -233,4 +227,4 @@ spec ∷ Spec
 spec = runIO . withCreateProcess (shell "selenium-server -role hub") $ \_ _ _ _ ->
     withCreateProcess (shell "selenium-server -role node") $ \_ _ _ _ -> do
         threadDelay 5000000
-        hspec $ mapM_ testForSite sites
+        hspec $ mapM_ testForSite (M.toAscList sites)

@@ -155,6 +155,7 @@ let
       cabal-install
       ghcid
       haskell-language-server
+      hasktags
       hlint
       implicit-hie
       krank

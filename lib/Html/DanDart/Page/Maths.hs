@@ -3,19 +3,11 @@
 
 module Html.DanDart.Page.Maths where
 
-import           Data.Env
-import           Data.Site.DanDart
-import           Html.Common.Audio
-import           Html.Common.Contact
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Html.Common.Header
+import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
 import           Html.Common.Shortcuts
-import           Html.Common.Social
 import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
 
 pageMaths ∷ WebsiteM Html
 pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do

@@ -3,7 +3,7 @@
 
 module Html.Common.Contact where
 
-import           Data.Env
+import           Data.Env.Types
 import           Text.Blaze.Html5            as H
 import           Text.Blaze.Html5.Attributes as A
 

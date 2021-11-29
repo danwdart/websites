@@ -3,12 +3,10 @@
 
 module Html.MadHacker.Index where
 
-import           Data.Env
+import           Data.Env.Types
 import           Data.Site.MadHacker
-import           Html.Common.Bootstrap
 import           Html.Common.Error.NotFound
 import           Html.Common.Head
-import           Html.Common.Page
 import           Html.MadHacker.Header
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A

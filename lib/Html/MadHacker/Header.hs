@@ -4,11 +4,7 @@
 module Html.MadHacker.Header where
 
 import           Control.Monad.Trans.Reader
-import           Data.Env
-import           Data.Site.MadHacker
-import           Html.Common.Bootstrap
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
+import           Data.Env.Types
 import           Html.Common.Page
 import           Html.MadHacker.Page.Reviews
 import           Text.Blaze.Html5            as H hiding (main)

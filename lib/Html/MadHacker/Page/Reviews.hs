@@ -3,11 +3,8 @@
 
 module Html.MadHacker.Page.Reviews where
 
-import           Data.Env
-import           Data.Site.MadHacker
+import           Data.Env.Types
 import           Html.Common.Bootstrap
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
 import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A

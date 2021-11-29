@@ -3,7 +3,7 @@
 
 module Html.Common.Page where
 
-import           Data.Env
+import           Data.Env.Types
 import           Data.String                 (IsString (fromString))
 import           Html.Common.Bootstrap
 import           Html.Common.Link
