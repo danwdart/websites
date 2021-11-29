@@ -35,6 +35,7 @@ let
     shellHook = ''
       gen-hie > hie.yaml
       for i in $(find -type f | grep -v dist-newstyle); do krank $i; done
+      doctest src lib
       cabal update
     '';
     buildInputs = with myHaskellPackages; with nixpkgs; with haskellPackages; [
