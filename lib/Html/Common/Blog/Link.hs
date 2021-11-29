@@ -3,8 +3,8 @@
 
 module Html.Common.Blog.Link where
 
-import           Data.List
-import           Data.List.Extra
+import           Data.List as L
+import           Data.List.Extra as LE
 import           Data.String
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T
@@ -24,7 +24,7 @@ makeLinks ∷ [BlogPost] → Html
 makeLinks = foldMap ((
         \byYear -> do
             details ! customAttribute "open" "" ! class_ "ps-2" $ do
-                H.summary . fromString . show . year . date . metadata . Data.List.head . Data.List.head $ byYear
+                H.summary . fromString . show . year . date . metadata . L.head . L.head $ byYear
                 p $ foldMap (
                     \byMonth -> details! customAttribute "open" "" ! class_ "ps-2" $ do
                         -- "%B" is Month
