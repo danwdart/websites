@@ -13,14 +13,10 @@ import           Html.JolHarg.Index
 import           Make
 import           Network.HTTP.Req
 import           Prelude
-import qualified Data.Text as T
 
 build ∷ WebsiteIO ()
 build = do
   slug' <- asks slug
-
-  liftIO . putStrLn $ "Building " <> T.unpack slug'
-
   _ <- liftIO $ loadFile defaultConfig
   reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
   reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
