@@ -1,1 +1,1 @@
--l -aTMain.main --restart=src --restart=lib --reload=posts --reload=revi--command="cabal repl websites:serve"
+-l -aTMain.main --restart=src --restart=lib --reload=posts --reload=reviews --command="cabal repl websites:exe:serve"
