@@ -46,3 +46,13 @@ pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
         li $ extLink (oeis <> "275167") "A275167: Pisano periods of A275124."
         li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
         li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477."
+    p $ do
+        "I also discovered "
+        extLink (oeis <> "332049") "A332049: a(n) = (1/2) * Sum_{d|n, d > 1} d * phi(d)"
+        " seemingly first "
+        extLink "https://github.com/danwdart/projects/commit/8691b3ebcd4560f1eeae9cefccc017becce29256#diff-d849c35e9758cd82b45e19d5c4d74ee08e32d8a0092476e3189bebeca7156ac5" "in 2019"
+        ", but wasn't the first to submit it."
+    p $ do
+        "I have "
+        extLink "https://github.com/danwdart/projects/tree/master/haskell/maths/src/oeis" "a repository"
+        " containing code that generates some more sequences in Haskell."
