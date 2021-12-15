@@ -1,9 +1,11 @@
 { 
   nixpkgs ? import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz") {},
-  compiler ? "ghc901"
+  compiler ? "ghc921"
 } :
 let
+  crossPkgs = nixpkgs.pkgsCross.aarch64-multiplatform;
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
+  lib = nixpkgs.pkgs.haskell.lib;
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = self.callCabal2nix "websites" (gitignore ./.) {};
@@ -20,12 +22,11 @@ let
       # not in nix
       semialign = self.callHackage "semialign" "1.2" {};
       # Depends on cabal-un-published http-client versions.
-      req = nixpkgs.pkgs.haskell.lib.doJailbreak (self.callHackage "req" "3.9.1" {});
+      req = lib.doJailbreak (self.callHackage "req" "3.9.2" {});
       webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
         url = "https://github.com/danwdart/hs-webdriver.git";
         rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
       }) {};
-      http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
     };
   };
   shell = myHaskellPackages.shellFor {
@@ -52,14 +53,14 @@ let
       hlint
       implicit-hie
       krank
-      haskellPackages.stan # issue with 9.0.1
-      # selenium-server
+      stan
+      nixpkgs.selenium-server-standalone # http-conduit-downloader is marked as broken
       stylish-haskell
       weeder
     ];
     withHoogle = false;
   };
-  exe = nixpkgs.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
+  exe = lib.justStaticExecutables (myHaskellPackages.websites);
 in
 {
   inherit shell;
