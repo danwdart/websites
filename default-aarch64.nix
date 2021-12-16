@@ -22,7 +22,7 @@ let
       # not in nix
       semialign = self.callHackage "semialign" "1.2" {};
       # Depends on cabal-un-published http-client versions.
-      req = lib.doJailbreak (self.callHackage "req" "3.9.1" {});
+      req = lib.doJailbreak (self.callHackage "req" "3.9.2" {});
     };
   };
   shell = myHaskellPackages.shellFor {

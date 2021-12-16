@@ -20,7 +20,7 @@ let
       # not in nix
       semialign = self.callHackage "semialign" "1.2" {};
       # Depends on cabal-un-published http-client versions.
-      req = nixpkgs.pkgs.haskell.lib.doJailbreak (self.callHackage "req" "3.9.1" {});
+      req = nixpkgs.pkgs.haskell.lib.doJailbreak (self.callHackage "req" "3.9.2" {});
       webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
         url = "https://github.com/danwdart/hs-webdriver.git";
         rev = "a37d3a28d88374416b38ed37edbc304e44b66268";

@@ -30,7 +30,7 @@ let
         }) "--subpath semialign" {}
       );
       # Depends on cabal-un-published http-client versions.
-      req = lib.doJailbreak (self.callHackage "req" "3.9.1" {});
+      req = lib.doJailbreak (self.callHackage "req" "3.9.2" {});
       # Changes needed for 9.2.1
       JuicyPixels = lib.doJailbreak super.JuicyPixels;
       blaze-markup = lib.doJailbreak super.blaze-markup;
