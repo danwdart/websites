@@ -50,6 +50,7 @@ let
       citeproc = self.callHackage "citeproc" "0.5" {};
       # hslua-module-version problem with >= 2.15
       pandoc = self.callHackage "pandoc" "2.14.2" {};
+      # constraints-extras
     };
   };
   shell = myHaskellPackages.shellFor {
