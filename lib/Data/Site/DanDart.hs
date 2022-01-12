@@ -64,6 +64,11 @@ favCharacters = [
                 "I am curious, confused and if he was human he'd probably be autistic"
             ),
             (
+                "Q",
+                wikia "memory-alpha" "Q",
+                "I love what a cheeky devil he is, and his ability to make people think different of themselves is fascinating"
+            ),
+            (
                 "EMH",
                 wikia "memory-alpha" "Emergency_Medical_Holographic_program",
                 "he's socially inept, evolves and gets into hilariously unfortunate situations a lot. Also, " <> babby "Seven" <> " is waifu."
