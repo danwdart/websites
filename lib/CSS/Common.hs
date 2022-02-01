@@ -1,25 +1,26 @@
-* {
-    font-family: 'Caudex', serif;
-} 
+{-# LANGUAGE OverloadedStrings #-}
 
-html {
-    background: repeating-linear-gradient(-45deg, #ddd, #eee 5px, #eee 5px);
-}
+module CSS.Common where
 
-body {
-    background-color: #eee;
-}
+import Clay
 
-p, ul {
-    margin: 0;
-}
-
-a,
-a:hover,
-a:active,
-a:visited {
-    color: purple;
-}
+common :: Css
+common = do
+    star ? fontFamily ["Caudex"] ["serif"]
+    html ? backgroundImage (
+        repeatingLinearGradient
+            (angular (deg (-45)))
+            [
+                (rgb 0xd 0xd 0xd, 0),
+                (rgb 0xe 0xe 0xe, px 5),
+                (rgb 0xe 0xe 0xe, px 5)
+                ]
+        ) -- (-45deg, #ddd, #eee 5px, #eee 5px);
+    body ? backgroundColor (rgb 0xe 0xe 0xe)
+    (p <> ul) ? margin nil nil nil nil
+    (a <> a # (hover <> active <> visited)) ? color "purple"
+    
+{-
 
 
 .bg-primary {
@@ -156,3 +157,5 @@ input:checked ~ .page {
         margin-top: 80px;
     }
 }
+
+-}

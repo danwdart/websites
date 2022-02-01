@@ -1,3 +1,5 @@
+{-
+
 .page {
     margin-top: 10px;
 }
@@ -7,3 +9,8 @@
         margin-top: 10px;
     }
 }
+
+-}
+
+module CSS.Blog where
+
