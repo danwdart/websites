@@ -92,6 +92,7 @@ library
     , Html.DanDart.Page.Health
     , Html.DanDart.Page.Intro
     , Html.DanDart.Page.Maths
+    , Html.DanDart.Page.Morals
     , Html.DanDart.Page.Music
     , Html.DanDart.Page.Origami
     , Html.DanDart.Social

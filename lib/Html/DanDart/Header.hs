@@ -14,6 +14,7 @@ import           Html.DanDart.Page.Favourites
 import           Html.DanDart.Page.Health
 import           Html.DanDart.Page.Intro
 import           Html.DanDart.Page.Maths
+import           Html.DanDart.Page.Morals
 import           Html.DanDart.Page.Music
 import           Html.DanDart.Page.Origami
 import           Html.DanDart.Social
@@ -49,6 +50,7 @@ htmlHeader = do
             pageHealth <>
             pageMusic <>
             pageMaths <>
+            pageMorals <>
             pageOrigami <>
             pageAbout <>
             linkSoftware <>

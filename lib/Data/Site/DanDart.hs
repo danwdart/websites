@@ -355,8 +355,6 @@ favCharacters = [
     )
     ]
 
-
-
 musicList ∷ [(Html, [Html])]
 musicList = [
     (
