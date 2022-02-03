@@ -44,15 +44,15 @@ let
       doctest
       ghci-dap
       ghcid
-      ghcide
+      # ghcide # issue with 9.0.2
       haskell-dap
       haskell-debug-adapter
-      haskell-language-server
+      # haskell-language-server # issue with 9.0.2
       hasktags
       hlint
       implicit-hie
       krank
-      haskellPackages.stan # issue with 9.0.1
+      stan
       # selenium-server
       stylish-haskell
       weeder
