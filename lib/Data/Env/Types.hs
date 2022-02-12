@@ -8,7 +8,7 @@ module Data.Env.Types where
 import           Control.Applicative        (liftA2)
 import           Control.Monad.Trans.Reader
 import           Data.Functor.Identity
-import           Data.Map                   (Map)
+import           Data.Set                   (Set)
 import           Data.String
 import           Data.Text                  (Text)
 
@@ -34,12 +34,17 @@ data Website = Website {
     urls         :: Urls,
     siteType     :: SiteType,
     livereload   :: Bool,
-    endpoint     :: Text,
     build        :: WebsiteIO (),
     serve        :: WebsiteIO ()
 }
 
-type Env = Map Text Website
+instance Eq Website where
+    Website {slug = slug1} == Website {slug = slug2} = slug1 == slug2
+
+instance Ord Website where
+    compare Website {slug = slug1} Website {slug = slug2} = compare slug1 slug2
+
+type Env = Set Website
 
 type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website
