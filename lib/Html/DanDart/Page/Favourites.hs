@@ -53,15 +53,15 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
         li $ do
             extLink (imdb <> "0056751") "Doctor Who (1963-)"
             " (my favourite Doctor is Tom Baker)"
+    p $ strong "Pokémon"
+    ul $ mapM_ (\name' -> do
+        li . extLink (bulbapedia . fromString $ name') $ fromString name'
+        ) pokémonList
     p $ strong "Music"
     ul $ mapM_ (\(title', list') -> do
         title'
         ul $ mapM_ li list'
         ) musicList
-    p $ strong "Pokémon"
-    ul $ mapM_ (\name' -> do
-        li . extLink (bulbapedia . fromString $ name') $ fromString name'
-        ) pokémonList
     p $ strong "Musical styles"
     ul $ mapM_ li musicalStyles
     p $ strong "Games"
