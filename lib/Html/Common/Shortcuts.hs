@@ -28,5 +28,8 @@ wikia = wiki "wikia.com"
 fandom :: AttributeValue -> AttributeValue -> AttributeValue
 fandom = wiki "fandom.com"
 
+bulbapedia :: AttributeValue -> AttributeValue
+bulbapedia pokémon = "https://bulbapedia.bulbagarden.net/wiki/" <> pokémon <> "_(Pok%C3%A9mon)"
+
 babby :: Html -> Html
 babby = extLink "https://yanderedarling.com"

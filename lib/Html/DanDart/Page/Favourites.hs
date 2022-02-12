@@ -5,6 +5,7 @@ module Html.DanDart.Page.Favourites where
 
 import           Data.Env.Types
 import           Data.Site.DanDart
+import           Data.String
 import           Html.Common.Link
 import           Html.Common.Page
 import           Html.Common.Shortcuts
@@ -57,6 +58,10 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
         title'
         ul $ mapM_ li list'
         ) musicList
+    p $ strong "Pokémon"
+    ul $ mapM_ (\name' -> do
+        li . extLink (bulbapedia . fromString $ name') $ fromString name'
+        ) pokémonList
     p $ strong "Musical styles"
     ul $ mapM_ li musicalStyles
     p $ strong "Games"
