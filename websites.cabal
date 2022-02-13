@@ -40,6 +40,7 @@ library
     , mtl
     , pandoc
     , req >= 2.9.1
+    , sitemap-gen
     , text
     , time
     , transformers

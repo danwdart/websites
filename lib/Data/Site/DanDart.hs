@@ -42,6 +42,14 @@ musicalStyles = [
     "Classical"
     ]
 
+pokémonList ∷ [String]
+pokémonList = [
+    "Eevee",
+    "Vulpix",
+    "Rowlet",
+    "Piplup"
+    ]
+
 favCharacters ∷ [(Html, AttributeValue, [(Html, AttributeValue, Html)])]
 favCharacters = [
     (

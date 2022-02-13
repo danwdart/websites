@@ -10,8 +10,8 @@ import           Control.Concurrent
 import           Control.Monad.Trans.Reader
 import           Data.Env
 import           Data.Env.Types
-import qualified Data.Map as M
 import           Data.Maybe
+import qualified Data.Set as S
 import qualified Data.Text                      as T
 import           Data.Text.Encoding
 import           Data.Text.IO
@@ -30,7 +30,7 @@ serve = do
     runReaderT Build.build development
     port <- fromMaybe "80" <$> lookupEnv "PORT"
     putStrLn "Serving all websites:"
-    devSlugs <- runReaderT (asks (fmap slug . M.elems)) development
+    devSlugs <- runReaderT (asks (fmap slug . S.toList)) development
     mapM_ (\host -> putStrLn $ "http://" <> host <> ".localhost:" <> T.pack port) devSlugs
     runEnv 80 $ websocketsOr defaultConnectionOptions wsApp (
         vhost (

@@ -14,9 +14,9 @@ import           Data.Env                   as Env
 import           Data.Env.Types             as Env
 import           Data.Functor.Compose       (Compose (Compose, getCompose))
 import           Data.List                  (nub)
-import           Data.Map                   (Map)
-import qualified Data.Map                   as M
 import           Data.Maybe                 (catMaybes)
+import           Data.Set                   (Set)
+import qualified Data.Set                   as S
 import           Data.Text                  (Text, unpack)
 import           Network.HTTP.Client        (Manager, Response (responseStatus),
                                              httpNoBody, newManager,
@@ -87,10 +87,12 @@ configs = [
     ("Chrome", chromeConfig)
     ]
 
-sites ∷ Map Text (IO ())
-sites = fmap (
-        \website -> 
+sites ∷ Set (Text, IO ())
+sites = S.mapMonotonic (
+        \website -> (
+            slug website,
             runReaderT ((Env.serve :: Website -> WebsiteIO ()) (website :: Website) :: WebsiteIO ()) website :: IO ()
+        )
     ) development
 
 -- in terms of safeTry / try?
@@ -227,4 +229,4 @@ spec ∷ Spec
 spec = runIO . withCreateProcess (shell "selenium-server -role hub") $ \_ _ _ _ ->
     withCreateProcess (shell "selenium-server -role node") $ \_ _ _ _ -> do
         threadDelay 5000000
-        hspec $ mapM_ testForSite (M.toAscList sites)
+        hspec $ mapM_ testForSite (S.toList sites)
