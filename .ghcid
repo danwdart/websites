@@ -1,1 +1,1 @@
--l -aTMain.main --restart=src --restart=lib --reload=posts --reload=reviews --command="cabal repl websites:exe:serve"
+-l -aTMain.main --restart=src --restart=lib --restart=websites.cabal --reload=posts --reload=reviews  --reverse-errors --no-height-limit --command="cabal repl websites:exe:serve"
