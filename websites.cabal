@@ -56,6 +56,7 @@ library
     , Build.JolHarg
     , Build.M0ORI
     , Build.MadHacker
+    , CSS.Common
     , Data.Site.Blog
     , Data.Site.DanDart
     , Data.Site.JolHarg

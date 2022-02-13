@@ -6,50 +6,30 @@ import Clay
 
 common :: Css
 common = do
-    star ? fontFamily ["Caudex"] ["serif"]
-    html ? backgroundImage (
-        repeatingLinearGradient
-            (angular (deg (-45)))
-            [
-                (rgb 0xd 0xd 0xd, 0),
-                (rgb 0xe 0xe 0xe, px 5),
-                (rgb 0xe 0xe 0xe, px 5)
-                ]
-        ) -- (-45deg, #ddd, #eee 5px, #eee 5px);
+    star ? fontFamily ["Caudex"] [sansSerif]
+    html ? ""
     body ? backgroundColor (rgb 0xe 0xe 0xe)
     (p <> ul) ? margin nil nil nil nil
     (a <> a # (hover <> active <> visited)) ? color "purple"
-    
+    ".bg-primary" ? backgroundColor "#ddd" -- !important
+    ".navbar-dark .navbar-nav .nav-link" # (id <> hover <> active <> focus) ? do
+        color purple
+        boxShadow none
+    ".navbar-nav" ? overflow auto
+    ".nav-item" ? flex nil nil auto -- flex: 0 0 auto;
+    ".nav-link" ? transition transform (sec 0.5) easeInOut -- transition: transform 0.5s ease-in-out !important;
+    ".nav-link" # hover ? transform scale 1.1 -- transform: scale(1.1);
+    ".row" ? margin nil nil nil nil
+    ".page" ? do
+        display none
+
 {-
 
+    
 
-.bg-primary {
-    background-color: #ddd !important;
-}
-
-.navbar-dark .navbar-nav .nav-link,
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link:active,
-.navbar-dark .navbar-nav .nav-link:focus {
-    color: purple;
-    box-shadow: none;
-}
-
-.navbar-nav {
-    overflow: auto;
-}
-
-.nav-item {
-    flex: 0 0 auto;
-}
-
-.nav-link:hover {
-    transform: scale(1.1);
-}
 
 .nav-link {
-    transition: transform 0.5s ease-in-out !important;
-}
+    
 
 .row {
     margin: 0;
