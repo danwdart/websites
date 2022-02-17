@@ -9,7 +9,7 @@ import           Html.Common.Header
 import           Html.Common.Page
 import           Html.M0ORI.Page.Contact
 import           Html.M0ORI.Page.HamRadio
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5           as H hiding (main)
 
 htmlHeader ∷ WebsiteM Html
 htmlHeader = do

@@ -5,7 +5,7 @@ module Html.DanDart.Page.About where
 
 import           Data.Env.Types
 import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5 as H hiding (main)
 
 pageAbout ∷ WebsiteM Html
 pageAbout = makePage "about" "About" defaultLayout notDefaultPage $ do

@@ -11,7 +11,7 @@ import           Control.Monad.Trans.Reader
 import           Data.Env
 import           Data.Env.Types
 import           Data.Maybe
-import qualified Data.Set as S
+import qualified Data.Set                       as S
 import qualified Data.Text                      as T
 import           Data.Text.Encoding
 import           Data.Text.IO

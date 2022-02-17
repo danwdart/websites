@@ -3,11 +3,11 @@
 
 module Html.Common.Blog.Feed where
 
-import           Html.Common.Blog.Types
 import           Data.Text                     (Text)
 import           Data.Text.Lazy                (toStrict)
 import qualified Data.Text.Lazy                as TL
 import           Data.Text.Show
+import           Html.Common.Blog.Types
 import qualified Text.Atom.Feed                as Atom
 import qualified Text.Atom.Feed.Export         as Export
 import           Text.Blaze.Html.Renderer.Text (renderHtml)

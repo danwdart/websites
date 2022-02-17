@@ -19,23 +19,23 @@ newtype PostsLocation = PostsLocation {
 data SiteType = Normal | Blog PostsLocation
 
 data Urls = Urls {
-    urlDanDart :: Text,
-    urlHamRadio :: Text,
-    urlBlog :: Text,
-    urlJolHarg :: Text,
+    urlDanDart   :: Text,
+    urlHamRadio  :: Text,
+    urlBlog      :: Text,
+    urlJolHarg   :: Text,
     urlMadHacker :: Text
 }
 
 data Website = Website {
-    slug         :: Text,
-    title        :: Text,
+    slug       :: Text,
+    title      :: Text,
     -- keywords :: Set Text,
-    url          :: Text,
-    urls         :: Urls,
-    siteType     :: SiteType,
-    livereload   :: Bool,
-    build        :: WebsiteIO (),
-    serve        :: WebsiteIO ()
+    url        :: Text,
+    urls       :: Urls,
+    siteType   :: SiteType,
+    livereload :: Bool,
+    build      :: WebsiteIO (),
+    serve      :: WebsiteIO ()
 }
 
 instance Eq Website where

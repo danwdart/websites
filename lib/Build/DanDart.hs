@@ -1,18 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Build.DanDart where
 
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
-import qualified Data.ByteString.Lazy.Char8     as BSL
+import qualified Data.ByteString.Lazy.Char8 as BSL
 import           Data.Env.Types
 import           Data.Time.Clock
 import           Html.DanDart.Index
 import           Make
 import           Web.Sitemap.Gen
 
-sitemap :: WebsiteIO Sitemap
+sitemap ∷ WebsiteIO Sitemap
 sitemap = do
     now <- liftIO getCurrentTime
     pure $ Sitemap [
@@ -23,7 +23,7 @@ build ∷ WebsiteIO ()
 build = do
     slug' <- asks slug
     sitemap' <- sitemap
-    liftIO . BSL.writeFile (".sites/dandart/sitemap.xml") $ renderSitemap sitemap'
+    liftIO . BSL.writeFile ".sites/dandart/sitemap.xml" $ renderSitemap sitemap'
     make slug' page page404
 
 serve ∷ WebsiteIO ()

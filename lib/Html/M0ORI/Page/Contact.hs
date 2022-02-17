@@ -6,7 +6,7 @@ module Html.M0ORI.Page.Contact where
 import           Data.Env.Types
 import           Html.Common.Contact
 import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5    as H hiding (main)
 
 pageContact ∷ WebsiteM Html
 pageContact = do

@@ -7,7 +7,7 @@ import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
 import           Html.Common.Shortcuts
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5      as H hiding (main)
 
 pageMaths ∷ WebsiteM Html
 pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do

@@ -4,7 +4,6 @@
 
 module Html.Common.Blog.Comment where
 
-import           Html.Common.Blog.Types
 import           Control.Monad
 import           Data.Either
 import           Data.Frontmatter
@@ -15,6 +14,7 @@ import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
 import           Data.Time
 import           Data.Time.Utils
+import           Html.Common.Blog.Types
 import           System.Directory
 import           System.FilePath
 import           Text.Pandoc.Class

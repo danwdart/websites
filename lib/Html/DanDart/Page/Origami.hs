@@ -6,7 +6,7 @@ module Html.DanDart.Page.Origami where
 import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5 as H hiding (main)
 
 pageOrigami ∷ WebsiteM Html
 pageOrigami = makePage "origami" "Origami" defaultLayout notDefaultPage $ do

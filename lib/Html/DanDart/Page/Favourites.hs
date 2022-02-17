@@ -9,7 +9,7 @@ import           Data.String
 import           Html.Common.Link
 import           Html.Common.Page
 import           Html.Common.Shortcuts
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5      as H hiding (main)
 
 pageFavourites ∷ WebsiteM Html
 pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do

@@ -7,7 +7,7 @@ import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
 import           Html.Common.Shortcuts
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5      as H hiding (main)
 
 pageHealth ∷ WebsiteM Html
 pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
@@ -15,7 +15,7 @@ pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do
     p "I think I'm addicted to caffeine, which I wouldn't recommend."
     p "I have been diagnosed with the following things, both physical and mental intermingling:"
     ul $ do
-        
+
         li $ extLinkTitle (nhs <> "post-traumatic-stress-disorder-ptsd") "Post-traumatic Stress Disorder" "PTSD"
         li $ extLink (nhs <> "fibromyalgia") "Fibromyalgia"
         li $ extLink (nhs <> "autism") "Asperger's Syndrome"

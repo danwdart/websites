@@ -7,7 +7,7 @@ import           Data.Env.Types
 import           Data.Site.DanDart
 import           Html.Common.Link
 import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5  as H hiding (main)
 
 pageCharacters ∷ WebsiteM Html
 pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do

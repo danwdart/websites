@@ -3,8 +3,8 @@
 
 module Html.Common.Blog.Link where
 
-import           Data.List as L
-import           Data.List.Extra as LE
+import           Data.List                   as L
+import           Data.List.Extra             as LE
 import           Data.String
 import           Data.Text                   (Text)
 import qualified Data.Text                   as T

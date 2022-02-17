@@ -6,7 +6,7 @@ module Html.DanDart.Page.Music where
 import           Data.Env.Types
 import           Html.Common.Audio
 import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
+import           Text.Blaze.Html5  as H hiding (main)
 
 pageMusic ∷ WebsiteM Html
 pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
