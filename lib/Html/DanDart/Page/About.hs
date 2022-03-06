@@ -1,13 +1,15 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.DanDart.Page.About where
 
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.Common.Page
 import           Text.Blaze.Html5 as H hiding (main)
 
-pageAbout ∷ WebsiteM Html
+pageAbout ∷ (MonadReader Website m) => m Html
 pageAbout = makePage "about" "About" defaultLayout notDefaultPage $ do
     p "This website entailed a few design and code decisions which I would like to explain."
     p mempty

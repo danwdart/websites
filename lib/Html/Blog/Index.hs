@@ -1,8 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Blog.Index where
 
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.Site.Blog
 import           Html.Blog.Header
@@ -14,7 +16,7 @@ import           Text.Blaze.Html5.Attributes as A
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Dan Dart's Blog" ! href "/atom.xml"
 
-page ∷ Html → Html → WebsiteM Html
+page ∷ MonadReader Website m => Html → Html → m Html
 page blogPostLinks blogPosts = do
     header' <- htmlHeader blogPostLinks blogPosts
     head' <- htmlHead descTitle keywords extraHead
@@ -22,5 +24,5 @@ page blogPostLinks blogPosts = do
         head'
         header'
 
-page404 ∷ WebsiteM Html
+page404 ∷ MonadReader Website m => m Html
 page404 = defaultPage404 descTitle keywords extraHead

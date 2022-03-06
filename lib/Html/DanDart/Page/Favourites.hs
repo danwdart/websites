@@ -1,8 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.DanDart.Page.Favourites where
 
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.Site.DanDart
 import           Data.String
@@ -11,7 +13,7 @@ import           Html.Common.Page
 import           Html.Common.Shortcuts
 import           Text.Blaze.Html5      as H hiding (main)
 
-pageFavourites ∷ WebsiteM Html
+pageFavourites ∷ (MonadReader Website m) => m Html
 pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do
     p "Here is a list of some of my favourite things."
     p $ strong "YouTube channels"

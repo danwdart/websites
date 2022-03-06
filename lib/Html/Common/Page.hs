@@ -1,8 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Common.Page where
 
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.String                 (IsString (fromString))
 import           Html.Common.Bootstrap
@@ -41,7 +43,7 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-makePage ∷ AttributeValue → String → (Html → Html) → Attribute → Html → WebsiteM Html
+makePage ∷ (MonadReader Website m) => AttributeValue → String → (Html → Html) → Attribute → Html → m Html
 makePage pageId label' layout extraParams content' = do
     pure . (li ! class_ "nav-item") $ do
         input

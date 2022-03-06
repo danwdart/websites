@@ -7,7 +7,7 @@ module Serve where
 
 import           Build
 import           Control.Concurrent
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Env
 import           Data.Env.Types
 import           Data.Maybe

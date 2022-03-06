@@ -1,15 +1,17 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.DanDart.Page.Intro where
 
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageIntro ∷ WebsiteM Html
+pageIntro ∷ (MonadReader Website m) => m Html
 pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "Hello, my name is Dan."
     p "I am a software engineer, mathematics lover, radio ham and musician."

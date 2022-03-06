@@ -1,8 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.MadHacker.Index where
 
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.Site.MadHacker
 import           Html.Common.Error.NotFound
@@ -14,7 +16,7 @@ import           Text.Blaze.Html5.Attributes as A
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "The Mad Hacker: Reviews" ! href "/atom.xml"
 
-page ∷ Html → Html → WebsiteM Html
+page ∷ MonadReader Website m => Html → Html → m Html
 page reviewLinks reviews = do
     header' <- htmlHeader reviewLinks reviews
     head' <- htmlHead descTitle keywords extraHead
@@ -22,5 +24,5 @@ page reviewLinks reviews = do
         head'
         header'
 
-page404 ∷ WebsiteM Html
+page404 ∷ MonadReader Website m => m Html
 page404 = defaultPage404 descTitle keywords extraHead

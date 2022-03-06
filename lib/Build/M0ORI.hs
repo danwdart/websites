@@ -1,8 +1,9 @@
-{-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE UnicodeSyntax    #-}
 
 module Build.M0ORI where
 
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.M0ORI.Index
 import           Make

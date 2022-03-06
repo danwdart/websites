@@ -1,10 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Common.Head where
 
-import           Control.Monad               (when)
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.String
 import           Html.Common.CSS
@@ -26,7 +26,7 @@ metas descTitle keywords = do
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
-htmlHead ∷ String → [AttributeValue] → Html → WebsiteM Html
+htmlHead ∷ (MonadReader Website m) => String → [AttributeValue] → Html → m Html
 htmlHead descTitle keywords extraHead = do
     livereload' <- asks livereload
     pure . H.head $ do

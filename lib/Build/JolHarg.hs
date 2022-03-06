@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -6,7 +7,7 @@ module Build.JolHarg where
 
 import           Configuration.Dotenv
 import           Control.Monad.IO.Class
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.Common.GitHub
 import           Html.JolHarg.Index

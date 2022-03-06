@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -12,7 +13,7 @@ import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageFs ∷ Reader [Repo] (WebsiteM Html)
+pageFs ∷ (MonadReader [Repo] n, MonadReader Website m) => n (m Html)
 pageFs = do
     repos <- ask
     pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do

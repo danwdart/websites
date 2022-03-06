@@ -1,4 +1,5 @@
 {-# LANGUAGE DerivingVia       #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -6,7 +7,7 @@
 module Data.Env.Types where
 
 import           Control.Applicative        (liftA2)
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Functor.Identity
 import           Data.Set                   (Set)
 import           Data.String
@@ -57,7 +58,7 @@ instance (Monoid a) => Monoid (WebsiteM a) where
     mempty = pure mempty
     mappend = liftA2 mappend
 
-websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
+websiteMToWebsiteIO ∷ WebsiteM a -> WebsiteIO a
 websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
 
 type WebsitesM = Reader Env

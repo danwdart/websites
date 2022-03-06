@@ -1,9 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Blog.Header where
 
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.String
 import           Html.Blog.Page.Blog
@@ -12,7 +13,7 @@ import           Html.Common.Page
 import           Text.Blaze.Html5           as H hiding (main)
 import           Text.Pandoc.Highlighting
 
-htmlHeader ∷ Html → Html → WebsiteM Html
+htmlHeader ∷ MonadReader Website m => Html → Html → m Html
 htmlHeader blogPostLinks blogPosts = do
     urlDanDart' <- asks (urlDanDart . urls)
     pageBlog' <- pageBlog blogPostLinks blogPosts

@@ -1,9 +1,10 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.DanDart.Header where
 
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.Common.Header
 import           Html.Common.Page
@@ -19,27 +20,27 @@ import           Html.DanDart.Page.Origami
 import           Html.DanDart.Social
 import           Text.Blaze.Html5             as H hiding (main)
 
-linkHamRadio ∷ WebsiteM Html
+linkHamRadio ∷ (MonadReader Website m) => m Html
 linkHamRadio = do
     urlHamRadio' <- asks (urlHamRadio . urls)
     pure $ extNav (textValue urlHamRadio') "Ham Radio"
 
-linkSoftware ∷ WebsiteM Html
+linkSoftware ∷ (MonadReader Website m) => m Html
 linkSoftware = do
     urlJolHarg' <- asks (urlJolHarg . urls)
     pure $ extNav (textValue urlJolHarg') "Software"
 
-linkBlog ∷ WebsiteM Html
+linkBlog ∷ (MonadReader Website m) => m Html
 linkBlog = do
     urlBlog' <- asks (urlBlog . urls)
     pure $ extNav (textValue urlBlog') "Blog"
 
-linkReviews ∷ WebsiteM Html
+linkReviews ∷ (MonadReader Website m) => m Html
 linkReviews = do
     urlMadHacker' <- asks (urlMadHacker . urls)
     pure $ extNav (textValue urlMadHacker') "Reviews"
 
-htmlHeader ∷ WebsiteM Html
+htmlHeader ∷ (MonadReader Website m, Semigroup (m Html)) => m Html
 htmlHeader = do
     pages <- do
         pageIntro <>

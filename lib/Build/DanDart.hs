@@ -1,10 +1,11 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Build.DanDart where
 
 import           Control.Monad.IO.Class
-import           Control.Monad.Trans.Reader
+import           Control.Monad.Reader
 import qualified Data.ByteString.Lazy.Char8 as BSL
 import           Data.Env.Types
 import           Data.Time.Clock
@@ -12,7 +13,7 @@ import           Html.DanDart.Index
 import           Make
 import           Web.Sitemap.Gen
 
-sitemap ∷ WebsiteIO Sitemap
+sitemap ∷ (MonadReader Website m, MonadIO m) => m Sitemap
 sitemap = do
     now <- liftIO getCurrentTime
     pure $ Sitemap [

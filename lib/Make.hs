@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -5,7 +6,7 @@
 module Make where
 
 import           Control.Monad
-import           Control.Monad.IO.Class
+import           Control.Monad.Reader
 import qualified Data.ByteString.Lazy.Char8     as BSL
 import           Data.Env.Types
 import           Data.List                      (sortOn)
@@ -40,7 +41,7 @@ make name page page404 = do
         BSL.writeFile (".sites" </> path </> "404.html") $ renderHtml page404'
         putStrLn $ name <> " compiled."
 
-makeServe ∷ WebsiteIO () → Text → WebsiteIO ()
+makeServe ∷ (MonadReader Website m, MonadIO m) => m () → Text → m ()
 makeServe build' slug' = do
     liftIO $ putStrLn "Building..."
     build'

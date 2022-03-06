@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -13,7 +14,7 @@ import           Html.JolHarg.Page.Portfolio
 import           Text.Blaze.Html5               as H hiding (main)
 
 -- Todo Technologies, Pricing, Blog, About
-htmlHeader ∷ Reader [Repo] (WebsiteM Html)
+htmlHeader ∷ (MonadReader [Repo] n, MonadReader Website m) => n (m Html)
 htmlHeader = do
     pageFs' <- pageFs
     pure $ do
