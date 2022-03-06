@@ -1,9 +1,12 @@
 { 
   nixpkgs ? import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/haskell-updates.tar.gz") {},
+  haskell-tools ? import (builtins.fetchTarball "https://github.com/danwdart/haskell-tools/archive/master.tar.gz") {},
   compiler ? "ghc902"
 } :
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
+  lib = nixpkgs.pkgs.haskell.lib;
+  tools = haskell-tools compiler;
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = self.callCabal2nix "websites" (gitignore ./.) {};
@@ -20,12 +23,13 @@ let
       # not in nix
       semialign = self.callHackage "semialign" "1.2" {};
       # Depends on cabal-un-published http-client versions.
-      req = nixpkgs.pkgs.haskell.lib.doJailbreak (self.callHackage "req" "3.9.2" {});
-      webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
-        url = "https://github.com/danwdart/hs-webdriver.git";
-        rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
-      }) {};
+      req = lib.doJailbreak (self.callHackage "req" "3.9.2" {});
+      #webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
+      #  url = "https://github.com/danwdart/hs-webdriver.git";
+      #  rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
+      #}) {};
       http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
+      clay = lib.doJailbreak super.clay;
     };
   };
   shell = myHaskellPackages.shellFor {
@@ -38,28 +42,10 @@ let
       doctest src lib
       cabal update
     '';
-    buildInputs = with myHaskellPackages; with nixpkgs; with haskellPackages; [
-      apply-refact
-      cabal-install
-      doctest
-      ghci-dap
-      ghcid
-      # ghcide # issue with 9.0.2
-      haskell-dap
-      haskell-debug-adapter
-      # haskell-language-server # issue with 9.0.2
-      hasktags
-      hlint
-      implicit-hie
-      krank
-      stan
-      # selenium-server
-      stylish-haskell
-      weeder
-    ];
+    buildInputs = tools.availableBuildTools;
     withHoogle = false;
   };
-  exe = nixpkgs.haskell.lib.justStaticExecutables (myHaskellPackages.websites);
+  exe = lib.justStaticExecutables (myHaskellPackages.websites);
 in
 {
   inherit shell;
