@@ -1,3 +1,9 @@
+module E2E.Site.CommonSpec where
+    
+main :: IO ()
+main = pure ()
+
+{-}
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -230,3 +236,4 @@ spec = runIO . withCreateProcess (shell "selenium-server -role hub") $ \_ _ _ _ 
     withCreateProcess (shell "selenium-server -role node") $ \_ _ _ _ -> do
         threadDelay 5000000
         hspec $ mapM_ testForSite (S.toList sites)
+-}
