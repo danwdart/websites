@@ -42,7 +42,7 @@ let
       doctest src lib
       cabal update
     '';
-    buildInputs = tools.availableBuildTools;
+    buildInputs = tools.defaultBuildTools;
     withHoogle = false;
   };
   exe = lib.justStaticExecutables (myHaskellPackages.websites);
