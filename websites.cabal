@@ -59,7 +59,6 @@ library
     , Data.Site.JolHarg
     , Data.Site.M0ORI
     , Data.Site.MadHacker
-    , Data.Text.Show
     , Data.Time.Utils
     , Html.Blog.Header
     , Html.Blog.Index

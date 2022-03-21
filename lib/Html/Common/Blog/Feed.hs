@@ -6,11 +6,11 @@ module Html.Common.Blog.Feed where
 import           Data.Text                     (Text)
 import           Data.Text.Lazy                (toStrict)
 import qualified Data.Text.Lazy                as TL
-import           Data.Text.Show
 import           Html.Common.Blog.Types
 import qualified Text.Atom.Feed                as Atom
 import qualified Text.Atom.Feed.Export         as Export
 import           Text.Blaze.Html.Renderer.Text (renderHtml)
+import           Text.Pandoc.Shared            (tshow)
 
 toEntry ∷ Text → BlogPost → Atom.Entry
 toEntry domain (BlogPost postId' BlogMetadata { title = title', date = date' } html' _) = (
