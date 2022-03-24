@@ -56,7 +56,7 @@ instance (Semigroup a) => Semigroup (WebsiteM a) where
 
 instance (Monoid a) => Monoid (WebsiteM a) where
     mempty = pure mempty
-    mappend = liftA2 mappend
+    mappend = (<>)
 
 websiteMToWebsiteIO ∷ WebsiteM a -> WebsiteIO a
 websiteMToWebsiteIO = mapReaderT (pure . runIdentity)

@@ -24,10 +24,12 @@ data Score = Score {
 
 instance FromJSON Score where
     parseJSON (A.String a') = do
-        let [rating', outOf'] = T.splitOn "/" a'
-        let rating'' = read . T.unpack $ rating'
-        let outOf'' = read . T.unpack $ outOf'
-        pure $ Score rating'' outOf''
+        case T.splitOn "/" a' of
+            [rating', outOf'] -> do
+                let rating'' = read . T.unpack $ rating'
+                let outOf'' = read . T.unpack $ outOf'
+                pure $ Score rating'' outOf''
+            _ -> fail "Problem parsing score."
     parseJSON _ = fail "Problem parsing score."
 
 instance FromJSON BlogTag where
