@@ -9,7 +9,7 @@ let
   tools = haskell-tools compiler;
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
-      websites = self.callCabal2nix "websites" (gitignore ./.) {};
+      websites = lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {});
       fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
         rev = "324369ee5ff5d2c797b5d00d55e24e74d631c40f";
@@ -23,7 +23,7 @@ let
       # not in nix
       semialign = self.callHackage "semialign" "1.2" {};
       # Depends on cabal-un-published http-client versions.
-      req = lib.doJailbreak (self.callHackage "req" "3.9.2" {});
+      req = lib.doJailbreak (self.callHackage "req" "3.10.0" {});
       #webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
       #  url = "https://github.com/danwdart/hs-webdriver.git";
       #  rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
