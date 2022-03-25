@@ -43,7 +43,7 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-makePage ∷ (MonadReader Website m) => AttributeValue → String → (Html → Html) → Attribute → Html → m Html
+makePage ∷ (MonadReader Website m) ⇒ AttributeValue → String → (Html → Html) → Attribute → Html → m Html
 makePage pageId label' layout extraParams content' = do
     pure . (li ! class_ "nav-item") $ do
         input

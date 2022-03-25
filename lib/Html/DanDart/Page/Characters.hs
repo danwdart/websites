@@ -9,9 +9,9 @@ import           Data.Env.Types
 import           Data.Site.DanDart
 import           Html.Common.Link
 import           Html.Common.Page
-import           Text.Blaze.Html5  as H hiding (main)
+import           Text.Blaze.Html5     as H hiding (main)
 
-pageCharacters ∷ (MonadReader Website m) => m Html
+pageCharacters ∷ (MonadReader Website m) ⇒ m Html
 pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do
     p "Some of my favourite characters and characters that I identify with are:"
     ul $ mapM_ (\(fandom', fandomLink, characters) -> do

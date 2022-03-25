@@ -41,7 +41,7 @@ make name page page404 = do
         BSL.writeFile (".sites" </> path </> "404.html") $ renderHtml page404'
         putStrLn $ name <> " compiled."
 
-makeServe ∷ (MonadReader Website m, MonadIO m) => m () → Text → m ()
+makeServe ∷ (MonadReader Website m, MonadIO m) ⇒ m () → Text → m ()
 makeServe build' slug' = do
     liftIO $ putStrLn "Building..."
     build'

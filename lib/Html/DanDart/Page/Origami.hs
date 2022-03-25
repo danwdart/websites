@@ -8,9 +8,9 @@ import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.Common.Link
 import           Html.Common.Page
-import           Text.Blaze.Html5 as H hiding (main)
+import           Text.Blaze.Html5     as H hiding (main)
 
-pageOrigami ∷ (MonadReader Website m) => m Html
+pageOrigami ∷ (MonadReader Website m) ⇒ m Html
 pageOrigami = makePage "origami" "Origami" defaultLayout notDefaultPage $ do
     p "I've been doing origami from a very young age. I will give some instructions on how to make some models that I've invented later on when I've figured out how to digitise them, but for now, I'll give you some of my favourite origami resources:"
     br

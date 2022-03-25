@@ -7,8 +7,8 @@ module Build.MadHacker where
 import           Control.Monad.IO.Class
 import           Control.Monad.Reader
 import           Data.Env.Types
-import qualified Data.Text                  as T
-import qualified Data.Text.IO               as TIO
+import qualified Data.Text              as T
+import qualified Data.Text.IO           as TIO
 import           Html.Common.Blog.Feed
 import           Html.Common.Blog.Link
 import           Html.MadHacker.Index

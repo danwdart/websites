@@ -11,7 +11,7 @@ import           Html.Common.Page
 import           Html.Common.Shortcuts
 import           Text.Blaze.Html5      as H hiding (main)
 
-pageMaths ∷ (MonadReader Website m) => m Html
+pageMaths ∷ (MonadReader Website m) ⇒ m Html
 pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
     p "Mathematics has always been a great pastime for me."
     p $ do

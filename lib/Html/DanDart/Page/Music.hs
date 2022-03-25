@@ -8,9 +8,9 @@ import           Control.Monad.Reader
 import           Data.Env.Types
 import           Html.Common.Audio
 import           Html.Common.Page
-import           Text.Blaze.Html5  as H hiding (main)
+import           Text.Blaze.Html5     as H hiding (main)
 
-pageMusic ∷ (MonadReader Website m) => m Html
+pageMusic ∷ (MonadReader Website m) ⇒ m Html
 pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
     p "I play the guitar, keyboard and synthesiser."
     p "I've created the following pieces of music/sound effects:"

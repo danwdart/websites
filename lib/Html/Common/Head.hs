@@ -26,7 +26,7 @@ metas descTitle keywords = do
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
-htmlHead ∷ (MonadReader Website m) => String → [AttributeValue] → Html → m Html
+htmlHead ∷ (MonadReader Website m) ⇒ String → [AttributeValue] → Html → m Html
 htmlHead descTitle keywords extraHead = do
     livereload' <- asks livereload
     pure . H.head $ do

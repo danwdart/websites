@@ -8,8 +8,8 @@ import           Data.String                 (IsString (fromString))
 import qualified Data.Text                   as T
 import           Html.Common.Blog.Types
 import           Html.Common.Bootstrap
-import           Text.Blaze.Html5
 import qualified Text.Blaze.Html5            as H
+import           Text.Blaze.Html5
 import           Text.Blaze.Html5.Attributes as A
 
 stars ∷ Score → Html

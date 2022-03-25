@@ -20,27 +20,27 @@ import           Html.DanDart.Page.Origami
 import           Html.DanDart.Social
 import           Text.Blaze.Html5             as H hiding (main)
 
-linkHamRadio ∷ (MonadReader Website m) => m Html
+linkHamRadio ∷ (MonadReader Website m) ⇒ m Html
 linkHamRadio = do
     urlHamRadio' <- asks (urlHamRadio . urls)
     pure $ extNav (textValue urlHamRadio') "Ham Radio"
 
-linkSoftware ∷ (MonadReader Website m) => m Html
+linkSoftware ∷ (MonadReader Website m) ⇒ m Html
 linkSoftware = do
     urlJolHarg' <- asks (urlJolHarg . urls)
     pure $ extNav (textValue urlJolHarg') "Software"
 
-linkBlog ∷ (MonadReader Website m) => m Html
+linkBlog ∷ (MonadReader Website m) ⇒ m Html
 linkBlog = do
     urlBlog' <- asks (urlBlog . urls)
     pure $ extNav (textValue urlBlog') "Blog"
 
-linkReviews ∷ (MonadReader Website m) => m Html
+linkReviews ∷ (MonadReader Website m) ⇒ m Html
 linkReviews = do
     urlMadHacker' <- asks (urlMadHacker . urls)
     pure $ extNav (textValue urlMadHacker') "Reviews"
 
-htmlHeader ∷ (MonadReader Website m, Semigroup (m Html)) => m Html
+htmlHeader ∷ (MonadReader Website m, Semigroup (m Html)) ⇒ m Html
 htmlHeader = do
     pages <- do
         pageIntro <>

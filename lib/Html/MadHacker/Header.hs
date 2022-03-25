@@ -11,7 +11,7 @@ import           Html.MadHacker.Page.Reviews
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-htmlHeader ∷ MonadReader Website m => Html → Html → m Html
+htmlHeader ∷ MonadReader Website m ⇒ Html → Html → m Html
 htmlHeader reviewLinks reviews = do
     urlDanDart' <- asks (urlDanDart . urls)
     pageReviews' <- pageReviews reviewLinks reviews

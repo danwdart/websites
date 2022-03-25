@@ -13,7 +13,7 @@ import           Html.DanDart.Index
 import           Make
 import           Web.Sitemap.Gen
 
-sitemap ∷ (MonadReader Website m, MonadIO m) => m Sitemap
+sitemap ∷ (MonadReader Website m, MonadIO m) ⇒ m Sitemap
 sitemap = do
     now <- liftIO getCurrentTime
     pure $ Sitemap [

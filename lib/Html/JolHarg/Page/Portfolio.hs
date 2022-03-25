@@ -13,7 +13,7 @@ import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pagePortfolio ∷ (MonadReader Website m) => m Html
+pagePortfolio ∷ (MonadReader Website m) ⇒ m Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
     row . (H.div ! class_ "col-md-12 text-center") $
         p "Some of the websites, projects and companies JolHarg Ltd has been involved with are:"

@@ -7,14 +7,14 @@
 
 module Data.Env where
 
-import qualified Build.Blog as B
-import qualified Build.DanDart as D
-import qualified Build.JolHarg as J
-import qualified Build.M0ORI as M
+import qualified Build.Blog      as B
+import qualified Build.DanDart   as D
+import qualified Build.JolHarg   as J
+import qualified Build.M0ORI     as M
 import qualified Build.MadHacker as MH
 import           Data.Env.Types
 
-developmentUrls, productionUrls :: Urls
+developmentUrls, productionUrls ∷ Urls
 developmentUrls = Urls {
     urlDanDart = "http://dandart.localhost:8080",
     urlHamRadio = "http://m0ori.localhost:8080",
@@ -35,7 +35,7 @@ devBlog, prodBlog,
     devDanDart, prodDanDart,
     devJolHarg, prodJolHarg,
     devM0ORI, prodM0ORI,
-    devMadHacker, prodMadHacker :: Website
+    devMadHacker, prodMadHacker ∷ Website
 devBlog = Website {
     slug = "blog",
     title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",

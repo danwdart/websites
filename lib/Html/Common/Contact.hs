@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
@@ -13,7 +13,7 @@ emailHelpSingular, emailHelpPlural ∷ Html
 emailHelpSingular = "I'll never share your email with anyone else."
 emailHelpPlural = "We'll never share your email with anyone else."
 
-contactForm ∷ (MonadReader Website m) => AttributeValue → Html → AttributeValue → AttributeValue → m Html
+contactForm ∷ (MonadReader Website m) ⇒ AttributeValue → Html → AttributeValue → AttributeValue → m Html
 contactForm email _ _ _ = pure $ do
     "This form has been temporarily removed, so please "
     a ! href ("mailto:" <> email) $ "send a direct email"

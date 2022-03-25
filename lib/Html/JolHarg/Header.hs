@@ -14,7 +14,7 @@ import           Html.JolHarg.Page.Portfolio
 import           Text.Blaze.Html5               as H hiding (main)
 
 -- Todo Technologies, Pricing, Blog, About
-htmlHeader ∷ (MonadReader [Repo] n, MonadReader Website m) => n (m Html)
+htmlHeader ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)
 htmlHeader = do
     pageFs' <- pageFs
     pure $ do

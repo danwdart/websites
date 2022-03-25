@@ -1,6 +1,7 @@
+{-# LANGUAGE UnicodeSyntax #-}
 module E2E.Site.CommonSpec where
-    
-main :: IO ()
+
+main ∷ IO ()
 main = pure ()
 
 {-}

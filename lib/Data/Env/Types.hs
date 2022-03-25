@@ -1,17 +1,17 @@
 {-# LANGUAGE DerivingVia       #-}
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE StrictData        #-}
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.Env.Types where
 
-import           Control.Applicative        (liftA2)
+import           Control.Applicative   (liftA2)
 import           Control.Monad.Reader
 import           Data.Functor.Identity
-import           Data.Set                   (Set)
+import           Data.Set              (Set)
 import           Data.String
-import           Data.Text                  (Text)
+import           Data.Text             (Text)
 
 newtype PostsLocation = PostsLocation {
     getPostsLocation :: Text
@@ -51,14 +51,14 @@ type WebsiteM = Reader Website
 type WebsiteT = ReaderT Website
 type WebsiteIO = WebsiteT IO
 
-instance (Semigroup a) => Semigroup (WebsiteM a) where
+instance (Semigroup a) ⇒ Semigroup (WebsiteM a) where
     (<>) = liftA2 (<>)
 
-instance (Monoid a) => Monoid (WebsiteM a) where
+instance (Monoid a) ⇒ Monoid (WebsiteM a) where
     mempty = pure mempty
     mappend = (<>)
 
-websiteMToWebsiteIO ∷ WebsiteM a -> WebsiteIO a
+websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
 websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
 
 type WebsitesM = Reader Env

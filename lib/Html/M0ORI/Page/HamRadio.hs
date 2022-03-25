@@ -11,7 +11,7 @@ import           Html.Common.Page
 import           Text.Blaze.Html5            as H hiding (main)
 import           Text.Blaze.Html5.Attributes as A
 
-pageHamRadio ∷ MonadReader Website m => m Html
+pageHamRadio ∷ MonadReader Website m ⇒ m Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
     p "I am a UK full-licenced radio amateur, and have been issued the callsign M0ORI."
     p $ do

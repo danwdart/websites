@@ -10,10 +10,10 @@ import           Data.String
 import           Html.Blog.Page.Blog
 import           Html.Common.Header
 import           Html.Common.Page
-import           Text.Blaze.Html5           as H hiding (main)
+import           Text.Blaze.Html5         as H hiding (main)
 import           Text.Pandoc.Highlighting
 
-htmlHeader ∷ MonadReader Website m => Html → Html → m Html
+htmlHeader ∷ MonadReader Website m ⇒ Html → Html → m Html
 htmlHeader blogPostLinks blogPosts = do
     urlDanDart' <- asks (urlDanDart . urls)
     pageBlog' <- pageBlog blogPostLinks blogPosts
