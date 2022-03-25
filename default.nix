@@ -10,10 +10,10 @@ let
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {});
-      fsutils = lib.doJailbreak (self.callCabal2nix "fsutils" (builtins.fetchGit {
+      fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
-        rev = "324369ee5ff5d2c797b5d00d55e24e74d631c40f";
-      }) {});
+        rev = "0ec6c5cc1ebadddf767bd4ef660c09badd8f285e";
+      }) {};
       # Changes needed for 9.0.1
       # Not yet pushed to hackage
       aeson-diff = (self.callCabal2nix "aeson-diff" (builtins.fetchGit {
