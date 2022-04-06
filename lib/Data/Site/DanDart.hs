@@ -285,6 +285,77 @@ favCharacters = [
         ]
     ),
     (
+        "Ace Attorney",
+        wikipedia "Ace_Attorney",
+        [
+            (
+                "Phoenix Wright",
+                wikipedia "Phoenix_Wright",
+                "he's hilariously unaware, tries to be good at what he does but fails often" -- babby
+            )
+        ]
+    ),
+    (
+        "Strawberry Panic!",
+        wikipedia "Strawberry_Panic!",
+        [
+            (
+                "Shizuma Hanazono",
+                fandom "strawberrypanic" "Shizuma_Hanazono",
+                "she yans over my waifu, who is both " <> babby "Nagisa and Kaori"
+            ),
+            (
+                "Tamao Suzumi",
+                fandom "strawberrypanic" "Tamao_Suzumi",
+                "she fights over my waifu, who is " <> babby "Nagisa"
+            )
+        ]
+    ),
+    (
+        "Kannazuki no Miko",
+        wikipedia "Kannazuki_no_Miko",
+        [
+            (
+                "Chikane Himemiya",
+                fandom "kannazukinomiko" "Chikane_Himemiya",
+                "she adores and fights for my waifu, " <> babby "Himeko"
+            )
+        ]
+    ),
+    (
+        "Kyōshirō to Towa no Sora",
+        wikipedia "Shattered_Angels",
+        [
+            (
+                "Kaon",
+                fandom "shatteredangels" "kaon",
+                "she adores my waifu " <> babby "Himiko" <> " and is Chikane's reincarnation"
+            )
+        ]
+    ),
+    (
+        "Mahō Shōjo Madoka Magika",
+        wikipedia "Puella_Magi_Madoka_Magica",
+        [
+            (
+                "Homura Akemi",
+                fandom "madoka" "Homura_Akemi",
+                "she goes after my waifu " <> babby "Madoka" <> "'s heart infinite times in infinite universes" 
+            )
+        ]
+    ),
+    (
+        "Yami to Bōshi to Hon no Tabibito",
+        wikipedia "Yami_to_Bōshi_to_Hon_no_Tabibito",
+        [
+            (
+                "Hazuki Azuma",
+                fandom "yuripedia" "Hazuki_Azuma",
+                "she is in love with my waifu " <> babby "Hatsumi"
+            )
+        ]
+    ),
+    (
         "Neon Genesis Evangelion",
         wikipedia "Neon_Genesis_Evangelion",
         [
