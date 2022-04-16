@@ -132,6 +132,17 @@ favCharacters = [
         ]
     ),
     (
+        "Fate/stay night (Heaven's Feel)",
+        wikipedia "Fate%2Fstay_night%3A_Heaven's_Feel",
+        [
+            (
+                "Shirou Emiya",
+                fandom "typemoon" "Shirou_Emiya",
+                "he protects the abused baby and helps her, as I do with my waifu " <> babby "Sakura"
+            )
+        ]
+    ),
+    (
         "Aku no Hana",
         wikipedia "The_Flowers_of_Evil_(manga)",
         [
@@ -258,7 +269,7 @@ favCharacters = [
             (
                 "Griffith",
                 wikipedia "List_of_Berserk_characters#Griffith",
-                "he's sneaky and smart and he looks fabulous. " <> babby "Casca" <> " is waifu."
+                "he's sneaky and smart and he looks fabulous. " <> babby "Schierke" <> " is waifu."
             )
         ]
     ),
