@@ -15,7 +15,7 @@ Whilst it's socially important (in the West at least) to make it on time to wher
 
 ### Unimportant
 
-What I'm talking about here is not about meetings, nor is it about calls. It is about the everyday. Obviously it's important to make your scheduled events. But for day-to-day stuff, like "do X hours on project Y" or "Make sure that Z feature is working" it seems to me less important than getting the work done. The argument I'm trying to make here is that ignoring team synchronisation, as long as the work is there, the amount of work, effort or results are there, it should matter less when in the day this is done.
+What I'm talking about here is not about meetings, nor is it about calls. It is about the everyday. Obviously it's important to make your scheduled events. But for day-to-day stuff, like "do X hours on project Y" or "Make sure that Z feature is working" it seems to me less important to be punctual on a project than getting the work done. The argument I'm trying to make here is that, ignoring team synchronisation, as long as the work is there, the amount of work, effort or results are there, it should matter less when in the day this is done.
 
 ### Unreasonable
 

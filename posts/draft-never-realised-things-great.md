@@ -16,5 +16,6 @@ yarn
 nixos
 keeping birds
 drugs
+pokemon
 
 Several things I didn't know of are
