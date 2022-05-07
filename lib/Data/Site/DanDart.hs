@@ -132,7 +132,18 @@ favCharacters = [
         ]
     ),
     (
-        "Fate/stay night (Heaven's Feel)",
+        "Hyouka",
+        wikipedia "Hyouka",
+        [
+            (
+                "Houtarou Oreki",
+                fandom "hyouka" "Houtarou_Oreki",
+                "his energy-efficient philosophy is something I can heavily agree with. Plus, I think he must have similar mental illnesses to me and/or be a spoonie like me. My waifu is " <> babby "Eru Chitanda" <> "."
+            )
+        ]
+    ),
+    (
+        "Fate/stay night: Heaven's Feel",
         wikipedia "Fate%2Fstay_night%3A_Heaven's_Feel",
         [
             (
