@@ -1,8 +1,8 @@
-{-# LANGUAGE DeriveAnyClass    #-}
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE StrictData        #-}
-{-# LANGUAGE UnicodeSyntax     #-}
+{-# LANGUAGE DeriveAnyClass     #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE StrictData         #-}
+
 module Html.Common.GitHub where
 
 import           Control.Monad.IO.Class
@@ -47,8 +47,10 @@ instance FromJSON Language where
     parseJSON (String "Nix") = pure LangNix
     parseJSON (String "Python") = pure LangPython
     parseJSON (String "PHP") = pure LangPHP
+    parseJSON (String "Pug") = pure LangHTML
     parseJSON (String "Makefile") = pure LangShell
     parseJSON (String "Shell") = pure LangShell
+    parseJSON (String "Stylus") = pure LangHTML
     parseJSON (String "Vim script") = pure LangShell
     parseJSON (String "Tcl") = pure LangTcl
     parseJSON (String "TypeScript") = pure LangTS
@@ -60,7 +62,8 @@ instance FromJSON Language where
 
 newtype Licence = Licence {
     spdx_id :: String
-} deriving (Eq, FromJSON, Generic, Show)
+} deriving stock (Eq, Generic, Show)
+  deriving anyclass FromJSON
 
 data Repo = Repo {
     name        :: String,
