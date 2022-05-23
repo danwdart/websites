@@ -1,12 +1,12 @@
 source-repository-package
   type: git
-  location: git://github.com/danwdart/fsutils.git
-  tag: 324369ee5ff5d2c797b5d00d55e24e74d631c40f
+  location: https://github.com/danwdart/fsutils.git
+  tag: e5f97a067955afffc8d120249488f9b59c38a24a
 
 source-repository-package
   type: git
-  location: git://github.com/thsutton/aeson-diff.git
-  tag: 1d247f4f4a20f528be3ac75982b5927bc779082e
+  location: https://github.com/ysangkok/aeson-diff.git
+  tag: 37101dc86af1be9ba16a45040998ae920f524010
 
 packages: ./websites.cabal
 

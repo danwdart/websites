@@ -1,5 +1,5 @@
 { 
-  nixpkgs ? import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/haskell-updates.tar.gz") {},
+  nixpkgs ? import <unstable> {},
   haskell-tools ? import (builtins.fetchTarball "https://github.com/danwdart/haskell-tools/archive/master.tar.gz") {},
   compiler ? "ghc922"
 } :
@@ -12,24 +12,22 @@ let
       websites = lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {});
       fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
-        rev = "0ec6c5cc1ebadddf767bd4ef660c09badd8f285e";
+        rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
       }) {};
       # Changes needed for 9.0.1
       # Not yet pushed to hackage
-      aeson-diff = (self.callCabal2nix "aeson-diff" (builtins.fetchGit {
-        url = "https://github.com/thsutton/aeson-diff.git";
-        rev = "1d247f4f4a20f528be3ac75982b5927bc779082e";
-      }) {});
+      #aeson-diff = (self.callCabal2nix "aeson-diff" (builtins.fetchGit {
+      #  url = "https://github.com/ysangkok/aeson-diff.git";
+      #  rev = "37101dc86af1be9ba16a45040998ae920f524010";
+      #}) {});
       # not in nix
-      semialign = self.callHackage "semialign" "1.2.0.1" {};
-      # Depends on cabal-un-published http-client versions.
-      req = lib.doJailbreak (self.callHackage "req" "3.10.0" {});
+      #semialign = self.callHackage "semialign" "1.2.0.1" {};
       #webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
       #  url = "https://github.com/danwdart/hs-webdriver.git";
       #  rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
       #}) {};
-      http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
-      clay = lib.doJailbreak super.clay;
+      #http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
+      #clay = lib.doJailbreak super.clay;
     };
   };
   shell = myHaskellPackages.shellFor {
