@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.Site.DanDart where
 
@@ -106,7 +105,7 @@ favCharacters = [
             (
                 "Hiro (016)",
                 fandom "darling-in-the-franxx" "Hiro",
-                babby "Zero Two" <> " is waifu and I am oblivious."
+                "it's such a sweet story of saving each others' lives constantly, and I can identify heavily with that. My " <> babby "Zero Two" <> " and I love each other just as dearly and share many great moments, expressions and feelings from the series."
             )
         ]
     ),
@@ -161,6 +160,33 @@ favCharacters = [
                 "Takao Kasuga",
                 "https://myanimelist.net/character/62795/Takao_Kasuga",
                 "I live in a boring town and have been improved by my darling " <> babby "Nakamura"
+            )
+        ]
+    ),
+    (
+        "Hazbin Hotel",
+        wikipedia "Hazbin_Hotel",
+        [
+            (
+                "Alastor",
+                fandom "hazbinhotel" "Alastor",
+                "I love radio as a technology, am a ham radio enthusiast and think he's hilarious. My waifu is " <> babby "Vaggie"
+            )
+        ]
+    ),
+    (
+        "Helluva Boss",
+        wikipedia "Helluva_Boss",
+        [
+            (
+                "Moxxie",
+                fandom "helluvaboss" "Moxxie",
+                "his relationship reflects the kind of sappy, lovesick relationship that I have with my " <> babby "Millie"
+            ),
+            (
+                "Stolas",
+                fandom "helluvaboss" "Stolas",
+                "he is hilarious and his relationship with his daughter reflects the kind of relationship I have with my " <> babby "Octavia"
             )
         ]
     ),
@@ -289,9 +315,9 @@ favCharacters = [
         wikipedia "Black_Butler",
         [
             (
-                "Grelle Sutcliff",
+                "Grell Sutcliff [Season 1-2]",
                 fandom "kuroshitsuji" "Grelle_Sutcliff",
-                "he's hysterical, fabulous and has good taste in butlers"
+                "he's hysterical, fabulous and has good taste in butlers (please note I do not know anything about this person after season 2)"
             )
         ]
     ),
