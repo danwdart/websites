@@ -1,8 +1,5 @@
 {-# LANGUAGE DerivingVia       #-}
-{-# LANGUAGE FlexibleContexts  #-}
-{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE StrictData        #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.Env.Types where
 

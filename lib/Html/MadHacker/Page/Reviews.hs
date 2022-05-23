@@ -1,6 +1,4 @@
-{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.MadHacker.Page.Reviews where
 

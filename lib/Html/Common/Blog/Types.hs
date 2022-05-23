@@ -1,7 +1,5 @@
-{-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module Html.Common.Blog.Types where
 

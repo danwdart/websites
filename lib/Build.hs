@@ -1,6 +1,4 @@
-{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module Build where
 

@@ -1,5 +1,3 @@
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE UnicodeSyntax    #-}
 
 module Build.M0ORI where
 

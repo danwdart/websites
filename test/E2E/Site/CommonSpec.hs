@@ -1,13 +1,10 @@
-{-# LANGUAGE UnicodeSyntax #-}
 module E2E.Site.CommonSpec where
 
 main ∷ IO ()
 main = pure ()
 
 {-}
-{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module E2E.Site.CommonSpec where
 

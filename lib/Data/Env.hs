@@ -1,9 +1,7 @@
 {-# LANGUAGE DerivingVia       #-}
-{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
-{-# LANGUAGE UnicodeSyntax     #-}
 
 module Data.Env where
 

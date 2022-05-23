@@ -1,4 +1,3 @@
-{-# LANGUAGE UnicodeSyntax #-}
 module Data.Time.Utils where
 
 import           Control.Applicative      ((<|>))
