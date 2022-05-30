@@ -388,7 +388,7 @@ favCharacters = [
             (
                 "Homura Akemi",
                 fandom "madoka" "Homura_Akemi",
-                "she goes after my waifu " <> babby "Madoka" <> "'s heart infinite times in infinite universes" 
+                "she goes after my waifu " <> babby "Madoka" <> "'s heart infinite times in infinite universes"
             )
         ]
     ),

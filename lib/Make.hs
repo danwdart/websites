@@ -53,7 +53,7 @@ buildMD postsDir postType renderSuffix = do
   files' <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files' -- if used in same line, use Compose
   validFiles <- liftIO $ filterM doesFileExist fileNames
-  posts <- liftIO . sequence $ makeBlogPost postsDir <$> validFiles
+  posts <- liftIO (mapM (makeBlogPost postsDir) validFiles)
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
   renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost postType renderSuffix) sortedPosts
 

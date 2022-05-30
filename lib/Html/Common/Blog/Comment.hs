@@ -39,7 +39,7 @@ getCommentsIfExists postsDir postId' = do
     let commentFileNames = (postsDir </>) . (postId' </>) <$> commentFiles
     validCommentFiles <- filterM doesFileExist commentFileNames
     let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
-    commentTexts <- sequence $ TIO.readFile <$> validCommentFiles
+    commentTexts <- mapM TIO.readFile validCommentFiles
     let commentData = zipWith parseComment dates commentTexts
     pure $ sortOn (Down . commentDate) commentData
 

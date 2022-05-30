@@ -1,5 +1,5 @@
-{-# LANGUAGE DerivingVia       #-}
-{-# LANGUAGE StrictData        #-}
+{-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE StrictData  #-}
 
 module Data.Env.Types where
 
