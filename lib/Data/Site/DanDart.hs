@@ -266,14 +266,57 @@ favCharacters = [
                 "she's got \"a system\" and I like her vibe."
             ),
             (
+                "Peridot",
+                wikia "steven-universe" "Peridot",
+                "of her mannerisms, special interests, need for technology, weirdness, evil laughter and general vibe. My waifu is " <> babby "Lapis" <> "."
+            ),
+            (
                 "(Um)Greg",
                 wikia "steven-universe" "Greg_Universe",
-                "of his guitar skills."
+                "of his guitar skills and unconditional love of the gang. Also I feel like I'm dumb a lot and don't want to get involved in business that I might mess up."
             ),
             (
                 "Steven Universe (from the movie)",
                 wikia "steven-universe" "Steven_Universe_(character)",
                 "his evolution to this stage helps my waifu " <> babby "Spinel" <> "."
+            )
+        ]
+    ),
+    (
+        "Undertale",
+        wikipedia "Undertale",
+        [
+            (
+                "W. D. Gaster",
+                wikia "undertale" "W._D._Gaster",
+                "he is mysterious and talks in code, much like I often do because of my autism."
+            ),
+            (
+                "Alphys",
+                wikia "undertale" "Alphys",
+                "she's a super nerd and grows to not be afraid to express her emotions."
+            )
+        ]
+    ),
+    (
+        "Dead or Alive 6",
+        wikipedia "Dead_or_Alive_6",
+        [
+            (
+                "NiCO",
+                wikia "deadoralive" "Nico",
+                "of her obsession with many forms of science and interest with experimentation."
+            )
+        ]
+    ),
+    (
+        "Drakengard 3",
+        wikipedia "Drakengard_3",
+        [
+            (
+                "Accord",
+                wikia "drakengard" "Accord",
+                "of her shitbag-like attitude, understanding and screwing around of alternate timelines and interest in psychology."
             )
         ]
     ),
