@@ -8,24 +8,19 @@ import           Control.Monad.Reader
 import qualified Data.ByteString.Lazy.Char8     as BSL
 import           Data.Env.Types
 import           Data.List                      (sortOn)
-import           Data.Maybe                     (fromMaybe, mapMaybe)
 import           Data.Ord                       (Down (Down))
 import           Data.Text                      (Text)
 import qualified Data.Text                      as T
 import           Data.Text.IO
 import           Html.Common.Blog.Post
 import           Html.Common.Blog.Types
-import           Network.Wai.Application.Static
-import           Network.Wai.Handler.Warp
 import           Prelude                        hiding (putStrLn)
 import           System.Directory               (doesFileExist,
                                                  getDirectoryContents)
-import           System.Environment             (lookupEnv)
 import           System.FilePath                ((</>))
 import           System.Path
 import           Text.Blaze.Html.Renderer.Utf8
 import           Text.Blaze.Html5               as H
-import           WaiAppStatic.Types
 
 make ∷ Text → WebsiteM Html → WebsiteM Html → WebsiteIO ()
 make name page page404 = do
@@ -38,15 +33,6 @@ make name page page404 = do
         BSL.writeFile (".sites" </> path </> "index.html") $ renderHtml page'
         BSL.writeFile (".sites" </> path </> "404.html") $ renderHtml page404'
         putStrLn $ name <> " compiled."
-
-makeServe ∷ (MonadReader Website m, MonadIO m) ⇒ m () → Text → m ()
-makeServe build' slug' = do
-    liftIO $ putStrLn "Building..."
-    build'
-    liftIO $ do
-        port <- fromMaybe "80" <$> lookupEnv "PORT"
-        putStrLn $ "Serving on http://localhost:" <> T.pack port
-        runEnv 80 . staticApp $ (defaultWebAppSettings $ ".sites/" <> T.unpack slug' <> "/"){ ssIndices = mapMaybe toPiece ["index.html"] }
 
 buildMD ∷ FilePath → Text → (BlogMetadata → Html) → WebsiteIO ([BlogPost], Html)
 buildMD postsDir postType renderSuffix = do

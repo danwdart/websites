@@ -95,7 +95,7 @@ sites ∷ Set (Text, IO ())
 sites = S.mapMonotonic (
         \website -> (
             slug website,
-            runReaderT ((Env.serve :: Website -> WebsiteIO ()) (website :: Website) :: WebsiteIO ()) website :: IO ()
+            runReaderT ((Env.build :: Website -> WebsiteIO ()) (website :: Website) :: WebsiteIO ()) website :: IO ()
         )
     ) development
 
@@ -221,7 +221,7 @@ testForSite (siteName, serve') = describe (unpack siteName) $ do
     myPort <- runIO (randomRIO (49152, 65535) :: IO Int)
     thread <- runIO $ do
         setEnv "PORT" (show myPort)
-        thread <- forkIO serve'
+        thread <- forkIO build'
         threadDelay 5000000 -- Let it start
         pure thread
 

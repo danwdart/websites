@@ -4,7 +4,7 @@
 frontend() {
     pkill nix-build
     nix-build
-    result/bin/serve
+    result/bin/build
 }
 
 frontend &

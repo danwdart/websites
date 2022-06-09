@@ -1,5 +1,6 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE StrictData        #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE StrictData         #-}
 
 module Html.Common.Blog.Types where
 
@@ -13,7 +14,7 @@ import           Text.Blaze.Html5 as H hiding (main)
 
 newtype BlogTag = BlogTag {
     getTag :: Text
- } deriving (Show)
+ } deriving newtype (Show)
 
 data Score = Score {
     rating :: Int,
@@ -24,8 +25,8 @@ instance FromJSON Score where
     parseJSON (A.String a') = do
         case T.splitOn "/" a' of
             [rating', outOf'] -> do
-                let rating'' = read . T.unpack $ rating'
-                let outOf'' = read . T.unpack $ outOf'
+                let rating'' = read . T.unpack $ rating' :: Int
+                let outOf'' = read . T.unpack $ outOf' :: Int
                 pure $ Score rating'' outOf''
             _ -> fail "Problem parsing score."
     parseJSON _ = fail "Problem parsing score."
@@ -44,13 +45,13 @@ data BlogMetadata = BlogMetadata {
     featuredImage :: Maybe Text,
     tags          :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
     scores        :: Maybe [(Text, Score)]
-} deriving (Generic)
+} deriving stock (Generic)
 
 data BlogCommentMetadata = BlogCommentMetadata {
     author      :: Text,
     authorEmail :: Text,
     authorUrl   :: Maybe Text
-} deriving (Generic, Show)
+} deriving stock (Generic, Show)
 
 instance FromJSON BlogCommentMetadata where
     parseJSON (A.Object o) = BlogCommentMetadata <$>

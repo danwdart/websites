@@ -32,8 +32,7 @@ data Website = Website {
     urls       :: Urls,
     siteType   :: SiteType,
     livereload :: Bool,
-    build      :: WebsiteIO (),
-    serve      :: WebsiteIO ()
+    build      :: WebsiteIO ()
 }
 
 instance Eq Website where

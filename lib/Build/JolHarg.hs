@@ -12,6 +12,8 @@ import           Html.JolHarg.Index
 import           Make
 import           Network.HTTP.Req
 import           Prelude
+import           Text.Blaze.Html5 as H hiding (main)
+
 
 build ∷ WebsiteIO ()
 build = do
@@ -19,9 +21,6 @@ build = do
   _ <- liftIO $ loadFile defaultConfig
   reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
   reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
-  let page' = runReader page (reposDan <> reposJH)
+  let page' = runReader page (reposDan <> reposJH) :: Reader Website Html
 
   make slug' page' page404
-
-serve ∷ WebsiteIO ()
-serve = asks slug >>= makeServe Build.JolHarg.build

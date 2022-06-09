@@ -24,6 +24,3 @@ build = do
     sitemap' <- sitemap
     liftIO . BSL.writeFile ".sites/dandart/sitemap.xml" $ renderSitemap sitemap'
     make slug' page page404
-
-serve ∷ WebsiteIO ()
-serve = asks slug >>= makeServe Build.DanDart.build

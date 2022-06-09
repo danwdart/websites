@@ -31,7 +31,7 @@ data Language = LangASM
     | LangTcl
     | LangTS
     | LangVB
-    deriving (Eq, Generic, Show)
+    deriving stock (Eq, Generic, Show)
 
 instance FromJSON Language where
     parseJSON (String "Assembly") = pure LangASM
@@ -74,7 +74,7 @@ data Repo = Repo {
     website     :: Maybe String,
     licence     :: Maybe Licence,
     stars       :: Int
-} deriving (Generic, Show)
+} deriving stock (Generic, Show)
 
 instance FromJSON Repo where
     parseJSON (Object a) = do

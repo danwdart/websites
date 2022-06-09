@@ -10,6 +10,3 @@ build ∷ WebsiteIO ()
 build = do
     slug' <- asks slug
     make slug' page page404
-
-serve ∷ WebsiteIO ()
-serve = asks slug >>= makeServe Build.M0ORI.build

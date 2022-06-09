@@ -2,7 +2,7 @@
 
 module Html.Common.Blog.Link where
 
-import           Data.List                   as L
+import qualified Data.List                   as L
 import           Data.List.Extra             as LE
 import           Data.String
 import           Data.Text                   (Text)
@@ -25,7 +25,7 @@ makeLinks = foldMap ((
             details ! customAttribute "open" "" ! class_ "ps-2" $ do
                 H.summary . fromString . show . year . date . metadata . L.head . L.head $ byYear
                 p $ foldMap (
-                    \byMonth -> details! customAttribute "open" "" ! class_ "ps-2" $ do
+                    \byMonth -> details ! customAttribute "open" "" ! class_ "ps-2" $ do
                         -- "%B" is Month
                         H.summary . fromString . formatTime defaultTimeLocale "%B" . date . metadata . L.head $ byMonth
                         p $ foldMap (\link' -> do

@@ -6,7 +6,7 @@ module Html.Common.Blog.Comment where
 import           Control.Monad
 import           Data.Either
 import           Data.Frontmatter
-import           Data.List
+import qualified Data.List                    as L
 import           Data.Ord
 import           Data.Text                    (Text)
 import           Data.Text.Encoding
@@ -41,7 +41,7 @@ getCommentsIfExists postsDir postId' = do
     let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
     commentTexts <- mapM TIO.readFile validCommentFiles
     let commentData = zipWith parseComment dates commentTexts
-    pure $ sortOn (Down . commentDate) commentData
+    pure $ L.sortOn (Down . commentDate) commentData
 
 getComments ∷ FilePath → FilePath → IO [ParseCommentResult]
 getComments postsDir postId' = do

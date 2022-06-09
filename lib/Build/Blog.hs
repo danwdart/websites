@@ -21,6 +21,3 @@ build = do
   (sortedPosts, renderedPosts) <- buildMD "posts" "post" (const mempty)
   liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed url' title' sortedPosts
   make slug' (page (makeLinks sortedPosts) renderedPosts) page404
-
-serve ∷ WebsiteIO ()
-serve = asks slug >>= makeServe Build.Blog.build

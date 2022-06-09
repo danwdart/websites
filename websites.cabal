@@ -15,12 +15,34 @@ common shared-properties
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
   build-depends:       base >= 4.15 && < 5
-  ghc-options:         -Wall -Werror -haddock -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         
+    -Weverything
+    -Wno-unsafe
+    -Wno-missing-import-lists
+    -Wno-missing-export-lists
+    -Wno-implicit-prelude
+    -Wno-missing-safe-haskell-mode
+    -Wno-missing-kind-signatures
+    -Wno-prepositive-qualified-module
+    -Werror
+    -haddock
+    -threaded
+    -rtsopts -with-rtsopts=-N
   ghcjs-options:       -dedupe
 
 library
   hs-source-dirs:      lib
-  ghc-options:         -Wall -Werror -haddock
+  ghc-options:         
+    -Weverything
+    -Wno-unsafe
+    -Wno-missing-import-lists
+    -Wno-missing-export-lists
+    -Wno-implicit-prelude
+    -Wno-missing-safe-haskell-mode
+    -Wno-missing-kind-signatures
+    -Wno-prepositive-qualified-module
+    -Werror
+    -haddock
   ghcjs-options:       -dedupe
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
@@ -44,12 +66,6 @@ library
     , sitemap-gen
     , text
     , time
-    , wai
-    , wai-app-static
-    , wai-extra
-    , wai-websockets
-    , warp
-    , websockets
   other-modules:
       Build.Blog
     , Build.DanDart
@@ -114,22 +130,11 @@ library
       Build
     , Data.Env
     , Data.Env.Types
-    , Serve
 
 executable build
   import: shared-properties
   hs-source-dirs:      src
   main-is:             build.hs
-  default-language:    GHC2021
-  default-extensions:  UnicodeSyntax
-  build-depends:
-      base >= 4.15 && < 5
-    , websites
-
-executable serve
-  import: shared-properties
-  hs-source-dirs:      src
-  main-is:             serve.hs
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
   build-depends:
@@ -146,24 +151,23 @@ test-suite websites-test
   default-extensions:  UnicodeSyntax
   build-depends:
       base >= 4.15 && < 5
-    , websites
-    , aeson
-    , async
-    , containers
-    , hspec
-    , hspec-core
-    , hspec-expectations
-    , http-client
-    , http-client-tls
-    , http-types
-    , process
-    , QuickCheck
-    , random
-    , text
-    , transformers
-    , vector
+    -- , aeson
+    -- , async
+    -- , containers
+    -- , hspec
+    -- , hspec-core
+    -- , hspec-expectations
+    -- , http-client
+    -- , http-client-tls
+    -- , http-types
+    -- , process
+    -- , QuickCheck
+    -- , random
+    -- , text
+    -- , transformers
+    -- , vector
     -- , webdriver
-    , websites
+    -- , websites
 
 benchmark websites-bench
   import: shared-properties
