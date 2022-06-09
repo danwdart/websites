@@ -14,7 +14,6 @@ extra-source-files:  README.md
 common shared-properties
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
-  build-depends:       base >= 4.15 && < 5
   ghc-options:         
     -Weverything
     -Wno-unsafe
@@ -24,6 +23,7 @@ common shared-properties
     -Wno-missing-safe-haskell-mode
     -Wno-missing-kind-signatures
     -Wno-prepositive-qualified-module
+    -Wno-missing-local-signatures
     -Werror
     -haddock
     -threaded
@@ -41,6 +41,7 @@ library
     -Wno-missing-safe-haskell-mode
     -Wno-missing-kind-signatures
     -Wno-prepositive-qualified-module
+    -Wno-missing-local-signatures
     -Werror
     -haddock
   ghcjs-options:       -dedupe
@@ -140,6 +141,96 @@ executable build
   build-depends:
       base >= 4.15 && < 5
     , websites
+
+executable dev
+  import: shared-properties
+  hs-source-dirs:      src, lib
+  main-is:             build.hs
+  default-language:    GHC2021
+  default-extensions:  UnicodeSyntax
+  other-modules:
+      Build.Blog
+    , Build.DanDart
+    , Build.JolHarg
+    , Build.M0ORI
+    , Build.MadHacker
+    , Data.Site.Blog
+    , Data.Site.DanDart
+    , Data.Site.JolHarg
+    , Data.Site.M0ORI
+    , Data.Site.MadHacker
+    , Data.Time.Utils
+    , Html.Blog.Header
+    , Html.Blog.Index
+    , Html.Blog.Page.Blog
+    , Html.Common.Audio
+    , Html.Common.Blog.Comment
+    , Html.Common.Blog.Feed
+    , Html.Common.Blog.Link
+    , Html.Common.Blog.Post
+    , Html.Common.Blog.Types
+    , Html.Common.Bootstrap
+    , Html.Common.CSS
+    , Html.Common.Card
+    , Html.Common.Contact
+    , Html.Common.Error.NotFound
+    , Html.Common.GitHub
+    , Html.Common.Head
+    , Html.Common.Header
+    , Html.Common.Link
+    , Html.Common.Page
+    , Html.Common.Shortcuts
+    , Html.Common.Social
+    , Html.Common.Utils
+    , Html.DanDart.Header
+    , Html.DanDart.Index
+    , Html.DanDart.Page.About
+    , Html.DanDart.Page.Characters
+    , Html.DanDart.Page.Contact
+    , Html.DanDart.Page.Favourites
+    , Html.DanDart.Page.Health
+    , Html.DanDart.Page.Intro
+    , Html.DanDart.Page.Maths
+    , Html.DanDart.Page.Music
+    , Html.DanDart.Page.Origami
+    , Html.DanDart.Social
+    , Html.JolHarg.Header
+    , Html.JolHarg.Index
+    , Html.JolHarg.Page.Contact
+    , Html.JolHarg.Page.FreeSoftware
+    , Html.JolHarg.Page.Portfolio
+    , Html.M0ORI.Header
+    , Html.M0ORI.Index
+    , Html.M0ORI.Page.Contact
+    , Html.M0ORI.Page.HamRadio
+    , Html.MadHacker.Header
+    , Html.MadHacker.Index
+    , Html.MadHacker.Page.Reviews
+    , Html.MadHacker.Suffix
+    , Make
+    , Build
+    , Data.Env
+    , Data.Env.Types
+  build-depends:
+      base >= 4.15 && < 5
+    , aeson
+    , blaze-html
+    , blaze-markup
+    , bytestring
+    , containers
+    , dotenv
+    , directory
+    , extra
+    , feed
+    , filepath
+    , frontmatter
+    , fsutils >= 0.1.4
+    , mtl
+    , pandoc
+    , req
+    , sitemap-gen
+    , text
+    , time
 
 test-suite websites-test
   import: shared-properties

@@ -1,1 +1,1 @@
--l -a -r --restart=src --restart=lib --restart=websites.cabal --reload=posts --reload=reviews  --reverse-errors --no-height-limit --command="cabal repl websites:exe:build"
+-l -a -r --restart=websites.cabal --reload=posts --reload=reviews --reverse-errors --no-height-limit --command="cabal repl websites:exe:dev"

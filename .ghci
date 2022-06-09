@@ -1,0 +1,2 @@
+:set -XUnicodeSyntax
+:set -Wno-unused-packages
