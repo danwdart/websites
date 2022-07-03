@@ -15,3 +15,5 @@ Warring race try to invade more peaceful race, weird guy warns them not to, they
 Authoritarian leader tries to control people's privacy, they are advised not to, they end up being deposed.
 
 It goes on...
+
+I wonder if it's a comment on authority not thinking properly?
