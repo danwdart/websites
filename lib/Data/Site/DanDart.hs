@@ -261,14 +261,14 @@ favCharacters = [
         wikipedia "Steven_Universe",
         [
             (
+                "Peridot",
+                wikia "steven-universe" "Peridot",
+                "of her mannerisms, special interests, need for technology, weirdness, evil laughter and general vibe. She probably has the gem equivalent of autism. My waifu is " <> babby "Lapis" <> "."
+            ),
+            (
                 "Amethyst",
                 wikia "steven-universe" "Amethyst",
                 "she's got \"a system\" and I like her vibe."
-            ),
-            (
-                "Peridot",
-                wikia "steven-universe" "Peridot",
-                "of her mannerisms, special interests, need for technology, weirdness, evil laughter and general vibe. My waifu is " <> babby "Lapis" <> "."
             ),
             (
                 "(Um)Greg",
@@ -347,7 +347,7 @@ favCharacters = [
         wikipedia "Berserk_%28manga%29",
         [
             (
-                "Griffith",
+                "Griffith (pre-Femto)",
                 wikipedia "List_of_Berserk_characters#Griffith",
                 "he's sneaky and smart and he looks fabulous. " <> babby "Schierke" <> " is waifu."
             )
