@@ -36,4 +36,6 @@ So, the usual formula, the DOs, and the DO NOTs, some of which will be repeats, 
 
 YouTube is one of the worst offenders because it disobeys every single rule here. But a site such as what AdBard used to do sensibly obeys all the rules.  
   
+**Solutions to avoid it as a user**
+
 Ta-ta.
