@@ -66,8 +66,7 @@ It seems due to the original game, every other person (let's say the odds) must 
 Let's try it out with n people.
 
 In order to "out" person m, one must force m to have no option but to say "quinze".
-This means that person m-1 must start with douze, treize or quatorze.
-
+This means that person m-1 must end with quatorze, and therefore start with douze, treize or quatorze.
 
 
 [number picking game]: https://www.youtube.com/watch?v=9KABcmczPdg
