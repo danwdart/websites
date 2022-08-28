@@ -39,6 +39,10 @@ YouTube is one of the worst offenders because it disobeys every single rule here
   
 As a bonus, I'll even include space on the next iteration of my own website for relevant advertising if they sensibly obey these rules.  
   
+**Edit 2022-08-25: Solutions to avoid it as a user**
+
+
+
 Till next time!  
   
 Please note - this blog is to be moved to my own site soon - so stay posted for a link.
