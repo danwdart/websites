@@ -5,11 +5,12 @@
 
 module Data.Env where
 
-import qualified Build.Blog      as B
-import qualified Build.DanDart   as D
-import qualified Build.JolHarg   as J
-import qualified Build.M0ORI     as M
-import qualified Build.MadHacker as MH
+import qualified Build.Blog        as Blog
+import qualified Build.BlogJolHarg as BlogJolHarg
+import qualified Build.DanDart     as DanDart
+import qualified Build.JolHarg     as JolHarg
+import qualified Build.M0ORI       as M0ORI
+import qualified Build.MadHacker   as MadHacker
 import           Data.Env.Types
 
 productionUrls ∷ Urls
@@ -17,6 +18,7 @@ productionUrls = Urls {
     urlDanDart = "https://dandart.co.uk",
     urlHamRadio = "https://m0ori.com",
     urlBlog = "https://blog.dandart.co.uk",
+    urlBlogJolHarg = "https://blog.jolharg.com",
     urlJolHarg = "https://jolharg.com",
     urlMadHacker = "https://madhackerreviews.com"
 }
@@ -24,6 +26,7 @@ productionUrls = Urls {
 prodBlog,
     prodDanDart,
     prodJolHarg,
+    prodBlogJolHarg,
     prodM0ORI,
     prodMadHacker ∷ Website
 prodBlog = Website {
@@ -31,9 +34,9 @@ prodBlog = Website {
     title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
     url = urlBlog productionUrls,
     urls = productionUrls,
-    siteType = Blog "posts",
+    siteType = Blog "posts/blog",
     livereload = False,
-    build = B.build
+    build = Blog.build
 }
 prodDanDart = Website {
     slug = "dandart",
@@ -42,7 +45,7 @@ prodDanDart = Website {
     urls = productionUrls,
     siteType = Normal,
     livereload = False,
-    build = D.build
+    build = DanDart.build
 }
 prodJolHarg = Website {
     slug = "jolharg",
@@ -51,7 +54,16 @@ prodJolHarg = Website {
     urls = productionUrls,
     siteType = Normal,
     livereload = False,
-    build = J.build
+    build = JolHarg.build
+}
+prodBlogJolHarg = Website {
+    slug = "blogjolharg",
+    title = "JolHarg: Software Blog",
+    url = urlBlogJolHarg productionUrls,
+    urls = productionUrls,
+    siteType = Blog "posts/blogjolharg",
+    livereload = False,
+    build = BlogJolHarg.build
 }
 prodM0ORI = Website {
     slug = "m0ori",
@@ -60,7 +72,7 @@ prodM0ORI = Website {
     urls = productionUrls,
     siteType = Normal,
     livereload = False,
-    build = M.build
+    build = M0ORI.build
 }
 prodMadHacker = Website {
     slug = "madhacker",
@@ -69,7 +81,7 @@ prodMadHacker = Website {
     urls = productionUrls,
     siteType = Blog "reviews",
     livereload = False,
-    build = MH.build
+    build = MadHacker.build
 }
 
 production ∷ Env
@@ -77,6 +89,7 @@ production = [
     prodBlog,
     prodDanDart,
     prodJolHarg,
+    prodBlogJolHarg,
     prodM0ORI,
     prodMadHacker
     ]
