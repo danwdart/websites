@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Build.Blog where
 
 import qualified Build.Blogs as Blogs
