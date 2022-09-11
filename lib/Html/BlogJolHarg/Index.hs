@@ -4,7 +4,7 @@ module Html.BlogJolHarg.Index where
 
 import           Control.Monad.Reader
 import           Data.Env.Types
-import           Data.Site.Blog
+import           Data.Site.BlogJolHarg
 import           Html.BlogJolHarg.Header
 import           Html.Common.Error.NotFound
 import           Html.Common.Head
