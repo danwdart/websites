@@ -5,7 +5,7 @@ module Html.BlogJolHarg.Index where
 import           Control.Monad.Reader
 import           Data.Env.Types
 import           Data.Site.Blog
-import           Html.Blog.Header
+import           Html.BlogJolHarg.Header
 import           Html.Common.Error.NotFound
 import           Html.Common.Head
 import           Text.Blaze.Html5            as H hiding (main)

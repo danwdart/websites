@@ -1,12 +1,9 @@
 
 module Build.M0ORI where
 
-import           Control.Monad.Reader
+import qualified Build.Normal as Normal
 import           Data.Env.Types
 import           Html.M0ORI.Index
-import           Make
 
 build ∷ WebsiteIO ()
-build = do
-    slug' <- asks slug
-    make slug' page page404
+build = Normal.build page page404

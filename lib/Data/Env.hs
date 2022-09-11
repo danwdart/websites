@@ -34,7 +34,7 @@ prodBlog = Website {
     title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
     url = urlBlog productionUrls,
     urls = productionUrls,
-    siteType = Blog "posts/blog",
+    siteType = Blog,
     livereload = False,
     build = Blog.build
 }
@@ -61,7 +61,7 @@ prodBlogJolHarg = Website {
     title = "JolHarg: Software Blog",
     url = urlBlogJolHarg productionUrls,
     urls = productionUrls,
-    siteType = Blog "posts/blogjolharg",
+    siteType = Blog,
     livereload = False,
     build = BlogJolHarg.build
 }
@@ -79,7 +79,7 @@ prodMadHacker = Website {
     title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
     url = urlMadHacker productionUrls,
     urls = productionUrls,
-    siteType = Blog "posts/reviews",
+    siteType = Blog,
     livereload = False,
     build = MadHacker.build
 }

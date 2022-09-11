@@ -7,14 +7,9 @@ import           Control.Applicative   (liftA2)
 import           Control.Monad.Reader
 import           Data.Functor.Identity
 import           Data.Set              (Set)
-import           Data.String
 import           Data.Text             (Text)
 
-newtype PostsLocation = PostsLocation {
-    getPostsLocation :: FilePath
-} deriving IsString via FilePath
-
-data SiteType = Normal | Blog PostsLocation
+data SiteType = Normal | Blog
 
 data Urls = Urls {
     urlDanDart     :: Text,
