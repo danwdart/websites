@@ -70,10 +70,13 @@ library
   other-modules:
       Build.Blog
     , Build.BlogJolHarg
+    , Build.Blogs
     , Build.DanDart
     , Build.JolHarg
     , Build.M0ORI
     , Build.MadHacker
+    , Build.Normal
+    , Build.Sitemap
     , Data.Site.Blog
     , Data.Site.BlogJolHarg
     , Data.Site.DanDart
@@ -156,10 +159,13 @@ executable dev
   other-modules:
       Build.Blog
     , Build.BlogJolHarg
+    , Build.Blogs
     , Build.DanDart
     , Build.JolHarg
     , Build.M0ORI
     , Build.MadHacker
+    , Build.Normal
+    , Build.Sitemap
     , Data.Site.Blog
     , Data.Site.BlogJolHarg
     , Data.Site.DanDart
