@@ -142,6 +142,61 @@ favCharacters = [
         ]
     ),
     (
+        "Toradora!",
+        wikipedia "Toradora!",
+        [
+            (
+                "Ryuuji Takasu",
+                fandom "tora-dora" "Ryuuji_Takasu",
+                "he is very applicable to my life, and he loves very hard, saving and helping my darling " <> babby "Taiga" <> ", and their love music makes me cry every time."
+            )
+        ]
+    ),
+    (
+        "Ijiranaide, Nagatoro-san",
+        wikipedia "Don't_Toy_with_Me,_Miss_Nagatoro",
+        [
+            (
+                "Naoto Hachiouji",
+                fandom "nagatoro" "Naoto_Hachiouji",
+                "he is very awkward like me, and tolerates and eventually enjoys the loving tsumdere/yandere pestering and loving harrassment of his " <> babby "Nagatoro" <> ". We match very well."
+            )
+        ]
+    ),
+    (
+        "Tonikaku Kawaii (Tonikawa)",
+        wikipedia "Fly_Me_to_the_Moon_(manga)#Anime",
+        [
+            (
+                "Nasa Yuzaki",
+                fandom "tonikaku-kawaii" "Nasa_Yuzaki",
+                "he falls very hard in love enough to marry his loving wife " <> babby "Tsukasa" <> " early on, but is incredibly awkward. Also, space."
+            )
+        ]
+    ),
+    (
+        "Blend S",
+        wikipedia "Blend_S#Anime",
+        [
+            (
+                "Dino",
+                fandom "blend-s" "Dino",
+                "he stays up late to watch anime and adores his crush " <> babby "Maika" <> ". Also, he's foreign, and I feel that way very often."
+            )
+        ]
+    ),
+    (
+        "Hataraku Maō-sama! (The Devil Is a Part-Timer!)",
+        wikipedia "The_Devil_Is_a_Part-Timer!#Anime",
+        [
+            (
+                "Sadao Maou / King Satan",
+                fandom "hataraku" "Sadao_Maou",
+                "he is the only one in the main demon cast who works, and his dedication to his work is admirable. If I was anyone, I'm him. My waifu is " <> babby "Chiho" <> "."
+            )
+        ]
+    ),
+    (
         "Fate/stay night: Heaven's Feel",
         wikipedia "Fate%2Fstay_night%3A_Heaven's_Feel",
         [
