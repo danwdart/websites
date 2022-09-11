@@ -19,6 +19,7 @@ build = do
   slug' <- asks slug
   url' <- asks url
   title' <- asks title
-  (sortedPosts, renderedPosts) <- buildMD "reviews" "review" renderStars
+  (Blog (PostsLocation postsDir')) <- asks siteType
+  (sortedPosts, renderedPosts) <- buildMD postsDir' "review" renderStars
   liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed url' title' sortedPosts
   make slug' (page (makeLinks sortedPosts) renderedPosts) page404

@@ -1,0 +1,9 @@
+.page {
+    margin-top: 10px;
+}
+
+@media(max-width: 768px) {
+    .page {
+        margin-top: 10px;
+    }
+}

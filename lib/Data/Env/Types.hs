@@ -11,17 +11,18 @@ import           Data.String
 import           Data.Text             (Text)
 
 newtype PostsLocation = PostsLocation {
-    getPostsLocation :: Text
-} deriving IsString via Text
+    getPostsLocation :: FilePath
+} deriving IsString via FilePath
 
 data SiteType = Normal | Blog PostsLocation
 
 data Urls = Urls {
-    urlDanDart   :: Text,
-    urlHamRadio  :: Text,
-    urlBlog      :: Text,
-    urlJolHarg   :: Text,
-    urlMadHacker :: Text
+    urlDanDart     :: Text,
+    urlHamRadio    :: Text,
+    urlBlog        :: Text,
+    urlBlogJolHarg :: Text,
+    urlJolHarg     :: Text,
+    urlMadHacker   :: Text
 }
 
 data Website = Website {

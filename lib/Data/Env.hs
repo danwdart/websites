@@ -79,7 +79,7 @@ prodMadHacker = Website {
     title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
     url = urlMadHacker productionUrls,
     urls = productionUrls,
-    siteType = Blog "reviews",
+    siteType = Blog "posts/reviews",
     livereload = False,
     build = MadHacker.build
 }

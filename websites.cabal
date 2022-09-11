@@ -69,11 +69,13 @@ library
     , time
   other-modules:
       Build.Blog
+    , Build.BlogJolHarg
     , Build.DanDart
     , Build.JolHarg
     , Build.M0ORI
     , Build.MadHacker
     , Data.Site.Blog
+    , Data.Site.BlogJolHarg
     , Data.Site.DanDart
     , Data.Site.JolHarg
     , Data.Site.M0ORI
@@ -82,6 +84,9 @@ library
     , Html.Blog.Header
     , Html.Blog.Index
     , Html.Blog.Page.Blog
+    , Html.BlogJolHarg.Header
+    , Html.BlogJolHarg.Index
+    , Html.BlogJolHarg.Page.Blog
     , Html.Common.Audio
     , Html.Common.Blog.Comment
     , Html.Common.Blog.Feed
@@ -150,11 +155,13 @@ executable dev
   default-extensions:  UnicodeSyntax
   other-modules:
       Build.Blog
+    , Build.BlogJolHarg
     , Build.DanDart
     , Build.JolHarg
     , Build.M0ORI
     , Build.MadHacker
     , Data.Site.Blog
+    , Data.Site.BlogJolHarg
     , Data.Site.DanDart
     , Data.Site.JolHarg
     , Data.Site.M0ORI
@@ -163,6 +170,9 @@ executable dev
     , Html.Blog.Header
     , Html.Blog.Index
     , Html.Blog.Page.Blog
+    , Html.BlogJolHarg.Header
+    , Html.BlogJolHarg.Index
+    , Html.BlogJolHarg.Page.Blog
     , Html.Common.Audio
     , Html.Common.Blog.Comment
     , Html.Common.Blog.Feed

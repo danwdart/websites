@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Build.Blog where
+module Build.BlogJolHarg where
 
 import           Control.Monad.IO.Class
 import           Control.Monad.Reader
