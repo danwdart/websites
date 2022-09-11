@@ -13,3 +13,6 @@
 [submodule ".sites/madhacker"]
 	path = .sites/madhacker
 	url = git@github.com:danwdart/madhacker.git
+[submodule ".sites/blogjolharg"]
+	path = .sites/blogjolharg
+	url = git@github.com:JolHarg/blog.git
