@@ -10,7 +10,7 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import           Html.Common.Blog.Comment
-import           Html.Common.Blog.Types       as BT
+import           Html.Common.Blog.Types       as BlogTypes
 import           System.FilePath
 import           Text.Blaze.Html5             as H hiding (main)
 import           Text.Blaze.Html5.Attributes  as A
@@ -86,12 +86,12 @@ fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks
 fixExternalLinks as = as
 
 renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteM Html
-renderPost _ renderSuffix (BlogPost postId' metadata' html' _) = do
-    -- commentForm' <- commentForm postType postId'
+renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
+    commentForm' <- commentForm email' (BlogTypes.title metadata')
     pure $ do
         a ! name (fromString (T.unpack postId')) $ mempty
         -- Not working in Safari yet, so filter
-        h1 . fromString . T.unpack $ BT.title metadata'
+        h1 . fromString . T.unpack $ BlogTypes.title metadata'
         small $ do
             a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
             " | Published: "
@@ -108,3 +108,10 @@ renderPost _ renderSuffix (BlogPost postId' metadata' html' _) = do
         fixExternalLinks html'
         br
         renderSuffix metadata'
+        br
+        h3 "Comments"
+        if Prelude.null comments' then small "No comments yet..." <> br else mapM_ renderComment comments'
+        br
+        h4 "Post a comment:"
+        commentForm'
+        br

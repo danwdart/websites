@@ -35,6 +35,7 @@ prodBlog = Website {
     url = urlBlog productionUrls,
     urls = productionUrls,
     siteType = Blog,
+    email = "blog@dandart.co.uk",
     livereload = False,
     build = Blog.build
 }
@@ -44,6 +45,7 @@ prodDanDart = Website {
     url = urlDanDart productionUrls,
     urls = productionUrls,
     siteType = Normal,
+    email = "website@dandart.co.uk",
     livereload = False,
     build = DanDart.build
 }
@@ -53,6 +55,7 @@ prodJolHarg = Website {
     url = urlJolHarg productionUrls,
     urls = productionUrls,
     siteType = Normal,
+    email = "website@jolharg.com",
     livereload = False,
     build = JolHarg.build
 }
@@ -62,6 +65,7 @@ prodBlogJolHarg = Website {
     url = urlBlogJolHarg productionUrls,
     urls = productionUrls,
     siteType = Blog,
+    email = "blog@jolharg.com",
     livereload = False,
     build = BlogJolHarg.build
 }
@@ -71,6 +75,7 @@ prodM0ORI = Website {
     url = urlHamRadio productionUrls,
     urls = productionUrls,
     siteType = Normal,
+    email = "website@m0ori.com",
     livereload = False,
     build = M0ORI.build
 }
@@ -80,6 +85,7 @@ prodMadHacker = Website {
     url = urlMadHacker productionUrls,
     urls = productionUrls,
     siteType = Blog,
+    email = "madhacker@dandart.co.uk", -- TODO add MX
     livereload = False,
     build = MadHacker.build
 }

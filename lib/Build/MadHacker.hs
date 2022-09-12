@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Build.MadHacker where
 
 import qualified Build.Blogs as Blogs

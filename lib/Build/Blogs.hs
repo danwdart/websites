@@ -18,6 +18,7 @@ build page page404 = do
   url' <- asks url
   title' <- asks title
   slug' <- asks slug
-  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug') "post" (const mempty)
+  email' <- asks email
+  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug') email' (const mempty)
   liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed url' title' sortedPosts
   make slug' (page (makeLinks sortedPosts) renderedPosts) page404

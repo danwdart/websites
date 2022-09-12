@@ -5,17 +5,25 @@ module Html.Common.Blog.Comment where
 
 import           Control.Monad
 import           Data.Either
+import           Data.Env.Types
 import           Data.Frontmatter
 import qualified Data.List                    as L
+import           Data.Maybe
 import           Data.Ord
+import           Data.String
 import           Data.Text                    (Text)
+import qualified Data.Text                    as T
 import           Data.Text.Encoding
 import qualified Data.Text.IO                 as TIO
 import           Data.Time
+import           Data.Time.Format.ISO8601
 import           Data.Time.Utils
 import           Html.Common.Blog.Types
+import           Html.Common.Icon             as Icon
 import           System.Directory
 import           System.FilePath
+import           Text.Blaze.Html5             as H hiding (main)
+import           Text.Blaze.Html5.Attributes  as A
 import           Text.Pandoc.Class
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Highlighting
@@ -50,30 +58,24 @@ getComments postsDir postId' = do
         then getCommentsIfExists postsDir postId'
         else pure mempty
 
-{-
 commentForm ∷ Text → Text → WebsiteM Html
-commentForm postType postId = pure . (H.form
+commentForm toEmail title' = pure . (H.form
         ! A.class_ "form"
         ! enctype "application/x-www-form-urlencoded"
-        ! action ""
-        ! method "post"
-        ! target "_result") $ do
-            H.input ! A.type_ "hidden" ! name "postId" ! value (fromString (T.unpack postId))
-            H.input ! A.type_ "hidden" ! name "postType" ! value (fromString (T.unpack postType))
-            mapM_ (\(type__, name_, label_, placeholder_) -> H.div ! A.class_ "group" $ do
-                H.label ! for name_ $ label_
-                H.input ! A.type_ type__ ! A.class_ "form-control" ! name name_ ! placeholder placeholder_
-                ) [
-                    ("text", "name", "Name", "John Smith"),
-                    ("email", "email", "Email", "john@smith.com"),
-                    ("text", "website", "Website", "https://mydomain.com")
-                    ]
+        ! action "mailto:"
+        ! method "get"
+        ! target "email") $ do
+            H.input ! A.type_ "hidden" ! name "to" ! value (textValue toEmail)
+            H.input ! A.type_ "hidden" ! name "subject" ! value (textValue $ "Re: " <> title')
             H.div ! A.class_ "group" $ do
-                H.label ! for "name" $ "Comment"
-                H.textarea ! A.class_ "form-control" ! name "comment" ! placeholder "I think..." $ mempty
+                H.label ! for "body" $ do
+                    "Comment"
+                    H.textarea ! A.class_ "form-control" ! name "body" ! placeholder "I think..." $ mempty
+            br
             H.div ! A.class_ "group" $ do
-                button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ "Submit"
-                H.iframe ! name "_result" ! height "90" ! width "300" ! A.style "border: 0; vertical-align: middle; margin-left: 10px;" $ mempty
+                button ! A.type_ "submit" ! A.class_ "btn btn-primary" $ do
+                    Icon.icon S "envelope"
+                    " Send"
 
 renderComment ∷ ParseCommentResult → Html
 renderComment ParseCommentResult {
@@ -95,5 +97,3 @@ renderComment ParseCommentResult {
             ":"
         p commentHtml
         br
-
--}

@@ -27,6 +27,7 @@ data Website = Website {
     url        :: Text,
     urls       :: Urls,
     siteType   :: SiteType,
+    email      :: Text,
     livereload :: Bool,
     build      :: WebsiteIO ()
 }

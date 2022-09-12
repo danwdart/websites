@@ -35,12 +35,12 @@ make name page page404 = do
         putStrLn $ name <> " compiled."
 
 buildMD ∷ FilePath → Text → (BlogMetadata → Html) → WebsiteIO ([BlogPost], Html)
-buildMD postsDir postType renderSuffix = do
+buildMD postsDir email' renderSuffix = do
   files' <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files' -- if used in same line, use Compose
   validFiles <- liftIO $ filterM doesFileExist fileNames
   posts <- liftIO (mapM (makeBlogPost postsDir) validFiles)
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
-  renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost postType renderSuffix) sortedPosts
+  renderedPosts <- websiteMToWebsiteIO $ foldMap (renderPost email' renderSuffix) sortedPosts
 
   pure (sortedPosts, renderedPosts)
