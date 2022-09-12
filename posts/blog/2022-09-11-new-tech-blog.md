@@ -10,4 +10,4 @@ Hello everyone, it's been a while. I've got a new tech blog out - it's intended 
 
 Here's the [JolHarg Blog](https://blog.jolharg.com), and here's the new [atom feed](https://blog.jolharg.com/atom.xml)
 
-And if you're still waiting for the comments to come back, don't worry, they'll be back soon [edit 2022-09-12: they're back!]! In the meantime you can always use the contact link on the [main site](https://dandart.co.uk)!
+Also, the comments are back!

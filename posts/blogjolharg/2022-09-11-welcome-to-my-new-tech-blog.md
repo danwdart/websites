@@ -10,4 +10,4 @@ Welcome to my new tech blog! It's intended for things attributable to JolHarg (e
 
 If this is your first time here, my [non-tech blog is here](https://blog.dandart.co.uk), and its [atom feed is here](https://blog.dandart.co.uk/atom.xml)
 
-And if you're still waiting for the comments to come back, don't worry, they'll be back soon! [edit 2022-09-12: they're back!] In the meantime you can always use the contact link on the [main site](https://jolharg.com)!
+Also, the comments are back!
