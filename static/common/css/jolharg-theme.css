@@ -156,3 +156,16 @@ input:checked ~ .page {
         margin-top: 80px;
     }
 }
+
+blockquote {
+    background-color: #eee;
+    margin: 0 0 0 10px;
+}
+
+blockquote ::before {
+    content: '> ';
+}
+
+pre, code {
+    font-family: monospace;
+}
