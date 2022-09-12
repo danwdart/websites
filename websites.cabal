@@ -104,6 +104,7 @@ library
     , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Header
+    , Html.Common.Icon
     , Html.Common.Link
     , Html.Common.Page
     , Html.Common.Shortcuts
@@ -193,6 +194,7 @@ executable dev
     , Html.Common.GitHub
     , Html.Common.Head
     , Html.Common.Header
+    , Html.Common.Icon
     , Html.Common.Link
     , Html.Common.Page
     , Html.Common.Shortcuts
