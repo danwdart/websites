@@ -197,6 +197,17 @@ favCharacters = [
         ]
     ),
     (
+        "Kimetsu no Yaiba",
+        wikipedia "Demon_Slayer:_Kimetsu_no_Yaiba#Anime",
+        [
+            (
+                "Tanjiro Kamado",
+                fandom "kimetsu-no-yaiba" "Tanjiro_Kamado",
+                "he fights for his life for his adored little sister, to the point where it wears him down, and I would do anything for my little baby " <> babby "Nezuko" <> "!"
+            )
+        ]
+    ),
+    (
         "Fate/stay night: Heaven's Feel",
         wikipedia "Fate%2Fstay_night%3A_Heaven's_Feel",
         [
