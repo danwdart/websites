@@ -153,6 +153,17 @@ favCharacters = [
         ]
     ),
     (
+        "Ano Hi Mita Hana no Namae o Bokutachi wa Mada Shiranai (Anohana)",
+        wikipedia "Anohana",
+        [
+            (
+                "Jinta \"Jintan\" Yadomi",
+                fandom "anohana" "Jinta_\"Jintan\"_Yadomi",
+                "he loves and adores his childhood friend " <> babby "Menma" <> " so intensely that she became a love interest. The whole story made me absolutely bawl, and as painful as it is, it is also beautiful."
+            )
+        ]
+    ),
+    (
         "Ijiranaide, Nagatoro-san",
         wikipedia "Don't_Toy_with_Me,_Miss_Nagatoro",
         [
