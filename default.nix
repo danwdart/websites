@@ -4,7 +4,7 @@
     nixpkgs = nixpkgs;
     compiler = compiler;
   },
-  compiler ? "ghc924"
+  compiler ? "ghc942"
 } :
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
@@ -31,6 +31,18 @@ let
       #}) {};
       #http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
       #clay = lib.doJailbreak super.clay;
+
+      # ghc 9.4.2 updates
+
+      # not released yet
+      req = self.callHackage "req" "3.13.0" {};
+      pandoc = lib.doJailbreak super.pandoc;
+
+      feed = lib.doJailbreak super.feed;
+      string-qq = lib.doJailbreak super.string-qq;
+      unicode-collation = lib.doJailbreak super.unicode-collation;
+      unicode-data = lib.doJailbreak super.unicode-data;
+      hslua-aeson = lib.doJailbreak super.hslua-aeson;
     };
   };
   shell = myHaskellPackages.shellFor {
