@@ -12,7 +12,7 @@ import           Html.JolHarg.Index
 import           Make
 import           Network.HTTP.Req
 import           Prelude
-import           Text.Blaze.Html5 as H hiding (main)
+import           Text.Blaze.Html5       as H hiding (main)
 
 
 build ∷ WebsiteIO ()

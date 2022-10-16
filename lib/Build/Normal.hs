@@ -5,12 +5,12 @@ import           Control.Monad.IO.Class
 import           Control.Monad.Reader
 import qualified Data.ByteString.Lazy.Char8 as BSL
 import           Data.Env.Types
-import qualified Data.Text as T
+import qualified Data.Text                  as T
 import           Make
-import           Text.Blaze.Html5 as H hiding (main)
+import           Text.Blaze.Html5           as H hiding (main)
 import           Web.Sitemap.Gen
 
-build ∷ WebsiteM Html -> WebsiteM Html -> WebsiteIO ()
+build ∷ WebsiteM Html → WebsiteM Html → WebsiteIO ()
 build page page404 = do
     slug' <- asks slug
     sitemap' <- sitemap

@@ -11,9 +11,9 @@ import           Html.Common.Blog.Feed
 import           Html.Common.Blog.Link
 import           Make
 import           System.FilePath
-import           Text.Blaze.Html5 as H hiding (main, title)
+import           Text.Blaze.Html5       as H hiding (main, title)
 
-build ∷ (Html → Html → WebsiteM Html) -> WebsiteM Html -> WebsiteIO ()
+build ∷ (Html → Html → WebsiteM Html) → WebsiteM Html → WebsiteIO ()
 build page page404 = do
   url' <- asks url
   title' <- asks title

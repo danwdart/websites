@@ -1,6 +1,6 @@
 module Build.Blog where
 
-import qualified Build.Blogs as Blogs
+import qualified Build.Blogs     as Blogs
 import           Data.Env.Types
 import           Html.Blog.Index
 

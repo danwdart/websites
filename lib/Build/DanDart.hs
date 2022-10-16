@@ -1,6 +1,6 @@
 module Build.DanDart where
 
-import qualified Build.Normal as Normal
+import qualified Build.Normal       as Normal
 import           Data.Env.Types
 import           Html.DanDart.Index
 
