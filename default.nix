@@ -17,31 +17,17 @@ let
         url = "https://github.com/danwdart/fsutils.git";
         rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
       }) {};
-      # Changes needed for 9.0.1
-      # Not yet pushed to hackage
-      #aeson-diff = (self.callCabal2nix "aeson-diff" (builtins.fetchGit {
-      #  url = "https://github.com/ysangkok/aeson-diff.git";
-      #  rev = "37101dc86af1be9ba16a45040998ae920f524010";
-      #}) {});
-      # not in nix
-      #semialign = self.callHackage "semialign" "1.2.0.1" {};
-      #webdriver = self.callCabal2nix "webdriver" (builtins.fetchGit {
-      #  url = "https://github.com/danwdart/hs-webdriver.git";
-      #  rev = "a37d3a28d88374416b38ed37edbc304e44b66268";
-      #}) {};
-      #http-conduit-downloader = self.callHackage "http-conduit-downloader" "1.1.4" {};
-      #clay = lib.doJailbreak super.clay;
-
-      # ghc 9.4.2 updates
-
       # not released yet
       req = self.callHackage "req" "3.13.0" {};
+      feed = lib.doJailbreak super.feed;
+      
+      # 2.17.1.1: aeson >=0.7 && <2.1
       pandoc = lib.doJailbreak super.pandoc;
 
-      feed = lib.doJailbreak super.feed;
+      # 0.0.4: text >=1.2 && <1.3
       string-qq = lib.doJailbreak super.string-qq;
-      unicode-collation = lib.doJailbreak super.unicode-collation;
-      unicode-data = lib.doJailbreak super.unicode-data;
+
+      # 2.1.0: aeson >=1.5 && <2.1
       hslua-aeson = lib.doJailbreak super.hslua-aeson;
     };
   };
