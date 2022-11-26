@@ -1,9 +1,10 @@
 ---
 title: "PocketCHIP: A Failure in Delivery"
 date: 2022-07-08T11:03:00+01:00
-draft: true
+draft: false
 aliases: [ "/2022/07/pocketchip-failure-delivery.html" ]
-featuredImage: TODO
+featuredImage: https://pokerfuse.com/site_media/media/uploads/news/burning-pounds.jpg
+imageCopyright: https://www.flickr.com/photos/59937401@N07/5856809025/sizes/o/
 tags: [pocketchip, chip]
 scores :
     -
