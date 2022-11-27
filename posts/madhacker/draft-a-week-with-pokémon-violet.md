@@ -8,16 +8,16 @@ tags: [pokemon,pokémon,violet,game,nintendo,switch,scarlet]
 scores :
     -
         - Fun
-        - 
+        - 10/10
     -
         - Value
-        - 
+        - 10/10
     -
         - Dex
-        - 
+        - 10/10
     -
-        - 
-        - 
+        - Something
+        - 10/10
 ---
 
 # A Return To Form
