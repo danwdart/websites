@@ -29,6 +29,11 @@ let
 
       # 2.1.0: aeson >=1.5 && <2.1
       hslua-aeson = lib.doJailbreak super.hslua-aeson;
+
+      aeson-diff = self.callCabal2nix "aeson-diff" (builtins.fetchGit {
+        url = "https://github.com/ysangkok/aeson-diff.git";
+        rev = "5f2051042fb350ecd1bb63379cc7e2c768fe494f";
+      }) {};
     };
   };
   shell = myHaskellPackages.shellFor {
