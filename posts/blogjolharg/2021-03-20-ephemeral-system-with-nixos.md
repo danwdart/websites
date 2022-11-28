@@ -79,7 +79,7 @@ So I added the following to `hardware-configuration.nix`:
         "noatime"
       ];
     };
-  
+
   fileSystems."/etc/ssh" =
     {
       device = "/dev/XXX";
@@ -99,7 +99,7 @@ So I added the following to `hardware-configuration.nix`:
         "noatime"
       ];
     };
-  
+
   fileSystems."/var/lib" =
     {
       device = "/dev/XXX";

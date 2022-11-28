@@ -31,7 +31,7 @@ Another reason I disagree with 100% punctuality is the situation you're in: what
 
 ### Summarily
 
-In summary, because of the the shortcomings of having to deal with time 
+In summary, because of the the shortcomings of having to deal with time
 
 Perhaps this is why "Flexi-time" and "Core hours" come from in the contracts of employees and contractors, and I'm certainly fully on board with these concepts, but only at their fully realised form (not some "choose your 8 hours a day as long as we choose 6 of them" business).
 

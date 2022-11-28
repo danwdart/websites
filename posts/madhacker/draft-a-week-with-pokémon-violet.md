@@ -3,7 +3,7 @@ title: "A Week with Pokémon Violet (Spoiler Free)"
 date: 2022-11-25T11:02:03Z
 draft: true
 aliases: [ "/2022/11/a-week-with-pokémon-violet-spoiler-free.html" ]
-featuredImage: 
+featuredImage:
 tags: [pokemon,pokémon,violet,game,nintendo,switch,scarlet]
 scores :
     -
@@ -22,7 +22,7 @@ scores :
 
 # A Return To Form
 
-I was honestly pleasantly surprised by the variety, 
+I was honestly pleasantly surprised by the variety,
 
 # Interesting Challenges
 
@@ -46,7 +46,7 @@ It really
 
 # I Cri Everytim
 
-Pokémon did "emotional damage" to me (is that you, ?) during some of the scenes involving 
+Pokémon did "emotional damage" to me (is that you, ?) during some of the scenes involving
 
 # Dat Soundtrack Man
 

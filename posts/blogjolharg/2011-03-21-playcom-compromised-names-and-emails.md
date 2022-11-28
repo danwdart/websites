@@ -8,11 +8,11 @@ tags: [security, cracker, compromise, emai, rakuten, com, hacker, l, play]
 
 The popular UK online shop Play.com has reportedly been compromised, revealing its database of usernames and email addresses of its customers to its attackers. An email appearing to be from play.com to its customers reads:
 
-  
+
 
 Dear Customer,
 
-  
+
 
 Email Security Message
 

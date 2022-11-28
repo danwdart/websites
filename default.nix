@@ -1,4 +1,4 @@
-{ 
+{
   nixpkgs ? import <nixpkgs> {},
   haskell-tools ? import (builtins.fetchTarball "https://github.com/danwdart/haskell-tools/archive/master.tar.gz") {
     nixpkgs = nixpkgs;
@@ -20,7 +20,7 @@ let
       # not released yet
       req = self.callHackage "req" "3.13.0" {};
       feed = lib.doJailbreak super.feed;
-      
+
       # 2.17.1.1: aeson >=0.7 && <2.1
       pandoc = lib.doJailbreak super.pandoc;
 

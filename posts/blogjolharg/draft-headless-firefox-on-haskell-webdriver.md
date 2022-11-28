@@ -6,4 +6,4 @@ aliases: [ "/2020/11/headless-firefox-on-haskell-webdriver.html" ]
 tags: [headless, firefox, haskell, webdriver, selenium]
 ---
 
-As I answered in (https://stackoverflow.com/questions/57846224/haskell-webdriver-selenium-firefox-headless-mode)[this Stack Overflow post], 
+As I answered in (https://stackoverflow.com/questions/57846224/haskell-webdriver-selenium-firefox-headless-mode)[this Stack Overflow post],

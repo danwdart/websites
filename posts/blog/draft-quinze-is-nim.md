@@ -57,11 +57,11 @@ In order to do that, person 1 will have to count an extra 4 minus the number 10 
 This is fine, and person 9 will have to end with dix.
 Therefore, person 6 will have to end with six.
 Therefore, person 3 will have to end with deux.
-So, in order to avoid being out, person 3 
+So, in order to avoid being out, person 3
 
 Is there still a good strategy to win? One would have to force n-1 people "out", where you do not know where you are in the system. Is there a good strategy when you know everybody else doesn't have a strategy? Is there only a good strategy when you know everybody else does have a strategy?
 
-It seems due to the original game, every other person (let's say the odds) must work together in order to win, and respond to the evens' responses, and ensure the sum of each even/odd pair is the appropriate amount in order to get rid of a pre-agreed person. It seems that half of the people must work together for this. 
+It seems due to the original game, every other person (let's say the odds) must work together in order to win, and respond to the evens' responses, and ensure the sum of each even/odd pair is the appropriate amount in order to get rid of a pre-agreed person. It seems that half of the people must work together for this.
 
 Let's try it out with n people.
 

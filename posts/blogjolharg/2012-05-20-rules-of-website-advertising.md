@@ -6,11 +6,11 @@ aliases: [ "/2012/05/rules-of-website-advertising.html" ]
 tags: [rules, annoying, seo, ads, website, advertising, flash, adwords, dfp, relevant, adsense, content]
 ---
 
-I don't mind sensible advertising. Believe it or not I wouldn't mind if people advertised their wares to me if they did it in a reasonable way and it was interesting, but most people are doing it wrong.  
-  
-I've come up with some sensible rules to stay within my personal limits:  
-  
-**The DOs:**  
+I don't mind sensible advertising. Believe it or not I wouldn't mind if people advertised their wares to me if they did it in a reasonable way and it was interesting, but most people are doing it wrong.
+
+I've come up with some sensible rules to stay within my personal limits:
+
+**The DOs:**
 
 1.  DO provide relevant content for your users related to the subject material of the website.
 2.  DO market research about your customers: the more you know about them, the more you know what they like and the more clicks you'll get.
@@ -18,7 +18,7 @@ I've come up with some sensible rules to stay within my personal limits:
 4.  DO provide more text than images.
 5.  DO try to keep any media included to a minimum.
 
-**The Do NOTs:**  
+**The Do NOTs:**
 
 1.  Do NOT advertise irrelevant or spam material such as drugs, gambling or uninteresting products.
 2.  Do NOT obscure other more relevant content such as the body of an article by using any form of pop-up.
@@ -31,14 +31,14 @@ I've come up with some sensible rules to stay within my personal limits:
 9.  Try not to include video at all as this can hurt people's bandwidth.
 10.  Try not to necessitate a "close" button - they should be non-intrusive enough not to get in the way.
 
-Maybe people will hate them less if they obey these rules.  
-  
-**Some examples of people who do it wrong:**  
-  
-YouTube is one of the worst offenders because it disobeys every single rule here. But a site such as what AdBard used to do sensibly obeys all the rules.  
-  
-As a bonus, I'll even include space on the next iteration of my own website for relevant advertising if they sensibly obey these rules.  
-  
-Till next time!  
-  
+Maybe people will hate them less if they obey these rules.
+
+**Some examples of people who do it wrong:**
+
+YouTube is one of the worst offenders because it disobeys every single rule here. But a site such as what AdBard used to do sensibly obeys all the rules.
+
+As a bonus, I'll even include space on the next iteration of my own website for relevant advertising if they sensibly obey these rules.
+
+Till next time!
+
 Please note - this blog is to be moved to my own site soon - so stay posted for a link.

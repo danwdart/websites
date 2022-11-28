@@ -8,11 +8,11 @@ tags: [rules, annoying, seo, ads, video, advertising, app, mobile, apps, android
 
 One more absolute plague! Do not do this at all if humanly possible.
 
-**The DOs:**  
+**The DOs:**
 
-**The Do NOTs:**  
+**The Do NOTs:**
 
-**Some examples of people who do it wrong:**  
+**Some examples of people who do it wrong:**
 
 **Solutions to avoid it as a user**
 
