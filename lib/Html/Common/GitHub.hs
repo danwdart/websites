@@ -56,6 +56,7 @@ instance FromJSON Language where
     parseJSON (String "TypeScript") = pure LangTS
     parseJSON (String "VBA") = pure LangVB
     parseJSON (String "Visual Basic") = pure LangVB
+    parseJSON (String "Visual Basic 6.0") = pure LangVB
     parseJSON (String a) = fail $ "Unknown language: " <> T.unpack a
     parseJSON Null = pure LangGeneric
     parseJSON _ = pure LangGeneric
