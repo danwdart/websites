@@ -11,13 +11,10 @@ scores :
         - 10/10
     -
         - Value
-        - 10/10
+        - 6/10
     -
         - Dex
-        - 10/10
-    -
-        - Something
-        - 10/10
+        - 7/10
 ---
 
 # A Return To Form
