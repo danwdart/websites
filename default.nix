@@ -34,6 +34,10 @@ let
         url = "https://github.com/ysangkok/aeson-diff.git";
         rev = "5f2051042fb350ecd1bb63379cc7e2c768fe494f";
       }) {};
+
+      http-api-data = lib.doJailbreak super.http-api-data;
+      servant = lib.doJailbreak super.servant;
+      servant-server = lib.doJailbreak super.servant-server;
     };
   };
   shell = myHaskellPackages.shellFor {
