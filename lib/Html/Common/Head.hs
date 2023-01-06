@@ -20,7 +20,7 @@ metas descTitle keywords = do
     meta ! name "viewport" ! content "width=device-width, initial-scale=1"
     mapM_ (\(aHE, aCont) -> meta ! httpEquiv aHE ! content aCont) [
         ("Content-Type", "text/html; charset=utf-8"),
-        ("Who-is-awesome", "Kaychan"),
+        ("Who-is-awesome", "Raven"),
         ("X-UA-Compatible", "IE=edge,chrome=1")
         ]
 
