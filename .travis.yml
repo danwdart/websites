@@ -21,10 +21,10 @@ install:
   - echo "trusted-users = $USER" | sudo tee -a /etc/nix/nix.conf
   - sudo systemctl restart nix-daemon
   - nix-env -iA nixpkgs.cachix
-  - cachix use websites
+  - cachix use dandart
 before-script:
   - sudo mkdir -p /etc/nix && echo 'sandbox = true' | sudo tee -a /etc/nix/nix.conf
   - sudo systemctl restart nix-daemon
 script:
-  - cachix use websites
+  - cachix use dandart
   - nix-build
