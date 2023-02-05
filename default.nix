@@ -4,7 +4,7 @@
     nixpkgs = nixpkgs;
     compiler = compiler;
   },
-  compiler ? "ghc94"
+  compiler ? "ghc92"
 } :
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
@@ -18,26 +18,26 @@ let
         rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
       }) {};
       # not released yet
-      req = self.callHackage "req" "3.13.0" {};
-      feed = lib.doJailbreak super.feed;
+      #req = self.callHackage "req" "3.13.0" {};
+      # feed = lib.doJailbreak super.feed;
 
       # 2.17.1.1: aeson >=0.7 && <2.1
-      pandoc = lib.doJailbreak super.pandoc;
+      # pandoc = lib.doJailbreak super.pandoc;
 
       # 0.0.4: text >=1.2 && <1.3
-      string-qq = lib.doJailbreak super.string-qq;
+      # string-qq = lib.doJailbreak super.string-qq;
 
       # 2.1.0: aeson >=1.5 && <2.1
-      hslua-aeson = lib.doJailbreak super.hslua-aeson;
+      # hslua-aeson = lib.doJailbreak super.hslua-aeson;
 
-      aeson-diff = self.callCabal2nix "aeson-diff" (builtins.fetchGit {
-        url = "https://github.com/ysangkok/aeson-diff.git";
-        rev = "5f2051042fb350ecd1bb63379cc7e2c768fe494f";
-      }) {};
+      #aeson-diff = self.callCabal2nix "aeson-diff" (builtins.fetchGit {
+      #  url = "https://github.com/ysangkok/aeson-diff.git";
+      #  rev = "5f2051042fb350ecd1bb63379cc7e2c768fe494f";
+      #}) {};
 
-      http-api-data = lib.doJailbreak super.http-api-data;
-      servant = lib.doJailbreak super.servant;
-      servant-server = lib.doJailbreak super.servant-server;
+      # http-api-data = lib.doJailbreak super.http-api-data;
+      # servant = lib.doJailbreak super.servant;
+      # servant-server = lib.doJailbreak super.servant-server;
     };
   };
   shell = myHaskellPackages.shellFor {
