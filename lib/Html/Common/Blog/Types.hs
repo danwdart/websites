@@ -86,5 +86,6 @@ instance FromJSON BlogMetadata where
         o .: "aliases" <*>
         o .:? "featuredImage" <*>
         (concat <$> (o .:? "tags")) <*> -- Maybe [a] -> [a]
+         -- Maybe [a] -> [a]
         o .:? "scores"
     parseJSON _ = fail "Bad blog metadata"
