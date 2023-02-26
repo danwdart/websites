@@ -8,7 +8,7 @@ on:
     - master
   workflow_dispatch:
 jobs:
-  push-to-cachix:
+  deploy-all-websites:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
