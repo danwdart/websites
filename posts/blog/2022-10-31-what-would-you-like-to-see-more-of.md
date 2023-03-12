@@ -1,6 +1,6 @@
 ---
 title: 'What would you like to see more of?'
-date: 2016-10-28T00:55:00Z
+date: 2022-10-31T00:55:00Z
 draft: false
 aliases: [ "/2022/10/what-would-you-like-to-see-more-of.html" ]
 tags: [you, tech, next, what, like, see, science, would, to, personal]
