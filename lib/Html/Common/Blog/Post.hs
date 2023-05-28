@@ -2,6 +2,8 @@
 
 module Html.Common.Blog.Post where
 
+import           Control.Exception
+import           Control.Exception.ParseFileException
 import           Data.Either
 import           Data.Env.Types
 import           Data.Frontmatter
@@ -22,24 +24,26 @@ import           Text.Pandoc.Options
 import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
 
-parseFile ∷ Text → ParseResult
+parseFile ∷ Text → Either ParseFileException ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r -> ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
+    Done i' r -> Right $ ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (decodeUtf8 i')))
-    Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
-    Partial _ -> error "Returned partial"
+    Fail i' xs' y' -> Left $ PFFail i' xs' y'
+    Partial _ -> Left PFPartial
 
 makeBlogPost ∷ FilePath → FilePath → IO BlogPost
 makeBlogPost postsDir filename = do
     fileString <- readFile filename
     let fileText = T.pack fileString
-    let (ParseResult metadata' html') = parseFile fileText
-    let postId' = dropExtension . takeFileName . Prelude.head . aliases $ metadata'
-    comments' <- getComments postsDir postId'
-    pure $ BlogPost (T.pack postId') metadata' html' comments'
+    case parseFile fileText of
+        Left ex -> throwIO ex -- wah wah wah
+        Right (ParseResult metadata' html') -> do
+            let postId' = dropExtension . takeFileName . Prelude.head . aliases $ metadata'
+            comments' <- getComments postsDir postId'
+            pure $ BlogPost (T.pack postId') metadata' html' comments'
 
 tshowChoiceString ∷ ChoiceString → Text
 tshowChoiceString (Text s) = s
