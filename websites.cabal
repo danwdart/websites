@@ -77,6 +77,7 @@ library
     , Build.MadHacker
     , Build.Normal
     , Build.Sitemap
+    , Control.Exception.InvalidDateException
     , Control.Exception.ParseFileException
     , Data.Site.Blog
     , Data.Site.BlogJolHarg
@@ -168,6 +169,7 @@ executable dev
     , Build.MadHacker
     , Build.Normal
     , Build.Sitemap
+    , Control.Exception.InvalidDateException
     , Control.Exception.ParseFileException
     , Data.Site.Blog
     , Data.Site.BlogJolHarg

@@ -3,18 +3,19 @@
 
 module Html.Common.Blog.Comment where
 
+import           Control.Exception
+import           Control.Exception.ParseFileException
 import           Control.Monad
+import qualified Data.ByteString.Char8        as B
 import           Data.Either
 import           Data.Env.Types
 import           Data.Frontmatter
 import qualified Data.List                    as L
-import           Data.Maybe
 import           Data.Ord
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as T
 import           Data.Text.Encoding
-import qualified Data.Text.IO                 as TIO
 import           Data.Time
 import           Data.Time.Format.ISO8601
 import           Data.Time.Utils
@@ -31,25 +32,29 @@ import           Text.Pandoc.Options
 import           Text.Pandoc.Readers.Markdown
 import           Text.Pandoc.Writers.HTML
 
-parseComment ∷ UTCTime → Text → ParseCommentResult
+parseComment ∷ UTCTime → Text → Either ParseFileException ParseCommentResult
 parseComment date' contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
-    Done i' r -> ParseCommentResult date' r (fromRight "" $ runPure (writeHtml5 (def {
+    Done i' r -> Right $ ParseCommentResult date' r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (decodeUtf8 i')))
-    Fail _ xs y -> error $ "Failure of " <> (show xs <> y)
-    Partial _ -> error "Partial return indicative of failure"
+    Fail i' xs' y' -> Left $ PFFail i' xs' y'
+    Partial _ -> Left PFPartial
 
 getCommentsIfExists ∷ FilePath → FilePath → IO [ParseCommentResult]
 getCommentsIfExists postsDir postId' = do
     commentFiles <- getDirectoryContents $ postsDir </> postId'
     let commentFileNames = (postsDir </>) . (postId' </>) <$> commentFiles
     validCommentFiles <- filterM doesFileExist commentFileNames
-    let dates = stringToTime . dropExtension . takeFileName <$> validCommentFiles
-    commentTexts <- mapM TIO.readFile validCommentFiles
-    let commentData = zipWith parseComment dates commentTexts
-    pure $ L.sortOn (Down . commentDate) commentData
+    let mDates = traverse (stringToTime . dropExtension . takeFileName) validCommentFiles
+    case mDates of
+        Left ex -> throwIO ex
+        Right dates -> do
+            commentTexts <- fmap decodeUtf8 <$> mapM B.readFile validCommentFiles
+            case zipWithM parseComment dates commentTexts of
+                Left ex -> throwIO ex
+                Right commentData -> pure $ L.sortOn (Down . commentDate) commentData
 
 getComments ∷ FilePath → FilePath → IO [ParseCommentResult]
 getComments postsDir postId' = do
@@ -87,11 +92,13 @@ renderComment ParseCommentResult {
     },
     commentHtml
     } = do
+        let authorUrl' :: AttributeValue
+            authorUrl' = maybe mempty (fromString . T.unpack) authorUrl
         small $ do
             a ! name (fromString (iso8601Show commentDate)) $ mempty
             a ! href ("mailto:" <> (fromString . T.unpack $ authorEmail)) $ string (T.unpack author)
             " "
-            when (isJust authorUrl) . (a ! href (fromString . T.unpack $ fromJust authorUrl)) $ " (URL)"
+            a ! href authorUrl' $ " (URL)"
             " said on "
             (a ! href ("#" <> fromString (iso8601Show commentDate))) . fromString $ iso8601Show commentDate
             ":"

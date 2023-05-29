@@ -8,16 +8,16 @@ tags: [windows, 11]
 scores :
     -
         - Hackability
-        - ?/10
+        - 3/10
     -
         - Fun
-        - ?/10
+        - 2/10
     -
         - Value for money
-        - ?/10
+        - 2/10
     -
         - Overall
-        - ?/10
+        - 2/10
 ---
 
 Recently, I have had the opportunity to virtualise Microsoft's newest offering to the desktop OS scene, "unimaginatively" called Windows 11. I quote this because they have only ever had prerelase codenames and that's not what it's about anyway.

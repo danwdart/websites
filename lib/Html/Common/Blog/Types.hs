@@ -11,6 +11,7 @@ import qualified Data.Text        as T
 import           Data.Time
 import           GHC.Generics
 import           Text.Blaze.Html5 as H hiding (main)
+import Text.Read
 
 newtype BlogTag = BlogTag {
     getTag :: Text
@@ -25,9 +26,13 @@ instance FromJSON Score where
     parseJSON (A.String a') = do
         case T.splitOn "/" a' of
             [rating', outOf'] -> do
-                let rating'' = read . T.unpack $ rating' :: Int
-                let outOf'' = read . T.unpack $ outOf' :: Int
-                pure $ Score rating'' outOf''
+                case (do
+                    rating'' <- readEither . T.unpack $ rating' 
+                    outOf'' <- readEither . T.unpack $ outOf'
+                    pure $ Score rating'' outOf''
+                    ) of
+                    Left errMsg -> fail errMsg
+                    Right score -> pure score
             _ -> fail "Problem parsing score."
     parseJSON _ = fail "Problem parsing score."
 

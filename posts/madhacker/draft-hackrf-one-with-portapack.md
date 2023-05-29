@@ -8,16 +8,16 @@ tags: [hackrf,one,hfradio,portapack,vhf,uhf]
 scores :
     -
         - Hackability
-        - ?/10
+        - 8/10
     -
         - Fun
-        - ?/10
+        - 8/10
     -
         - Value for money
-        - ?/10
+        - 7/10
     -
         - Overall
-        - ?/10
+        - 7/10
 ---
 
 Good morning! I recently purchased a new radio device. This device is an SDR - which means practically that it can be controlled by computer.
