@@ -1,8 +1,9 @@
-{-# LANGUAGE DeriveAnyClass, DerivingStrategies #-}
+{-# LANGUAGE DeriveAnyClass     #-}
+{-# LANGUAGE DerivingStrategies #-}
 
 module Control.Exception.InvalidDateException where
 
-import Control.Exception
+import           Control.Exception
 
 data InvalidDateException = InvalidDateException String
     deriving stock (Show)

@@ -11,7 +11,7 @@ import qualified Data.Text        as T
 import           Data.Time
 import           GHC.Generics
 import           Text.Blaze.Html5 as H hiding (main)
-import Text.Read
+import           Text.Read
 
 newtype BlogTag = BlogTag {
     getTag :: Text
@@ -27,7 +27,7 @@ instance FromJSON Score where
         case T.splitOn "/" a' of
             [rating', outOf'] -> do
                 case (do
-                    rating'' <- readEither . T.unpack $ rating' 
+                    rating'' <- readEither . T.unpack $ rating'
                     outOf'' <- readEither . T.unpack $ outOf'
                     pure $ Score rating'' outOf''
                     ) of

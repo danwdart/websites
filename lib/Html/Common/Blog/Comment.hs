@@ -6,25 +6,25 @@ module Html.Common.Blog.Comment where
 import           Control.Exception
 import           Control.Exception.ParseFileException
 import           Control.Monad
-import qualified Data.ByteString.Char8        as B
+import qualified Data.ByteString.Char8                as B
 import           Data.Either
 import           Data.Env.Types
 import           Data.Frontmatter
-import qualified Data.List                    as L
+import qualified Data.List                            as L
 import           Data.Ord
 import           Data.String
-import           Data.Text                    (Text)
-import qualified Data.Text                    as T
+import           Data.Text                            (Text)
+import qualified Data.Text                            as T
 import           Data.Text.Encoding
 import           Data.Time
 import           Data.Time.Format.ISO8601
 import           Data.Time.Utils
 import           Html.Common.Blog.Types
-import           Html.Common.Icon             as Icon
+import           Html.Common.Icon                     as Icon
 import           System.Directory
 import           System.FilePath
-import           Text.Blaze.Html5             as H hiding (main)
-import           Text.Blaze.Html5.Attributes  as A
+import           Text.Blaze.Html5                     as H hiding (main)
+import           Text.Blaze.Html5.Attributes          as A
 import           Text.Pandoc.Class
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Highlighting
@@ -92,7 +92,7 @@ renderComment ParseCommentResult {
     },
     commentHtml
     } = do
-        let authorUrl' :: AttributeValue
+        let authorUrl' ∷ AttributeValue
             authorUrl' = maybe mempty (fromString . T.unpack) authorUrl
         small $ do
             a ! name (fromString (iso8601Show commentDate)) $ mempty

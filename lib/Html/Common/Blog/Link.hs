@@ -19,21 +19,21 @@ renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fro
 renderLink ∷ BlogPost → Html
 renderLink bp = renderMetaLink (postId bp) (metadata bp)
 
-makeLink :: BlogPost -> Html
+makeLink ∷ BlogPost → Html
 makeLink link' = do
     p ! class_ "ps-2" $ renderLink link'
     br
 
-genericMakeLinks :: Foldable t => (t a -> String) -> (a -> Html) -> t a -> Html
+genericMakeLinks ∷ Foldable t ⇒ (t a → String) → (a → Html) → t a → Html
 genericMakeLinks formatter makeSubLinks byPeriod = details ! customAttribute "open" "" ! class_ "ps-2" $ do
      H.summary . fromString . formatter $ byPeriod
      p $ foldMap makeSubLinks byPeriod
 
-makeLinksByMonth :: [BlogPost] -> Html
+makeLinksByMonth ∷ [BlogPost] → Html
 makeLinksByMonth = genericMakeLinks (formatTime defaultTimeLocale "%B" . date . metadata . L.head) makeLink
 
-makeLinksByYear :: [[BlogPost]] -> Html
+makeLinksByYear ∷ [[BlogPost]] → Html
 makeLinksByYear = genericMakeLinks (show . year . date . metadata . L.head . L.head) makeLinksByMonth
-         
+
 makeLinks ∷ [BlogPost] → Html
 makeLinks = foldMap (makeLinksByYear . groupOn (month . date . metadata)) . groupOn (year . date . metadata)
