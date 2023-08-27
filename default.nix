@@ -17,6 +17,18 @@ let
         url = "https://github.com/danwdart/fsutils.git";
         rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
       }) {};
+      typst-symbols = self.callCabal2nix "typst-symbols" (nixpkgs.fetchFromGitHub {
+        owner = "jgm";
+        repo = "typst-symbols";
+        rev = "29dcdd8197c1a3b239918062975e8ac7450523ea";
+        sha256 = "f73CvkGtUWuNn4JgYSLNXTziXMcFYKnge/HJGaiK2tY=";
+      }) {};
+      texmath = self.callCabal2nix "texmath" (nixpkgs.fetchFromGitHub {
+        owner = "jgm";
+        repo = "texmath";
+        rev = "05bec1350255f724b8c449041ec37875fb774329";
+        sha256 = "CY0SLY3DkjmfmdZ4dADbpYypKZIon1GrFGbASoxw5Z4=";
+      }) {};
       # not released yet
       #req = self.callHackage "req" "3.13.0" {};
       # feed = lib.doJailbreak super.feed;
