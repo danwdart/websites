@@ -48,7 +48,7 @@ library
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
   build-depends:
-      base >= 4.16.4.0 && < 5
+      base >= 4.17.0.0 && < 5
     , aeson
     , blaze-html
     , blaze-markup
@@ -150,7 +150,7 @@ executable build
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
   build-depends:
-      base >= 4.16.4.0 && < 5
+      base >= 4.17.0.0 && < 5
     , websites
 
 executable dev
@@ -234,7 +234,7 @@ executable dev
     , Data.Env
     , Data.Env.Types
   build-depends:
-      base >= 4.16.4.0 && < 5
+      base >= 4.17.0.0 && < 5
     , aeson
     , blaze-html
     , blaze-markup
@@ -263,7 +263,7 @@ test-suite websites-test
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
   build-depends:
-      base >= 4.16.4.0 && < 5
+      base >= 4.17.0.0 && < 5
     -- , aeson
     -- , async
     -- , containers
@@ -291,6 +291,6 @@ benchmark websites-bench
   default-language:    GHC2021
   default-extensions:  UnicodeSyntax
   build-depends:
-      base >= 4.16.4.0 && < 5
+      base >= 4.17.0.0 && < 5
     , criterion
     , websites
