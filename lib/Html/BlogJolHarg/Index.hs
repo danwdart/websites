@@ -2,14 +2,14 @@
 
 module Html.BlogJolHarg.Index where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.Site.BlogJolHarg
-import           Html.BlogJolHarg.Header
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.Site.BlogJolHarg
+import Html.BlogJolHarg.Header
+import Html.Common.Error.NotFound
+import Html.Common.Head
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "JolHarg Blog" ! href "/atom.xml"

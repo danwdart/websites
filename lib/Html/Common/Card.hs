@@ -2,13 +2,13 @@
 
 module Html.Common.Card where
 
-import           Control.Monad
-import           Data.Maybe
-import           Data.String
-import           Html.Common.GitHub          as GH
-import           Html.Common.Link
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad
+import Data.Maybe
+import Data.String
+import Html.Common.GitHub          as GH
+import Html.Common.Link
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 genericImage ∷ AttributeValue
 genericImage = "https://web.archive.org/web/20181125122112if_/https://upload.wikimedia.org/wikipedia/commons/1/1a/Code.jpg"

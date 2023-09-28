@@ -2,12 +2,12 @@
 
 module Html.MadHacker.Page.Reviews where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Bootstrap
-import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Bootstrap
+import Html.Common.Page
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 pageReviews ∷ MonadReader Website m ⇒ Html → Html → m Html
 pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do

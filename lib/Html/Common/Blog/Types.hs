@@ -4,14 +4,14 @@
 
 module Html.Common.Blog.Types where
 
-import           Data.Aeson       (FromJSON, (.:), (.:?))
-import qualified Data.Aeson       as A
-import           Data.Text        (Text)
-import qualified Data.Text        as T
-import           Data.Time
-import           GHC.Generics
-import           Text.Blaze.Html5 as H hiding (main)
-import           Text.Read
+import Data.Aeson       (FromJSON, (.:), (.:?))
+import Data.Aeson       qualified as A
+import Data.Text        (Text)
+import Data.Text        qualified as T
+import Data.Time
+import GHC.Generics
+import Text.Blaze.Html5 as H hiding (main)
+import Text.Read
 
 newtype BlogTag = BlogTag {
     getTag :: Text

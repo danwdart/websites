@@ -2,13 +2,13 @@
 
 module Html.M0ORI.Header where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Header
-import           Html.Common.Page
-import           Html.M0ORI.Page.Contact
-import           Html.M0ORI.Page.HamRadio
-import           Text.Blaze.Html5         as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Header
+import Html.Common.Page
+import Html.M0ORI.Page.Contact
+import Html.M0ORI.Page.HamRadio
+import Text.Blaze.Html5         as H hiding (main)
 
 htmlHeader ∷ MonadReader Website m ⇒ m Html
 htmlHeader = do

@@ -2,8 +2,8 @@
 
 module Html.Common.Header where
 
-import           Text.Blaze.Html5            as H
-import           Text.Blaze.Html5.Attributes as A
+import Text.Blaze.Html5            as H
+import Text.Blaze.Html5.Attributes as A
 
 makeHeader ∷ AttributeValue → String → Html → Html → Html
 makeHeader mainLink title' extraHeaderContent content' =

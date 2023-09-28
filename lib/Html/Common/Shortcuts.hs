@@ -2,8 +2,8 @@
 
 module Html.Common.Shortcuts where
 
-import           Html.Common.Link
-import           Text.Blaze.Html5 as H hiding (main)
+import Html.Common.Link
+import Text.Blaze.Html5 as H hiding (main)
 
 ghPages, ghPagesProjects, projectsSource, imdb, yt, ytChan, ytUser, nhs, oeis ∷ AttributeValue
 ghPages = "https://danwdart.github.io/"

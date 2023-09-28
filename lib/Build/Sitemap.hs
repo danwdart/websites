@@ -1,10 +1,10 @@
 module Build.Sitemap where
 
-import           Control.Monad.IO.Class
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.Time.Clock
-import           Web.Sitemap.Gen
+import Control.Monad.IO.Class
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.Time.Clock
+import Web.Sitemap.Gen
 
 sitemap ∷ (MonadReader Website m, MonadIO m) ⇒ m Sitemap
 sitemap = do

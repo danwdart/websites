@@ -20,7 +20,7 @@ import           Data.Functor.Compose       (Compose (Compose, getCompose))
 import           Data.List                  (nub)
 import           Data.Maybe                 (catMaybes)
 import           Data.Set                   (Set)
-import qualified Data.Set                   as S
+import Data.Set qualified                   as S
 import           Data.Text                  (Text, unpack)
 import           Network.HTTP.Client        (Manager, Response (responseStatus),
                                              httpNoBody, newManager,

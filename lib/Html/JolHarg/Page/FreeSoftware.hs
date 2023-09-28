@@ -2,14 +2,14 @@
 
 module Html.JolHarg.Page.FreeSoftware where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Bootstrap
-import           Html.Common.Card
-import           Html.Common.GitHub
-import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Bootstrap
+import Html.Common.Card
+import Html.Common.GitHub
+import Html.Common.Page
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 pageFs ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)
 pageFs = do

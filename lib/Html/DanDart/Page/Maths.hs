@@ -2,12 +2,12 @@
 
 module Html.DanDart.Page.Maths where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Link
-import           Html.Common.Page
-import           Html.Common.Shortcuts
-import           Text.Blaze.Html5      as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Link
+import Html.Common.Page
+import Html.Common.Shortcuts
+import Text.Blaze.Html5      as H hiding (main)
 
 pageMaths ∷ (MonadReader Website m) ⇒ m Html
 pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do

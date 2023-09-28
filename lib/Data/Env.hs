@@ -5,13 +5,13 @@
 
 module Data.Env where
 
-import qualified Build.Blog        as Blog
-import qualified Build.BlogJolHarg as BlogJolHarg
-import qualified Build.DanDart     as DanDart
-import qualified Build.JolHarg     as JolHarg
-import qualified Build.M0ORI       as M0ORI
-import qualified Build.MadHacker   as MadHacker
-import           Data.Env.Types
+import Build.Blog        qualified as Blog
+import Build.BlogJolHarg qualified as BlogJolHarg
+import Build.DanDart     qualified as DanDart
+import Build.JolHarg     qualified as JolHarg
+import Build.M0ORI       qualified as M0ORI
+import Build.MadHacker   qualified as MadHacker
+import Data.Env.Types
 
 productionUrls ∷ Urls
 productionUrls = Urls {

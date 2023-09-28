@@ -2,9 +2,9 @@
 
 module Html.Common.Audio where
 
-import           Html.Common.Link
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Html.Common.Link
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 audioFile ∷ Html → AttributeValue → AttributeValue → Html
 audioFile audioTitle oggFilename mp3Filename = H.div ! class_ "border m-3" $ do

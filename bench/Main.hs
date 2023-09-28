@@ -1,9 +1,9 @@
 module Main where
 
-import           Build
+import Build
 -- https://hackage.haskell.org/package/criterion
 -- http://www.serpentine.com/criterion/tutorial.html
-import           Criterion.Main
+import Criterion.Main
 
 main ∷ IO ()
 main = defaultMain [

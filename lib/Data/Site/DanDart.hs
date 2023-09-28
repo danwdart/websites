@@ -2,8 +2,8 @@
 
 module Data.Site.DanDart where
 
-import           Html.Common.Shortcuts
-import           Text.Blaze.Html5      as H hiding (main)
+import Html.Common.Shortcuts
+import Text.Blaze.Html5      as H hiding (main)
 
 keywords ∷ [AttributeValue]
 keywords = [

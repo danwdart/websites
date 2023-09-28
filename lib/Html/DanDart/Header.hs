@@ -2,21 +2,21 @@
 
 module Html.DanDart.Header where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Header
-import           Html.Common.Page
-import           Html.DanDart.Page.About
-import           Html.DanDart.Page.Characters
-import           Html.DanDart.Page.Contact
-import           Html.DanDart.Page.Favourites
-import           Html.DanDart.Page.Health
-import           Html.DanDart.Page.Intro
-import           Html.DanDart.Page.Maths
-import           Html.DanDart.Page.Music
-import           Html.DanDart.Page.Origami
-import           Html.DanDart.Social
-import           Text.Blaze.Html5             as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Header
+import Html.Common.Page
+import Html.DanDart.Page.About
+import Html.DanDart.Page.Characters
+import Html.DanDart.Page.Contact
+import Html.DanDart.Page.Favourites
+import Html.DanDart.Page.Health
+import Html.DanDart.Page.Intro
+import Html.DanDart.Page.Maths
+import Html.DanDart.Page.Music
+import Html.DanDart.Page.Origami
+import Html.DanDart.Social
+import Text.Blaze.Html5             as H hiding (main)
 
 linkHamRadio ∷ (MonadReader Website m) ⇒ m Html
 linkHamRadio = do

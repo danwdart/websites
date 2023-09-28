@@ -2,8 +2,8 @@
 
 module Html.Common.CSS where
 
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 css ∷ AttributeValue → Html
 css sourceUrl = link ! rel "stylesheet" ! type_ "text/css" ! href sourceUrl ! customAttribute "crossorigin" "anonymous"

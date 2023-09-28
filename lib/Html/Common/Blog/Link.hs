@@ -2,16 +2,16 @@
 
 module Html.Common.Blog.Link where
 
-import qualified Data.List                   as L
-import           Data.List.Extra             as LE
-import           Data.String
-import           Data.Text                   (Text)
-import qualified Data.Text                   as T
-import           Data.Time
-import           Data.Time.Utils
-import           Html.Common.Blog.Types      as BT
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Data.List                   qualified as L
+import Data.List.Extra             as LE
+import Data.String
+import Data.Text                   (Text)
+import Data.Text                   qualified as T
+import Data.Time
+import Data.Time.Utils
+import Html.Common.Blog.Types      as BT
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 renderMetaLink ∷ Text → BlogMetadata → Html
 renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (BT.title m))

@@ -2,12 +2,12 @@
 
 module Html.BlogJolHarg.Page.Blog where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Bootstrap
-import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Bootstrap
+import Html.Common.Page
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 pageBlog ∷ MonadReader Website m ⇒ Html → Html → m Html
 pageBlog blogPostLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do

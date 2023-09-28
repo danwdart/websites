@@ -2,14 +2,14 @@
 
 module Html.DanDart.Page.Favourites where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.Site.DanDart
-import           Data.String
-import           Html.Common.Link
-import           Html.Common.Page
-import           Html.Common.Shortcuts
-import           Text.Blaze.Html5      as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.Site.DanDart
+import Data.String
+import Html.Common.Link
+import Html.Common.Page
+import Html.Common.Shortcuts
+import Text.Blaze.Html5      as H hiding (main)
 
 pageFavourites ∷ (MonadReader Website m) ⇒ m Html
 pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do

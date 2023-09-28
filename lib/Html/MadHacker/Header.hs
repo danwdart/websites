@@ -2,12 +2,12 @@
 
 module Html.MadHacker.Header where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Page
-import           Html.MadHacker.Page.Reviews
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Page
+import Html.MadHacker.Page.Reviews
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 htmlHeader ∷ MonadReader Website m ⇒ Html → Html → m Html
 htmlHeader reviewLinks reviews = do

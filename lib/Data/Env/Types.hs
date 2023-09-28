@@ -3,11 +3,11 @@
 
 module Data.Env.Types where
 
-import           Control.Applicative   (liftA2)
-import           Control.Monad.Reader
-import           Data.Functor.Identity
-import           Data.Set              (Set)
-import           Data.Text             (Text)
+import Control.Applicative   (liftA2)
+import Control.Monad.Reader
+import Data.Functor.Identity
+import Data.Set              (Set)
+import Data.Text             (Text)
 
 data SiteType = Normal | Blog
 

@@ -2,10 +2,10 @@
 
 module Html.DanDart.Social where
 
-import           Html.Common.Shortcuts
-import           Html.Common.Social
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Html.Common.Shortcuts
+import Html.Common.Social
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 socialIcons ∷ Html
 socialIcons = (H.div ! class_ "row social-row") . (H.div ! class_ "text-end social-inside") $ (do

@@ -2,12 +2,12 @@
 
 module Html.M0ORI.Page.HamRadio where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Link
-import           Html.Common.Page
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Link
+import Html.Common.Page
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 pageHamRadio ∷ MonadReader Website m ⇒ m Html
 pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do

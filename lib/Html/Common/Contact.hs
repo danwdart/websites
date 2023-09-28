@@ -2,10 +2,10 @@
 
 module Html.Common.Contact where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Text.Blaze.Html5            as H
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Text.Blaze.Html5            as H
+import Text.Blaze.Html5.Attributes as A
 
 emailHelpSingular, emailHelpPlural ∷ Html
 emailHelpSingular = "I'll never share your email with anyone else."

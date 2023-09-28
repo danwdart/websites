@@ -1,7 +1,7 @@
 
 module Main where
 
-import           Build
+import Build
 
 main ∷ IO ()
 main = runBuild

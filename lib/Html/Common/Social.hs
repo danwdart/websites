@@ -2,11 +2,11 @@
 
 module Html.Common.Social where
 
-import           Data.Text                   (Text)
-import           Html.Common.Icon            as Icon
-import           Html.Common.Link
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Data.Text                   (Text)
+import Html.Common.Icon            as Icon
+import Html.Common.Link
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 type Href = AttributeValue
 type Title = AttributeValue

@@ -2,13 +2,13 @@
 
 module Html.Common.Head where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.String
-import           Html.Common.CSS
-import           Html.Common.Utils
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.String
+import Html.Common.CSS
+import Html.Common.Utils
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 metas ∷ String → [AttributeValue] → Html
 metas descTitle keywords = do

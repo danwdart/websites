@@ -2,11 +2,11 @@
 
 module Html.DanDart.Page.Origami where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Link
-import           Html.Common.Page
-import           Text.Blaze.Html5     as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Link
+import Html.Common.Page
+import Text.Blaze.Html5     as H hiding (main)
 
 pageOrigami ∷ (MonadReader Website m) ⇒ m Html
 pageOrigami = makePage "origami" "Origami" defaultLayout notDefaultPage $ do

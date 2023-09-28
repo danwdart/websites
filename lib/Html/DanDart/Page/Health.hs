@@ -2,12 +2,12 @@
 
 module Html.DanDart.Page.Health where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Link
-import           Html.Common.Page
-import           Html.Common.Shortcuts
-import           Text.Blaze.Html5      as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Link
+import Html.Common.Page
+import Html.Common.Shortcuts
+import Text.Blaze.Html5      as H hiding (main)
 
 pageHealth ∷ (MonadReader Website m) ⇒ m Html
 pageHealth = makePage "health" "Health" defaultLayout notDefaultPage $ do

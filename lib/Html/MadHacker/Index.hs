@@ -2,14 +2,14 @@
 
 module Html.MadHacker.Index where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.Site.MadHacker
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Html.MadHacker.Header
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.Site.MadHacker
+import Html.Common.Error.NotFound
+import Html.Common.Head
+import Html.MadHacker.Header
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "The Mad Hacker: Reviews" ! href "/atom.xml"

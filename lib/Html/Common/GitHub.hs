@@ -5,14 +5,14 @@
 
 module Html.Common.GitHub where
 
-import           Control.Monad.IO.Class
-import           Data.Aeson
-import           Data.Maybe
-import           Data.Text              as T
-import           Data.Text.Encoding
-import           GHC.Generics
-import           Network.HTTP.Req
-import           System.Environment
+import Control.Monad.IO.Class
+import Data.Aeson
+import Data.Maybe
+import Data.Text              as T
+import Data.Text.Encoding
+import GHC.Generics
+import Network.HTTP.Req
+import System.Environment
 
 data Language = LangASM
     | LangBlitzBasic

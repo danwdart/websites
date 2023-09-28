@@ -2,27 +2,27 @@
 
 module Html.Common.Blog.Post where
 
-import           Control.Exception
-import           Control.Exception.ParseFileException
-import           Data.Either
-import           Data.Env.Types
-import           Data.Frontmatter
-import           Data.String
-import           Data.Text                            (Text)
-import qualified Data.Text                            as T
-import           Data.Text.Encoding
-import           Html.Common.Blog.Comment
-import           Html.Common.Blog.Types               as BlogTypes
-import           System.FilePath
-import           Text.Blaze.Html5                     as H hiding (main)
-import           Text.Blaze.Html5.Attributes          as A
-import           Text.Blaze.Internal
-import           Text.Pandoc.Class
-import           Text.Pandoc.Extensions
-import           Text.Pandoc.Highlighting
-import           Text.Pandoc.Options
-import           Text.Pandoc.Readers.Markdown
-import           Text.Pandoc.Writers.HTML
+import Control.Exception
+import Control.Exception.ParseFileException
+import Data.Either
+import Data.Env.Types
+import Data.Frontmatter
+import Data.String
+import Data.Text                            (Text)
+import Data.Text                            qualified as T
+import Data.Text.Encoding
+import Html.Common.Blog.Comment
+import Html.Common.Blog.Types               as BlogTypes
+import System.FilePath
+import Text.Blaze.Html5                     as H hiding (main)
+import Text.Blaze.Html5.Attributes          as A
+import Text.Blaze.Internal
+import Text.Pandoc.Class
+import Text.Pandoc.Extensions
+import Text.Pandoc.Highlighting
+import Text.Pandoc.Options
+import Text.Pandoc.Readers.Markdown
+import Text.Pandoc.Writers.HTML
 
 parseFile ∷ Text → Either ParseFileException ParseResult
 parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of

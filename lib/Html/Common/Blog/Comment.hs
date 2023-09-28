@@ -3,34 +3,34 @@
 
 module Html.Common.Blog.Comment where
 
-import           Control.Exception
-import           Control.Exception.ParseFileException
-import           Control.Monad
-import qualified Data.ByteString.Char8                as B
-import           Data.Either
-import           Data.Env.Types
-import           Data.Frontmatter
-import qualified Data.List                            as L
-import           Data.Ord
-import           Data.String
-import           Data.Text                            (Text)
-import qualified Data.Text                            as T
-import           Data.Text.Encoding
-import           Data.Time
-import           Data.Time.Format.ISO8601
-import           Data.Time.Utils
-import           Html.Common.Blog.Types
-import           Html.Common.Icon                     as Icon
-import           System.Directory
-import           System.FilePath
-import           Text.Blaze.Html5                     as H hiding (main)
-import           Text.Blaze.Html5.Attributes          as A
-import           Text.Pandoc.Class
-import           Text.Pandoc.Extensions
-import           Text.Pandoc.Highlighting
-import           Text.Pandoc.Options
-import           Text.Pandoc.Readers.Markdown
-import           Text.Pandoc.Writers.HTML
+import Control.Exception
+import Control.Exception.ParseFileException
+import Control.Monad
+import Data.ByteString.Char8                qualified as B
+import Data.Either
+import Data.Env.Types
+import Data.Frontmatter
+import Data.List                            qualified as L
+import Data.Ord
+import Data.String
+import Data.Text                            (Text)
+import Data.Text                            qualified as T
+import Data.Text.Encoding
+import Data.Time
+import Data.Time.Format.ISO8601
+import Data.Time.Utils
+import Html.Common.Blog.Types
+import Html.Common.Icon                     as Icon
+import System.Directory
+import System.FilePath
+import Text.Blaze.Html5                     as H hiding (main)
+import Text.Blaze.Html5.Attributes          as A
+import Text.Pandoc.Class
+import Text.Pandoc.Extensions
+import Text.Pandoc.Highlighting
+import Text.Pandoc.Options
+import Text.Pandoc.Readers.Markdown
+import Text.Pandoc.Writers.HTML
 
 parseComment ∷ UTCTime → Text → Either ParseFileException ParseCommentResult
 parseComment date' contents' = case parseYamlFrontmatter (encodeUtf8 contents') of

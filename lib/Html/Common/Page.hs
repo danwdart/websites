@@ -2,13 +2,13 @@
 
 module Html.Common.Page where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.String                 (IsString (fromString))
-import           Html.Common.Bootstrap
-import           Html.Common.Link
-import           Text.Blaze.Html5            as H
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.String                 (IsString (fromString))
+import Html.Common.Bootstrap
+import Html.Common.Link
+import Text.Blaze.Html5            as H
+import Text.Blaze.Html5.Attributes as A
 
 navBtn ∷ Attribute
 navBtn = class_ "nav-link btn btn-sm"

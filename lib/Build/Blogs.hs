@@ -2,16 +2,16 @@
 
 module Build.Blogs where
 
-import           Control.Monad.IO.Class
-import           Control.Monad.Reader
-import           Data.Env.Types
-import qualified Data.Text              as T
-import qualified Data.Text.IO           as TIO
-import           Html.Common.Blog.Feed
-import           Html.Common.Blog.Link
-import           Make
-import           System.FilePath
-import           Text.Blaze.Html5       as H hiding (main, title)
+import Control.Monad.IO.Class
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.Text              qualified as T
+import Data.Text.IO           qualified as TIO
+import Html.Common.Blog.Feed
+import Html.Common.Blog.Link
+import Make
+import System.FilePath
+import Text.Blaze.Html5       as H hiding (main, title)
 
 build ∷ (Html → Html → WebsiteM Html) → WebsiteM Html → WebsiteIO ()
 build page page404 = do

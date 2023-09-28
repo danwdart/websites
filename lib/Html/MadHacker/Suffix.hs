@@ -2,14 +2,14 @@
 
 module Html.MadHacker.Suffix where
 
-import           Control.Monad               (replicateM_)
-import           Data.String                 (IsString (fromString))
-import qualified Data.Text                   as T
-import           Html.Common.Blog.Types
-import           Html.Common.Bootstrap
-import qualified Text.Blaze.Html5            as H
-import           Text.Blaze.Html5
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad               (replicateM_)
+import Data.String                 (IsString (fromString))
+import Data.Text                   qualified as T
+import Html.Common.Blog.Types
+import Html.Common.Bootstrap
+import Text.Blaze.Html5
+import Text.Blaze.Html5            qualified as H
+import Text.Blaze.Html5.Attributes as A
 
 stars ∷ Score → Html
 stars (Score value' total) = do

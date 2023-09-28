@@ -2,14 +2,14 @@
 
 module Html.DanDart.Index where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Data.Site.DanDart
-import           Html.Common.Error.NotFound
-import           Html.Common.Head
-import           Html.DanDart.Header
-import           Text.Blaze.Html5            as H hiding (main)
-import           Text.Blaze.Html5.Attributes as A
+import Control.Monad.Reader
+import Data.Env.Types
+import Data.Site.DanDart
+import Html.Common.Error.NotFound
+import Html.Common.Head
+import Html.DanDart.Header
+import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5.Attributes as A
 
 page ∷ (MonadReader Website m, Semigroup (m Html)) ⇒ m Html
 page = do

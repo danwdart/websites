@@ -2,11 +2,11 @@
 
 module Html.DanDart.Page.Music where
 
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.Audio
-import           Html.Common.Page
-import           Text.Blaze.Html5     as H hiding (main)
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.Audio
+import Html.Common.Page
+import Text.Blaze.Html5     as H hiding (main)
 
 pageMusic ∷ (MonadReader Website m) ⇒ m Html
 pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do

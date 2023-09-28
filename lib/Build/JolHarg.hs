@@ -3,16 +3,16 @@
 
 module Build.JolHarg where
 
-import           Configuration.Dotenv
-import           Control.Monad.IO.Class
-import           Control.Monad.Reader
-import           Data.Env.Types
-import           Html.Common.GitHub
-import           Html.JolHarg.Index
-import           Make
-import           Network.HTTP.Req
-import           Prelude
-import           Text.Blaze.Html5       as H hiding (main)
+import Configuration.Dotenv
+import Control.Monad.IO.Class
+import Control.Monad.Reader
+import Data.Env.Types
+import Html.Common.GitHub
+import Html.JolHarg.Index
+import Make
+import Network.HTTP.Req
+import Prelude
+import Text.Blaze.Html5       as H hiding (main)
 
 
 build ∷ WebsiteIO ()

@@ -3,24 +3,23 @@
 
 module Make where
 
-import           Control.Monad
-import           Control.Monad.Reader
-import qualified Data.ByteString.Lazy.Char8    as BSL
-import           Data.Env.Types
-import           Data.List                     (sortOn)
-import           Data.Ord                      (Down (Down))
-import           Data.Text                     (Text)
-import qualified Data.Text                     as T
-import           Data.Text.IO
-import           Html.Common.Blog.Post
-import           Html.Common.Blog.Types
-import           Prelude                       hiding (putStrLn)
-import           System.Directory              (doesFileExist,
-                                                getDirectoryContents)
-import           System.FilePath               ((</>))
-import           System.Path
-import           Text.Blaze.Html.Renderer.Utf8
-import           Text.Blaze.Html5              as H
+import Control.Monad
+import Control.Monad.Reader
+import Data.ByteString.Lazy.Char8    qualified as BSL
+import Data.Env.Types
+import Data.List                     (sortOn)
+import Data.Ord                      (Down (Down))
+import Data.Text                     (Text)
+import Data.Text                     qualified as T
+import Data.Text.IO
+import Html.Common.Blog.Post
+import Html.Common.Blog.Types
+import Prelude                       hiding (putStrLn)
+import System.Directory              (doesFileExist, getDirectoryContents)
+import System.FilePath               ((</>))
+import System.Path
+import Text.Blaze.Html.Renderer.Utf8
+import Text.Blaze.Html5              as H
 
 make ∷ Text → WebsiteM Html → WebsiteM Html → WebsiteIO ()
 make name page page404 = do
