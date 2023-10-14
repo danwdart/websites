@@ -18,11 +18,13 @@ pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
     row $ do
         (H.div ! class_ "card col-md-4 col-12 text-center") . extLink "mailto:website@jolharg.com" . (H.div ! class_ "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"
-            h4 ! class_ "card-title" $ "You"
+            h4 ! class_ "card-title" $ "Your website here"
             p ! class_ "card-text" $ "Make an enquiry for a website or project.")
+        card "img/equalsmoney.png" "Equals Money" "B2B money management platform" "https://equalsmoney.com"
+        card "img/fairfx.png" "FairFX" "Currency card and conversion" "https://fairfx.com"
         card "img/roqqett.png" "Roqqett" "Fast checkout app and website plugin" "https://roqqett.com"
-        card "img/timezap.png"  "TimeZap" "Set-and-forget accurate time tracking" "https://timezap.ai"
-        card "img/eppiq.png"    "Eppiq Marketing" "Digital marketing agency" "https://eppiq.co.uk"
+        card "img/timezap.png" "TimeZap" "Set-and-forget accurate time tracking" "https://timezap.ai"
+        card "img/eppiq.png" "Eppiq Marketing" "Digital marketing agency" "https://eppiq.co.uk"
         card "img/penta.png" "Penta Consulting" "Web Agency" "https://www.pentaconsulting.com/"
         card "img/dotfive.png" "DotFive" "Promotional website" "https://dotfive.co.uk"
         card "img/usaycompare.png" "Usaycompare" "Health insurance comparison" "https://usaycompare.co.uk"
