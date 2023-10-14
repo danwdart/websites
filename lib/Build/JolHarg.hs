@@ -19,8 +19,8 @@ build ∷ WebsiteIO ()
 build = do
   slug' <- asks slug
   _ <- liftIO $ loadFile defaultConfig
-  reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
   reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
-  let page' = runReader page (reposDan <> reposJH) :: Reader Website Html
+  reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
+  let page' = runReader page (reposJH <> reposDan) :: Reader Website Html
 
   make slug' page' page404
