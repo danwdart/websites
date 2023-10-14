@@ -38,12 +38,12 @@ pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
         card "img/dadi.png" "DADI" "DADI web services suite" "https://docs.dadi.cloud/"
         card "img/planetradio.png" "Planet Radio" "Collection of UK radio magazine websites" "https://planetradio.co.uk/"
         card "img/kompli.png" "Kompli Global" "Due diligence and search intelligence" "https://kompli-global.com"
-        card "img/canddi.png" "CANDDi" "Smart web analytics" "https://canddi.com"
         card "img/cloudbanter.png" "Cloudbanter" "Mobile operator messaging system" "http://cloudbanter.com/"
         card "img/reviverest.png" "Revive Ad server REST API" "RESTful API for Open source ad server" "https://www.reviveadserverrestapi.com/"
         cardDefunct "ThemeAttic" "Inventors' search platform"
         card "img/soampli.png" "SoAmpli" "Social media amplification" "https://soampli.com"
         card "img/viewex.png" "Viewex" "Advertising revenue optimisation" "http://viewex.co.uk"
+        card "img/canddi.png" "CANDDi" "Smart web analytics" "https://canddi.com"
         card "img/mobilefun.png" "Mobile Fun" "Web shop for phones and accessories" "http://mobilefun.co.uk"
         -- gamingzap now redirects to mobilefun
         card "img/gamingzap.png" "Gamingzap" "Web shop for gaming devices and accessories" "https://www.mobilefun.co.uk/"
