@@ -1,4 +1,4 @@
-module Main where
+module Main (main) where
 
 import Build
 -- https://hackage.haskell.org/package/criterion
