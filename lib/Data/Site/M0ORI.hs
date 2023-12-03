@@ -9,6 +9,16 @@ keywords ∷ [AttributeValue]
 keywords = [
     "dan",
     "dart",
+    "exmouth",
+    "exeter",
+    "devon",
+    "england",
+    "united kingdom",
+    "uk",
+    "en_GB",
+    "gb",
+    "Great Britain",
+    "Britain",
     "radio",
     "call",
     "sign",
@@ -18,5 +28,14 @@ keywords = [
     "qrz"
     ]
 
-descTitle ∷ String
-descTitle = "M0ORI call sign: Dan Dart, England"
+title' ∷ String
+title' = "M0ORI call sign: Dan Dart, England"
+
+description' :: String
+description' = "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth."
+
+url' :: String
+url' = "https://m0ori.com"
+
+imgUrl :: String
+imgUrl = "https://www.hamqsl.com/solar101vhf.php"

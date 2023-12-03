@@ -9,6 +9,16 @@ keywords ∷ [AttributeValue]
 keywords = [
     "dan",
     "dart",
+    "exmouth",
+    "exeter",
+    "devon",
+    "england",
+    "united kingdom",
+    "uk",
+    "en_GB",
+    "gb",
+    "Great Britain",
+    "Britain",
     "software",
     "engineer",
     "mathematics",
@@ -30,8 +40,17 @@ keywords = [
     "debian"
     ]
 
-descTitle ∷ String
-descTitle = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician"
+title' ∷ String
+title' = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician"
+
+description' :: String
+description' = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics."
+
+url' :: String
+url' = "https://dandart.co.uk"
+
+imgUrl :: String
+imgUrl = "https://dandart.co.uk/img/header.png"
 
 musicalStyles ∷ [Html]
 musicalStyles = [

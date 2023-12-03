@@ -16,11 +16,11 @@ page ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)
 page = do
     header' <- htmlHeader
     pure $ do
-        head' <- htmlHead descTitle keywords mempty
+        head' <- htmlHead title' description' url' imgUrl keywords mempty
         header'' <- header'
         pure . (docTypeHtml ! lang "en-GB") $ do
             head'
             header''
 
 page404 ∷ MonadReader Website m ⇒ m Html
-page404 = defaultPage404 descTitle keywords mempty
+page404 = defaultPage404 title' description' url' imgUrl keywords mempty

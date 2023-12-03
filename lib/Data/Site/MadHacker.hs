@@ -6,6 +6,16 @@ import Text.Blaze.Html5 as H hiding (main)
 
 keywords ∷ [AttributeValue]
 keywords = [
+    "exmouth",
+    "exeter",
+    "devon",
+    "england",
+    "united kingdom",
+    "uk",
+    "en_GB",
+    "gb",
+    "Great Britain",
+    "Britain",
     "mad",
     "hacker",
     "tech",
@@ -16,5 +26,14 @@ keywords = [
     "dart"
     ]
 
-descTitle ∷ String
-descTitle = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast"
+title' ∷ String
+title' = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast"
+
+description' :: String
+description' = "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored."
+
+url' :: String
+url' = "https://madhackerreviews.com"
+
+imgUrl :: String
+imgUrl = "https://dandart.co.uk/img/header.png"

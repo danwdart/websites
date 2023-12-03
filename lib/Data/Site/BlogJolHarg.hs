@@ -8,6 +8,16 @@ keywords ∷ [AttributeValue]
 keywords = [
     "jolharg",
     "blog",
+    "exmouth",
+    "exeter",
+    "devon",
+    "england",
+    "united kingdom",
+    "uk",
+    "en_GB",
+    "gb",
+    "Great Britain",
+    "Britain",
     "software",
     "engineer",
     "mathematics",
@@ -29,5 +39,14 @@ keywords = [
     "debian"
     ]
 
-descTitle ∷ String
-descTitle = "JolHarg Blog: Software Engineering Blog"
+title' ∷ String
+title' = "JolHarg Blog: Software Engineering Blog"
+
+description' :: String
+description' = "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier."
+
+url' :: String
+url' = "https://blog.jolharg.com"
+
+imgUrl :: String
+imgUrl = "https://jolharg.com/img/header.png"

@@ -58,8 +58,8 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
         li . extLink (bulbapedia . fromString $ name') $ fromString name'
         ) pokémonList
     p $ strong "Music"
-    ul $ mapM_ (\(title', list') -> do
-        title'
+    ul $ mapM_ (\(title'', list') -> do
+        title''
         ul $ mapM_ li list'
         ) musicList
     p $ strong "Musical styles"

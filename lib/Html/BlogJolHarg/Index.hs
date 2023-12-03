@@ -17,10 +17,10 @@ extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "Jol
 page ∷ MonadReader Website m ⇒ Html → Html → m Html
 page blogPostLinks blogPosts = do
     header' <- htmlHeader blogPostLinks blogPosts
-    head' <- htmlHead descTitle keywords extraHead
+    head' <- htmlHead title' description' url' imgUrl keywords extraHead
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
 
 page404 ∷ MonadReader Website m ⇒ m Html
-page404 = defaultPage404 descTitle keywords extraHead
+page404 = defaultPage404 title' description' url' imgUrl keywords extraHead
