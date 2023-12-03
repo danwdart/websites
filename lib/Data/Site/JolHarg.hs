@@ -7,6 +7,11 @@ import Text.Blaze.Html5 as H hiding (main)
 keywords ∷ [AttributeValue]
 keywords = [
     "jolharg",
+    "dan",
+    "dart",
+    "dandart",
+    "daniel dart",
+    "dan dart",
     "exmouth",
     "exeter",
     "devon",
@@ -37,6 +42,10 @@ keywords = [
     "hask",
     "ask",
     "question",
+    "haskell",
+    "typescript",
+    "react.js",
+    "react",
     "css",
     "coffee",
     "coffeescript",

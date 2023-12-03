@@ -23,7 +23,14 @@ keywords = [
     "reviews",
     "review",
     "dan",
-    "dart"
+    "dart",
+    "dandart",
+    "daniel dart",
+    "dan dart",
+    "haskell",
+    "typescript",
+    "react.js",
+    "react"
     ]
 
 title' ∷ String
