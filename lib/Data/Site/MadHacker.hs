@@ -36,11 +36,11 @@ keywords = [
 title' ∷ String
 title' = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast"
 
-description' :: String
+description' ∷ String
 description' = "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored."
 
-url' :: String
+url' ∷ String
 url' = "https://madhackerreviews.com"
 
-imgUrl :: String
+imgUrl ∷ String
 imgUrl = "https://dandart.co.uk/img/header.png"

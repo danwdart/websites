@@ -50,13 +50,13 @@ keywords = [
 title' ∷ String
 title' = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician"
 
-description' :: String
+description' ∷ String
 description' = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics."
 
-url' :: String
+url' ∷ String
 url' = "https://dandart.co.uk"
 
-imgUrl :: String
+imgUrl ∷ String
 imgUrl = "https://dandart.co.uk/img/header.png"
 
 musicalStyles ∷ [Html]

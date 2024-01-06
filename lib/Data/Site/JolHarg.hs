@@ -62,11 +62,11 @@ keywords = [
 title' ∷ String
 title' = "JolHarg: Your Software Engineering Partner"
 
-description' :: String
+description' ∷ String
 description' = "JolHarg Ltd can provide you with all kinds of software engineering including fully-functioning web and phone applications."
 
-url' :: String
+url' ∷ String
 url' = "https://jolharg.com"
 
-imgUrl :: String
+imgUrl ∷ String
 imgUrl = "https://jolharg.com/img/header.png"

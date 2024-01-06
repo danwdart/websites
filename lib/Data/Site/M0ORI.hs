@@ -38,11 +38,11 @@ keywords = [
 title' ∷ String
 title' = "M0ORI call sign: Dan Dart, England"
 
-description' :: String
+description' ∷ String
 description' = "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth."
 
-url' :: String
+url' ∷ String
 url' = "https://m0ori.com"
 
-imgUrl :: String
+imgUrl ∷ String
 imgUrl = "https://www.hamqsl.com/solar101vhf.php"

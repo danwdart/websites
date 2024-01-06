@@ -10,7 +10,7 @@ import Html.Common.Utils
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-metas ∷ String → String -> String -> String -> [AttributeValue] → Html
+metas ∷ String → String → String → String → [AttributeValue] → Html
 metas title' description url imgUrl keywords = do
     meta ! charset "utf-8"
     mapM_ (\(aName, aCont) -> meta ! name aName ! content aCont) [
@@ -39,7 +39,7 @@ metas title' description url imgUrl keywords = do
         ("twitter:image", fromString imgUrl)
         ]
 
-htmlHead ∷ (MonadReader Website m) ⇒ String → String -> String -> String -> [AttributeValue] → Html → m Html
+htmlHead ∷ (MonadReader Website m) ⇒ String → String → String → String → [AttributeValue] → Html → m Html
 htmlHead title' description url imgUrl keywords extraHead = do
     livereload' <- asks livereload
     pure . H.head $ do

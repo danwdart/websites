@@ -49,11 +49,11 @@ keywords = [
 title' ∷ String
 title' = "JolHarg Blog: Software Engineering Blog"
 
-description' :: String
+description' ∷ String
 description' = "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier."
 
-url' :: String
+url' ∷ String
 url' = "https://blog.jolharg.com"
 
-imgUrl :: String
+imgUrl ∷ String
 imgUrl = "https://jolharg.com/img/header.png"

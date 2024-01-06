@@ -50,11 +50,11 @@ keywords = [
 title' ∷ String
 title' = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio Ham, Musician"
 
-description' :: String
+description' ∷ String
 description' = "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world."
 
-url' :: String
+url' ∷ String
 url' = "https://blog.dandart.co.uk"
 
-imgUrl :: String
+imgUrl ∷ String
 imgUrl = "https://dandart.co.uk/img/header.png"
