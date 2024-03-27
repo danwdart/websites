@@ -2,6 +2,7 @@
 
 module Html.Common.Head where
 
+import Control.Monad               (when)
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String

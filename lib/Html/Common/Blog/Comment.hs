@@ -1,5 +1,7 @@
 
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE Unsafe #-}
+{-# OPTIONS_GHC -Wno-unsafe #-}
 
 module Html.Common.Blog.Comment where
 
