@@ -46,7 +46,7 @@ makeBlogPost postsDir filename = do
             pure $ BlogPost (T.pack postId') metadata' html' comments'
 
 tshowChoiceString ∷ ChoiceString → Text
-tshowChoiceString (Text s) = s
+tshowChoiceString (Text text') = text'
 tshowChoiceString _        = ""
 
 isLink ∷ StaticString → Bool
