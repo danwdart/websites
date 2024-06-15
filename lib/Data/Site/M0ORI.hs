@@ -2,9 +2,7 @@
 
 module Data.Site.M0ORI where
 
-
-import Text.Blaze.Html5 as H hiding (main)
-
+{-
 keywords ∷ [AttributeValue]
 keywords = [
     "dan",
@@ -34,6 +32,7 @@ keywords = [
     "yaesu",
     "qrz"
     ]
+-}
 
 title' ∷ String
 title' = "M0ORI call sign: Dan Dart, England"

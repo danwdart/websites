@@ -5,6 +5,7 @@ module Data.Site.DanDart where
 import Html.Common.Shortcuts
 import Text.Blaze.Html5      as H hiding (main)
 
+{-
 keywords ∷ [AttributeValue]
 keywords = [
     "dan",
@@ -46,6 +47,7 @@ keywords = [
     "ubuntu",
     "debian"
     ]
+-}
 
 title' ∷ String
 title' = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician"

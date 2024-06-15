@@ -2,8 +2,7 @@
 
 module Data.Site.MadHacker where
 
-import Text.Blaze.Html5 as H hiding (main)
-
+{-
 keywords ∷ [AttributeValue]
 keywords = [
     "exmouth",
@@ -32,6 +31,7 @@ keywords = [
     "react.js",
     "react"
     ]
+-}
 
 title' ∷ String
 title' = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast"

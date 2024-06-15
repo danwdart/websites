@@ -9,9 +9,9 @@ import Html.Common.Head
 import Text.Blaze.Html5            as H
 import Text.Blaze.Html5.Attributes as A
 
-defaultPage404 ∷ (MonadReader Website m) ⇒ String → String → String → String → [AttributeValue] → Html → m Html
-defaultPage404 title' description url imgUrl keywords extraHead = do
-    head' <- htmlHead title' description url imgUrl keywords extraHead
+defaultPage404 ∷ (MonadReader Website m) ⇒ String → String → String → String → Html → m Html
+defaultPage404 title' description url imgUrl extraHead = do
+    head' <- htmlHead title' description url imgUrl extraHead
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         body $ do

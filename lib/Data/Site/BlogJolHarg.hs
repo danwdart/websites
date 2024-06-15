@@ -2,8 +2,7 @@
 
 module Data.Site.BlogJolHarg where
 
-import Text.Blaze.Html5 as H hiding (main)
-
+{-
 keywords ∷ [AttributeValue]
 keywords = [
     "jolharg",
@@ -45,6 +44,7 @@ keywords = [
     "ubuntu",
     "debian"
     ]
+-}
 
 title' ∷ String
 title' = "JolHarg Blog: Software Engineering Blog"
