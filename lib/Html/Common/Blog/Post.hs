@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 module Html.Common.Blog.Post where
 
@@ -58,20 +59,20 @@ isExternalLink acs = "http" `T.isPrefixOf` tshowChoiceString acs
 isFeed ∷ ChoiceString → Bool
 isFeed acs = ".xml" `T.isSuffixOf` tshowChoiceString acs
 
-setExternalLink ∷ MarkupM a → MarkupM a
+setExternalLink ∷ MarkupM anyLink → MarkupM anyLink
 setExternalLink (AddAttribute ass1 ass2 acs res) =
     AddAttribute "target" "target=\"" "_blank" .
         AddAttribute "rel" "rel=\"" "noreferrer" $
             AddAttribute ass1 ass2 acs res
 setExternalLink as = as
 
-setDownload ∷ MarkupM a → MarkupM a
+setDownload ∷ MarkupM anyLink → MarkupM anyLink
 setDownload (AddAttribute ass1 ass2 acs res) =
     AddAttribute "download" "download=\"" "" $
         AddAttribute ass1 ass2 acs res
 setDownload as = as
 
-fixExternalLinks ∷ MarkupM a → MarkupM a
+fixExternalLinks ∷ MarkupM anyLink → MarkupM anyLink
 fixExternalLinks at@(AddAttribute _ _ acs (Parent ss1 _ _ _)) =
     if isLink ss1 then
         if isExternalLink acs

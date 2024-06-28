@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 
 module Html.Common.Blog.Link where
 
@@ -24,7 +25,7 @@ makeLink link' = do
     p ! class_ "ps-2" $ renderLink link'
     br
 
-genericMakeLinks ∷ Foldable t ⇒ (t a → String) → (a → Html) → t a → Html
+genericMakeLinks ∷ Foldable t ⇒ (t anyLink → String) → (anyLink → Html) → t anyLink → Html
 genericMakeLinks formatter makeSubLinks byPeriod = details ! customAttribute "open" "" ! class_ "ps-2" $ do
      H.summary . fromString . formatter $ byPeriod
      p $ foldMap makeSubLinks byPeriod
