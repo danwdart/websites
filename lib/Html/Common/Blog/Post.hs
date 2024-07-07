@@ -48,7 +48,7 @@ makeBlogPost postsDir filename = do
 
 tshowChoiceString ∷ ChoiceString → Text
 tshowChoiceString (Text text') = text'
-tshowChoiceString _        = ""
+tshowChoiceString _            = ""
 
 isLink ∷ StaticString → Bool
 isLink ss1 = "a" == getText ss1
