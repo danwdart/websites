@@ -14,7 +14,7 @@ import Text.Blaze.Html5.Attributes as A
 pagePortfolio ∷ (MonadReader Website m) ⇒ m Html
 pagePortfolio = makePage "portfolio" "Portfolio" customLayout defaultPage $ do
     row . (H.div ! class_ "col-md-12 text-center") $
-        p "Some of the websites, projects and companies JolHarg Ltd has been involved with are:"
+        p "Some of the websites, projects and companies Dan Dart has been involved with are:"
     row $ do
         (H.div ! class_ "card col-md-4 col-12 text-center") . extLink "mailto:website@jolharg.com" . (H.div ! class_ "card-body") $ (do
             img ! class_ "card-img-top" ! src "img/sample.png"

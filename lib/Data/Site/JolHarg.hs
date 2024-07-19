@@ -60,10 +60,10 @@ keywords = [
 -}
 
 title' ∷ String
-title' = "JolHarg: Your Software Engineering Partner"
+title' = "Dan Dart: Your Software Engineering Partner"
 
 description' ∷ String
-description' = "JolHarg Ltd can provide you with all kinds of software engineering including fully-functioning web and phone applications."
+description' = "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications."
 
 url' ∷ String
 url' = "https://jolharg.com"
