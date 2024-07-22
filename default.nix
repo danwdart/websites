@@ -32,8 +32,7 @@ let
     buildInputs = tools.defaultBuildTools;
     withHoogle = false;
   };
-  exe = lib.justStaticExecutables (myHaskellPackages.websites);
-in
+  in
 {
   inherit shell;
   websites = lib.justStaticExecutables (myHaskellPackages.websites);
