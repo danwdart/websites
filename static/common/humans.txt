@@ -1,13 +1,13 @@
 /* TEAM */
 Dev: Dan Dart
 Site: https://dandart.co.uk
-Location: Shepton Mallet, UK
+Location: Exmouth, UK
 
 /* THANKS */
 Waifu: Raven
 
 /* SITE */
-Last update: 2020/07/25
+Last update: 2024/08/28
 Standards: HTML-LS, CSS3
 Components: Google Fonts
 Software: Haskell
