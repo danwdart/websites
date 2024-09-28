@@ -50,7 +50,7 @@ library
 
   build-depends:
     , aeson
-    , base          >=4.19.1.0 && <5
+    , base          >=4.20.0.0 && <5
     , blaze-html
     , blaze-markup
     , bytestring
@@ -58,7 +58,7 @@ library
     , directory
     , dotenv
     , extra
-    , feed
+    , feed >= 1.3.2.1
     , filepath
     , frontmatter
     , fsutils       >=0.1.4
@@ -157,7 +157,7 @@ executable build
     UnicodeSyntax
 
   build-depends:
-    , base      >=4.19.1.0 && <5
+    , base      >=4.20.0.0 && <5
     , websites
 
 executable dev
@@ -247,7 +247,7 @@ executable dev
 
   build-depends:
     , aeson
-    , base          >=4.19.1.0 && <5
+    , base          >=4.20.0.0 && <5
     , blaze-html
     , blaze-markup
     , bytestring
@@ -255,7 +255,7 @@ executable dev
     , directory
     , dotenv
     , extra
-    , feed
+    , feed >= 1.3.2.1
     , filepath
     , frontmatter
     , fsutils       >=0.1.4
@@ -277,9 +277,7 @@ test-suite websites-test
     DerivingStrategies
     ImportQualifiedPost
     UnicodeSyntax
-
-  build-depends:      base >=4.19.1.0 && <5
-
+  build-depends:      base >=4.20.0.0 && <5
 -- , aeson
 -- , async
 -- , containers
@@ -297,6 +295,7 @@ test-suite websites-test
 -- , vector
 -- , webdriver
 -- , websites
+  build-tool-depends: hspec-discover:hspec-discover
 
 benchmark websites-bench
   import:             shared-properties
@@ -311,6 +310,6 @@ benchmark websites-bench
     UnicodeSyntax
 
   build-depends:
-    , base       >=4.19.1.0 && <5
+    , base       >=4.20.0.0 && <5
     , criterion
     , websites

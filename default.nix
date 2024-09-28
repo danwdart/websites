@@ -4,7 +4,7 @@
     nixpkgs = nixpkgs;
     compiler = compiler;
   },
-  compiler ? "ghc98"
+  compiler ? "ghc910"
 } :
 let
   gitignore = nixpkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
@@ -13,10 +13,14 @@ let
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
       websites = lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {});
-      fsutils = self.callCabal2nix "fsutils" (builtins.fetchGit {
+      fsutils = lib.doJailbreak (self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
         rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
-      }) {};
+      }) {});
+      feed = lib.doJailbreak super.feed;
+      toml-parser = lib.doJailbreak super.toml-parser;
+      citeproc = lib.doJailbreak super.citeproc;
+      pandoc = lib.doJailbreak super.pandoc;
     };
   };
   shell = myHaskellPackages.shellFor {
