@@ -44,4 +44,4 @@ url' ∷ String
 url' = "https://m0ori.com"
 
 imgUrl ∷ String
-imgUrl = "https://www.hamqsl.com/solar101vhf.php"
+imgUrl = "https://www.hamqsl.com/solar101vhf.php?muf=trms&kindex=tromso"
