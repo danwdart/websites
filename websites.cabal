@@ -162,6 +162,7 @@ executable build
 
 executable dev
   import:             shared-properties
+  ghc-options:        -Wwarn
   hs-source-dirs:     src lib
   main-is:            build.hs
   default-language:   GHC2021
