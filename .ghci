@@ -1,5 +1,3 @@
 :set -Wno-unused-packages
 :set -Wno-prepositive-qualified-module
-:set -XDerivingStrategies
-:set -XImportQualifiedPost
 :set -XUnicodeSyntax

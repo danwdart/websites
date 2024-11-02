@@ -13,10 +13,8 @@ build-type:         Simple
 extra-source-files: README.md
 
 common shared-properties
-  default-language:   GHC2021
+  default-language:   GHC2024
   default-extensions:
-    DerivingStrategies
-    ImportQualifiedPost
     UnicodeSyntax
 
   ghc-options:
@@ -42,10 +40,8 @@ library
     -Werror -haddock
 
   ghcjs-options:      -dedupe
-  default-language:   GHC2021
+  default-language:   GHC2024
   default-extensions:
-    DerivingStrategies
-    ImportQualifiedPost
     UnicodeSyntax
 
   build-depends:
@@ -155,10 +151,8 @@ executable build
   import:             shared-properties
   hs-source-dirs:     src
   main-is:            build.hs
-  default-language:   GHC2021
+  default-language:   GHC2024
   default-extensions:
-    DerivingStrategies
-    ImportQualifiedPost
     UnicodeSyntax
 
   build-depends:
@@ -170,10 +164,8 @@ executable dev
   ghc-options:        -Wwarn
   hs-source-dirs:     src lib
   main-is:            build.hs
-  default-language:   GHC2021
+  default-language:   GHC2024
   default-extensions:
-    DerivingStrategies
-    ImportQualifiedPost
     UnicodeSyntax
 
   other-modules:
@@ -283,10 +275,8 @@ test-suite websites-test
   type:               exitcode-stdio-1.0
   main-is:            Spec.hs
   other-modules:      E2E.Site.CommonSpec
-  default-language:   GHC2021
+  default-language:   GHC2024
   default-extensions:
-    DerivingStrategies
-    ImportQualifiedPost
     UnicodeSyntax
   build-depends:      base >=4.20.0.0 && <5
 -- , aeson
@@ -314,10 +304,8 @@ benchmark websites-bench
   type:               exitcode-stdio-1.0
   main-is:            Main.hs
   other-modules:
-  default-language:   GHC2021
+  default-language:   GHC2024
   default-extensions:
-    DerivingStrategies
-    ImportQualifiedPost
     UnicodeSyntax
 
   build-depends:

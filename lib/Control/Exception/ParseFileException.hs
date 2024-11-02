@@ -1,5 +1,4 @@
 {-# LANGUAGE DeriveAnyClass     #-}
-{-# LANGUAGE DerivingStrategies #-}
 
 module Control.Exception.ParseFileException where
 
