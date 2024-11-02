@@ -32,11 +32,11 @@ notDefaultPage = mempty
 
 defaultLayout ∷ Html → Html
 defaultLayout = row .
-    (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-light")
+    (H.div ! class_ "col-md-8 offset-md-2 py-3 mb-3 bg-page")
 
 contactLayout ∷ Html → Html
 contactLayout = row .
-    (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-light p-3 mb-3")
+    (H.div ! class_ "col-lg-6 offset-lg-3 col-sm-12 col-md-12 col-xs-12 bg-page p-3 mb-3")
 
 customLayout ∷ Html → Html
 customLayout = Prelude.id

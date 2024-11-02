@@ -3,6 +3,8 @@
 
 module Html.Common.Blog.Feed where
 
+import Data.List.NonEmpty            (NonEmpty)
+import Data.List.NonEmpty            qualified as LNE
 import Data.Text                     (Text)
 import Data.Text.Lazy                (toStrict)
 import Data.Text.Lazy                qualified as TL
@@ -24,22 +26,21 @@ toEntry domain (BlogPost postId' BlogMetadata { title = title', date = date' } h
     , Atom.entryContent = Just (Atom.HTMLContent . toStrict . renderHtml $ html')
     }
 
-dateUpdated ∷ [BlogPost] → Text
-dateUpdated []    = ""
-dateUpdated posts = tshow . date . metadata . Prelude.head $ posts
+dateUpdated ∷ NonEmpty BlogPost → Text
+dateUpdated = tshow . date . metadata . LNE.head
 
-feed ∷ Text → Text → [BlogPost] → Atom.Feed
+feed ∷ Text → Text → NonEmpty BlogPost → Atom.Feed
 feed domain title' posts = Atom.nullFeed
     (domain <> "atom.xml") -- ID
     (Atom.TextString title') -- Title
     (dateUpdated posts)
 
-makeRSSFeed ∷ Text → Text → [BlogPost] → Text
+makeRSSFeed ∷ Text → Text → NonEmpty BlogPost → Text
 makeRSSFeed domain title' posts = maybe "" TL.toStrict (
     Export.textFeed $
     (feed domain title' posts)
     {
-        Atom.feedEntries = fmap (toEntry domain) posts,
+        Atom.feedEntries = toEntry domain <$> LNE.toList posts,
         Atom.feedLinks = [
             Atom.nullLink domain
             ]

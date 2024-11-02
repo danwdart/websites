@@ -3,8 +3,8 @@
 
 module Html.Common.Blog.Link where
 
-import Data.List                   qualified as L
-import Data.List.Extra             as LE
+import Data.List.NonEmpty          (NonEmpty)
+import Data.List.NonEmpty          qualified as LNE
 import Data.String
 import Data.Text                   (Text)
 import Data.Text                   qualified as T
@@ -30,11 +30,17 @@ genericMakeLinks formatter makeSubLinks byPeriod = details ! customAttribute "op
      H.summary . fromString . formatter $ byPeriod
      p $ foldMap makeSubLinks byPeriod
 
-makeLinksByMonth ∷ [BlogPost] → Html
-makeLinksByMonth = genericMakeLinks (formatTime defaultTimeLocale "%B" . date . metadata . L.head) makeLink
+makeLinksByMonth ∷ NonEmpty BlogPost → Html
+makeLinksByMonth = genericMakeLinks (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) makeLink -- you could use comonad extract here but what is a type with a head
 
-makeLinksByYear ∷ [[BlogPost]] → Html
-makeLinksByYear = genericMakeLinks (show . year . date . metadata . L.head . L.head) makeLinksByMonth
+makeLinksByYear ∷ NonEmpty (NonEmpty BlogPost) → Html
+makeLinksByYear = genericMakeLinks (show . year . date . metadata . LNE.head . LNE.head) makeLinksByMonth
 
-makeLinks ∷ [BlogPost] → Html
-makeLinks = foldMap (makeLinksByYear . groupOn (month . date . metadata)) . groupOn (year . date . metadata)
+-- TODO libify
+groupOnNonEmpty ∷ Eq k ⇒ (a' → k) → NonEmpty a' → NonEmpty (NonEmpty a')
+groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
+    -- redefine on so we avoid duplicate computation for most values.
+    where (.*.) `on2` fn = \x -> let fx = fn x in \y -> fx .*. fn y
+
+makeLinks ∷ NonEmpty BlogPost → Html
+makeLinks = foldMap (makeLinksByYear . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata)

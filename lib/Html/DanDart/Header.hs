@@ -38,20 +38,34 @@ linkReviews = do
     urlMadHacker' <- asks (urlMadHacker . urls)
     pure $ extNav (textValue urlMadHacker') "Reviews"
 
-htmlHeader ∷ (MonadReader Website m, Semigroup (m Html)) ⇒ m Html
+htmlHeader ∷ (MonadReader Website m) ⇒ m Html
 htmlHeader = do
-    pages <- do
-        pageIntro <>
-            pageCharacters <>
-            pageFavourites <>
-            linkHamRadio <>
-            pageHealth <>
-            pageMusic <>
-            pageMaths <>
-            pageOrigami <>
-            pageAbout <>
-            linkSoftware <>
-            linkBlog <>
-            linkReviews <>
-            pageContact
+    pageIntro' <- pageIntro
+    pageCharacters' <- pageCharacters
+    pageFavourites' <- pageFavourites
+    linkHamRadio' <- linkHamRadio
+    pageHealth' <- pageHealth
+    pageMusic' <- pageMusic
+    pageMaths' <- pageMaths
+    pageOrigami' <- pageOrigami
+    pageAbout' <- pageAbout
+    linkSoftware' <- linkSoftware
+    linkBlog' <- linkBlog
+    linkReviews' <- linkReviews
+    pageContact' <- pageContact
+
+    let pages = pageIntro' <>
+            pageCharacters' <>
+            pageFavourites' <>
+            linkHamRadio' <>
+            pageHealth' <>
+            pageMusic' <>
+            pageMaths' <>
+            pageOrigami' <>
+            pageAbout' <>
+            linkSoftware' <>
+            linkBlog' <>
+            linkReviews' <>
+            pageContact'
+
     pure . makeHeader "#intro" "Dan Dart" socialIcons $ pages

@@ -5,6 +5,7 @@ module Html.Common.Blog.Post where
 
 import Control.Exception
 import Control.Exception.ParseFileException
+import Control.Monad.Reader
 import Data.Either
 import Data.Env.Types
 import Data.Frontmatter
@@ -90,7 +91,7 @@ fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
 
-renderPost ∷ Text → (BlogMetadata → Html) → BlogPost → WebsiteM Html
+renderPost ∷ (MonadReader Website m) ⇒ Text → (BlogMetadata → Html) → BlogPost → m Html
 renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
     commentForm' <- commentForm email' (BlogTypes.title metadata')
     pure $ do

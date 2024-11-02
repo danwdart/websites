@@ -15,7 +15,9 @@ htmlHeader = do
     urlDanDart' <- asks (urlDanDart . urls)
     pageHamRadio' <- pageHamRadio
     pageContact' <- pageContact
+    urlBlogM0ORI' <- asks (urlBlogHamRadio. urls)
     pure . makeHeader "" "M0ORI: Dan Dart" mempty $ do
         extNav (textValue urlDanDart') "Dan Dart"
         pageHamRadio'
+        extNav (textValue urlBlogM0ORI') "Blog"
         pageContact'

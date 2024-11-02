@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Html.BlogJolHarg.Page.Blog where
+module Html.BlogM0ORI.Page.Blog where
 
 import Control.Monad.Reader
 import Data.Env.Types

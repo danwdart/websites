@@ -13,4 +13,4 @@ pageReviews ∷ MonadReader Website m ⇒ Html → Html → m Html
 pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
     row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
-        H.div ! class_ "col-md-8 py-3 mb-3 bg-light" $ reviews
+        H.div ! class_ "col-md-8 py-3 mb-3 bg-page" $ reviews

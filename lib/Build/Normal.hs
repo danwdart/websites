@@ -10,7 +10,7 @@ import Make
 import Text.Blaze.Html5           as H hiding (main)
 import Web.Sitemap.Gen
 
-build ∷ WebsiteM Html → WebsiteM Html → WebsiteIO ()
+build ∷ (MonadReader Website m, MonadIO m) ⇒ m Html → m Html → m ()
 build page page404 = do
     slug' <- asks slug
     sitemap' <- sitemap

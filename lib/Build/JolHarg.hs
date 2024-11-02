@@ -1,4 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Build.JolHarg where
@@ -11,16 +10,15 @@ import Html.Common.GitHub
 import Html.JolHarg.Index
 import Make
 import Network.HTTP.Req
-import Prelude
 import Text.Blaze.Html5       as H hiding (main)
 
-
-build ∷ WebsiteIO ()
+build ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ m ()
 build = do
   slug' <- asks slug
   _ <- liftIO $ loadFile defaultConfig
   reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
   reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
-  let page' = runReader page (reposJH <> reposDan) :: Reader Website Html
+  let page' :: m Html
+      page' = runReader page (reposJH <> reposDan)
 
   make slug' page' page404

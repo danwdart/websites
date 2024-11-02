@@ -7,6 +7,7 @@ module Data.Env where
 
 import Build.Blog        qualified as Blog
 import Build.BlogJolHarg qualified as BlogJolHarg
+import Build.BlogM0ORI   qualified as BlogM0ORI
 import Build.DanDart     qualified as DanDart
 import Build.JolHarg     qualified as JolHarg
 import Build.M0ORI       qualified as M0ORI
@@ -17,6 +18,7 @@ productionUrls ∷ Urls
 productionUrls = Urls {
     urlDanDart = "https://dandart.co.uk",
     urlHamRadio = "https://m0ori.com",
+    urlBlogHamRadio = "https://blog.m0ori.com",
     urlBlog = "https://blog.dandart.co.uk",
     urlBlogJolHarg = "https://blog.jolharg.com",
     urlJolHarg = "https://jolharg.com",
@@ -28,6 +30,7 @@ prodBlog,
     prodJolHarg,
     prodBlogJolHarg,
     prodM0ORI,
+    prodBlogM0ORI,
     prodMadHacker ∷ Website
 prodBlog = Website {
     slug = "blog",
@@ -79,6 +82,16 @@ prodM0ORI = Website {
     livereload = False,
     build = M0ORI.build
 }
+prodBlogM0ORI = Website {
+    slug = "blogm0ori",
+    title = "The Blog of M0ORI: Interesting Radio Observations",
+    url = urlBlogHamRadio productionUrls,
+    urls = productionUrls,
+    siteType = Blog,
+    email = "blog@m0ori.com",
+    livereload = False,
+    build = BlogM0ORI.build
+}
 prodMadHacker = Website {
     slug = "madhacker",
     title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
@@ -96,6 +109,7 @@ production = [
     prodDanDart,
     prodJolHarg,
     prodBlogJolHarg,
+    prodBlogM0ORI,
     prodM0ORI,
     prodMadHacker
     ]

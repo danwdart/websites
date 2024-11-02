@@ -13,7 +13,7 @@ import Make
 import System.FilePath
 import Text.Blaze.Html5       as H hiding (main, title)
 
-build ∷ (Html → Html → WebsiteM Html) → WebsiteM Html → WebsiteIO ()
+build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → m Html) → m Html → m ()
 build page page404 = do
   url' <- asks url
   title' <- asks title

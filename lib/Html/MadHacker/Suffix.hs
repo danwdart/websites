@@ -11,10 +11,12 @@ import Text.Blaze.Html5
 import Text.Blaze.Html5            qualified as H
 import Text.Blaze.Html5.Attributes as A
 
+-- Looks like this isn't being included anywhere... todo include it!
+
 stars ∷ Score → Html
 stars (Score value' total) = do
-    H.span ! A.style "color: gold" $ replicateM_ value' ((i ! class_ "fas fa-star") mempty)
-    H.span ! A.style "color: black" $ replicateM_ (total - value') ((i ! class_ "far fa-star") mempty)
+    H.span ! A.class_ "star-full" $ replicateM_ value' ((i ! class_ "fas fa-star") mempty)
+    H.span ! A.class_ "star-empty" $ replicateM_ (total - value') ((i ! class_ "far fa-star") mempty)
 
 renderStars ∷ BlogMetadata → Html
 renderStars BlogMetadata { scores = Just scores' } = do

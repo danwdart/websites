@@ -8,6 +8,7 @@ module Html.Common.Blog.Comment where
 import Control.Exception
 import Control.Exception.ParseFileException
 import Control.Monad
+import Control.Monad.Reader
 import Data.ByteString.Char8                qualified as B
 import Data.Either
 import Data.Env.Types
@@ -65,7 +66,7 @@ getComments postsDir postId' = do
         then getCommentsIfExists postsDir postId'
         else pure mempty
 
-commentForm ∷ Text → Text → WebsiteM Html
+commentForm ∷ MonadReader Website m ⇒ Text → Text → m Html
 commentForm toEmail title' = pure . (H.form
         ! A.class_ "form"
         ! enctype "application/x-www-form-urlencoded"

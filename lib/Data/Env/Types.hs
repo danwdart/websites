@@ -4,19 +4,19 @@
 module Data.Env.Types where
 
 import Control.Monad.Reader
-import Data.Functor.Identity
-import Data.Set              (Set)
-import Data.Text             (Text)
+import Data.Set             (Set)
+import Data.Text            (Text)
 
 data SiteType = Normal | Blog
 
 data Urls = Urls {
-    urlDanDart     :: Text,
-    urlHamRadio    :: Text,
-    urlBlog        :: Text,
-    urlBlogJolHarg :: Text,
-    urlJolHarg     :: Text,
-    urlMadHacker   :: Text
+    urlDanDart      :: Text,
+    urlHamRadio     :: Text,
+    urlBlogHamRadio :: Text,
+    urlBlog         :: Text,
+    urlBlogJolHarg  :: Text,
+    urlJolHarg      :: Text,
+    urlMadHacker    :: Text
 }
 
 data Website = Website {
@@ -28,7 +28,7 @@ data Website = Website {
     siteType   :: SiteType,
     email      :: Text,
     livereload :: Bool,
-    build      :: WebsiteIO ()
+    build      :: ReaderT Website IO ()
 }
 
 instance Eq Website where
@@ -38,21 +38,3 @@ instance Ord Website where
     compare Website {slug = slug1} Website {slug = slug2} = compare slug1 slug2
 
 type Env = Set Website
-
-type WebsiteM = Reader Website
-type WebsiteT = ReaderT Website
-type WebsiteIO = WebsiteT IO
-
-instance (Semigroup a) ⇒ Semigroup (WebsiteM a) where
-    (<>) = liftA2 (<>)
-
-instance (Monoid a) ⇒ Monoid (WebsiteM a) where
-    mempty = pure mempty
-    mappend = (<>)
-
-websiteMToWebsiteIO ∷ WebsiteM a → WebsiteIO a
-websiteMToWebsiteIO = mapReaderT (pure . runIdentity)
-
-type WebsitesM = Reader Env
-type WebsitesT = ReaderT Env
-type WebsitesIO = WebsitesT IO

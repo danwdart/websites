@@ -11,7 +11,7 @@ import Html.DanDart.Header
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-page ∷ (MonadReader Website m, Semigroup (m Html)) ⇒ m Html
+page ∷ (MonadReader Website m) ⇒ m Html
 page = do
     header' <- htmlHeader
     head' <- htmlHead title' description' url' imgUrl mempty
