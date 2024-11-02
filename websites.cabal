@@ -72,6 +72,7 @@ library
   other-modules:
     Build.Blog
     Build.BlogJolHarg
+    Build.BlogM0ORI
     Build.Blogs
     Build.DanDart
     Build.JolHarg
@@ -83,6 +84,7 @@ library
     Control.Exception.ParseFileException
     Data.Site.Blog
     Data.Site.BlogJolHarg
+    Data.Site.BlogM0ORI
     Data.Site.DanDart
     Data.Site.JolHarg
     Data.Site.M0ORI
@@ -94,6 +96,9 @@ library
     Html.BlogJolHarg.Header
     Html.BlogJolHarg.Index
     Html.BlogJolHarg.Page.Blog
+    Html.BlogM0ORI.Header
+    Html.BlogM0ORI.Index
+    Html.BlogM0ORI.Page.Blog
     Html.Common.Audio
     Html.Common.Blog.Comment
     Html.Common.Blog.Feed
@@ -175,6 +180,7 @@ executable dev
     Build
     Build.Blog
     Build.BlogJolHarg
+    Build.BlogM0ORI
     Build.Blogs
     Build.DanDart
     Build.JolHarg
@@ -188,6 +194,7 @@ executable dev
     Data.Env.Types
     Data.Site.Blog
     Data.Site.BlogJolHarg
+    Data.Site.BlogM0ORI
     Data.Site.DanDart
     Data.Site.JolHarg
     Data.Site.M0ORI
@@ -199,6 +206,9 @@ executable dev
     Html.BlogJolHarg.Header
     Html.BlogJolHarg.Index
     Html.BlogJolHarg.Page.Blog
+    Html.BlogM0ORI.Header
+    Html.BlogM0ORI.Index
+    Html.BlogM0ORI.Page.Blog
     Html.Common.Audio
     Html.Common.Blog.Comment
     Html.Common.Blog.Feed
