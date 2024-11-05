@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveAnyClass     #-}
+{-# LANGUAGE DeriveAnyClass #-}
 
 module Control.Exception.InvalidDateException where
 

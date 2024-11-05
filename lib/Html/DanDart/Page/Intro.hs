@@ -6,7 +6,7 @@ import Control.Monad.Reader
 import Data.Env.Types
 import Html.Common.Link
 import Html.Common.Page
-import Text.Blaze.Html5            as H hiding (main)
+import Text.Blaze.Html5     as H hiding (main)
 -- import Text.Blaze.Html5.Attributes as A
 
 pageIntro ∷ (MonadReader Website m) ⇒ m Html

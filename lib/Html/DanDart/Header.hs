@@ -4,6 +4,7 @@ module Html.DanDart.Header where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Foldable.Monoid
 import Html.Common.Header
 import Html.Common.Page
 import Html.DanDart.Page.About
@@ -40,32 +41,19 @@ linkReviews = do
 
 htmlHeader ∷ (MonadReader Website m) ⇒ m Html
 htmlHeader = do
-    pageIntro' <- pageIntro
-    pageCharacters' <- pageCharacters
-    pageFavourites' <- pageFavourites
-    linkHamRadio' <- linkHamRadio
-    pageHealth' <- pageHealth
-    pageMusic' <- pageMusic
-    pageMaths' <- pageMaths
-    pageOrigami' <- pageOrigami
-    pageAbout' <- pageAbout
-    linkSoftware' <- linkSoftware
-    linkBlog' <- linkBlog
-    linkReviews' <- linkReviews
-    pageContact' <- pageContact
-
-    let pages = pageIntro' <>
-            pageCharacters' <>
-            pageFavourites' <>
-            linkHamRadio' <>
-            pageHealth' <>
-            pageMusic' <>
-            pageMaths' <>
-            pageOrigami' <>
-            pageAbout' <>
-            linkSoftware' <>
-            linkBlog' <>
-            linkReviews' <>
-            pageContact'
-
+    pages <- foldA [
+        pageIntro,
+        pageCharacters,
+        pageFavourites,
+        linkHamRadio,
+        pageHealth,
+        pageMusic,
+        pageMaths,
+        pageOrigami,
+        pageAbout,
+        linkSoftware,
+        linkBlog,
+        linkReviews,
+        pageContact
+        ]
     pure . makeHeader "#intro" "Dan Dart" socialIcons $ pages

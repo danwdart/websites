@@ -12,13 +12,12 @@ import Make
 import Network.HTTP.Req
 import Text.Blaze.Html5       as H hiding (main)
 
-build ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ m ()
+build ∷ forall m. (MonadReader Website m, MonadIO m, MonadFail m) ⇒ m ()
 build = do
   slug' <- asks slug
   _ <- liftIO $ loadFile defaultConfig
-  reposJH <- liftIO . runReq defaultHttpConfig $ getRepos "jolharg"
-  reposDan <- liftIO . runReq defaultHttpConfig $ getRepos "danwdart"
-  let page' :: m Html
+  [reposJH, reposDan] <- mapM (liftIO . runReq defaultHttpConfig . getRepos) ["jolharg", "danwdart"]
+  let page' ∷ m Html
       page' = runReader page (reposJH <> reposDan)
 
   make slug' page' page404
