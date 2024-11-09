@@ -147,7 +147,7 @@ library
 executable build
   import:             shared-properties
   hs-source-dirs:     src
-  main-is:            build.hs
+  main-is:            Main.hs
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   build-depends:
@@ -158,7 +158,7 @@ executable dev
   import:             shared-properties
   ghc-options:        -Wwarn
   hs-source-dirs:     src lib
-  main-is:            build.hs
+  main-is:            Main.hs
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   other-modules:

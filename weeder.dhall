@@ -1,8 +1,6 @@
 {
     roots = [
-        "^Main.main$",
-        "^Main.serve$",
-        "^Site.*.serve$"
+        "^Main.main$"
     ],
     type-class-roots = True
 }
