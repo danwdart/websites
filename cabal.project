@@ -10,7 +10,4 @@ source-repository-package
 
 packages: ./websites.cabal
 
-package *
-  ghc-options: -fwrite-ide-info -hiedir=.hie
-
 allow-newer: base
