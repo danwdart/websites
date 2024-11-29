@@ -3,6 +3,7 @@
 module Html.MadHacker.Suffix where
 
 import Control.Monad               (replicateM_)
+import Data.Foldable
 import Data.String                 (IsString (fromString))
 import Data.Text                   qualified as T
 import Html.Common.Blog.Types
@@ -22,7 +23,7 @@ renderStars ∷ BlogMetadata → Html
 renderStars BlogMetadata { scores = Just scores' } = do
     h3 "Overall Scores"
     br
-    mapM_ (\(name', score) -> do
+    traverse_ (\(name', score) -> do
         row $ do
             ((H.div ! class_ "col") . h4) . fromString . T.unpack $ name'
             H.div ! class_ "col" $ stars score

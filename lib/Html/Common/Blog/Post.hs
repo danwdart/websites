@@ -8,6 +8,7 @@ import Control.Exception.ParseFileException
 import Control.Monad.Reader
 import Data.Either
 import Data.Env.Types
+import Data.Foldable
 import Data.Frontmatter
 import Data.String
 import Data.Text                            (Text)
@@ -116,7 +117,7 @@ renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
         renderSuffix metadata'
         br
         h3 "Comments"
-        if Prelude.null comments' then small "No comments yet..." <> br else mapM_ renderComment comments'
+        if Prelude.null comments' then small "No comments yet..." <> br else traverse_ renderComment comments'
         br
         h4 "Post a comment:"
         commentForm'

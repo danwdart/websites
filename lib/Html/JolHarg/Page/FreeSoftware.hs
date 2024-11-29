@@ -4,6 +4,7 @@ module Html.JolHarg.Page.FreeSoftware where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Foldable
 import Html.Common.Bootstrap
 import Html.Common.Card
 import Html.Common.GitHub
@@ -16,4 +17,4 @@ pageFs = do
     repos <- ask
     pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do
         row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects Dan Dart has created or contributed to are:"
-        mapM_ renderCard repos
+        traverse_ renderCard repos

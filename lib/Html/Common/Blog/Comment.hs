@@ -54,7 +54,7 @@ getCommentsIfExists postsDir postId' = do
     case mDates of
         Left ex -> throwIO ex
         Right dates -> do
-            commentTexts <- fmap decodeUtf8 <$> mapM B.readFile validCommentFiles
+            commentTexts <- fmap decodeUtf8 <$> traverse B.readFile validCommentFiles
             case zipWithM parseComment dates commentTexts of
                 Left ex -> throwIO ex
                 Right commentData -> pure $ L.sortOn (Down . commentDate) commentData

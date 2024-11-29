@@ -4,6 +4,7 @@ module Html.DanDart.Page.Favourites where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Foldable
 import Data.Site.DanDart
 import Data.String
 import Html.Common.Link
@@ -54,16 +55,16 @@ pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage
             extLink (imdb <> "0056751") "Doctor Who (1963-)"
             " (my favourite Doctor is Tom Baker)"
     p $ strong "Pokémon"
-    ul $ mapM_ (\name' -> do
+    ul $ traverse_ (\name' -> do
         li . extLink (bulbapedia . fromString $ name') $ fromString name'
         ) pokémonList
     p $ strong "Music"
-    ul $ mapM_ (\(title'', list') -> do
+    ul $ traverse_ (\(title'', list') -> do
         title''
-        ul $ mapM_ li list'
+        ul $ traverse_ li list'
         ) musicList
     p $ strong "Musical styles"
-    ul $ mapM_ li musicalStyles
+    ul $ traverse_ li musicalStyles
     p $ strong "Games"
     ul $ do
         li $ extLink "http://www.idsoftware.com/en-gb" "Quake"

@@ -36,18 +36,18 @@ make name page page404 = do
         BSL.writeFile (".sites" </> path </> "404.html") $ renderHtml page404'
         TIO.putStrLn $ name <> " compiled."
 
-foldMapM ∷ (Monoid b', Traversable t, Applicative f) ⇒ (a' → f b') → t a' → f b'
-foldMapM f xs = fold <$> traverse f xs
+foldtraverse ∷ (Monoid b', Traversable t, Applicative f) ⇒ (a' → f b') → t a' → f b'
+foldtraverse f xs = fold <$> traverse f xs
 
 buildMD ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ FilePath → Text → (BlogMetadata → Html) → m (NonEmpty BlogPost, Html)
 buildMD postsDir email' renderSuffix = do
   files' <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files' -- if used in same line, use Compose
   validFiles <- liftIO $ filterM doesFileExist fileNames
-  posts <- liftIO (mapM (makeBlogPost postsDir) validFiles)
+  posts <- liftIO (traverse (makeBlogPost postsDir) validFiles)
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
   case LNE.nonEmpty sortedPosts of
     Nothing -> liftIO $ fail "No valid, non-draft posts."
     Just sortedPosts' -> do
-      renderedPosts <- foldMapM (renderPost email' renderSuffix) sortedPosts'
+      renderedPosts <- foldtraverse (renderPost email' renderSuffix) sortedPosts'
       pure (sortedPosts', renderedPosts)
