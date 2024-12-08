@@ -15,7 +15,7 @@ import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
 renderMetaLink ∷ Text → BlogMetadata → Html
-renderMetaLink postId' m = a ! href (fromString ("#" <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
+renderMetaLink postId' m = a ! href (fromString ("/#" <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
 
 renderLink ∷ BlogPost → Html
 renderLink bp = renderMetaLink (postId bp) (metadata bp)

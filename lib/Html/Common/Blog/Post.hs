@@ -6,6 +6,8 @@ module Html.Common.Blog.Post where
 import Control.Exception
 import Control.Exception.ParseFileException
 import Control.Monad.Reader
+import Data.ByteString.Char8                (ByteString)
+import Data.ByteString.Char8                qualified as BS
 import Data.Either
 import Data.Env.Types
 import Data.Foldable
@@ -27,21 +29,20 @@ import Text.Pandoc.Options
 import Text.Pandoc.Readers.Markdown
 import Text.Pandoc.Writers.HTML
 
-parseFile ∷ Text → Either ParseFileException ParseResult
-parseFile contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
+parseFile ∷ FilePath -> ByteString → Either ParseFileException ParseResult
+parseFile filename' contents' = case parseYamlFrontmatter contents' of
     Done i' r -> Right $ ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (decodeUtf8 i')))
-    Fail i' xs' y' -> Left $ PFFail i' xs' y'
-    Partial _ -> Left PFPartial
+    Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
+    Partial _ -> Left $ PFPartial filename' contents'
 
 makeBlogPost ∷ FilePath → FilePath → IO BlogPost
 makeBlogPost postsDir filename = do
-    fileString <- readFile filename
-    let fileText = T.pack fileString
-    case parseFile fileText of
+    file <- BS.readFile filename
+    case parseFile filename file of
         Left ex -> throwIO ex -- wah wah wah
         Right (ParseResult metadata' html') -> do
             let postId' = dropExtension . takeFileName . Prelude.head . aliases $ metadata'
@@ -100,12 +101,12 @@ renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
         -- Not working in Safari yet, so filter
         h1 . fromString . T.unpack $ BlogTypes.title metadata'
         small $ do
-            a ! href ("#" <> fromString (T.unpack postId')) $ "Permalink"
+            a ! href (fromString . Prelude.head . BlogTypes.aliases $ metadata') $ "Permalink"
             " | Published: "
             fromString . show . date $ metadata'
             " | Tags: "
             foldMap ((\str -> do
-                a ! href "#" {-( <> fromString str)-} $ fromString str
+                a ! href (fromString ("/tag/" <> str <> ".html")) $ fromString str
                 " "
                 ) . T.unpack . getTag) (tags metadata')
         br

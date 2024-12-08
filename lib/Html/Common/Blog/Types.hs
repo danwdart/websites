@@ -1,10 +1,12 @@
+{-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
 
 module Html.Common.Blog.Types where
 
-import Data.Aeson       (FromJSON, (.:), (.:?))
+import Data.Aeson       (FromJSON, (.:))
 import Data.Aeson       qualified as A
+-- import Data.ByteString.Char8 qualified as BS
 import Data.Text        (Text)
 import Data.Text        qualified as T
 import Data.Time
@@ -14,7 +16,7 @@ import Text.Read
 
 newtype BlogTag = BlogTag {
     getTag :: Text
- } deriving newtype (Show)
+ } deriving newtype (Show, Eq, Ord)
 
 data Score = Score {
     rating :: Int,
@@ -45,11 +47,12 @@ data BlogMetadata = BlogMetadata {
     title         :: Text,
     date          :: UTCTime,
     draft         :: Bool,
-    aliases       :: [FilePath], -- TODO make these files and use them for permalink?
+    aliases       :: [FilePath],
     featuredImage :: Maybe Text,
     tags          :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
     scores        :: Maybe [(Text, Score)]
 } deriving stock (Generic)
+    deriving anyclass (FromJSON)
 
 data BlogCommentMetadata = BlogCommentMetadata {
     author      :: Text,
@@ -81,14 +84,3 @@ data ParseCommentResult = ParseCommentResult {
     commentMetadata :: BlogCommentMetadata,
     commentHtml     :: Html
 }
-
-instance FromJSON BlogMetadata where
-    parseJSON (A.Object o) = BlogMetadata <$>
-        o .: "title" <*>
-        o .: "date" <*>
-        o .: "draft" <*>
-        o .: "aliases" <*>
-        o .:? "featuredImage" <*>
-        (concat <$> (o .:? "tags")) <*> -- Maybe [a] -> [a]
-        o .:? "scores"
-    parseJSON _ = fail "Bad blog metadata"

@@ -9,7 +9,8 @@ import Control.Exception
 import Control.Exception.ParseFileException
 import Control.Monad
 import Control.Monad.Reader
-import Data.ByteString.Char8                qualified as B
+import Data.ByteString.Char8                (ByteString)
+import Data.ByteString.Char8                qualified as BS
 import Data.Either
 import Data.Env.Types
 import Data.Frontmatter
@@ -35,15 +36,15 @@ import Text.Pandoc.Options
 import Text.Pandoc.Readers.Markdown
 import Text.Pandoc.Writers.HTML
 
-parseComment ∷ UTCTime → Text → Either ParseFileException ParseCommentResult
-parseComment date' contents' = case parseYamlFrontmatter (encodeUtf8 contents') of
+parseComment ∷ FilePath -> UTCTime → ByteString → Either ParseFileException ParseCommentResult
+parseComment filename' date' contents' = case parseYamlFrontmatter contents' of
     Done i' r -> Right $ ParseCommentResult date' r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (decodeUtf8 i')))
-    Fail i' xs' y' -> Left $ PFFail i' xs' y'
-    Partial _ -> Left PFPartial
+    Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
+    Partial _ -> Left $ PFPartial filename' contents'
 
 getCommentsIfExists ∷ FilePath → FilePath → IO [ParseCommentResult]
 getCommentsIfExists postsDir postId' = do
@@ -54,8 +55,8 @@ getCommentsIfExists postsDir postId' = do
     case mDates of
         Left ex -> throwIO ex
         Right dates -> do
-            commentTexts <- fmap decodeUtf8 <$> traverse B.readFile validCommentFiles
-            case zipWithM parseComment dates commentTexts of
+            commentTexts <- traverse BS.readFile validCommentFiles
+            case sequenceA (zipWith3 parseComment validCommentFiles dates commentTexts) of
                 Left ex -> throwIO ex
                 Right commentData -> pure $ L.sortOn (Down . commentDate) commentData
 

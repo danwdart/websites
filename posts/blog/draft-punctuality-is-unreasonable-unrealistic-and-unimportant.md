@@ -2,7 +2,7 @@
 title: '100% punctuality is unreasonable, unrealistic and unimportant'
 date: 2021-11-11T23:44:13Z
 draft: true
-aliases: [ "/2021/11/one-hundred-percent-punctuality-unreasonable-unrealistic-unimportant" ]
+aliases: [ "/2021/11/one-hundred-percent-punctuality-unreasonable-unrealistic-unimportant.html" ]
 tags: [100%,punctuality,unreasonable,unrealistic,unimportant]
 TODO: FIND THOSE STUDIES
 ---

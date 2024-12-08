@@ -2,7 +2,7 @@
 title: 'Sorry, something somewhere went wrong!'
 date: 2021-11-12T00:16:11Z
 draft: false
-aliases: [ "/2021/11/sorry-something-somewhere-went-wrong" ]
+aliases: [ "/2021/11/sorry-something-somewhere-went-wrong.html" ]
 tags: [sorry,something,somewhere,went,wrong]
 ---
 

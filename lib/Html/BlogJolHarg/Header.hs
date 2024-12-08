@@ -15,7 +15,7 @@ htmlHeader ∷ MonadReader Website m ⇒ Html → Html → m Html
 htmlHeader blogPostLinks blogPosts = do
     urlJolHarg' <- asks (urlJolHarg . urls)
     pageBlog' <- pageBlog blogPostLinks blogPosts
-    pure . makeHeader "#blog" "JolHarg Blog" mempty $ do
+    pure . makeHeader "/#blog" "JolHarg Blog" mempty $ do
         extNav (textValue urlJolHarg') "JolHarg"
         pageBlog'
         dlNav "/atom.xml" "Atom Feed"

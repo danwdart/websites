@@ -6,7 +6,7 @@ module Make where
 
 import Control.Monad
 import Control.Monad.Reader
-import Data.ByteString.Lazy.Char8    qualified as BSL
+import Data.ByteString.Char8    qualified as BS
 import Data.Env.Types
 import Data.Foldable
 import Data.List                     (sortOn)
@@ -32,8 +32,8 @@ make name page page404 = do
     liftIO $ do
         copyDir "static/common" $ ".sites" </> path
         copyDir ("static" </> path) (".sites" </> path)
-        BSL.writeFile (".sites" </> path </> "index.html") $ renderHtml page'
-        BSL.writeFile (".sites" </> path </> "404.html") $ renderHtml page404'
+        BS.writeFile (".sites" </> path </> "index.html") . BS.toStrict $ renderHtml page'
+        BS.writeFile (".sites" </> path </> "404.html") . BS.toStrict $ renderHtml page404'
         TIO.putStrLn $ name <> " compiled."
 
 foldtraverse ∷ (Monoid b', Traversable t, Applicative f) ⇒ (a' → f b') → t a' → f b'
