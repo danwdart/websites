@@ -9,10 +9,10 @@ import Data.ByteString.Char8         qualified as BS
 import Data.Env.Types
 import Data.Foldable
 import Data.List.NonEmpty            (NonEmpty (..))
--- import Data.List.NonEmpty            qualified as LNE
+import Data.List.NonEmpty            qualified as LNE
 import Data.Map                      (Map)
 import Data.Map                      qualified as M
-import Data.Set                      (Set)
+-- import Data.Set                      (Set)
 import Data.Set                      qualified as S
 import Data.Text                     qualified as T
 import Data.Text.IO                  qualified as TIO
@@ -29,18 +29,9 @@ import Text.Blaze.Html5              as H hiding (main, title)
 -- go through and write in some way, so something to concat perhaps
 
 -- thanks chatgpt
-groupByMany :: Ord tag => (post -> Set tag) -> NonEmpty post -> Map tag (NonEmpty post)
-groupByMany postToTags (post :| posts) = 
-    let
-        -- Collect all tags and associate them with their posts
-        tagToPosts = foldr collectTags M.empty (post : posts)
-        collectTags post' acc = 
-            let tags = S.toList (postToTags post')
-            in foldr (insertPost post') acc tags
-        
-        -- Insert a post into the Map under a specific tag
-        insertPost post' tag = M.insertWith (<>) tag (post' :| [])
-    in tagToPosts
+groupByMany :: (Foldable f, Ord tag) => (post -> f tag) -> NonEmpty post -> Map tag (NonEmpty post)
+groupByMany postToTags =
+  foldMap (\post -> foldMap (\tag -> M.singleton tag (LNE.singleton post)) (postToTags post))
 
 build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → m Html) → m Html → m ()
 build page page404 = do
