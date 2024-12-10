@@ -2,7 +2,7 @@
 title: 'Algebra is not hard'
 date: 2018-07-10T12:30:00.000+01:00
 draft: false
-aliases: [ "/2018/07/algebra-is-not-hard.html" ]
+aliases: [ "/2018/07/algebra-is-not-hard" ]
 tags: [numbers, letters, shorthand, variable, arithmetic, manipulation, apples, fruit, algebra, difficulty, oranges, counting, mathematics, maths]
 ---
 

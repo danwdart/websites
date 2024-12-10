@@ -2,7 +2,7 @@
 title: 'My favourite font is nonexistent!'
 date: 2016-10-19T18:59:00.000+01:00
 draft: false
-aliases: [ "/2016/10/my-favourite-font-is-nonexistent.html" ]
+aliases: [ "/2016/10/my-favourite-font-is-nonexistent" ]
 tags: [font, sans, serif, typeface, letters, ocd, type, quirky, writing, preschool, source, educational, weird, open, education, free, software, picky, fonts, text]
 ---
 

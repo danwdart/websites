@@ -2,7 +2,7 @@
 title: 'Updated Websites'
 date: 2024-11-01T21:45:03Z
 draft: false
-aliases: [ "/2024/11/updated-websites.html" ]
+aliases: [ "/2024/11/updated-websites" ]
 tags: [updated, websites]
 ---
 

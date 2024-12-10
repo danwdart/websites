@@ -2,7 +2,7 @@
 title: 'Quinze is Nim'
 date: 2022-06-26T18:07:00+01:00
 draft: true
-aliases: [ "/2022/06/quinze-is-nim.html" ]
+aliases: [ "/2022/06/quinze-is-nim" ]
 tags: [quinze, nim, number, game]
 ---
 

@@ -2,7 +2,7 @@
 title: 'The rules of tone in text'
 date: 2021-01-15T13:20:35+00:00
 draft: false
-aliases: [ "/2021/01/tone-in-text.html" ]
+aliases: [ "/2021/01/tone-in-text" ]
 tags: [tone, text]
 ---
 

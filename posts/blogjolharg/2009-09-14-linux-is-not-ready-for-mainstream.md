@@ -2,7 +2,7 @@
 title: 'Linux is not ready for the mainstream'
 date: 2009-09-14T23:40:00.000+01:00
 draft: false
-aliases: [ "/2009/09/linux-is-not-ready-for-mainstream.html" ]
+aliases: [ "/2009/09/linux-is-not-ready-for-mainstream" ]
 tags: [standardisation, new, linux, device, public, xenon]
 ---
 

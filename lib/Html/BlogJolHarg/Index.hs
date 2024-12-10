@@ -14,9 +14,9 @@ import Text.Blaze.Html5.Attributes as A
 extraHead ∷ Html
 extraHead = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title "JolHarg Blog" ! href "/atom.xml"
 
-page ∷ MonadReader Website m ⇒ Html → Html → m Html
-page blogPostLinks blogPosts = do
-    header' <- htmlHeader blogPostLinks blogPosts
+page ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
+page blogPostLinks blogTagLinks blogPosts = do
+    header' <- htmlHeader blogPostLinks blogTagLinks blogPosts
     head' <- htmlHead title' description' url' imgUrl extraHead
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'

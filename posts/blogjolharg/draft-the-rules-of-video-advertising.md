@@ -2,7 +2,7 @@
 title: 'The Rules of Video Advertising'
 date: 2022-04-11T12:51:00Z
 draft: true
-aliases: [ "/2022/04/rules-of-video-advertising.html" ]
+aliases: [ "/2022/04/rules-of-video-advertising" ]
 tags: [rules, annoying, seo, ads, video, advertising, youtube, adwords, google, dfp, relevant, adsense, content]
 ---
 

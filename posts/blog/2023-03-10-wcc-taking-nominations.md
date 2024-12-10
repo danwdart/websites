@@ -2,7 +2,7 @@
 title: 'WCC now taking nominations'
 date: 2023-03-10T11:33:00Z
 draft: false
-aliases: [ "/2023/03/wcc-now-taking-nominations.html" ]
+aliases: [ "/2023/03/wcc-now-taking-nominations" ]
 tags: [wcc, world commune, ftaoe, advancement]
 ---
 

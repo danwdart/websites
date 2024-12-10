@@ -1,17 +1,19 @@
-{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveAnyClass    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
 
 module Html.Common.Blog.Types where
 
-import Data.Aeson       (FromJSON, (.:))
-import Data.Aeson       qualified as A
+import Data.Aeson         (FromJSON, (.:))
+import Data.Aeson         qualified as A
 -- import Data.ByteString.Char8 qualified as BS
-import Data.Text        (Text)
-import Data.Text        qualified as T
+--- import Data.List.NonEmpty (NonEmpty)
+import Data.List.NonEmpty as LNE
+import Data.Text          (Text)
+import Data.Text          qualified as T
 import Data.Time
 import GHC.Generics
-import Text.Blaze.Html5 as H hiding (main)
+import Text.Blaze.Html5   as H hiding (main)
 import Text.Read
 
 newtype BlogTag = BlogTag {
@@ -47,10 +49,10 @@ data BlogMetadata = BlogMetadata {
     title         :: Text,
     date          :: UTCTime,
     draft         :: Bool,
-    aliases       :: [FilePath],
+    aliases       :: NonEmpty FilePath,
     featuredImage :: Maybe Text,
-    tags          :: [BlogTag], -- Doesn't like tags which are numbers... nor don't have tags
-    scores        :: Maybe [(Text, Score)]
+    tags          :: NonEmpty BlogTag, -- Doesn't like tags which are numbers... nor don't have tags
+    scores        :: Maybe (NonEmpty (Text, Score))
 } deriving stock (Generic)
     deriving anyclass (FromJSON)
 

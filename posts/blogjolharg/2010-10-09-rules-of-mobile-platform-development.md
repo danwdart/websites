@@ -2,7 +2,7 @@
 title: 'Rules of Mobile Platform Development'
 date: 2010-10-09T15:51:00.000+01:00
 draft: false
-aliases: [ "/2010/10/rules-of-mobile-platform-development.html" ]
+aliases: [ "/2010/10/rules-of-mobile-platform-development" ]
 tags: [htc, phone, apple, motorola, app, android]
 ---
 

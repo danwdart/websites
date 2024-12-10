@@ -2,7 +2,7 @@
 title: 'What Free Software needs'
 date: 2009-07-05T14:21:00.000+01:00
 draft: false
-aliases: [ "/2009/07/what-free-software-needs.html" ]
+aliases: [ "/2009/07/what-free-software-needs" ]
 tags: [standardisation, bsd. competition, windows, free, linux, packages]
 ---
 

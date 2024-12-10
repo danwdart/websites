@@ -2,7 +2,7 @@
 title: 'Answers to the big questions'
 date: 2009-06-29T13:30:00.000+01:00
 draft: false
-aliases: [ "/2009/06/answers-to-big-questions.html" ]
+aliases: [ "/2009/06/answers-to-big-questions" ]
 tags: [how, why, universe, life, creation, where, robots]
 ---
 

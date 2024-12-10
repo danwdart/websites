@@ -2,7 +2,7 @@
 title: 'Xenon Alpha released!'
 date: 2009-12-29T13:20:00.001Z
 draft: false
-aliases: [ "/2009/12/xenon-alpha-released.html" ]
+aliases: [ "/2009/12/xenon-alpha-released" ]
 tags: [css, social, javascript, cloud, html, desktop, sql, xenon, ajax, gui, linux, html5, networking, api, fast, operating system, os, php, apps]
 ---
 

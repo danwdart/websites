@@ -2,7 +2,7 @@
 title: 'The categories of truthfulness of information'
 date: 2019-06-15T17:17:00.000+01:00
 draft: false
-aliases: [ "/2019/06/the-categories-of-truthfulness-of.html" ]
+aliases: [ "/2019/06/the-categories-of-truthfulness-of" ]
 tags: [truthfulness, danganronpa, falsehoods, nonsense, falsehood, kokichi, mistake, oma, unknown, detector, lies, lying, mistakes, truth, unknowns]
 ---
 

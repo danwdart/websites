@@ -2,7 +2,7 @@
 title: 'Project Chaplin 0.3.2 point release'
 date: 2016-10-13T09:41:00.001+01:00
 draft: false
-aliases: [ "/2016/10/project-chaplin-032-point-release.html" ]
+aliases: [ "/2016/10/project-chaplin-032-point-release" ]
 tags: [css, youtube, dailymotion, media, sharing, javascript, cc, dart, videos, vimeo, free software, chaplin, open source, creativecommons, html5, video, php, project]
 ---
 

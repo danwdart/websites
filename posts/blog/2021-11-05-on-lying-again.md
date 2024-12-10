@@ -2,7 +2,7 @@
 title: 'On Lying (Again)'
 date: 2021-11-05T15:07:12Z
 draft: false
-aliases: [ "/2021/11/on-lying-again.html" ]
+aliases: [ "/2021/11/on-lying-again" ]
 tags: [lying, lies, truth, gains, truthfulness, meaning]
 ---
 

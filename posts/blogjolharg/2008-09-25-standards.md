@@ -2,7 +2,7 @@
 title: 'Standards'
 date: 2008-09-25T15:57:00.000+01:00
 draft: false
-aliases: [ "/2008/09/standards.html" ]
+aliases: [ "/2008/09/standards" ]
 tags: [argument, war, open, format, gnome, desktop, standard, kde]
 ---
 

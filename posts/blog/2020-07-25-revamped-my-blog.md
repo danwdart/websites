@@ -2,7 +2,7 @@
 title: 'Revamped my blog!'
 date: 2020-07-25T21:48:00.000+01:00
 draft: false
-aliases: [ "/2020/07/revamped-my-blog.html" ]
+aliases: [ "/2020/07/revamped-my-blog" ]
 tags: [revamped, blog, dan, dart]
 ---
 

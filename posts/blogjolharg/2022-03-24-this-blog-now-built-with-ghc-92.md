@@ -2,7 +2,7 @@
 title: 'This blog now built with GHC 9.2'
 date: 2022-03-24T19:13:00Z
 draft: false
-aliases: [ "/2022/03/this-blog-now-built-with-ghc-92.html" ]
+aliases: [ "/2022/03/this-blog-now-built-with-ghc-92" ]
 tags: [blog, built, with, ghc, 9.2]
 ---
 

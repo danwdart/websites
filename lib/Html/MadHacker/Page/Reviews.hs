@@ -9,8 +9,9 @@ import Html.Common.Page
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-pageReviews ∷ MonadReader Website m ⇒ Html → Html → m Html
-pageReviews reviewLinks reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
+pageReviews ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
+pageReviews reviewLinks reviewTags reviews = makePage "reviews" "Reviews" customLayout defaultPage $ do
     row $ do
         H.div ! class_ "col-md-2 py-3 mb-3" $ reviewLinks
         H.div ! class_ "col-md-8 py-3 mb-3 bg-page" $ reviews
+        H.div ! class_ "col-md-2 py-3 mb-3" $ reviewTags

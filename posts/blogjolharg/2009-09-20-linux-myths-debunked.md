@@ -2,7 +2,7 @@
 title: 'Linux Myths Debunked'
 date: 2009-09-20T10:33:00.000+01:00
 draft: false
-aliases: [ "/2009/09/linux-myths-debunked.html" ]
+aliases: [ "/2009/09/linux-myths-debunked" ]
 tags: [debunked, security, trojan, virus, myths, windows, linux, operating system]
 ---
 

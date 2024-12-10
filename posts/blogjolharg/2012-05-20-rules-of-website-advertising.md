@@ -2,7 +2,7 @@
 title: 'The Rules of Website Advertising'
 date: 2012-05-20T17:38:00.002+01:00
 draft: false
-aliases: [ "/2012/05/rules-of-website-advertising.html" ]
+aliases: [ "/2012/05/rules-of-website-advertising" ]
 tags: [rules, annoying, seo, ads, website, advertising, flash, adwords, dfp, relevant, adsense, content]
 ---
 

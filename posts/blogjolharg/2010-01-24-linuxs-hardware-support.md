@@ -2,7 +2,7 @@
 title: 'Linux''s Hardware Support'
 date: 2010-01-24T14:52:00.000Z
 draft: false
-aliases: [ "/2010/01/linuxs-hardware-support.html" ]
+aliases: [ "/2010/01/linuxs-hardware-support" ]
 tags: [ubuntu, 64 bit, hardware, intel, windows, linux, core, usb, i7, opensuse, support]
 ---
 

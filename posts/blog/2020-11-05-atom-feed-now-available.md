@@ -2,7 +2,7 @@
 title: 'Atom feed now available'
 date: 2020-11-05T00:21:00.000Z
 draft: false
-aliases: [ "/2020/11/atom-feed-now-available.html" ]
+aliases: [ "/2020/11/atom-feed-now-available" ]
 tags: [atom, rss, feed]
 ---
 

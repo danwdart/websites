@@ -2,7 +2,7 @@
 title: 'Error messages have still not changed'
 date: 2022-09-11T22:56:03+01:00
 draft: false
-aliases: [ "/2022/09/error-messages-have-still-not-changed.html" ]
+aliases: [ "/2022/09/error-messages-have-still-not-changed" ]
 tags: [error,messages,not,changed]
 ---
 

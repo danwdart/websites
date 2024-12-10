@@ -11,10 +11,10 @@ import Html.Common.Page
 import Text.Blaze.Html5         as H hiding (main)
 import Text.Pandoc.Highlighting
 
-htmlHeader ∷ MonadReader Website m ⇒ Html → Html → m Html
-htmlHeader blogPostLinks blogPosts = do
+htmlHeader ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
+htmlHeader blogPostLinks blogTagLinks blogPosts = do
     urlDanDart' <- asks (urlDanDart . urls)
-    pageBlog' <- pageBlog blogPostLinks blogPosts
+    pageBlog' <- pageBlog blogPostLinks blogTagLinks blogPosts
     pure . makeHeader "/#blog" "Dan Dart's Blog" mempty $ do
         extNav (textValue urlDanDart') "Dan Dart"
         pageBlog'

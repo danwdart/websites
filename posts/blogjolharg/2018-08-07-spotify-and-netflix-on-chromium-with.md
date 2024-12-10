@@ -2,7 +2,7 @@
 title: 'Spotify (and Netflix) on Chromium, with help from Steam, without root!'
 date: 2018-08-07T12:30:00.000+01:00
 draft: false
-aliases: [ "/2018/08/spotify-and-netflix-on-chromium-with.html" ]
+aliases: [ "/2018/08/spotify-and-netflix-on-chromium-with" ]
 tags: [netflix, library, steam, spotify, chromium, widevine, drm, libraries, chrome, copy, protected]
 ---
 

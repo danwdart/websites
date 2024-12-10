@@ -2,7 +2,7 @@
 title: 'Is telling a falsehood always a lie?'
 date: 2021-10-08T23:13:54+00:00
 draft: false
-aliases: [ "/2021/10/is-telling-falsehood-always-lie.html" ]
+aliases: [ "/2021/10/is-telling-falsehood-always-lie" ]
 tags: [lying, communication, false]
 ---
 

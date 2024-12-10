@@ -2,7 +2,7 @@
 title: 'What would you like to see more of?'
 date: 2022-10-31T00:55:00Z
 draft: false
-aliases: [ "/2022/10/what-would-you-like-to-see-more-of.html" ]
+aliases: [ "/2022/10/what-would-you-like-to-see-more-of" ]
 tags: [you, tech, next, what, like, see, science, would, to, personal]
 ---
 

@@ -2,7 +2,7 @@
 title: 'Being enby doesn't make me special'
 date: 2024-12-04T12:09:00Z
 draft: true
-aliases: [ "/2024/12/being-enby-doesnt-make-me-special.html" ]
+aliases: [ "/2024/12/being-enby-doesnt-make-me-special" ]
 tags: [gender,enby,todo]
 ---
 

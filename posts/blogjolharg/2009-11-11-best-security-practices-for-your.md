@@ -2,7 +2,7 @@
 title: 'Best Security Practices For Your Personal Computer'
 date: 2009-11-11T00:51:00.001Z
 draft: false
-aliases: [ "/2009/11/best-security-practices-for-your.html" ]
+aliases: [ "/2009/11/best-security-practices-for-your" ]
 tags: [xp, virus, rootkit, password, worm, anti, avast, firewall, trojan, vista, windows, linux, live]
 ---
 

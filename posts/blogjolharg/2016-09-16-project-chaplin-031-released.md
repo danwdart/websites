@@ -2,7 +2,7 @@
 title: 'Project Chaplin 0.3.1 Released'
 date: 2016-09-16T15:23:00.000+01:00
 draft: false
-aliases: [ "/2016/09/project-chaplin-031-released.html" ]
+aliases: [ "/2016/09/project-chaplin-031-released" ]
 tags: [css, youtube, dailymotion, media, sharing, javascript, cc, dart, videos, vimeo, free software, chaplin, open source, creativecommons, html5, video, php, project]
 ---
 

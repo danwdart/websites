@@ -25,17 +25,19 @@ makeLink link' = do
     p ! class_ "ps-2" $ renderLink link'
     br
 
-genericMakeLinks ∷ Foldable t ⇒ (t anyLink → String) → (anyLink → Html) → t anyLink → Html
-genericMakeLinks formatter makeSubLinks byPeriod = details ! customAttribute "open" "" ! class_ "ps-2" $ do
-     H.summary . fromString . formatter $ byPeriod
-     p $ foldMap makeSubLinks byPeriod
+genericMakeLinks ∷ Foldable t ⇒ Bool -> (t anyLink → String) → (anyLink → Html) → t anyLink → Html
+genericMakeLinks opened formatter makeSubLinks byPeriod = do
+    (if opened
+        then details ! customAttribute "open" "" ! class_ "ps-2"
+        else details ! class_ "ps-2") $ do
+            H.summary . fromString . formatter $ byPeriod
+            p $ foldMap makeSubLinks byPeriod
 
-makeLinksByMonth ∷ NonEmpty BlogPost → Html
-makeLinksByMonth = genericMakeLinks (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) makeLink -- you could use comonad extract here but what is a type with a head
+makeLinksByMonth ∷ Bool -> NonEmpty BlogPost → Html
+makeLinksByMonth opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) makeLink -- you could use comonad extract here but what is a type with a head
 
-makeLinksByYear ∷ NonEmpty (NonEmpty BlogPost) → Html
-makeLinksByYear = genericMakeLinks (show . year . date . metadata . LNE.head . LNE.head) makeLinksByMonth
-
+makeLinksByYear ∷ Bool -> NonEmpty (NonEmpty BlogPost) → Html
+makeLinksByYear opened = genericMakeLinks opened (show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth opened)
 -- TODO libify
 groupOnNonEmpty ∷ Eq k ⇒ (a' → k) → NonEmpty a' → NonEmpty (NonEmpty a')
 groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
@@ -43,4 +45,34 @@ groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
     where (.*.) `on2` fn = \x -> let fx = fn x in \y -> fx .*. fn y
 
 makeLinks ∷ NonEmpty BlogPost → Html
-makeLinks = foldMap (makeLinksByYear . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata)
+makeLinks bps = do
+    (H.div ! class_ "d-none d-lg-block") $ do
+        (details ! customAttribute "open" "" ! class_ "ps-2") $ do
+            H.summary "Posts"
+            foldMap (makeLinksByYear True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+        {-(details ! customAttribute "open" "" ! class_ "ps-2") $ do
+            H.summary "Tags"
+            foldMap (\tag -> do
+                p . (a ! href (fromString $ "/tag" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                ) tags -}
+    (H.div ! class_ "d-lg-none") $ do
+        (details ! class_ "ps-2") $ do
+            H.summary "Posts"
+            foldMap (makeLinksByYear False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+        (details ! class_ "ps-2") $
+            H.summary "Tags"
+
+makeTags :: NonEmpty BlogTag -> Html
+makeTags tags = do
+    (H.div ! class_ "d-none d-lg-block") $ do
+        (details ! customAttribute "open" "" ! class_ "ps-2") $ do
+            H.summary "Tags"
+            ul $ foldMap (\tag -> do
+                li . (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                ) tags
+    (H.div ! class_ "d-lg-none") $ do
+        (details ! customAttribute "open" "" ! class_ "ps-2") $ do
+            H.summary "Tags"
+            ul $ foldMap (\tag -> do
+                li . (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                ) tags

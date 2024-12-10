@@ -9,10 +9,10 @@ import Html.MadHacker.Page.Reviews
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-htmlHeader ∷ MonadReader Website m ⇒ Html → Html → m Html
-htmlHeader reviewLinks reviews = do
+htmlHeader ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
+htmlHeader reviewLinks reviewTagLinks reviews = do
     urlDanDart' <- asks (urlDanDart . urls)
-    pageReviews' <- pageReviews reviewLinks reviews
+    pageReviews' <- pageReviews reviewLinks reviewTagLinks reviews
     (pure . (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary")) .
         (H.div ! class_ "row my-0 w-100") $ (do
             a ! class_ "p-0 pt-1 pt-sm-0 col w-sm-auto text-center text-sm-start navbar-brand" ! href "#reviews" $ do

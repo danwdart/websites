@@ -2,7 +2,7 @@
 title: "I'm not centrist, but..."
 date: 2022-07-28T17:37:23+01:00
 draft: true
-aliases: [ "/2022/07/im-not-centrist-but.html" ]
+aliases: [ "/2022/07/im-not-centrist-but" ]
 tags: [not,centrist,but]
 ---
 

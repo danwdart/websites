@@ -2,7 +2,7 @@
 title: 'Should I cross-post?'
 date: 2021-11-05T16:24:24Z
 draft: false
-aliases: [ "/2021/11/should-i-cross-post.html" ]
+aliases: [ "/2021/11/should-i-cross-post" ]
 tags: [crosspost, reddit, tumblr, wordpress, blogger]
 ---
 

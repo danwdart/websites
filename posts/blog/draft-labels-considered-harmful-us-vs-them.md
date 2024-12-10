@@ -2,7 +2,7 @@
 title: 'Labels considered harmful: us vs. them'
 date: 2024-12-04T12:09:00Z
 draft: true
-aliases: [ "/2024/12/labels-considered-harmful-us-vs-them.html" ]
+aliases: [ "/2024/12/labels-considered-harmful-us-vs-them" ]
 tags: [politics]
 ---
 

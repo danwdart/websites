@@ -2,7 +2,7 @@
 title: 'The Rules of Mobile App Advertising'
 date: 2022-08-22T23:43:03+01:00
 draft: true
-aliases: [ "/2022/08/rules-of-mobile-app-advertising.html" ]
+aliases: [ "/2022/08/rules-of-mobile-app-advertising" ]
 tags: [rules, annoying, seo, ads, video, advertising, app, mobile, apps, android, ios, adwords, google, dfp, relevant, adsense, content]
 ---
 

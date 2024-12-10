@@ -2,7 +2,7 @@
 title: What's the fastest apparent object?
 date: 2022-06-02T05:26:03Z
 draft: true
-aliases: [ "/2022/02/whats-the-fastest-apparent-object.html" ]
+aliases: [ "/2022/02/whats-the-fastest-apparent-object" ]
 tags: [fastest, apparent, object, speed]
 ---
 

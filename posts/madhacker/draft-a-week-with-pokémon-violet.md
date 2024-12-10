@@ -2,7 +2,7 @@
 title: "A Week with Pokémon Violet (Spoiler Free)"
 date: 2022-11-25T11:02:03Z
 draft: true
-aliases: [ "/2022/11/a-week-with-pokémon-violet-spoiler-free.html" ]
+aliases: [ "/2022/11/a-week-with-pokémon-violet-spoiler-free" ]
 featuredImage:
 tags: [pokemon,pokémon,violet,game,nintendo,switch,scarlet]
 scores :

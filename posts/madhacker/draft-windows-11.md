@@ -2,7 +2,7 @@
 title: "Windows 11"
 date: 2022-06-29T10:18:00+01:00
 draft: true
-aliases: [ "/2022/06/windows-11.html" ]
+aliases: [ "/2022/06/windows-11" ]
 featuredImage: TODO
 tags: [windows, 11]
 scores :

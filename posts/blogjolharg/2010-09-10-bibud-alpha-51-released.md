@@ -2,7 +2,7 @@
 title: 'Bibud Alpha 5.1 released'
 date: 2010-09-10T11:55:00.001+01:00
 draft: false
-aliases: [ "/2010/09/bibud-alpha-51-released.html" ]
+aliases: [ "/2010/09/bibud-alpha-51-released" ]
 tags: [css, audio, release, social, javascript, desktop, web, bibud, html5, alpha, git, video]
 ---
 

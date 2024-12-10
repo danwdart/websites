@@ -2,7 +2,7 @@
 title: "YouTube Bugs: Ten Years On"
 date: 2022-08-25T16:14:09+01:00
 draft: true
-aliases: [ "/2022/08/youtube-bugs-ten-years-on.html" ]
+aliases: [ "/2022/08/youtube-bugs-ten-years-on" ]
 tags: [the,state,of,youtube,bugs,ten,years,on]
 ---
 

@@ -2,7 +2,7 @@
 title: 'Retro dial-up network fun'
 date: 2018-07-27T01:46:00.000+01:00
 draft: false
-aliases: [ "/2018/07/retro-dial-up-network-fun.html" ]
+aliases: [ "/2018/07/retro-dial-up-network-fun" ]
 tags: [98, address, serial, protocol, routing, server, kernel, nostalgia, dial-up, nat, windows, linux, modem, internet, emulation, isp, dialup, emulate, network]
 ---
 

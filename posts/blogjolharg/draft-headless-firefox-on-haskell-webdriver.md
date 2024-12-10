@@ -2,7 +2,7 @@
 title: 'Headless Firefox on Haskell WebDriver'
 date: 2020-11-07T20:59:00Z
 draft: true
-aliases: [ "/2020/11/headless-firefox-on-haskell-webdriver.html" ]
+aliases: [ "/2020/11/headless-firefox-on-haskell-webdriver" ]
 tags: [headless, firefox, haskell, webdriver, selenium]
 ---
 

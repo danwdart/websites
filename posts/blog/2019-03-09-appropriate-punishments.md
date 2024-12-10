@@ -2,7 +2,7 @@
 title: 'Appropriate punishments?'
 date: 2019-03-09T18:40:00.000Z
 draft: false
-aliases: [ "/2019/03/appropriate-punishments.html" ]
+aliases: [ "/2019/03/appropriate-punishments" ]
 tags: [murder, punishment, thief, death, killed, lawmaker, country, criminals, criminal, justice, law, stolen, thievery, accountant, victim, crime, kill, stole, jewel, killing]
 ---
 

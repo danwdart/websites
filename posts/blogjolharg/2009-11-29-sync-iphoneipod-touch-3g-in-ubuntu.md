@@ -2,7 +2,7 @@
 title: 'Sync iPhone/iPod Touch 3G in Ubuntu'
 date: 2009-11-29T03:47:00.000Z
 draft: false
-aliases: [ "/2009/11/sync-iphoneipod-touch-3g-in-ubuntu.html" ]
+aliases: [ "/2009/11/sync-iphoneipod-touch-3g-in-ubuntu" ]
 tags: [ipod, ubuntu, linux, itunes]
 ---
 

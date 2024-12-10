@@ -2,7 +2,7 @@
 title: 'Always use UTC'
 date: 2020-12-05T07:39:00Z
 draft: false
-aliases: [ "/2020/12/always-use-utc.html" ]
+aliases: [ "/2020/12/always-use-utc" ]
 tags: [time, utc]
 ---
 

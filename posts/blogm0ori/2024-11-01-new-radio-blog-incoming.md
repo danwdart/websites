@@ -2,7 +2,7 @@
 title: 'New radio blog incoming!'
 date: 2024-11-01T21:45:03Z
 draft: false
-aliases: [ "/2024/11/new-radio-blog-incoming.html" ]
+aliases: [ "/2024/11/new-radio-blog-incoming" ]
 tags: [radio, blog]
 ---
 

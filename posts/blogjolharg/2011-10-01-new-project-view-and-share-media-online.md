@@ -2,7 +2,7 @@
 title: 'New Project: View and Share Media Online'
 date: 2011-10-01T22:58:00.000+01:00
 draft: false
-aliases: [ "/2011/10/new-project-view-and-share-media-online.html" ]
+aliases: [ "/2011/10/new-project-view-and-share-media-online" ]
 tags: [audio, bsd, open source, recording, media, sharing, broadcasting, mit, video, gpl, free software]
 ---
 

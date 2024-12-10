@@ -2,7 +2,7 @@
 title: 'Issuing modem commands to an unrooted Android device'
 date: 2018-07-31T20:37:00.000+01:00
 draft: false
-aliases: [ "/2018/07/issuing-modem-commands-to-unrooted.html" ]
+aliases: [ "/2018/07/issuing-modem-commands-to-unrooted" ]
 tags: [access, phone, serial, root, screen, m2msupport, gsm, mobile, port, linux, minicom, connection, modem, networking, android, hayes, network]
 ---
 

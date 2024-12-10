@@ -2,7 +2,7 @@
 title: 'How to Conquer the Desktop'
 date: 2009-08-19T20:28:00.001+01:00
 draft: false
-aliases: [ "/2009/08/how-to-conquer-desktop.html" ]
+aliases: [ "/2009/08/how-to-conquer-desktop" ]
 tags: [hardware, advertising, windows, gui, linux, packages, standard, change, command line, naming]
 ---
 

@@ -2,7 +2,7 @@
 title: 'A short story about your childhood: Part 2'
 date: 2022-03-28T17:04:27+00:00
 draft: false
-aliases: [ "/2022/03/a-short-story-about-your-childhood-part-2.html" ]
+aliases: [ "/2022/03/a-short-story-about-your-childhood-part-2" ]
 tags: [story,childhood]
 ---
 

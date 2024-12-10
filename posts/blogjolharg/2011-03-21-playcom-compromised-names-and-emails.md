@@ -2,7 +2,7 @@
 title: 'Play.com compromised, names and emails taken'
 date: 2011-03-21T23:40:00.000Z
 draft: false
-aliases: [ "/2011/03/playcom-compromised-names-and-emails.html" ]
+aliases: [ "/2011/03/playcom-compromised-names-and-emails" ]
 tags: [security, cracker, compromise, emai, rakuten, com, hacker, l, play]
 ---
 

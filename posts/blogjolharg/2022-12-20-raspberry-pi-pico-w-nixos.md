@@ -2,7 +2,7 @@
 title: 'Raspberry Pi Pico (W) on NixOS'
 date: 2022-12-20T19:16:15Z
 draft: false
-aliases: [ "/2022/12/raspberry-pi-pico-w-nixos.html" ]
+aliases: [ "/2022/12/raspberry-pi-pico-w-nixos" ]
 tags: [raspberry, pi, pico, w, nixos]
 ---
 

@@ -2,7 +2,7 @@
 title: 'General update on the current state of my life'
 date: 2016-10-19T20:00:00.003+01:00
 draft: false
-aliases: [ "/2016/10/general-update-on-current-state-of-my.html" ]
+aliases: [ "/2016/10/general-update-on-current-state-of-my" ]
 tags: [hunting, job, social, trek, wolfram, entertainment, life, media, transgender, games, star, podcast, skyrim, linux, gnu, software, doctor, who, blog, maths]
 ---
 

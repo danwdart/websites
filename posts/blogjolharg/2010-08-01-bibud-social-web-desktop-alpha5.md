@@ -2,7 +2,7 @@
 title: 'Bibud Social Web Desktop Alpha5 Released'
 date: 2010-08-01T20:01:00.001+01:00
 draft: false
-aliases: [ "/2010/08/bibud-social-web-desktop-alpha5.html" ]
+aliases: [ "/2010/08/bibud-social-web-desktop-alpha5" ]
 tags: [friends, audio, media, sharing, desktop, web, bibud, html5, webos, alpha, files, video]
 ---
 

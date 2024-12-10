@@ -2,7 +2,7 @@
 title: 'Welcome to my new tech blog'
 date: 2022-09-11T23:24:11+01:00
 draft: false
-aliases: [ "/2022/09/welcome-to-my-new-tech-blog.html" ]
+aliases: [ "/2022/09/welcome-to-my-new-tech-blog" ]
 tags: [welcome,to,my,new,tech,blog,company]
 ---
 

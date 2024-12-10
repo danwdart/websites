@@ -2,7 +2,7 @@
 title: 'BSD for Linux Users: An Introduction'
 date: 2015-03-29T15:05:00.003+01:00
 draft: false
-aliases: [ "/2015/03/bsd-for-linux-users-introduction.html" ]
+aliases: [ "/2015/03/bsd-for-linux-users-introduction" ]
 tags: [dragonfly, netbsd, openbsd, zfs, cddl, freebsd, bsd, open, dragonflybsd, free, linux, gnu, debian, pcbsd, sco, unix, licence]
 ---
 

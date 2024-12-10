@@ -12,6 +12,7 @@ import Data.Either
 import Data.Env.Types
 import Data.Foldable
 import Data.Frontmatter
+import Data.List.NonEmpty                   qualified as LNE
 import Data.String
 import Data.Text                            (Text)
 import Data.Text                            qualified as T
@@ -29,7 +30,7 @@ import Text.Pandoc.Options
 import Text.Pandoc.Readers.Markdown
 import Text.Pandoc.Writers.HTML
 
-parseFile ∷ FilePath -> ByteString → Either ParseFileException ParseResult
+parseFile ∷ FilePath → ByteString → Either ParseFileException ParseResult
 parseFile filename' contents' = case parseYamlFrontmatter contents' of
     Done i' r -> Right $ ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock
@@ -45,7 +46,7 @@ makeBlogPost postsDir filename = do
     case parseFile filename file of
         Left ex -> throwIO ex -- wah wah wah
         Right (ParseResult metadata' html') -> do
-            let postId' = dropExtension . takeFileName . Prelude.head . aliases $ metadata'
+            let postId' = dropExtension . takeFileName . LNE.head . aliases $ metadata'
             comments' <- getComments postsDir postId'
             pure $ BlogPost (T.pack postId') metadata' html' comments'
 
@@ -101,12 +102,14 @@ renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
         -- Not working in Safari yet, so filter
         h1 . fromString . T.unpack $ BlogTypes.title metadata'
         small $ do
-            a ! href (fromString . Prelude.head . BlogTypes.aliases $ metadata') $ "Permalink"
+            a ! href (fromString . ("/post" <>) . LNE.head . BlogTypes.aliases $ metadata') $ "Permalink"
+            " | Author: "
+            a ! href (fromString . T.unpack $ "mailto:" <> email' <> "&subject=" <> BlogTypes.title metadata') $ "Dan Dart"
             " | Published: "
             fromString . show . date $ metadata'
             " | Tags: "
             foldMap ((\str -> do
-                a ! href (fromString ("/tag/" <> str <> ".html")) $ fromString str
+                a ! href (fromString ("/tag/" <> str)) $ fromString str
                 " "
                 ) . T.unpack . getTag) (tags metadata')
         br

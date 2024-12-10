@@ -2,7 +2,7 @@
 title: 'Facebook being down killed AdGuard'
 date: 2021-10-08T16:37:31+00:00
 draft: false
-aliases: [ "/2021/10/facebook-being-down-killed-adguard.html" ]
+aliases: [ "/2021/10/facebook-being-down-killed-adguard" ]
 tags: [facebook, dns, bgp, adguard, internet]
 ---
 

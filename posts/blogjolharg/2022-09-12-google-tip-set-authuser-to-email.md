@@ -2,7 +2,7 @@
 title: 'Google tip: Set ?authuser=[email]'
 date: 2022-09-12T09:44:03+01:00
 draft: false
-aliases: [ "/2022/09/google-tip-set-authuser-to-email.html" ]
+aliases: [ "/2022/09/google-tip-set-authuser-to-email" ]
 tags: [google,tip,authuser,email]
 ---
 

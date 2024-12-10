@@ -2,7 +2,7 @@
 title: 'My Morals'
 date: 2021-01-02T21:16:00Z
 draft: true
-aliases: [ "/2021/01/my-morals.html" ]
+aliases: [ "/2021/01/my-morals" ]
 tags: [morals]
 ---
 

@@ -2,7 +2,7 @@
 title: 'Sun is dead?'
 date: 2008-09-25T15:49:00.000+01:00
 draft: false
-aliases: [ "/2008/09/sun-is-dead.html" ]
+aliases: [ "/2008/09/sun-is-dead" ]
 tags: [bsd. competition, sun, jim, market, linux, share, kernel, solaris, unix, zemlin]
 ---
 
