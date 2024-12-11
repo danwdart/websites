@@ -39,7 +39,7 @@ groupByMany :: (Foldable f, Ord tag) => (post -> f tag) -> NonEmpty post -> Map 
 groupByMany postToTags =
   foldMap (\post -> foldMap (\tag -> M.singleton tag (LNE.singleton post)) (postToTags post))
 
-build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → Html → m Html) → m Html → m ()
+build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → Html → (String -> String) -> m Html) → m Html → m ()
 build page page404 = mdo
   url' <- asks url
   title' <- asks title
@@ -59,7 +59,8 @@ build page page404 = mdo
 
   tagUrlDates <- fromJust . LNE.nonEmpty . M.elems <$> M.traverseWithKey (\tag posts -> mdo
     postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
-    pageTag <- page (makeLinks sortedPosts) (makeTags tags) postsRendered
+    -- TODO: lowercase earlier?
+    pageTag <- page (makeLinks sortedPosts) (makeTags tags) postsRendered (("Posts tagged with " <> T.unpack (BlogTypes.getTag tag) <> ": ") <>)
     let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
     liftIO . createDirectoryIfMissing True $ dirname
@@ -81,7 +82,7 @@ build page page404 = mdo
       let dirname = dropFileName fullFilename
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost email' (const mempty) post
-      pageBlogPost <- page (makeLinks sortedPosts) (makeTags tags) renderedPost
+      pageBlogPost <- page (makeLinks sortedPosts) (makeTags tags) renderedPost (((T.unpack . BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> )
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
         url' <> "/post" <> T.pack alias,
@@ -96,4 +97,4 @@ build page page404 = mdo
   liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "sitemap.xml") $ renderSitemap sitemap'
   liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (url' <> "/atom.xml") url' url' title' sortedPosts
   liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> encodeUtf8 url' <> "/sitemap.xml"
-  make slug' (page (makeLinks sortedPosts) (makeTags tags) renderedPosts) page404
+  make slug' (page (makeLinks sortedPosts) (makeTags tags) renderedPosts id) page404
