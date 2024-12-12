@@ -3,7 +3,6 @@
 module Html.Blog.Index where
 
 import Control.Monad.Reader
-import Data.ByteString.Char8 (ByteString)
 import Data.Text (Text)
 import Data.Text.Encoding
 import Data.Env.Types              as Env
@@ -14,14 +13,11 @@ import Html.Common.Head
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-page ∷ MonadReader Website m ⇒ Html → Html → Html → (Text → Text) → m Html
-page blogPostLinks blogTagLinks blogPosts titleModifier = do
+page ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
+page blogPostLinks blogTagLinks blogPosts = do
     title' <- asks Env.title
-    description' <- asks Env.description
-    url' <- asks Env.url
-    imgUrl' <- asks Env.imgUrl
     header' <- htmlHeader blogPostLinks blogTagLinks blogPosts
-    head' <- htmlHead (titleModifier title') description' url' imgUrl' (extraHead title' "/atom.xml")
+    head' <- htmlHead (extraHead title' "/atom.xml")
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'

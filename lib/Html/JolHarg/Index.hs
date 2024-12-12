@@ -15,11 +15,7 @@ page ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)
 page = do
     header' <- htmlHeader
     pure $ do
-        title' <- asks Env.title
-        description' <- asks Env.description
-        url' <- asks Env.url
-        imgUrl' <- asks Env.imgUrl
-        head' <- htmlHead title' description' url' imgUrl' mempty
+        head' <- htmlHead mempty
         header'' <- header'
         pure . (docTypeHtml ! lang "en-GB") $ do
             head'

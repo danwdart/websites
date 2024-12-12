@@ -13,12 +13,8 @@ import Text.Blaze.Html5.Attributes as A
 
 page ∷ (MonadReader Website m) ⇒ m Html
 page = do
-    title' <- asks Env.title
-    description' <- asks Env.description
-    url' <- asks Env.url
-    imgUrl' <- asks Env.imgUrl
     header' <- htmlHeader
-    head' <- htmlHead title' description' url' imgUrl' mempty
+    head' <- htmlHead mempty
     pure $ do
         docTypeHtml ! lang "en-GB" $ do
             head'

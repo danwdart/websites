@@ -12,14 +12,11 @@ import Html.MadHacker.Header
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-page ∷ MonadReader Website m ⇒ Html → Html → Html → (Text → Text) → m Html
-page reviewLinks reviewTagLinks reviews titleModifier = do
+page ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
+page reviewLinks reviewTagLinks reviews = do
     title' <- asks Env.title
-    description' <- asks Env.description
-    url' <- asks Env.url
-    imgUrl' <- asks Env.imgUrl
     header' <- htmlHeader reviewLinks reviewTagLinks reviews
-    head' <- htmlHead (titleModifier title') description' url' imgUrl' (extraHead title' "/atom.xml")
+    head' <- htmlHead (extraHead title' "/atom.xml")
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'

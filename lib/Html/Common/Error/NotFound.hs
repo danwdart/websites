@@ -13,11 +13,7 @@ import Text.Blaze.Html5.Attributes as A
 
 defaultPage404 ∷ (MonadReader Website m) ⇒ Html → m Html
 defaultPage404 extraHead = do
-    title' <- asks Env.title
-    description' <- asks Env.description
-    url' <- asks Env.url
-    imgUrl' <- asks Env.imgUrl
-    head' <- htmlHead title' description' url' imgUrl' extraHead
+    head' <- htmlHead extraHead
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         body $ do
