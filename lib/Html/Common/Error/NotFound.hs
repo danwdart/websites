@@ -3,9 +3,7 @@
 module Html.Common.Error.NotFound where
 
 import Control.Monad.Reader
-import Data.ByteString.Char8       (ByteString)
 import Data.Env.Types              as Env
-import Data.Text                   (Text)
 import Html.Common.Bootstrap
 import Html.Common.Head
 import Text.Blaze.Html5            as H

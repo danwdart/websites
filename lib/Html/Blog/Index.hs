@@ -3,8 +3,6 @@
 module Html.Blog.Index where
 
 import Control.Monad.Reader
-import Data.Text (Text)
-import Data.Text.Encoding
 import Data.Env.Types              as Env
 import Html.Blog.Header
 import Html.Common.Blog.Feed

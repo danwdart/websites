@@ -3,7 +3,6 @@
 module Html.Blog.Header where
 
 import Control.Monad.Reader
-import Data.ByteString.Char8 as BS
 import Data.Env.Types
 import Data.String
 import Data.Text.Encoding

@@ -6,7 +6,6 @@ import Build.Sitemap
 import Control.Monad.IO.Class
 import Control.Monad.Reader
 import Data.ByteString.Char8 qualified as BS
-import Data.Text.Encoding
 import Data.Env.Types
 import Data.Text                  qualified as T
 import Make

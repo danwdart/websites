@@ -16,7 +16,7 @@ import Data.Map                      qualified as M
 import Data.Maybe
 -- import Data.Set                      (Set)
 import Data.Set                      qualified as S
-import Data.Text                     (Text)
+-- import Data.Text                     (Text)
 import Data.Text                     qualified as T
 import Data.Text.Encoding
 import Data.Text.IO                  qualified as TIO
@@ -61,7 +61,11 @@ build page page404 = mdo
   tagUrlDates <- fromJust . LNE.nonEmpty . M.elems <$> M.traverseWithKey (\tag posts -> mdo
     postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
     -- TODO: lowercase earlier?
-    pageTag <- page (makeLinks sortedPosts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
+
+    pageTag <- local (\w -> w {
+        title = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> title'
+      }) $
+      page (makeLinks sortedPosts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
     let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
     liftIO . createDirectoryIfMissing True $ dirname
@@ -83,7 +87,8 @@ build page page404 = mdo
       let dirname = dropFileName fullFilename
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost email' (const mempty) post
-      pageBlogPost <- page (makeLinks sortedPosts) (makeTags tags) renderedPost -- (((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> )
+      pageBlogPost <- local (\w -> w { title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title' }) $
+        page (makeLinks sortedPosts) (makeTags tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
         decodeUtf8 (url' <> "/post" <> BS.pack alias),

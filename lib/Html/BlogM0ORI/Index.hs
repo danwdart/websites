@@ -4,7 +4,6 @@ module Html.BlogM0ORI.Index where
 
 import Control.Monad.Reader
 import Data.Env.Types              as Env
-import Data.Text                   (Text)
 import Html.BlogM0ORI.Header
 import Html.Common.Blog.Feed
 import Html.Common.Error.NotFound

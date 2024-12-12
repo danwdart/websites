@@ -4,7 +4,6 @@ module Html.DanDart.Index where
 
 import Control.Monad.Reader
 import Data.Env.Types              as Env
-import Data.Text                   (Text)
 import Html.Common.Error.NotFound
 import Html.Common.Head
 import Html.DanDart.Header
