@@ -4,20 +4,23 @@ module Html.Common.Head where
 
 import Control.Monad               (when)
 import Control.Monad.Reader
+import Data.ByteString.Char8 (ByteString)
 import Data.Env.Types
 import Data.Foldable
 import Data.String
+import Data.Text (Text)
+import Data.Text.Encoding
 import Html.Common.CSS
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-metas ∷ String → String → String → String → Html
+metas ∷ Text → Text → ByteString → ByteString → Html
 metas title' description url imgUrl = do
     meta ! charset "utf-8"
     traverse_ (\(aName, aCont) -> meta ! name aName ! content aCont) [
-        ("title", fromString title'),
-        ("url", fromString url),
-        ("description", fromString description),
+        ("title", textValue title'),
+        ("url", textValue $ decodeUtf8 url),
+        ("description", textValue description),
         ("theme-color", "#800080")
         ]
     meta ! name "viewport" ! content "width=device-width, initial-scale=1"
@@ -28,18 +31,18 @@ metas title' description url imgUrl = do
         ]
     traverse_ (\(aProp, aCont) -> meta ! customAttribute "property" aProp ! content aCont) [
         ("og:type", "website"), -- https://ogp.me/#types
-        ("og:url", fromString url),
-        ("og:description", fromString description),
+        ("og:url", textValue $ decodeUtf8 url),
+        ("og:description", textValue description),
         ("og:locale", "en_GB"),
-        ("og:image", fromString imgUrl),
+        ("og:image", textValue $ decodeUtf8 imgUrl),
         ("twitter:card", "summary_large_image"),
-        ("twitter:url", fromString url),
-        ("twitter:title", fromString title'),
-        ("twitter:description", fromString description),
-        ("twitter:image", fromString imgUrl)
+        ("twitter:url", textValue $ decodeUtf8 url),
+        ("twitter:title", textValue title'),
+        ("twitter:description", textValue description),
+        ("twitter:image", textValue $ decodeUtf8 imgUrl)
         ]
 
-htmlHead ∷ (MonadReader Website m) ⇒ String → String → String → String → Html → m Html
+htmlHead ∷ (MonadReader Website m) ⇒ Text → Text → ByteString → ByteString → Html → m Html
 htmlHead title' description url imgUrl extraHead = do
     livereload' <- asks livereload
     pure . H.head $ do

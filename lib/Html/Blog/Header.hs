@@ -3,8 +3,10 @@
 module Html.Blog.Header where
 
 import Control.Monad.Reader
+import Data.ByteString.Char8 as BS
 import Data.Env.Types
 import Data.String
+import Data.Text.Encoding
 import Html.Blog.Page.Blog
 import Html.Common.Header
 import Html.Common.Page
@@ -16,7 +18,7 @@ htmlHeader blogPostLinks blogTagLinks blogPosts = do
     urlDanDart' <- asks (urlDanDart . urls)
     pageBlog' <- pageBlog blogPostLinks blogTagLinks blogPosts
     pure . makeHeader "/#blog" "Dan Dart's Blog" mempty $ do
-        extNav (textValue urlDanDart') "Dan Dart"
+        extNav (textValue $ decodeUtf8 urlDanDart') "Dan Dart"
         pageBlog'
         dlNav "/atom.xml" "Atom Feed"
         H.style . fromString $ styleToCss haddock

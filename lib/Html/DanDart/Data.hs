@@ -1,65 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Data.Site.DanDart where
+module Html.DanDart.Data where
 
 import Html.Common.Shortcuts
 import Text.Blaze.Html5      as H hiding (main)
-
-{-
-keywords ∷ [AttributeValue]
-keywords = [
-    "dan",
-    "dart",
-    "dandart",
-    "daniel dart",
-    "dan dart",
-    "exmouth",
-    "exeter",
-    "devon",
-    "england",
-    "united kingdom",
-    "uk",
-    "en_GB",
-    "gb",
-    "Great Britain",
-    "Britain",
-    "software",
-    "engineer",
-    "mathematics",
-    "lover",
-    "radio",
-    "ham",
-    "haskell",
-    "typescript",
-    "react.js",
-    "react",
-    "php",
-    "javascript",
-    "css",
-    "coffee",
-    "coffeescript",
-    "laravel",
-    "zend",
-    "framework",
-    "linux",
-    "gnu",
-    "express.js",
-    "ubuntu",
-    "debian"
-    ]
--}
-
-title' ∷ String
-title' = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician"
-
-description' ∷ String
-description' = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics."
-
-url' ∷ String
-url' = "https://dandart.co.uk"
-
-imgUrl ∷ String
-imgUrl = "https://dandart.co.uk/img/header.png"
 
 musicalStyles ∷ [Html]
 musicalStyles = [

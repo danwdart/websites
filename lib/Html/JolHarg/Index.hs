@@ -3,8 +3,7 @@
 module Html.JolHarg.Index where
 
 import Control.Monad.Reader
-import Data.Env.Types
-import Data.Site.JolHarg
+import Data.Env.Types              as Env
 import Html.Common.Error.NotFound
 import Html.Common.GitHub
 import Html.Common.Head
@@ -16,11 +15,15 @@ page ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)
 page = do
     header' <- htmlHeader
     pure $ do
-        head' <- htmlHead title' description' url' imgUrl mempty
+        title' <- asks Env.title
+        description' <- asks Env.description
+        url' <- asks Env.url
+        imgUrl' <- asks Env.imgUrl
+        head' <- htmlHead title' description' url' imgUrl' mempty
         header'' <- header'
         pure . (docTypeHtml ! lang "en-GB") $ do
             head'
             header''
 
 page404 ∷ MonadReader Website m ⇒ m Html
-page404 = defaultPage404 title' description' url' imgUrl mempty
+page404 = defaultPage404 mempty

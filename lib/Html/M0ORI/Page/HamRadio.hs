@@ -4,7 +4,6 @@ module Html.M0ORI.Page.HamRadio where
 
 import Control.Monad.Reader
 import Data.Env.Types
-import Data.Site.M0ORI
 import Html.Common.Link
 import Html.Common.Page
 import Text.Blaze.Html5            as H hiding (main)
@@ -29,4 +28,4 @@ pageHamRadio = makePage "ham" "Ham Radio" defaultLayout defaultPage $ do
     br
     (H.div ! A.id "rigref-solar-widget")
         . (a ! href "https://www.hamqsl.com/solar.html" ! target "_blank")
-        $ (img ! src (stringValue imgUrl))
+        $ (img ! src (stringValue "https://www.hamqsl.com/solar101vhf.php?muf=trms&kindex=tromso"))

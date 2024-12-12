@@ -3,6 +3,7 @@ module Build.Sitemap where
 import Control.Monad.IO.Class
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Text.Encoding
 import Data.Time.Clock
 import Web.Sitemap.Gen
 
@@ -11,5 +12,5 @@ sitemap = do
     now <- liftIO getCurrentTime
     url' <- asks url
     pure $ Sitemap [
-        SitemapUrl url' (Just now) (Just Weekly) (Just 1.0)
+        SitemapUrl (decodeUtf8 url') (Just now) (Just Weekly) (Just 1.0)
         ]

@@ -5,6 +5,7 @@ module Html.BlogM0ORI.Header where
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String
+import Data.Text.Encoding
 import Html.BlogM0ORI.Page.Blog
 import Html.Common.Header
 import Html.Common.Page
@@ -16,7 +17,7 @@ htmlHeader blogPostLinks blogTagLinks blogPosts = do
     urlHamRadio' <- asks (urlHamRadio . urls)
     pageBlog' <- pageBlog blogPostLinks blogTagLinks blogPosts
     pure . makeHeader "/#blog" "M0ORI Blog" mempty $ do
-        extNav (textValue urlHamRadio') "M0ORI"
+        extNav (textValue $ decodeUtf8 urlHamRadio') "M0ORI"
         pageBlog'
         dlNav "/atom.xml" "Atom Feed"
         H.style . fromString $ styleToCss haddock

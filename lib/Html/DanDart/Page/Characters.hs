@@ -5,7 +5,7 @@ module Html.DanDart.Page.Characters where
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.Foldable
-import Data.Site.DanDart
+import Html.DanDart.Data
 import Html.Common.Link
 import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)

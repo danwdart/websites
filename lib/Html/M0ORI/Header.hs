@@ -4,6 +4,7 @@ module Html.M0ORI.Header where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Text.Encoding
 import Html.Common.Header
 import Html.Common.Page
 import Html.M0ORI.Page.Contact
@@ -17,7 +18,7 @@ htmlHeader = do
     pageContact' <- pageContact
     urlBlogM0ORI' <- asks (urlBlogHamRadio. urls)
     pure . makeHeader "" "M0ORI: Dan Dart" mempty $ do
-        extNav (textValue urlDanDart') "Dan Dart"
+        extNav (textValue $ decodeUtf8 urlDanDart') "Dan Dart"
         pageHamRadio'
-        extNav (textValue urlBlogM0ORI') "Blog"
+        extNav (textValue $ decodeUtf8 urlBlogM0ORI') "Blog"
         pageContact'

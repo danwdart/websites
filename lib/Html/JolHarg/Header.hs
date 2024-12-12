@@ -4,6 +4,7 @@ module Html.JolHarg.Header where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Text.Encoding
 import Html.Common.GitHub
 import Html.Common.Header
 import Html.Common.Page
@@ -15,7 +16,7 @@ import Text.Blaze.Html5               as H hiding (main)
 linkBlogJolHarg ∷ (MonadReader Website m) ⇒ m Html
 linkBlogJolHarg = do
     urlBlogJolHarg' <- asks (urlBlogJolHarg . urls)
-    pure $ extNav (textValue urlBlogJolHarg') "Blog"
+    pure $ extNav (textValue $ decodeUtf8 urlBlogJolHarg') "Blog"
 
 -- Todo Technologies, Pricing, Blog, About
 htmlHeader ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)

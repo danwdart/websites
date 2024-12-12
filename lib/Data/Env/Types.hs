@@ -4,31 +4,36 @@
 module Data.Env.Types where
 
 import Control.Monad.Reader
-import Data.Set             (Set)
-import Data.Text            (Text)
+import Data.ByteString.Char8 (ByteString)
+import Data.Set              (Set)
+import Data.Text             (Text)
 
 data SiteType = Normal | Blog
 
+type Url = ByteString
+
 data Urls = Urls {
-    urlDanDart      :: Text,
-    urlHamRadio     :: Text,
-    urlBlogHamRadio :: Text,
-    urlBlog         :: Text,
-    urlBlogJolHarg  :: Text,
-    urlJolHarg      :: Text,
-    urlMadHacker    :: Text
+    urlDanDart      :: Url,
+    urlHamRadio     :: Url,
+    urlBlogHamRadio :: Url,
+    urlBlog         :: Url,
+    urlBlogJolHarg  :: Url,
+    urlJolHarg      :: Url,
+    urlMadHacker    :: Url
 }
 
 data Website = Website {
-    slug       :: Text,
-    title      :: Text,
+    slug        :: Text,
+    title       :: Text,
     -- keywords :: Set Text,
-    url        :: Text,
-    urls       :: Urls,
-    siteType   :: SiteType,
-    email      :: Text,
-    livereload :: Bool,
-    build      :: ReaderT Website IO ()
+    description :: Text,
+    imgUrl      :: Url,
+    url         :: Url,
+    urls        :: Urls,
+    siteType    :: SiteType,
+    email       :: Text, -- TODO email
+    livereload  :: Bool,
+    build       :: ReaderT Website IO ()
 }
 
 instance Eq Website where

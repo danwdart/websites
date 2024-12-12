@@ -4,6 +4,7 @@ module Html.MadHacker.Header where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Text.Encoding
 import Html.Common.Page
 import Html.MadHacker.Page.Reviews
 import Text.Blaze.Html5            as H hiding (main)
@@ -19,6 +20,6 @@ htmlHeader reviewLinks reviewTagLinks reviews = do
                 img ! src "/img/favicon.png" ! A.style "height:32px" ! alt ""
                 H.span ! class_ "title ms-2" $ "The Mad Hacker: Reviews"
             (H.div ! class_ "col") . (ul ! class_ "navbar-nav px-3") $ do
-                    extNav (textValue urlDanDart') "Dan Dart"
+                    extNav (textValue (decodeUtf8 urlDanDart')) "Dan Dart"
                     pageReviews'
                     dlNav "/atom.xml" "Atom Feed")

@@ -5,7 +5,7 @@ module Html.DanDart.Page.Favourites where
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.Foldable
-import Data.Site.DanDart
+import Html.DanDart.Data
 import Data.String
 import Html.Common.Link
 import Html.Common.Page
