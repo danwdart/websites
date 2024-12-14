@@ -3,6 +3,7 @@
 module Build.JolHarg where
 
 import Configuration.Dotenv
+import Control.Lens
 import Control.Monad (void)
 import Control.Monad.IO.Class
 import Control.Monad.Reader
@@ -15,7 +16,7 @@ import Text.Blaze.Html5       as H hiding (main)
 
 build ∷ forall m. (MonadReader Website m, MonadIO m, MonadFail m) ⇒ m ()
 build = do
-  slug' <- asks slug
+  slug' <- view slug
   void . liftIO $ loadFile defaultConfig
   [reposJH, reposDan] <- traverse (liftIO . runReq defaultHttpConfig . getRepos) ["jolharg", "danwdart"]
   let page' ∷ m Html

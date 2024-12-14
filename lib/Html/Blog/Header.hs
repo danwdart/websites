@@ -2,6 +2,7 @@
 
 module Html.Blog.Header where
 
+import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String
@@ -14,7 +15,7 @@ import Text.Pandoc.Highlighting
 
 htmlHeader ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
 htmlHeader blogPostLinks blogTagLinks blogPosts = do
-    urlDanDart' <- asks (urlDanDart . urls)
+    urlDanDart' <- view $ urls . urlDanDart
     pageBlog' <- pageBlog blogPostLinks blogTagLinks blogPosts
     pure . makeHeader "/#blog" "Dan Dart's Blog" mempty $ do
         extNav (textValue $ decodeUtf8 urlDanDart') "Dan Dart"

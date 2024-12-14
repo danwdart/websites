@@ -2,11 +2,12 @@
 
 module Html.Common.Blog.Index where
 
+import Control.Lens
 import Control.Monad.Reader
-import Data.ByteString.Char8 (ByteString)
-import Data.Text (Text)
-import Data.Text.Encoding
+import Data.ByteString.Char8       (ByteString)
 import Data.Env.Types              as Env
+import Data.Text                   (Text)
+import Data.Text.Encoding
 import Html.Common.Blog.Feed
 import Html.Common.Error.NotFound
 import Html.Common.Head
@@ -15,14 +16,12 @@ import Text.Blaze.Html5.Attributes as A
 
 page ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
 page blogPostLinks blogTagLinks blogPosts = do
-    title' <- asks Env.title
+    title' <- view Env.title
     header' <- htmlHeader blogPostLinks blogTagLinks blogPosts
-    head' <- htmlHead (extraHead title' "/atom.xml")
+    head' <- htmlHead
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
 
 page404 ∷ MonadReader Website m ⇒ m Html
-page404 = do
-    title' <- asks Env.title
-    defaultPage404 (extraHead title' "/atom.xml")
+page404 = defaultPage404

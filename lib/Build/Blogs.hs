@@ -3,11 +3,12 @@
 
 module Build.Blogs where
 
+import Control.Lens
 import Control.Monad                 (join)
 import Control.Monad.IO.Class
 import Control.Monad.Reader
 import Data.ByteString.Char8         qualified as BS
-import Data.Env.Types
+import Data.Env.Types                as Env
 import Data.Foldable
 import Data.List.NonEmpty            (NonEmpty (..))
 import Data.List.NonEmpty            qualified as LNE
@@ -40,12 +41,12 @@ groupByMany ∷ (Foldable f, Ord tag) ⇒ (post → f tag) → NonEmpty post →
 groupByMany postToTags =
   foldMap (\post -> foldMap (\tag -> M.singleton tag (LNE.singleton post)) (postToTags post))
 
-build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html -> Html -> Html -> m Html) → m Html → m ()
-build page page404 = mdo
-  url' <- asks url
-  title' <- asks title
-  slug' <- asks slug
-  email' <- asks email
+build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → Html → m Html) → m Html → m ()
+build page page404 = do
+  baseUrl' <- view baseUrl
+  title' <- view Env.title
+  slug' <- view slug
+  email' <- view email
   -- Clear us out, Jim
   let prefix = ".sites/" <> T.unpack slug' <> "/"
   traverse_ (liftIO . removePathForcibly . (prefix <>)) [
@@ -62,19 +63,23 @@ build page page404 = mdo
     postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
     -- TODO: lowercase earlier?
 
-    pageTag <- local (\w -> w {
-        title = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> title'
-      }) $
+    pageTag <- local (\w -> w { _title = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> title' }) $
       page (makeLinks sortedPosts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
     let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
     liftIO . createDirectoryIfMissing True $ dirname
     liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageTag
-    liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "tag" </> T.unpack (BlogTypes.getTag tag) </> "atom.xml") $ makeRSSFeed (url' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml") (url' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag)) url' ("Posts tagged with " <> BlogTypes.getTag tag <> ": " <> title') posts
+    liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "tag" </> T.unpack (BlogTypes.getTag tag) </> "atom.xml") $
+      makeRSSFeed
+        (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml")
+        (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag))
+        baseUrl'
+        ("Posts tagged with " <> BlogTypes.getTag tag <> ": " <> title')
+        posts
     -- liftIO . TIO.putStrLn $ url' <> "/tag/" <> BlogTypes.getTag tag
     -- liftIO . TIO.putStrLn . T.pack . show . BlogTypes.date . BlogTypes.metadata . LNE.head $ posts
     pure (
-      decodeUtf8 (url' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag)),
+      decodeUtf8 (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag)),
       BlogTypes.date . BlogTypes.metadata . LNE.head $ posts
       )
     ) grouped
@@ -87,20 +92,20 @@ build page page404 = mdo
       let dirname = dropFileName fullFilename
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost email' (const mempty) post
-      pageBlogPost <- local (\w -> w { title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title' }) $
+      pageBlogPost <- local (\w -> w { _title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title' }) $
         page (makeLinks sortedPosts) (makeTags tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
-        decodeUtf8 (url' <> "/post" <> BS.pack alias),
+        decodeUtf8 (baseUrl' <> "/post" <> BS.pack alias),
         BlogTypes.date . BlogTypes.metadata $ post
         )
 
   now <- liftIO getCurrentTime
   let sitemap' = Sitemap $ [
-        SitemapUrl (decodeUtf8 url') (Just now) (Just Weekly) (Just 1.0)
+        SitemapUrl (decodeUtf8 baseUrl') (Just now) (Just Weekly) (Just 1.0)
         ] <> fmap (\(url, date) -> SitemapUrl url (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
           <> fmap (\(url, date) -> SitemapUrl url (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
   liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "sitemap.xml") $ renderSitemap sitemap'
-  liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (url' <> "/atom.xml") url' url' title' sortedPosts
-  liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> url' <> "/sitemap.xml"
+  liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (baseUrl' <> "/atom.xml") (baseUrl' <> " (the atom url)") (baseUrl' <> " (the self url)") title' sortedPosts
+  liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> baseUrl' <> "/sitemap.xml"
   make slug' (page (makeLinks sortedPosts) (makeTags tags) renderedPosts) page404

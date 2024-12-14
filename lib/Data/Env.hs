@@ -12,17 +12,18 @@ import Build.DanDart     qualified as DanDart
 import Build.JolHarg     qualified as JolHarg
 import Build.M0ORI       qualified as M0ORI
 import Build.MadHacker   qualified as MadHacker
+import Control.Lens
 import Data.Env.Types
 
 productionUrls ∷ Urls
 productionUrls = Urls {
-    urlDanDart = "https://dandart.co.uk",
-    urlHamRadio = "https://m0ori.com",
-    urlBlogHamRadio = "https://blog.m0ori.com",
-    urlBlog = "https://blog.dandart.co.uk",
-    urlBlogJolHarg = "https://blog.jolharg.com",
-    urlJolHarg = "https://jolharg.com",
-    urlMadHacker = "https://madhackerreviews.com"
+    _urlDanDart = "https://dandart.co.uk",
+    _urlHamRadio = "https://m0ori.com",
+    _urlBlogHamRadio = "https://blog.m0ori.com",
+    _urlBlog = "https://blog.dandart.co.uk",
+    _urlBlogJolHarg = "https://blog.jolharg.com",
+    _urlJolHarg = "https://jolharg.com",
+    _urlMadHacker = "https://madhackerreviews.com"
 }
 
 prodBlog,
@@ -33,9 +34,9 @@ prodBlog,
     prodBlogM0ORI,
     prodMadHacker ∷ Website
 prodBlog = Website {
-    slug = "blog",
-    title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
-    {- keywords = [
+    _slug = "blog",
+    _title = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
+    {- _keywords = [
         "dan",
         "dart",
         "dandart",
@@ -76,19 +77,23 @@ prodBlog = Website {
         "ubuntu",
         "debian"
         ],-}
-    description = "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world.",
-    imgUrl = "https://dandart.co.uk/img/header.png",
-    url = urlBlog productionUrls,
-    urls = productionUrls,
-    siteType = Blog,
-    email = "blog@dandart.co.uk",
-    livereload = False,
-    build = Blog.build
+    _description = "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world.",
+    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _baseUrl = productionUrls ^. urlBlog,
+    _pageUrl = productionUrls ^. urlBlog,
+    _urls = productionUrls,
+    _siteType = Blog {
+        _atomTitle = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
+        _atomUrl = "https://blog.dandart.co.uk/atom.xml"
+    },
+    _email = "blog@dandart.co.uk",
+    _livereload = False,
+    _build = Blog.build
 }
 prodDanDart = Website {
-    slug = "dandart",
-    title = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician",
-    {- keywords = [
+    _slug = "dandart",
+    _title = "Dan Dart: Software Engineer, Mathematics Lover, Radio Ham, Musician",
+    {- _keywords = [
         "dan",
         "dart",
         "dandart",
@@ -129,19 +134,20 @@ prodDanDart = Website {
         "debian"
         ],
     -}
-    description = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics.",
-    imgUrl = "https://dandart.co.uk/img/header.png",
-    url = urlDanDart productionUrls,
-    urls = productionUrls,
-    siteType = Normal,
-    email = "website@dandart.co.uk",
-    livereload = False,
-    build = DanDart.build
+    _description = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics.",
+    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _baseUrl = productionUrls ^. urlDanDart,
+    _pageUrl = productionUrls ^. urlDanDart,
+    _urls = productionUrls,
+    _siteType = Normal,
+    _email = "website@dandart.co.uk",
+    _livereload = False,
+    _build = DanDart.build
 }
 prodJolHarg = Website {
-    slug = "jolharg",
-    title = "JolHarg: Your Software Engineering Partner",
-    {- keywords = [
+    _slug = "jolharg",
+    _title = "JolHarg: Your Software Engineering Partner",
+    {- _keywords = [
         "jolharg",
         "dan",
         "dart",
@@ -194,19 +200,20 @@ prodJolHarg = Website {
         "ubuntu",
         "debian"
         ], -}
-    description = "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications.",
-    imgUrl = "https://jolharg.com/img/header.png",
-    url = urlJolHarg productionUrls,
-    urls = productionUrls,
-    siteType = Normal,
-    email = "website@jolharg.com",
-    livereload = False,
-    build = JolHarg.build
+    _description = "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications.",
+    _imgUrl = "https://jolharg.com/img/header.png",
+    _baseUrl = productionUrls ^. urlJolHarg,
+    _pageUrl = productionUrls ^. urlJolHarg,
+    _urls = productionUrls,
+    _siteType = Normal,
+    _email = "website@jolharg.com",
+    _livereload = False,
+    _build = JolHarg.build
 }
 prodBlogJolHarg = Website {
-    slug = "blogjolharg",
-    title = "JolHarg: Software Blog",
-    {- keywords = [
+    _slug = "blogjolharg",
+    _title = "JolHarg: Software Blog",
+    {- _keywords = [
         "jolharg",
         "blog",
         "dandart",
@@ -246,19 +253,23 @@ prodBlogJolHarg = Website {
         "ubuntu",
         "debian"
         ], -}
-    description = "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier.",
-    imgUrl = "https://jolharg.com/img/header.png",
-    url = urlBlogJolHarg productionUrls,
-    urls = productionUrls,
-    siteType = Blog,
-    email = "blog@jolharg.com",
-    livereload = False,
-    build = BlogJolHarg.build
+    _description = "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier.",
+    _imgUrl = "https://jolharg.com/img/header.png",
+    _baseUrl = productionUrls ^. urlBlogJolHarg,
+    _pageUrl = productionUrls ^. urlBlogJolHarg,
+    _urls = productionUrls,
+    _siteType = Blog {
+        _atomTitle = "JolHarg: Software Blog",
+        _atomUrl = "https://blog.jolharg.com/atom.xml"
+    },
+    _email = "blog@jolharg.com",
+    _livereload = False,
+    _build = BlogJolHarg.build
 }
 prodM0ORI = Website {
-    slug = "m0ori",
-    title = "M0ORI call sign: Dan Dart, England",
-    {- keywords = [
+    _slug = "m0ori",
+    _title = "M0ORI call sign: Dan Dart, England",
+    {- _keywords = [
         "dan",
         "dart",
         "dandart",
@@ -287,31 +298,36 @@ prodM0ORI = Website {
         "qrz"
         ]
     -}
-    description = "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth.",
-    imgUrl = "https://dandart.co.uk/img/header.png",
-    url = urlHamRadio productionUrls,
-    urls = productionUrls,
-    siteType = Normal,
-    email = "website@m0ori.com",
-    livereload = False,
-    build = M0ORI.build
+    _description = "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth.",
+    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _baseUrl = productionUrls ^. urlHamRadio,
+    _pageUrl = productionUrls ^. urlHamRadio,
+    _urls = productionUrls,
+    _siteType = Normal,
+    _email = "website@m0ori.com",
+    _livereload = False,
+    _build = M0ORI.build
 }
 prodBlogM0ORI = Website {
-    slug = "blogm0ori",
-    title = "The Blog of M0ORI: Interesting Radio Observations",
-    description = "My radio blog covers interesting observations I have had whilst working on ham bands.",
-    imgUrl = "https://dandart.co.uk/img/header.png",
-    url = urlBlogHamRadio productionUrls,
-    urls = productionUrls,
-    siteType = Blog,
-    email = "blog@m0ori.com",
-    livereload = False,
-    build = BlogM0ORI.build
+    _slug = "blogm0ori",
+    _title = "The Blog of M0ORI: Interesting Radio Observations",
+    _description = "My radio blog covers interesting observations I have had whilst working on ham bands.",
+    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _baseUrl = productionUrls ^. urlBlogHamRadio,
+    _pageUrl = productionUrls ^. urlBlogHamRadio,
+    _urls = productionUrls,
+    _siteType = Blog {
+        _atomTitle = "The Blog of M0ORI: Interesting Radio Observations",
+        _atomUrl = "https://blog.m0ori.com/atom.xml"
+    },
+    _email = "blog@m0ori.com",
+    _livereload = False,
+    _build = BlogM0ORI.build
 }
 prodMadHacker = Website {
-    slug = "madhacker",
-    title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
-    {- keywords = [
+    _slug = "madhacker",
+    _title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
+    {- _keywords = [
         "exmouth",
         "exeter",
         "devon",
@@ -339,14 +355,18 @@ prodMadHacker = Website {
         "react"
         ]
     -}
-    description = "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored.",
-    imgUrl = "https://dandart.co.uk/img/header.png",
-    url = urlMadHacker productionUrls,
-    urls = productionUrls,
-    siteType = Blog,
-    email = "madhacker@dandart.co.uk", -- TODO add MX
-    livereload = False,
-    build = MadHacker.build
+    _description = "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored.",
+    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _baseUrl = productionUrls ^. urlMadHacker,
+    _pageUrl = productionUrls ^. urlMadHacker,
+    _urls = productionUrls,
+    _siteType = Blog {
+        _atomTitle = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
+        _atomUrl = "https://madhackerreviews.com/atom.xml"
+    },
+    _email = "madhacker@dandart.co.uk", -- TODO add MX
+    _livereload = False,
+    _build = MadHacker.build
 }
 
 production ∷ Env

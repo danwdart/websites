@@ -2,6 +2,7 @@
 
 module Html.BlogM0ORI.Header where
 
+import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String
@@ -14,7 +15,7 @@ import Text.Pandoc.Highlighting
 
 htmlHeader ∷ MonadReader Website m ⇒ Html → Html → Html → m Html
 htmlHeader blogPostLinks blogTagLinks blogPosts = do
-    urlHamRadio' <- asks (urlHamRadio . urls)
+    urlHamRadio' <- view $ urls . urlHamRadio
     pageBlog' <- pageBlog blogPostLinks blogTagLinks blogPosts
     pure . makeHeader "/#blog" "M0ORI Blog" mempty $ do
         extNav (textValue $ decodeUtf8 urlHamRadio') "M0ORI"

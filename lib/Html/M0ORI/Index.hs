@@ -13,10 +13,10 @@ import Text.Blaze.Html5.Attributes as A
 page ∷ MonadReader Website m ⇒ m Html
 page = do
     header' <- htmlHeader
-    head' <- htmlHead mempty
+    head' <- htmlHead
     pure . (docTypeHtml ! lang "en-GB") $ do
         head'
         header'
 
 page404 ∷ MonadReader Website m ⇒ m Html
-page404 = defaultPage404 mempty
+page404 = defaultPage404

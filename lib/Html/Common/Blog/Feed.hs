@@ -3,9 +3,14 @@
 
 module Html.Common.Blog.Feed where
 
+import Control.Lens
+-- import Control.Monad (when)
+import Control.Monad.Reader
 import Data.ByteString.Char8         (ByteString)
+import Data.Env.Types                as Env
 import Data.List.NonEmpty            (NonEmpty)
 import Data.List.NonEmpty            qualified as LNE
+-- import Data.Maybe
 import Data.Text                     (Text)
 import Data.Text                     qualified as T
 import Data.Text.Encoding
@@ -19,8 +24,12 @@ import Text.Blaze.Html5              as H hiding (main)
 import Text.Blaze.Html5.Attributes   as A
 import Text.Pandoc.Shared            (tshow)
 
-extraHead ∷ Text → ByteString → Html
-extraHead atomTitle atomUrl = link ! rel "alternate" ! type_ "application/atom+xml" ! A.title (textValue atomTitle) ! href (textValue $ decodeUtf8 atomUrl)
+extraHead ∷ MonadReader Website m ⇒ m Html
+extraHead = do -- TODO maybeT
+    atomTitle' <- view $ siteType . atomTitle
+    atomUrl' <- view $ siteType . atomUrl
+    pure $
+        link ! rel "alternate" ! type_ "application/atom+xml" ! A.title (textValue atomTitle') ! href (textValue $ decodeUtf8 atomUrl')
 
 toEntry ∷ ByteString → BlogPost → Atom.Entry
 toEntry domain (BlogPost _ BlogMetadata { aliases = aliases', title = title', date = date' } html' _) = (

@@ -2,6 +2,7 @@
 
 module Html.DanDart.Header where
 
+import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.Foldable.Monoid
@@ -22,22 +23,22 @@ import Text.Blaze.Html5             as H hiding (main)
 
 linkHamRadio ∷ (MonadReader Website m) ⇒ m Html
 linkHamRadio = do
-    urlHamRadio' <- asks (urlHamRadio . urls)
+    urlHamRadio' <- view $ urls . urlHamRadio
     pure $ extNav (textValue $ decodeUtf8 urlHamRadio') "Ham Radio"
 
 linkSoftware ∷ (MonadReader Website m) ⇒ m Html
 linkSoftware = do
-    urlJolHarg' <- asks (urlJolHarg . urls)
+    urlJolHarg' <- view $ urls . urlJolHarg
     pure $ extNav (textValue $ decodeUtf8 urlJolHarg') "Software"
 
 linkBlog ∷ (MonadReader Website m) ⇒ m Html
 linkBlog = do
-    urlBlog' <- asks (urlBlog . urls)
+    urlBlog' <- view $ urls . urlBlog
     pure $ extNav (textValue $ decodeUtf8 urlBlog') "Blog"
 
 linkReviews ∷ (MonadReader Website m) ⇒ m Html
 linkReviews = do
-    urlMadHacker' <- asks (urlMadHacker . urls)
+    urlMadHacker' <- view $ urls . urlMadHacker
     pure $ extNav (textValue $ decodeUtf8 urlMadHacker') "Reviews"
 
 htmlHeader ∷ (MonadReader Website m) ⇒ m Html
