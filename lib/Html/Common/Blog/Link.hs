@@ -56,11 +56,11 @@ groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
 groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
 groupOnNonEmptyWithKey f = foldr (\v acc -> M.insertWith (<>) (f v) (LNE.singleton v) acc) M.empty
 
-makeLinks ∷ NonEmpty BlogPost → Html
-makeLinks bps = do
+makeLinks ∷ Text -> NonEmpty BlogPost → Html
+makeLinks titleName bps = do
     (H.div ! class_ "d-none d-lg-block") $ do
         (details ! customAttribute "open" "" ! class_ "ps-2") $ do
-            H.summary "Posts"
+            H.summary . text $ titleName
             foldMap (makeLinksByYear True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
         {-(details ! customAttribute "open" "" ! class_ "ps-2") $ do
             H.summary "Tags"
@@ -69,7 +69,7 @@ makeLinks bps = do
                 ) tags -}
     (H.div ! class_ "d-lg-none") $ do
         (details ! class_ "ps-2") $ do
-            H.summary "Posts"
+            H.summary . text $ titleName
             foldMap (makeLinksByYear False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
         (details ! class_ "ps-2") $
             H.summary "Tags"

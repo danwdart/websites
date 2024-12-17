@@ -18,7 +18,7 @@ import Data.List.NonEmpty            qualified as LNE
 -- import Data.Map                      qualified as M
 import Data.Map.NonEmpty (NEMap)
 import Data.Map.NonEmpty qualified as MNE
-import Data.Maybe
+-- import Data.Maybe
 -- import Data.Set                      (Set)
 -- import Data.Set                      qualified as S
 -- import Data.Set.NonEmpty                      (NESet)
@@ -67,9 +67,9 @@ build page page404 = do
 
   let tags = MNE.keys grouped
 
+  -- pretty sus of this
   tagUrlDates <- MNE.elems <$> MNE.traverseWithKey (\tag posts -> mdo
     -- Okay LNE.filter does not have this guarantee - anything else?
-    let sortedPosts' = fromJust . LNE.nonEmpty $ LNE.filter (\p' -> tag `elem` (BlogTypes.tags . BlogTypes.metadata $ p')) sortedPosts 
     postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
     -- TODO: lowercase earlier?
 
@@ -80,7 +80,7 @@ build page page404 = do
         _atomUrl = baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml"
       }
     }) $
-      page (makeLinks sortedPosts') (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
+      page (makeLinks ("Posts tagged with " <> BlogTypes.getTag tag) posts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
     let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
     liftIO . createDirectoryIfMissing True $ dirname
@@ -115,7 +115,7 @@ build page page404 = do
         -- we don't override rss title, only page title, this is why they're separate
         _title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title'
       }) $
-        page (makeLinks sortedPosts) (makeTags tags) renderedPost
+        page (makeLinks "All Posts" sortedPosts) (makeTags tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
         decodeUtf8 (baseUrl' <> "/post" <> BS.pack alias),
@@ -130,4 +130,4 @@ build page page404 = do
   liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "sitemap.xml") $ renderSitemap sitemap'
   liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (baseUrl' <> "/atom.xml") baseUrl' baseUrl' title' sortedPosts
   liftIO . BS.writeFile (".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> baseUrl' <> "/sitemap.xml"
-  make slug' (page (makeLinks sortedPosts) (makeTags tags) renderedPosts) page404
+  make slug' (page (makeLinks "All Posts" sortedPosts) (makeTags tags) renderedPosts) page404
