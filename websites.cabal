@@ -54,7 +54,9 @@ library
     , filepath
     , frontmatter
     , fsutils       >=0.1.4
+    , lens
     , mtl
+    , nonempty-containers
     , pandoc
     , req
     , sitemap-gen
@@ -75,13 +77,6 @@ library
     Control.Exception.InvalidDateException
     Control.Exception.ParseFileException
     Data.Foldable.Monoid
-    Data.Site.Blog
-    Data.Site.BlogJolHarg
-    Data.Site.BlogM0ORI
-    Data.Site.DanDart
-    Data.Site.JolHarg
-    Data.Site.M0ORI
-    Data.Site.MadHacker
     Data.Time.Utils
     Html.Blog.Header
     Html.Blog.Index
@@ -112,6 +107,7 @@ library
     Html.Common.Shortcuts
     Html.Common.Social
     Html.Common.Utils
+    Html.DanDart.Data
     Html.DanDart.Header
     Html.DanDart.Index
     Html.DanDart.Page.About
@@ -178,13 +174,6 @@ executable dev
     Data.Env
     Data.Env.Types
     Data.Foldable.Monoid
-    Data.Site.Blog
-    Data.Site.BlogJolHarg
-    Data.Site.BlogM0ORI
-    Data.Site.DanDart
-    Data.Site.JolHarg
-    Data.Site.M0ORI
-    Data.Site.MadHacker
     Data.Time.Utils
     Html.Blog.Header
     Html.Blog.Index
@@ -215,6 +204,7 @@ executable dev
     Html.Common.Shortcuts
     Html.Common.Social
     Html.Common.Utils
+    Html.DanDart.Data
     Html.DanDart.Header
     Html.DanDart.Index
     Html.DanDart.Page.About
@@ -256,7 +246,9 @@ executable dev
     , filepath
     , frontmatter
     , fsutils       >=0.1.4
+    , lens
     , mtl
+    , nonempty-containers
     , pandoc
     , req
     , sitemap-gen
