@@ -47,7 +47,8 @@ buildMD postsDir email' renderSuffix = do
   posts <- liftIO (traverse (makeBlogPost postsDir) validFiles)
   let sortedPosts = sortOn (Down . date . metadata) . filter (not . draft . metadata) $ posts
   case LNE.nonEmpty sortedPosts of
-    Nothing -> liftIO $ fail "No valid, non-draft posts."
+    Nothing -> liftIO $ fail "No valid, non-draft posts. Oh dear."
     Just sortedPosts' -> do
+      -- potentially we could do this afterwards?
       renderedPosts <- foldtraverse (renderPost email' renderSuffix) sortedPosts'
       pure (sortedPosts', renderedPosts)

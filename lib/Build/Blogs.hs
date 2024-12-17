@@ -18,7 +18,7 @@ import Data.List.NonEmpty            qualified as LNE
 -- import Data.Map                      qualified as M
 import Data.Map.NonEmpty (NEMap)
 import Data.Map.NonEmpty qualified as MNE
--- import Data.Maybe
+import Data.Maybe
 -- import Data.Set                      (Set)
 -- import Data.Set                      qualified as S
 -- import Data.Set.NonEmpty                      (NESet)
@@ -68,6 +68,8 @@ build page page404 = do
   let tags = MNE.keys grouped
 
   tagUrlDates <- MNE.elems <$> MNE.traverseWithKey (\tag posts -> mdo
+    -- Okay LNE.filter does not have this guarantee - anything else?
+    let sortedPosts' = fromJust . LNE.nonEmpty $ LNE.filter (\p' -> tag `elem` (BlogTypes.tags . BlogTypes.metadata $ p')) sortedPosts 
     postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
     -- TODO: lowercase earlier?
 
@@ -78,7 +80,7 @@ build page page404 = do
         _atomUrl = baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml"
       }
     }) $
-      page (makeLinks sortedPosts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
+      page (makeLinks sortedPosts') (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
     let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
     liftIO . createDirectoryIfMissing True $ dirname
@@ -105,7 +107,6 @@ build page page404 = do
   urlDatePairsFromPages <- fmap join . for sortedPosts $ \post -> do
     let aliases' = BlogTypes.aliases . BlogTypes.metadata $ post
     for aliases' $ \alias -> do
-      -- TODO template
       let fullFilename = ".sites/" <> T.unpack slug' <> "/post" <> alias <> "/index.html" -- </> ???
       let dirname = dropFileName fullFilename
       liftIO . createDirectoryIfMissing True $ dirname
