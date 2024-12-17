@@ -111,6 +111,7 @@ build page page404 = do
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost email' (const mempty) post
       pageBlogPost <- local (\w -> w {
+        -- we don't override rss title, only page title, this is why they're separate
         _title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title'
       }) $
         page (makeLinks sortedPosts) (makeTags tags) renderedPost
