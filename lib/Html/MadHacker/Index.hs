@@ -2,10 +2,10 @@
 
 module Html.MadHacker.Index where
 
-import Control.Lens
+-- import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types              as Env
-import Html.Common.Blog.Feed
+-- import Html.Common.Blog.Feed
 import Html.Common.Error.NotFound
 import Html.Common.Head
 import Html.MadHacker.Header

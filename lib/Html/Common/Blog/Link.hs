@@ -7,6 +7,8 @@ import Data.List.NonEmpty          (NonEmpty)
 import Data.List.NonEmpty          qualified as LNE
 import Data.Map                    (Map)
 import Data.Map                    qualified as M
+-- import Data.Map.NonEmpty           (NEMap)
+-- import Data.Map.NonEmpty           qualified as MNE
 import Data.String
 import Data.Text                   (Text)
 import Data.Text                   qualified as T
@@ -48,7 +50,10 @@ groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
     -- redefine on so we avoid duplicate computation for most values.
     where (.*.) `on2` fn = \x -> let fx = fn x in \y -> fx .*. fn y
 
-groupOnNonEmptyWithKey ∷ (Ord b') => (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
+-- TODO convert to foldMap for NEMap
+-- not doable with M.insertMapWith because it's within a fold (i.e. first insertMapWith, second insertWith)
+-- unless we go crazy with pattern matching, better just to use foldMap1 or something
+groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
 groupOnNonEmptyWithKey f = foldr (\v acc -> M.insertWith (<>) (f v) (LNE.singleton v) acc) M.empty
 
 makeLinks ∷ NonEmpty BlogPost → Html
@@ -80,13 +85,16 @@ makeTags tags = do
             H.summary "Tags"
             innerElement
     where
-        sortedTags = groupOnNonEmptyWithKey (T.toLower . T.singleton . T.head . getTag) tags :: Map Text (NonEmpty BlogTag) 
+        sortedTags = groupOnNonEmptyWithKey (T.toLower . T.singleton . T.head . getTag) tags :: Map Text (NonEmpty BlogTag)
         innerElement = ul $
-            (M.foldMapWithKey :: (Text -> NonEmpty BlogTag -> Html) -> Map Text (NonEmpty BlogTag) -> Html)  (\letter subtags ->
+            (M.foldMapWithKey :: (Text → NonEmpty BlogTag → Html) → Map Text (NonEmpty BlogTag) → Html)  (\letter subtags ->
                 li . (details ! class_ "ps-2") $ do
                     H.summary . fromString . T.unpack $ letter
                     ul $ foldMap (\tag ->
-                        li . (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                        li $ do
+                            (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                            -- " "
+                            -- (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag) <> "/atom.xml")) "📰"
                         ) subtags
             ) (sortedTags :: Map Text (NonEmpty BlogTag))
           {-foldMap (\tag -> do

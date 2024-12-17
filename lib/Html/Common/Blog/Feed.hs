@@ -38,8 +38,14 @@ toEntry domain (BlogPost _ BlogMetadata { aliases = aliases', title = title', da
         (Atom.TextString title')
         (tshow date')
     )
-    { Atom.entryAuthors = [Atom.nullPerson {Atom.personName = "Dan Dart"}]
-    , Atom.entryLinks = [Atom.nullLink (decodeUtf8 domain <> "/post" <> T.pack (LNE.head aliases'))]
+    { Atom.entryAuthors = [
+        Atom.nullPerson {
+            Atom.personName = "Dan Dart"
+        }
+        ]
+    , Atom.entryLinks = [
+        Atom.nullLink (decodeUtf8 domain <> "/post" <> T.pack (LNE.head aliases'))
+        ]
     , Atom.entryContent = Just (Atom.HTMLContent . toStrict . renderHtml $ html')
     }
 
@@ -53,13 +59,13 @@ feed atomXml title' posts = Atom.nullFeed
     (dateUpdated posts)
 
 makeRSSFeed ∷ ByteString → ByteString → ByteString → Text → NonEmpty BlogPost → Text
-makeRSSFeed atomXml selfXml domain title' posts = maybe "" TL.toStrict (
+makeRSSFeed atomXml selfUrl domain title' posts = maybe "" TL.toStrict (
     Export.textFeed $
     (feed atomXml title' posts)
     {
         Atom.feedEntries = toEntry domain <$> LNE.toList posts,
         Atom.feedLinks = [
-            Atom.nullLink (decodeUtf8 selfXml)
+            Atom.nullLink (decodeUtf8 selfUrl)
             ]
         }
     )

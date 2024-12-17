@@ -8,6 +8,8 @@ import Control.Lens
 import Control.Monad.Reader
 import Data.ByteString.Char8 (ByteString)
 import Data.Set              (Set)
+-- huh? NESet is not IsList? Well I suppose not... maybe there should be an IsNEList...
+-- import Data.Set.NonEmpty     (NESet)
 import Data.Text             (Text)
 
 type Url = ByteString
@@ -34,7 +36,7 @@ makeLenses ''Urls
 data Website = Website {
     _slug        :: Text,
     _title       :: Text,
-    -- _keywords :: Set Text,
+    -- _keywords :: NESet Text,
     _description :: Text,
     _imgUrl      :: Url,
     _baseUrl     :: Url,
