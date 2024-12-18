@@ -56,6 +56,7 @@ groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
 groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
 groupOnNonEmptyWithKey f = foldr (\v acc -> M.insertWith (<>) (f v) (LNE.singleton v) acc) M.empty
 
+-- TODO open only the links we're on if we're in a post page
 makeLinks ∷ Text -> NonEmpty BlogPost → Html
 makeLinks titleName bps = do
     (H.div ! class_ "d-none d-lg-block") $ do
@@ -74,6 +75,7 @@ makeLinks titleName bps = do
         (details ! class_ "ps-2") $
             H.summary "Tags"
 
+-- TODO open only the letters we're in if we're in a tag page
 makeTags ∷ NonEmpty BlogTag → Html
 makeTags tags = do
     (H.div ! class_ "d-none d-lg-block") $ do
