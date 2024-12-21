@@ -2,9 +2,11 @@
 
 module Html.Common.Page where
 
+import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String                 (IsString (fromString))
+import Data.Text.Encoding
 import Html.Common.Bootstrap
 import Html.Common.Link
 import Text.Blaze.Html5            as H
@@ -41,8 +43,18 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
+renderBreadcrumb :: MonadReader Website m => m Html
+renderBreadcrumb = do
+    breadcrumb' <- view breadcrumb
+    pure . small $ foldMap (\(label', mUrl) -> do
+        "» "
+        maybe (text label') (\url -> a ! href (toValue $ decodeUtf8 url) $ text label') mUrl
+        " "
+        ) (getBreadcrumb breadcrumb')
+
 makePage ∷ (MonadReader Website m) ⇒ AttributeValue → String → (Html → Html) → Attribute -> Html -> m Html
 makePage pageId label' layout extraParams content' = do
+    breadcrumb' <- renderBreadcrumb
     pure . (li ! class_ "nav-item") $ do
         input
             ! type_ "radio"
@@ -63,6 +75,6 @@ makePage pageId label' layout extraParams content' = do
             ! class_ "page"
             ! A.id pageId $ do
                 row .
-                    (H.div ! class_ "col my-md-3") .
-                        small $ "» " <> fromString label'
+                    (H.div ! class_ "col my-md-3") $
+                        breadcrumb'
                 layout content'

@@ -9,7 +9,7 @@ import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)
 
 pageMusic ∷ (MonadReader Website m) ⇒ m Html
-pageMusic = makePage "music" "Music" defaultLayout notDefaultPage $ do
+pageMusic = plainBreadcrumb "Music" . makePage "music" "Music" defaultLayout notDefaultPage $ do
     p "I play the guitar, keyboard and synthesiser."
     p "I've created the following pieces of music/sound effects:"
     audioFile "Gothic Orchestra" "GothicOrchestra" "SatanicOrchestra"

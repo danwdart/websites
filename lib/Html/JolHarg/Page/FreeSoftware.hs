@@ -15,6 +15,6 @@ import Text.Blaze.Html5.Attributes as A
 pageFs ∷ (MonadReader [Repo] n, MonadReader Website m) ⇒ n (m Html)
 pageFs = do
     repos <- ask
-    pure . makePage "fs" "Free Software" customLayout notDefaultPage $ do
+    pure . plainBreadcrumb "Free Software" . makePage "fs" "Free Software" customLayout notDefaultPage $ do
         row . (H.div ! class_ "col-md-12 text-center") $ p "Some of the free software projects Dan Dart has created or contributed to are:"
         traverse_ renderCard repos

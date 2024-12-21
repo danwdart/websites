@@ -10,7 +10,7 @@ import Text.Blaze.Html5     as H hiding (main)
 -- import Text.Blaze.Html5.Attributes as A
 
 pageIntro ∷ (MonadReader Website m) ⇒ m Html
-pageIntro = makePage "intro" "Intro" defaultLayout defaultPage $ do
+pageIntro = plainBreadcrumb "Intro" . makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "Hello, my name is Dan."
     p "I am a software engineer, mathematics lover, radio ham and musician."
     p $ do

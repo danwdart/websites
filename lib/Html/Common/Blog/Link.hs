@@ -18,15 +18,16 @@ import Html.Common.Blog.Types      as BT
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
-renderMetaLink ∷ Text → BlogMetadata → Html
-renderMetaLink postId' m = a ! href (fromString ("/#" <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
+-- TODO make this choose between /# and #
+renderMetaLink ∷ String -> Text → BlogMetadata → Html
+renderMetaLink preLink postId' m = a ! href (fromString (preLink <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
 
-renderLink ∷ BlogPost → Html
-renderLink bp = renderMetaLink (postId bp) (metadata bp)
+renderLink ∷ String -> BlogPost → Html
+renderLink preLink bp = renderMetaLink preLink (postId bp) (metadata bp)
 
-makeLink ∷ BlogPost → Html
-makeLink link' = do
-    p ! class_ "ps-2" $ renderLink link'
+makeLink ∷ String -> BlogPost → Html
+makeLink preLink link' = do
+    p ! class_ "ps-2" $ renderLink preLink link'
     br
 
 genericMakeLinks ∷ Foldable t ⇒ Bool → (t anyLink → String) → (anyLink → Html) → t anyLink → Html
@@ -37,11 +38,11 @@ genericMakeLinks opened formatter makeSubLinks byPeriod = do
             H.summary . fromString . formatter $ byPeriod
             p $ foldMap makeSubLinks byPeriod
 
-makeLinksByMonth ∷ Bool → NonEmpty BlogPost → Html
-makeLinksByMonth opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) makeLink -- you could use comonad extract here but what is a type with a head
+makeLinksByMonth ∷ String -> Bool → NonEmpty BlogPost → Html
+makeLinksByMonth preLink opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) (makeLink preLink) -- you could use comonad extract here but what is a type with a head
 
-makeLinksByYear ∷ Bool → NonEmpty (NonEmpty BlogPost) → Html
-makeLinksByYear opened = genericMakeLinks opened (show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth opened)
+makeLinksByYear ∷ String -> Bool → NonEmpty (NonEmpty BlogPost) → Html
+makeLinksByYear preLink opened = genericMakeLinks opened (show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth preLink opened)
 
 -- why don't we make this an ordered map???
 -- TODO libify
@@ -57,12 +58,12 @@ groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (
 groupOnNonEmptyWithKey f = foldr (\v acc -> M.insertWith (<>) (f v) (LNE.singleton v) acc) M.empty
 
 -- TODO open only the links we're on if we're in a post page
-makeLinks ∷ Text -> NonEmpty BlogPost → Html
-makeLinks titleName bps = do
+makeLinks ∷ String -> Text -> NonEmpty BlogPost → Html
+makeLinks preLink titleName bps = do
     (H.div ! class_ "d-none d-lg-block") $ do
         (details ! customAttribute "open" "" ! class_ "ps-2") $ do
             H.summary . text $ titleName
-            foldMap (makeLinksByYear True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+            foldMap (makeLinksByYear preLink True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
         {-(details ! customAttribute "open" "" ! class_ "ps-2") $ do
             H.summary "Tags"
             foldMap (\tag -> do
@@ -71,7 +72,7 @@ makeLinks titleName bps = do
     (H.div ! class_ "d-lg-none") $ do
         (details ! class_ "ps-2") $ do
             H.summary . text $ titleName
-            foldMap (makeLinksByYear False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+            foldMap (makeLinksByYear preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
         (details ! class_ "ps-2") $
             H.summary "Tags"
 

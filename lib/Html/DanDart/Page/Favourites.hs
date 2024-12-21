@@ -13,7 +13,7 @@ import Html.Common.Shortcuts
 import Text.Blaze.Html5      as H hiding (main)
 
 pageFavourites ∷ (MonadReader Website m) ⇒ m Html
-pageFavourites = makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do
+pageFavourites = plainBreadcrumb "Favourites" . makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do
     p "Here is a list of some of my favourite things."
     p $ strong "YouTube channels"
     ul $ do

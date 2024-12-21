@@ -9,7 +9,7 @@ import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)
 
 pageContact ∷ (MonadReader Website m) ⇒ m Html
-pageContact = do
+pageContact = plainBreadcrumb "Contact" $ do
     contactForm' <- contactForm "website@dandart.co.uk" emailHelpSingular "Greetings..." "Hello!..."
     makePage "contact" "Contact" contactLayout notDefaultPage $ do
         contactForm'

@@ -10,7 +10,7 @@ import Html.Common.Shortcuts
 import Text.Blaze.Html5      as H hiding (main)
 
 pageMaths ∷ (MonadReader Website m) ⇒ m Html
-pageMaths = makePage "maths" "Maths" defaultLayout notDefaultPage $ do
+pageMaths = plainBreadcrumb "Maths" . makePage "maths" "Maths" defaultLayout notDefaultPage $ do
     p "Mathematics has always been a great pastime for me."
     p $ do
         "I have invented quite a few visualisations and generators for several interesting pieces of mathematics, some of which you can see and try on repos like my projects repo on GitHub ("

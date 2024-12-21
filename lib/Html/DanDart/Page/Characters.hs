@@ -11,7 +11,7 @@ import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)
 
 pageCharacters ∷ (MonadReader Website m) ⇒ m Html
-pageCharacters = makePage "characters" "Characters" defaultLayout notDefaultPage $ do
+pageCharacters = plainBreadcrumb "Characters" . makePage "characters" "Characters" defaultLayout notDefaultPage $ do
     p "Some of my favourite characters and characters that I identify with are:"
     ul $ traverse_ (\(fandom', fandomLink, characters) -> do
         "from "

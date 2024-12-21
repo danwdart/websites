@@ -79,8 +79,8 @@ build page page404 = do
         _atomTitle = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> atomTitle',
         _atomUrl = baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml"
       }
-    }) $
-      page (makeLinks ("Posts tagged with " <> BlogTypes.getTag tag) posts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
+    }) . addBreadcrumb ("Posts tagged with " <> BlogTypes.getTag tag) $
+      page (makeLinks "#" ("Posts tagged with " <> BlogTypes.getTag tag) posts) (makeTags tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
     let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
     liftIO . createDirectoryIfMissing True $ dirname
@@ -114,8 +114,8 @@ build page page404 = do
       pageBlogPost <- local (\w -> w {
         -- we don't override rss title, only page title, this is why they're separate
         _title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title'
-      }) $
-        page (makeLinks "All Posts" sortedPosts) (makeTags tags) renderedPost
+      }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
+        page (makeLinks "/#" "All Posts" sortedPosts) (makeTags tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
         decodeUtf8 (baseUrl' <> "/post" <> BS.pack alias),
@@ -130,4 +130,4 @@ build page page404 = do
   liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "sitemap.xml") $ renderSitemap sitemap'
   liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (baseUrl' <> "/atom.xml") baseUrl' baseUrl' title' sortedPosts
   liftIO . BS.writeFile (".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> baseUrl' <> "/sitemap.xml"
-  make slug' (page (makeLinks "All Posts" sortedPosts) (makeTags tags) renderedPosts) page404
+  make slug' (page (makeLinks "#" "All Posts" sortedPosts) (makeTags tags) renderedPosts) page404
