@@ -59,7 +59,6 @@ data Website = Website {
 
 makeLenses ''Website
 
-
 -- TODO lens it?
 plainBreadcrumb :: MonadReader Website m => Text -> m a -> m a
 plainBreadcrumb breadcrumb' = local (\w -> w { _breadcrumb = Breadcrumb [(breadcrumb', Nothing)] })

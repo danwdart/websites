@@ -18,31 +18,42 @@ import Html.Common.Blog.Types      as BT
 import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 
+data DetailsOpenOrClosed = Closed | Open
+
+detailsEl :: DetailsOpenOrClosed -> Html -> Html
+detailsEl Open = details ! customAttribute "open" "" ! class_ "ps-2"
+detailsEl Closed = details ! class_ "ps-2"
+
+detailsOp :: Bool -> Html -> Html
+detailsOp True = detailsEl Open
+detailsOp False = detailsEl Closed
+
 -- TODO make this choose between /# and #
-renderMetaLink ∷ String -> Text → BlogMetadata → Html
-renderMetaLink preLink postId' m = a ! href (fromString (preLink <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
+renderMetaLink ∷ Maybe Text -> String -> Text → BlogMetadata → Html
+renderMetaLink mCurrId preLink postId' m =
+    if Just postId' == mCurrId
+    then em . strong $ fromString (T.unpack (BT.title m))
+    else a ! href (fromString (preLink <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
 
-renderLink ∷ String -> BlogPost → Html
-renderLink preLink bp = renderMetaLink preLink (postId bp) (metadata bp)
+renderLink ∷ Maybe Text -> String -> BlogPost → Html
+renderLink mCurrId preLink bp = renderMetaLink mCurrId preLink (postId bp) (metadata bp)
 
-makeLink ∷ String -> BlogPost → Html
-makeLink preLink link' = do
-    p ! class_ "ps-2" $ renderLink preLink link'
+makeLink ∷ Maybe Text -> String -> BlogPost → Html
+makeLink mCurrId preLink link' = do
+    p ! class_ "ps-2" $ renderLink mCurrId preLink link'
     br
 
 genericMakeLinks ∷ Foldable t ⇒ Bool → (t anyLink → String) → (anyLink → Html) → t anyLink → Html
 genericMakeLinks opened formatter makeSubLinks byPeriod = do
-    (if opened
-        then details ! customAttribute "open" "" ! class_ "ps-2"
-        else details ! class_ "ps-2") $ do
-            H.summary . fromString . formatter $ byPeriod
-            p $ foldMap makeSubLinks byPeriod
+    detailsOp opened $ do
+        H.summary . fromString . formatter $ byPeriod
+        p $ foldMap makeSubLinks byPeriod
 
-makeLinksByMonth ∷ String -> Bool → NonEmpty BlogPost → Html
-makeLinksByMonth preLink opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) (makeLink preLink) -- you could use comonad extract here but what is a type with a head
+makeLinksByMonth ∷ Maybe Text -> String -> Bool → NonEmpty BlogPost → Html
+makeLinksByMonth mCurrId preLink opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) (makeLink mCurrId preLink) -- you could use comonad extract here but what is a type with a head
 
-makeLinksByYear ∷ String -> Bool → NonEmpty (NonEmpty BlogPost) → Html
-makeLinksByYear preLink opened = genericMakeLinks opened (show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth preLink opened)
+makeLinksByYear ∷ Maybe Text -> String -> Bool → NonEmpty (NonEmpty BlogPost) → Html
+makeLinksByYear mCurrId preLink opened = genericMakeLinks opened (show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth mCurrId preLink opened)
 
 -- why don't we make this an ordered map???
 -- TODO libify
@@ -62,44 +73,46 @@ groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → NEMap b'
 groupOnNonEmptyWithKey f = MNE.fromListWith (<>) . fmap (\x -> (f x, x :| []))
 
 -- TODO open only the links we're on if we're in a post page
-makeLinks ∷ String -> Text -> NonEmpty BlogPost → Html
-makeLinks preLink titleName bps = do
+makeLinks ∷ Maybe Text -> String -> Text -> NonEmpty BlogPost → Html
+makeLinks mCurrId preLink titleName bps = do
     (H.div ! class_ "d-none d-lg-block") $ do
-        (details ! customAttribute "open" "" ! class_ "ps-2") $ do
+        detailsEl Open $ do
             H.summary . text $ titleName
-            foldMap (makeLinksByYear preLink True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+            foldMap (makeLinksByYear mCurrId preLink True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
         {-(details ! customAttribute "open" "" ! class_ "ps-2") $ do
             H.summary "Tags"
             foldMap (\tag -> do
                 p . (a ! href (fromString $ "/tag" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
                 ) tags -}
     (H.div ! class_ "d-lg-none") $ do
-        (details ! class_ "ps-2") $ do
+        detailsEl Closed $ do
             H.summary . text $ titleName
-            foldMap (makeLinksByYear preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
-        (details ! class_ "ps-2") $
+            foldMap (makeLinksByYear mCurrId preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+        detailsEl Closed $
             H.summary "Tags"
 
 -- TODO open only the letters we're in if we're in a tag page
-makeTags ∷ NonEmpty BlogTag → Html
-makeTags tags = do
+makeTags ∷ Maybe BlogTag -> NonEmpty BlogTag → Html
+makeTags mCurrTag tags = do
     (H.div ! class_ "d-none d-lg-block") $ do
-        (details ! customAttribute "open" "" ! class_ "ps-2") $ do
+        detailsEl Open $ do
             H.summary "Tags"
             innerElement
     (H.div ! class_ "d-lg-none") $ do
-        (details ! customAttribute "open" "" ! class_ "ps-2") $ do
+        detailsEl Open $ do
             H.summary "Tags"
             innerElement
     where
         sortedTags = groupOnNonEmptyWithKey (T.toLower . T.singleton . T.head . getTag) tags :: NEMap Text (NonEmpty BlogTag)
         innerElement = ul $
             (MNE.foldMapWithKey :: (Text → NonEmpty BlogTag → Html) → NEMap Text (NonEmpty BlogTag) → Html)  (\letter subtags ->
-                li . (details ! class_ "ps-2") $ do
+                li . detailsOp (maybe False (`elem` subtags) mCurrTag) $ do
                     H.summary . fromString . T.unpack $ letter
                     ul $ foldMap (\tag ->
                         li $ do
-                            (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                            if mCurrTag == Just tag
+                            then em . strong $ fromString (T.unpack (getTag tag))
+                            else (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
                             -- " "
                             -- (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag) <> "/atom.xml")) "📰"
                         ) subtags
