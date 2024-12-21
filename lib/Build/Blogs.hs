@@ -15,7 +15,7 @@ import Data.Foldable1
 import Data.List.NonEmpty            (NonEmpty (..))
 import Data.List.NonEmpty            qualified as LNE
 -- import Data.Map                      (Map)
--- import Data.Map                      qualified as M
+import Data.Map                      qualified as M
 import Data.Map.NonEmpty (NEMap)
 import Data.Map.NonEmpty qualified as MNE
 -- import Data.Maybe
@@ -42,10 +42,18 @@ import Web.Sitemap.Gen
 
 -- go through and write in some way, so something to concat perhaps
 
--- thanks chatgpt
+-- urgh
 groupByMany ∷ (Foldable1 f, Ord tag) ⇒ (post → f tag) → NonEmpty post → NEMap tag (NonEmpty post)
-groupByMany postToTags =
-  foldMap1 (\post -> foldMap1 (\tag -> MNE.singleton tag (LNE.singleton post)) (postToTags post))
+groupByMany postToTags posts = MNE.unsafeFromMap $
+  foldr' (\post map'' ->
+    foldr' (\tag map' ->  
+        M.insertWith (<>) tag (LNE.singleton post) map'
+      )
+      map''
+      (postToTags post)
+    )
+    M.empty
+    posts
 
 build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → Html → m Html) → m Html → m ()
 build page page404 = do
@@ -64,7 +72,6 @@ build page page404 = do
   (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug') email' (const mempty)
   -- By tag
   let grouped = groupByMany (SNE.fromList . BlogTypes.tags . BlogTypes.metadata) sortedPosts :: NEMap BlogTypes.BlogTag (NonEmpty BlogTypes.BlogPost)
-
   let tags = MNE.keys grouped
 
   -- pretty sus of this
@@ -96,8 +103,8 @@ build page page404 = do
         -- and this should come from _pageTitle
         ("Posts tagged with " <> BlogTypes.getTag tag <> ": " <> title')
         posts
-    -- liftIO . TIO.putStrLn $ url' <> "/tag/" <> BlogTypes.getTag tag
-    -- liftIO . TIO.putStrLn . T.pack . show . BlogTypes.date . BlogTypes.metadata . LNE.head $ posts
+    -- liftIO . TIO.putStrLn $ "/tag/" <> BlogTypes.getTag tag
+    -- traverse_ (liftIO . TIO.putStrLn . BlogTypes.title . BlogTypes.metadata) posts
     pure (
       decodeUtf8 (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag)),
       BlogTypes.date . BlogTypes.metadata . LNE.head $ posts

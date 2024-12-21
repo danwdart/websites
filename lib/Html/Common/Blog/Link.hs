@@ -3,12 +3,12 @@
 
 module Html.Common.Blog.Link where
 
-import Data.List.NonEmpty          (NonEmpty)
+import Data.List.NonEmpty          (NonEmpty(..))
 import Data.List.NonEmpty          qualified as LNE
-import Data.Map                    (Map)
-import Data.Map                    qualified as M
--- import Data.Map.NonEmpty           (NEMap)
--- import Data.Map.NonEmpty           qualified as MNE
+-- import Data.Map                    (Map)
+-- import Data.Map                    qualified as M
+import Data.Map.NonEmpty           (NEMap)
+import Data.Map.NonEmpty           qualified as MNE
 import Data.String
 import Data.Text                   (Text)
 import Data.Text                   qualified as T
@@ -54,8 +54,12 @@ groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
 -- TODO convert to foldMap for NEMap
 -- not doable with M.insertMapWith because it's within a fold (i.e. first insertMapWith, second insertWith)
 -- unless we go crazy with pattern matching, better just to use foldMap1 or something
-groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
-groupOnNonEmptyWithKey f = foldr (\v acc -> M.insertWith (<>) (f v) (LNE.singleton v) acc) M.empty
+-- groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
+-- groupOnNonEmptyWithKey f = foldr (\v acc -> M.insertWith (<>) (f v) (LNE.singleton v) acc) M.empty
+
+-- thanks chatgpt
+groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → NEMap b' (NonEmpty a')
+groupOnNonEmptyWithKey f = MNE.fromListWith (<>) . fmap (\x -> (f x, x :| []))
 
 -- TODO open only the links we're on if we're in a post page
 makeLinks ∷ String -> Text -> NonEmpty BlogPost → Html
@@ -88,9 +92,9 @@ makeTags tags = do
             H.summary "Tags"
             innerElement
     where
-        sortedTags = groupOnNonEmptyWithKey (T.toLower . T.singleton . T.head . getTag) tags :: Map Text (NonEmpty BlogTag)
+        sortedTags = groupOnNonEmptyWithKey (T.toLower . T.singleton . T.head . getTag) tags :: NEMap Text (NonEmpty BlogTag)
         innerElement = ul $
-            (M.foldMapWithKey :: (Text → NonEmpty BlogTag → Html) → Map Text (NonEmpty BlogTag) → Html)  (\letter subtags ->
+            (MNE.foldMapWithKey :: (Text → NonEmpty BlogTag → Html) → NEMap Text (NonEmpty BlogTag) → Html)  (\letter subtags ->
                 li . (details ! class_ "ps-2") $ do
                     H.summary . fromString . T.unpack $ letter
                     ul $ foldMap (\tag ->
@@ -99,7 +103,7 @@ makeTags tags = do
                             -- " "
                             -- (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag) <> "/atom.xml")) "📰"
                         ) subtags
-            ) (sortedTags :: Map Text (NonEmpty BlogTag))
+            ) (sortedTags :: NEMap Text (NonEmpty BlogTag))
           {-foldMap (\tag -> do
                 li . (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
                 ) tags -}
