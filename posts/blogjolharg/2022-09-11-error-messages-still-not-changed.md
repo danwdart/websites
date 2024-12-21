@@ -3,7 +3,7 @@ title: 'Error messages have still not changed'
 date: 2022-09-11T22:56:03+01:00
 draft: false
 aliases: [ "/2022/09/error-messages-have-still-not-changed" ]
-tags: [error,messages,not,changed]
+tags: [error,messages,not,changed,whoops]
 ---
 
 It seems that in the last ten months, since the last post about error messages, nothing much has changed.
