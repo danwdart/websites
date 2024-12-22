@@ -15,17 +15,18 @@ import Build.M0ORI               qualified as M0ORI
 import Build.MadHacker           qualified as MadHacker
 import Control.Lens
 import Data.Env.Types
+import Network.URI.Static
 import Text.Email.QuasiQuotation qualified as QE
 
 productionUrls ∷ Urls
 productionUrls = Urls {
-    _urlDanDart = "https://dandart.co.uk",
-    _urlHamRadio = "https://m0ori.com",
-    _urlBlogHamRadio = "https://blog.m0ori.com",
-    _urlBlog = "https://blog.dandart.co.uk",
-    _urlBlogJolHarg = "https://blog.jolharg.com",
-    _urlJolHarg = "https://jolharg.com",
-    _urlMadHacker = "https://madhackerreviews.com"
+    _urlDanDart = [uri|https://dandart.co.uk|],
+    _urlHamRadio = [uri|https://m0ori.com|],
+    _urlBlogHamRadio = [uri|https://blog.m0ori.com|],
+    _urlBlog = [uri|https://blog.dandart.co.uk|],
+    _urlBlogJolHarg = [uri|https://blog.jolharg.com|],
+    _urlJolHarg = [uri|https://jolharg.com|],
+    _urlMadHacker = [uri|https://madhackerreviews.com|]
 }
 
 prodBlog,
@@ -80,14 +81,14 @@ prodBlog = Website {
         "debian"
         ],-}
     _description = "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world.",
-    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _imgUrl = [uri|https://dandart.co.uk/img/header.png|],
     _baseUrl = productionUrls ^. urlBlog,
     _pageUrl = productionUrls ^. urlBlog,
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
-        _atomUrl = "https://blog.dandart.co.uk/atom.xml"
+        _atomUrl = [uri|https://blog.dandart.co.uk/atom.xml|]
     },
     _email = [QE.email|blog@dandart.co.uk|],
     _livereload = False,
@@ -138,7 +139,7 @@ prodDanDart = Website {
         ],
     -}
     _description = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics.",
-    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _imgUrl = [uri|https://dandart.co.uk/img/header.png|],
     _baseUrl = productionUrls ^. urlDanDart,
     _pageUrl = productionUrls ^. urlDanDart,
     _urls = productionUrls,
@@ -205,7 +206,7 @@ prodJolHarg = Website {
         "debian"
         ], -}
     _description = "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications.",
-    _imgUrl = "https://jolharg.com/img/header.png",
+    _imgUrl = [uri|https://jolharg.com/img/header.png|],
     _baseUrl = productionUrls ^. urlJolHarg,
     _pageUrl = productionUrls ^. urlJolHarg,
     _urls = productionUrls,
@@ -259,14 +260,14 @@ prodBlogJolHarg = Website {
         "debian"
         ], -}
     _description = "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier.",
-    _imgUrl = "https://jolharg.com/img/header.png",
+    _imgUrl = [uri|https://jolharg.com/img/header.png|],
     _baseUrl = productionUrls ^. urlBlogJolHarg,
     _pageUrl = productionUrls ^. urlBlogJolHarg,
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("JolHarg Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = "JolHarg: Software Blog",
-        _atomUrl = "https://blog.jolharg.com/atom.xml"
+        _atomUrl = [uri|https://blog.jolharg.com/atom.xml|]
     },
     _email = [QE.email|blog@jolharg.com|],
     _livereload = False,
@@ -305,7 +306,7 @@ prodM0ORI = Website {
         ]
     -}
     _description = "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth.",
-    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _imgUrl = [uri|https://dandart.co.uk/img/header.png|],
     _baseUrl = productionUrls ^. urlHamRadio,
     _pageUrl = productionUrls ^. urlHamRadio,
     _urls = productionUrls,
@@ -319,14 +320,14 @@ prodBlogM0ORI = Website {
     _slug = "blogm0ori",
     _title = "The Blog of M0ORI: Interesting Radio Observations",
     _description = "My radio blog covers interesting observations I have had whilst working on ham bands.",
-    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _imgUrl = [uri|https://dandart.co.uk/img/header.png|],
     _baseUrl = productionUrls ^. urlBlogHamRadio,
     _pageUrl = productionUrls ^. urlBlogHamRadio,
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("M0ORI Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = "The Blog of M0ORI: Interesting Radio Observations",
-        _atomUrl = "https://blog.m0ori.com/atom.xml"
+        _atomUrl = [uri|https://blog.m0ori.com/atom.xml|]
     },
     _email = [QE.email|blog@m0ori.com|],
     _livereload = False,
@@ -364,14 +365,14 @@ prodMadHacker = Website {
         ]
     -}
     _description = "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored.",
-    _imgUrl = "https://dandart.co.uk/img/header.png",
+    _imgUrl = [uri|https://dandart.co.uk/img/header.png|],
     _baseUrl = productionUrls ^. urlMadHacker,
     _pageUrl = productionUrls ^. urlMadHacker,
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("Mad Hacker Reviews", Nothing)],
     _siteType = Blog {
         _atomTitle = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
-        _atomUrl = "https://madhackerreviews.com/atom.xml"
+        _atomUrl = [uri|https://madhackerreviews.com/atom.xml|]
     },
     _email = [QE.email|madhacker@dandart.co.uk|], -- TODO add MX
     _livereload = False,

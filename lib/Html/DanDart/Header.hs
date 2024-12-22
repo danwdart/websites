@@ -24,22 +24,22 @@ import Text.Blaze.Html5             as H hiding (main)
 linkHamRadio ∷ (MonadReader Website m) ⇒ m Html
 linkHamRadio = do
     urlHamRadio' <- view $ urls . urlHamRadio
-    pure $ extNav (textValue $ decodeUtf8 urlHamRadio') "Ham Radio"
+    pure $ extNav (stringValue . show $ urlHamRadio') "Ham Radio"
 
 linkSoftware ∷ (MonadReader Website m) ⇒ m Html
 linkSoftware = do
     urlJolHarg' <- view $ urls . urlJolHarg
-    pure $ extNav (textValue $ decodeUtf8 urlJolHarg') "Software"
+    pure $ extNav (stringValue . show $ urlJolHarg') "Software"
 
 linkBlog ∷ (MonadReader Website m) ⇒ m Html
 linkBlog = do
     urlBlog' <- view $ urls . urlBlog
-    pure $ extNav (textValue $ decodeUtf8 urlBlog') "Blog"
+    pure $ extNav (stringValue . show $ urlBlog') "Blog"
 
 linkReviews ∷ (MonadReader Website m) ⇒ m Html
 linkReviews = do
     urlMadHacker' <- view $ urls . urlMadHacker
-    pure $ extNav (textValue $ decodeUtf8 urlMadHacker') "Reviews"
+    pure $ extNav (stringValue . show $ urlMadHacker') "Reviews"
 
 htmlHeader ∷ (MonadReader Website m) ⇒ m Html
 htmlHeader = do

@@ -57,6 +57,7 @@ library
     , fsutils       >=0.1.4
     , lens
     , mtl
+    , network-uri
     , nonempty-containers
     , pandoc
     , req
@@ -250,6 +251,7 @@ executable dev
     , fsutils       >=0.1.4
     , lens
     , mtl
+    , network-uri
     , nonempty-containers
     , pandoc
     , req

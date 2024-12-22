@@ -23,7 +23,7 @@ metas = do
         meta ! charset "utf-8"
         traverse_ (\(aName, aCont) -> meta ! name aName ! content aCont) [
             ("title", textValue title'),
-            ("url", textValue $ decodeUtf8 pageUrl'),
+            ("url", stringValue $ show pageUrl'),
             ("description", textValue description'),
             ("theme-color", "#800080")
             ]
@@ -35,15 +35,15 @@ metas = do
             ]
         traverse_ (\(aProp, aCont) -> meta ! customAttribute "property" aProp ! content aCont) [
             ("og:type", "website"), -- https://ogp.me/#types
-            ("og:url", textValue $ decodeUtf8 pageUrl'),
+            ("og:url", stringValue $ show pageUrl'),
             ("og:description", textValue description'),
             ("og:locale", "en_GB"),
-            ("og:image", textValue $ decodeUtf8 imgUrl'),
+            ("og:image", stringValue $ show imgUrl'),
             ("twitter:card", "summary_large_image"),
-            ("twitter:url", textValue $ decodeUtf8 pageUrl'),
+            ("twitter:url", stringValue $ show pageUrl'),
             ("twitter:title", textValue title'),
             ("twitter:description", textValue description'),
-            ("twitter:image", textValue $ decodeUtf8 imgUrl')
+            ("twitter:image", stringValue $ show imgUrl')
             ]
 
 htmlHead ∷ (MonadReader Website m) => m Html

@@ -4,6 +4,7 @@ import Control.Lens
 import Control.Monad.IO.Class
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Text qualified as T
 import Data.Text.Encoding
 import Data.Time.Clock
 import Web.Sitemap.Gen
@@ -13,5 +14,5 @@ sitemap = do
     now <- liftIO getCurrentTime
     baseUrl' <- view baseUrl
     pure $ Sitemap [
-        SitemapUrl (decodeUtf8 baseUrl') (Just now) (Just Weekly) (Just 1.0)
+        SitemapUrl (T.pack . show $ baseUrl') (Just now) (Just Weekly) (Just 1.0)
         ]

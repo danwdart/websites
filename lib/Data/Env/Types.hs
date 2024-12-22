@@ -14,32 +14,31 @@ import Data.Set              (Set)
 -- huh? NESet is not IsList? Well I suppose not... maybe there should be an IsNEList...
 -- import Data.Set.NonEmpty     (NESet)
 import Data.Text             (Text)
+import Network.URI
 import Text.Email.Parser
-
-type Url = ByteString
 
 data SiteType = Normal | Blog {
     _atomTitle :: Text,
-    _atomUrl   :: Url
+    _atomUrl   :: URI
 }
 
 makeLenses ''SiteType
 
 data Urls = Urls {
-    _urlDanDart      :: Url,
-    _urlHamRadio     :: Url,
-    _urlBlogHamRadio :: Url,
-    _urlBlog         :: Url,
-    _urlBlogJolHarg  :: Url,
-    _urlJolHarg      :: Url,
-    _urlMadHacker    :: Url
+    _urlDanDart      :: URI,
+    _urlHamRadio     :: URI,
+    _urlBlogHamRadio :: URI,
+    _urlBlog         :: URI,
+    _urlBlogJolHarg  :: URI,
+    _urlJolHarg      :: URI,
+    _urlMadHacker    :: URI
 }
 
 makeLenses ''Urls
 
 -- not a map because ordered
 newtype Breadcrumb = Breadcrumb {
-    getBreadcrumb :: NonEmpty (Text, Maybe Url)
+    getBreadcrumb :: NonEmpty (Text, Maybe URI)
 }
 
 data Website = Website {
@@ -47,9 +46,9 @@ data Website = Website {
     _title       :: Text,
     -- _keywords :: NESet Text,
     _description :: Text,
-    _imgUrl      :: Url,
-    _baseUrl     :: Url,
-    _pageUrl     :: Url,
+    _imgUrl      :: URI,
+    _baseUrl     :: URI,
+    _pageUrl     :: URI,
     _urls        :: Urls,
     _breadcrumb  :: Breadcrumb,
     _siteType    :: SiteType,

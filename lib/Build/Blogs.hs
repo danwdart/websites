@@ -18,14 +18,13 @@ import Data.List.NonEmpty            qualified as LNE
 import Data.Map                      qualified as M
 import Data.Map.NonEmpty (NEMap)
 import Data.Map.NonEmpty qualified as MNE
--- import Data.Maybe
+import Data.Maybe
 -- import Data.Set                      (Set)
 -- import Data.Set                      qualified as S
 -- import Data.Set.NonEmpty                      (NESet)
 import Data.Set.NonEmpty                      qualified as SNE
 -- import Data.Text                     (Text)
 import Data.Text                     qualified as T
-import Data.Text.Encoding
 import Data.Text.IO                  qualified as TIO
 import Data.Time.Clock
 import Data.Traversable
@@ -34,6 +33,7 @@ import Html.Common.Blog.Link
 import Html.Common.Blog.Post
 import Html.Common.Blog.Types        qualified as BlogTypes
 import Make
+import Network.URI
 import System.Directory
 import System.FilePath
 import Text.Blaze.Html.Renderer.Utf8 (renderHtml)
@@ -84,7 +84,7 @@ build page page404 = do
       _title = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> title'',
       _siteType = Blog {
         _atomTitle = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> atomTitle',
-        _atomUrl = baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml"
+        _atomUrl = fromJust . parseURI $ show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)) <> "/atom.xml"
       }
     }) . addBreadcrumb ("Posts tagged with " <> BlogTypes.getTag tag) $
       page (makeLinks Nothing "#" ("Posts tagged with " <> BlogTypes.getTag tag) posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
@@ -95,9 +95,9 @@ build page page404 = do
     liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "tag" </> T.unpack (BlogTypes.getTag tag) </> "atom.xml") $
       makeRSSFeed
         -- this should come from _atomUrl above
-        (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag) <> "/atom.xml")
+        (fromJust (parseURI (show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)) <> "/atom.xml")))
         -- this should come from _pageUrl above
-        (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag))
+        (fromJust (parseURI (show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)))))
         -- this is plain old base url
         baseUrl'
         -- and this should come from _pageTitle
@@ -106,7 +106,7 @@ build page page404 = do
     -- liftIO . TIO.putStrLn $ "/tag/" <> BlogTypes.getTag tag
     -- traverse_ (liftIO . TIO.putStrLn . BlogTypes.title . BlogTypes.metadata) posts
     pure (
-      decodeUtf8 (baseUrl' <> "/tag/" <> encodeUtf8 (BlogTypes.getTag tag)),
+      fromJust (parseURI (show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)))),
       BlogTypes.date . BlogTypes.metadata . LNE.head $ posts
       )
     ) grouped
@@ -125,16 +125,16 @@ build page page404 = do
         page (makeLinks (Just . BlogTypes.postId $ post) "/#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
-        decodeUtf8 (baseUrl' <> "/post" <> BS.pack alias),
+        fromJust (parseURI (show baseUrl' <> "/post" <> alias)),
         BlogTypes.date . BlogTypes.metadata $ post
         )
 
   now <- liftIO getCurrentTime
   let sitemap' = Sitemap $ [
-        SitemapUrl (decodeUtf8 baseUrl') (Just now) (Just Weekly) (Just 1.0)
-        ] <> fmap (\(url, date) -> SitemapUrl url (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
-          <> fmap (\(url, date) -> SitemapUrl url (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
+        SitemapUrl (T.pack . show $ baseUrl') (Just now) (Just Weekly) (Just 1.0)
+        ] <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
+          <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
   liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "sitemap.xml") $ renderSitemap sitemap'
-  liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (baseUrl' <> "/atom.xml") baseUrl' baseUrl' title' sortedPosts
-  liftIO . BS.writeFile (".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> baseUrl' <> "/sitemap.xml"
+  liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (fromJust (parseURI (show baseUrl' <> "/atom.xml"))) baseUrl' baseUrl' title' sortedPosts
+  liftIO . BS.writeFile (".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show baseUrl') <> "/sitemap.xml"
   make slug' (page (makeLinks Nothing "#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPosts) page404

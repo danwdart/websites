@@ -9,6 +9,7 @@ import Data.String                 (IsString (fromString))
 import Data.Text.Encoding
 import Html.Common.Bootstrap
 import Html.Common.Link
+import Network.URI
 import Text.Blaze.Html5            as H
 import Text.Blaze.Html5.Attributes as A
 
@@ -48,7 +49,7 @@ renderBreadcrumb = do
     breadcrumb' <- view breadcrumb
     pure . small $ foldMap (\(label', mUrl) -> do
         "» "
-        maybe (text label') (\url -> a ! href (toValue $ decodeUtf8 url) $ text label') mUrl
+        maybe (text label') (\url -> a ! href (stringValue $ show url) $ text label') mUrl
         " "
         ) (getBreadcrumb breadcrumb')
 

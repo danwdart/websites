@@ -19,5 +19,5 @@ build page page404 = do
     baseUrl' <- view baseUrl
     sitemap' <- sitemap
     liftIO . BS.writeFile ( ".sites/" <> T.unpack slug' <> "/sitemap.xml") $ renderSitemap sitemap'
-    liftIO . BS.writeFile ( ".sites/" <> T.unpack slug' <> "/robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> baseUrl' <> "/sitemap.xml"
+    liftIO . BS.writeFile ( ".sites/" <> T.unpack slug' <> "/robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show baseUrl') <> "/sitemap.xml"
     make slug' page page404
