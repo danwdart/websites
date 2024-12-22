@@ -79,17 +79,10 @@ makeLinks mCurrId preLink titleName bps = do
         detailsEl Open $ do
             H.summary . text $ titleName
             foldMap (makeLinksByYear mCurrId preLink True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
-        {-(details ! customAttribute "open" "" ! class_ "ps-2") $ do
-            H.summary "Tags"
-            foldMap (\tag -> do
-                p . (a ! href (fromString $ "/tag" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
-                ) tags -}
     (H.div ! class_ "d-lg-none") $ do
         detailsEl Closed $ do
             H.summary . text $ titleName
             foldMap (makeLinksByYear mCurrId preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
-        -- detailsEl Closed $
-        --     H.summary "Tags"
 
 -- TODO open only the letters we're in if we're in a tag page
 makeTags ∷ Maybe BlogTag → NonEmpty BlogTag → Html
