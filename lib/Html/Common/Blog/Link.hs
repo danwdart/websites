@@ -3,7 +3,7 @@
 
 module Html.Common.Blog.Link where
 
-import Data.List.NonEmpty          (NonEmpty(..))
+import Data.List.NonEmpty          (NonEmpty (..))
 import Data.List.NonEmpty          qualified as LNE
 -- import Data.Map                    (Map)
 -- import Data.Map                    qualified as M
@@ -20,25 +20,25 @@ import Text.Blaze.Html5.Attributes as A
 
 data DetailsOpenOrClosed = Closed | Open
 
-detailsEl :: DetailsOpenOrClosed -> Html -> Html
-detailsEl Open = details ! customAttribute "open" "" ! class_ "ps-2"
+detailsEl ∷ DetailsOpenOrClosed → Html → Html
+detailsEl Open   = details ! customAttribute "open" "" ! class_ "ps-2"
 detailsEl Closed = details ! class_ "ps-2"
 
-detailsOp :: Bool -> Html -> Html
-detailsOp True = detailsEl Open
+detailsOp ∷ Bool → Html → Html
+detailsOp True  = detailsEl Open
 detailsOp False = detailsEl Closed
 
 -- TODO make this choose between /# and #
-renderMetaLink ∷ Maybe Text -> String -> Text → BlogMetadata → Html
+renderMetaLink ∷ Maybe Text → String → Text → BlogMetadata → Html
 renderMetaLink mCurrId preLink postId' m =
     if Just postId' == mCurrId
     then em . strong $ fromString (T.unpack (BT.title m))
     else a ! href (fromString (preLink <> T.unpack postId')) $ fromString (T.unpack (BT.title m))
 
-renderLink ∷ Maybe Text -> String -> BlogPost → Html
+renderLink ∷ Maybe Text → String → BlogPost → Html
 renderLink mCurrId preLink bp = renderMetaLink mCurrId preLink (postId bp) (metadata bp)
 
-makeLink ∷ Maybe Text -> String -> BlogPost → Html
+makeLink ∷ Maybe Text → String → BlogPost → Html
 makeLink mCurrId preLink link' = do
     p ! class_ "ps-2" $ renderLink mCurrId preLink link'
     br
@@ -49,10 +49,10 @@ genericMakeLinks opened formatter makeSubLinks byPeriod = do
         H.summary . fromString . formatter $ byPeriod
         p $ foldMap makeSubLinks byPeriod
 
-makeLinksByMonth ∷ Maybe Text -> String -> Bool → NonEmpty BlogPost → Html
+makeLinksByMonth ∷ Maybe Text → String → Bool → NonEmpty BlogPost → Html
 makeLinksByMonth mCurrId preLink opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) (makeLink mCurrId preLink) -- you could use comonad extract here but what is a type with a head
 
-makeLinksByYear ∷ Maybe Text -> String -> Bool → NonEmpty (NonEmpty BlogPost) → Html
+makeLinksByYear ∷ Maybe Text → String → Bool → NonEmpty (NonEmpty BlogPost) → Html
 makeLinksByYear mCurrId preLink opened = genericMakeLinks opened (show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth mCurrId preLink opened)
 
 -- why don't we make this an ordered map???
@@ -73,7 +73,7 @@ groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → NEMap b'
 groupOnNonEmptyWithKey f = MNE.fromListWith (<>) . fmap (\x -> (f x, x :| []))
 
 -- TODO open only the links we're on if we're in a post page
-makeLinks ∷ Maybe Text -> String -> Text -> NonEmpty BlogPost → Html
+makeLinks ∷ Maybe Text → String → Text → NonEmpty BlogPost → Html
 makeLinks mCurrId preLink titleName bps = do
     (H.div ! class_ "d-none d-lg-block") $ do
         detailsEl Open $ do
@@ -88,18 +88,18 @@ makeLinks mCurrId preLink titleName bps = do
         detailsEl Closed $ do
             H.summary . text $ titleName
             foldMap (makeLinksByYear mCurrId preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
-        detailsEl Closed $
-            H.summary "Tags"
+        -- detailsEl Closed $
+        --     H.summary "Tags"
 
 -- TODO open only the letters we're in if we're in a tag page
-makeTags ∷ Maybe BlogTag -> NonEmpty BlogTag → Html
+makeTags ∷ Maybe BlogTag → NonEmpty BlogTag → Html
 makeTags mCurrTag tags = do
     (H.div ! class_ "d-none d-lg-block") $ do
         detailsEl Open $ do
             H.summary "Tags"
             innerElement
     (H.div ! class_ "d-lg-none") $ do
-        detailsEl Open $ do
+        detailsEl Closed $ do
             H.summary "Tags"
             innerElement
     where

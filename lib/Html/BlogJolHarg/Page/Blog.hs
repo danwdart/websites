@@ -12,6 +12,6 @@ import Text.Blaze.Html5.Attributes as A
 pageBlog ∷ MonadReader Website m ⇒ Html → Html -> Html → m Html
 pageBlog blogPostLinks blogTagLinks blogPosts = makePage "blog" "Blog" customLayout defaultPage $ do
     row $ do
-        H.div ! class_ "col-md-2 py-3 mb-3" $ blogPostLinks
-        H.div ! class_ "col-md-8 py-3 mb-3 bg-page" $ blogPosts
-        H.div ! class_ "col-md-2 py-3 mb-3" $ blogTagLinks
+        H.div ! class_ "col-lg-2 py-1 mb-0 order-0" $ blogPostLinks
+        H.div ! class_ "col-lg-8 py-2 mb-0 bg-page order-lg-1 order-2" $ blogPosts
+        H.div ! class_ "col-lg-2 py-1 mb-1 order-lg-2 order-1" $ blogTagLinks
