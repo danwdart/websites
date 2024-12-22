@@ -14,6 +14,7 @@ import Data.Set              (Set)
 -- huh? NESet is not IsList? Well I suppose not... maybe there should be an IsNEList...
 -- import Data.Set.NonEmpty     (NESet)
 import Data.Text             (Text)
+import Text.Email.Parser
 
 type Url = ByteString
 
@@ -52,7 +53,7 @@ data Website = Website {
     _urls        :: Urls,
     _breadcrumb  :: Breadcrumb,
     _siteType    :: SiteType,
-    _email       :: Text, -- TODO email
+    _email       :: EmailAddress,
     _livereload  :: Bool,
     _build       :: ReaderT Website IO ()
 }

@@ -29,6 +29,7 @@ import System.Directory
 import System.FilePath
 import Text.Blaze.Html5                     as H hiding (main)
 import Text.Blaze.Html5.Attributes          as A
+import Text.Email.Parser
 import Text.Pandoc.Class
 import Text.Pandoc.Extensions
 import Text.Pandoc.Highlighting
@@ -67,14 +68,15 @@ getComments postsDir postId' = do
         then getCommentsIfExists postsDir postId'
         else pure mempty
 
-commentForm ∷ MonadReader Website m ⇒ Text → Text → m Html
+commentForm ∷ MonadReader Website m ⇒ EmailAddress → Text → m Html
 commentForm toEmail title' = pure . (H.form
         ! A.class_ "form"
         ! enctype "application/x-www-form-urlencoded"
-        ! action "mailto:"
+        ! action "mailto:" -- intentionally empty
         ! method "get"
         ! target "email") $ do
-            H.input ! A.type_ "hidden" ! name "to" ! value (textValue toEmail)
+            -- less scraping happens? maybe?
+            H.input ! A.type_ "hidden" ! name "to" ! value (textValue (decodeUtf8 (toByteString toEmail)))
             H.input ! A.type_ "hidden" ! name "subject" ! value (textValue $ "Re: " <> title')
             H.div ! A.class_ "group" $ do
                 H.label ! for "body" $ do

@@ -23,6 +23,7 @@ import System.FilePath               ((</>))
 import System.Path
 import Text.Blaze.Html.Renderer.Utf8
 import Text.Blaze.Html5              as H
+import Text.Email.Parser
 
 make ∷ (MonadReader Website m, MonadIO m) ⇒ Text → m Html → m Html → m ()
 make name page page404 = do
@@ -39,7 +40,7 @@ make name page page404 = do
 foldtraverse ∷ (Monoid b', Traversable t, Applicative f) ⇒ (a' → f b') → t a' → f b'
 foldtraverse f xs = fold <$> traverse f xs
 
-buildMD ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ FilePath → Text → (BlogMetadata → Html) → m (NonEmpty BlogPost, Html)
+buildMD ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ FilePath → EmailAddress → (BlogMetadata → Html) → m (NonEmpty BlogPost, Html)
 buildMD postsDir email' renderSuffix = do
   files' <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files' -- if used in same line, use Compose

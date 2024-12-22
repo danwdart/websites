@@ -43,6 +43,7 @@ linkReviews = do
 
 htmlHeader ∷ (MonadReader Website m) ⇒ m Html
 htmlHeader = do
+    socialIcons' <- socialIcons
     pages <- foldA [
         pageIntro,
         pageCharacters,
@@ -58,4 +59,4 @@ htmlHeader = do
         linkReviews,
         pageContact
         ]
-    pure . makeHeader "#intro" "Dan Dart" socialIcons $ pages
+    pure . makeHeader "#intro" "Dan Dart" socialIcons' $ pages

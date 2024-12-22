@@ -49,6 +49,7 @@ library
     , containers
     , directory
     , dotenv
+    , email-validate
     , extra
     , feed          >=1.3.2.1
     , filepath
@@ -241,6 +242,7 @@ executable dev
     , containers
     , directory
     , dotenv
+    , email-validate
     , extra
     , feed          >=1.3.2.1
     , filepath

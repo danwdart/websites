@@ -1,19 +1,21 @@
 {-# LANGUAGE DerivingVia       #-}
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes       #-}
 {-# LANGUAGE StrictData        #-}
 
 module Data.Env where
 
-import Build.Blog        qualified as Blog
-import Build.BlogJolHarg qualified as BlogJolHarg
-import Build.BlogM0ORI   qualified as BlogM0ORI
-import Build.DanDart     qualified as DanDart
-import Build.JolHarg     qualified as JolHarg
-import Build.M0ORI       qualified as M0ORI
-import Build.MadHacker   qualified as MadHacker
+import Build.Blog                qualified as Blog
+import Build.BlogJolHarg         qualified as BlogJolHarg
+import Build.BlogM0ORI           qualified as BlogM0ORI
+import Build.DanDart             qualified as DanDart
+import Build.JolHarg             qualified as JolHarg
+import Build.M0ORI               qualified as M0ORI
+import Build.MadHacker           qualified as MadHacker
 import Control.Lens
 import Data.Env.Types
+import Text.Email.QuasiQuotation qualified as QE
 
 productionUrls ∷ Urls
 productionUrls = Urls {
@@ -87,7 +89,7 @@ prodBlog = Website {
         _atomTitle = "Dan Dart's Blog: Software Engineer, Mathematics Lover, Radio) Ham, Musician",
         _atomUrl = "https://blog.dandart.co.uk/atom.xml"
     },
-    _email = "blog@dandart.co.uk",
+    _email = [QE.email|blog@dandart.co.uk|],
     _livereload = False,
     _build = Blog.build
 }
@@ -142,7 +144,7 @@ prodDanDart = Website {
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("Dan Dart", Nothing)],
     _siteType = Normal,
-    _email = "website@dandart.co.uk",
+    _email = [QE.email|website@dandart.co.uk|],
     _livereload = False,
     _build = DanDart.build
 }
@@ -209,7 +211,7 @@ prodJolHarg = Website {
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("JolHarg", Nothing)],
     _siteType = Normal,
-    _email = "website@jolharg.com",
+    _email = [QE.email|website@jolharg.com|],
     _livereload = False,
     _build = JolHarg.build
 }
@@ -266,7 +268,7 @@ prodBlogJolHarg = Website {
         _atomTitle = "JolHarg: Software Blog",
         _atomUrl = "https://blog.jolharg.com/atom.xml"
     },
-    _email = "blog@jolharg.com",
+    _email = [QE.email|blog@jolharg.com|],
     _livereload = False,
     _build = BlogJolHarg.build
 }
@@ -309,7 +311,7 @@ prodM0ORI = Website {
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [("M0ORI", Nothing)],
     _siteType = Normal,
-    _email = "website@m0ori.com",
+    _email = [QE.email|website@m0ori.com|],
     _livereload = False,
     _build = M0ORI.build
 }
@@ -326,7 +328,7 @@ prodBlogM0ORI = Website {
         _atomTitle = "The Blog of M0ORI: Interesting Radio Observations",
         _atomUrl = "https://blog.m0ori.com/atom.xml"
     },
-    _email = "blog@m0ori.com",
+    _email = [QE.email|blog@m0ori.com|],
     _livereload = False,
     _build = BlogM0ORI.build
 }
@@ -371,7 +373,7 @@ prodMadHacker = Website {
         _atomTitle = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
         _atomUrl = "https://madhackerreviews.com/atom.xml"
     },
-    _email = "madhacker@dandart.co.uk", -- TODO add MX
+    _email = [QE.email|madhacker@dandart.co.uk|], -- TODO add MX
     _livereload = False,
     _build = MadHacker.build
 }

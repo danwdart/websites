@@ -23,6 +23,7 @@ import System.FilePath
 import Text.Blaze.Html5                     as H hiding (main)
 import Text.Blaze.Html5.Attributes          as A
 import Text.Blaze.Internal
+import Text.Email.Parser
 import Text.Pandoc.Class
 import Text.Pandoc.Extensions
 import Text.Pandoc.Highlighting
@@ -94,7 +95,7 @@ fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
 
-renderPost ∷ (MonadReader Website m) ⇒ Text → (BlogMetadata → Html) → BlogPost → m Html
+renderPost ∷ (MonadReader Website m) ⇒ EmailAddress → (BlogMetadata → Html) → BlogPost → m Html
 renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
     commentForm' <- commentForm email' (BlogTypes.title metadata')
     pure $ do
@@ -104,7 +105,7 @@ renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
         small $ do
             a ! href (fromString . ("/post" <>) . LNE.head . BlogTypes.aliases $ metadata') $ "Permalink"
             " | Author: "
-            a ! href (fromString . T.unpack $ "mailto:" <> email' <> "&subject=" <> BlogTypes.title metadata') $ "Dan Dart"
+            a ! href (fromString . T.unpack $ "mailto:" <> decodeUtf8 (toByteString email') <> "&subject=" <> BlogTypes.title metadata') $ "Dan Dart"
             " | Published: "
             fromString . show . date $ metadata'
             " | Tags: "
