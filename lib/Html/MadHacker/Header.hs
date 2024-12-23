@@ -5,7 +5,6 @@ module Html.MadHacker.Header where
 import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
-import Data.Text.Encoding
 import Html.Common.Page
 import Html.MadHacker.Page.Reviews
 import Text.Blaze.Html5            as H hiding (main)

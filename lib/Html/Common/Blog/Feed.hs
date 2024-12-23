@@ -6,7 +6,6 @@ module Html.Common.Blog.Feed where
 import Control.Lens
 -- import Control.Monad (when)
 import Control.Monad.Reader
-import Data.ByteString.Char8         (ByteString)
 import Data.ByteString.Char8         as BS
 import Data.Env.Types                as Env
 import Data.List.NonEmpty            (NonEmpty)

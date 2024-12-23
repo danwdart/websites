@@ -6,7 +6,6 @@ import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String
-import Data.Text.Encoding
 import Html.Blog.Page.Blog
 import Html.Common.Header
 import Html.Common.Page

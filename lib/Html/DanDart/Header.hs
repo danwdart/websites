@@ -6,7 +6,6 @@ import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.Foldable.Monoid
-import Data.Text.Encoding
 import Html.Common.Header
 import Html.Common.Page
 import Html.DanDart.Page.About

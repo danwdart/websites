@@ -7,7 +7,6 @@ module Data.Env.Types where
 
 import Control.Lens
 import Control.Monad.Reader
-import Data.ByteString.Char8 (ByteString)
 import Data.List.NonEmpty qualified as LNE
 import Data.List.NonEmpty (NonEmpty)
 import Data.Set              (Set)

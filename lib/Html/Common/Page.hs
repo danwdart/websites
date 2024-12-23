@@ -6,10 +6,8 @@ import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.String                 (IsString (fromString))
-import Data.Text.Encoding
 import Html.Common.Bootstrap
 import Html.Common.Link
-import Network.URI
 import Text.Blaze.Html5            as H
 import Text.Blaze.Html5.Attributes as A
 

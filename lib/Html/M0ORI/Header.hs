@@ -5,7 +5,6 @@ module Html.M0ORI.Header where
 import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
-import Data.Text.Encoding
 import Html.Common.Header
 import Html.Common.Page
 import Html.M0ORI.Page.Contact

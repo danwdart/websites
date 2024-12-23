@@ -7,7 +7,6 @@ import Control.Monad               (when)
 import Control.Monad.Reader
 import Data.Env.Types              as Env
 import Data.Foldable
-import Data.Text.Encoding
 import Html.Common.Blog.Feed
 import Html.Common.CSS
 import Text.Blaze.Html5            as H hiding (main)
