@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecursiveDo       #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 module Build.Blogs where
@@ -61,11 +60,12 @@ build page page404 = do
   title' <- view Env.title
   slug' <- view slug
   email' <- view email
-  -- atomUrl' <- view $ siteType . atomUrl
+  mAtomUri' <- preview $ siteType . atomUrl
+  let atomUri' = fromJust mAtomUri' -- no Monoid for URI
   -- atomTitle' <- view $ siteType . atomTitle
   -- Clear us out, Jim
-  let prefix = ".sites/" <> T.unpack slug' <> "/"
-  traverse_ (liftIO . removePathForcibly . (prefix <>)) [
+  let siteDir = ".sites/" <> T.unpack slug' <> "/"
+  traverse_ (liftIO . removePathForcibly . (siteDir <>)) [
     "post",
     "tag"
     ]
@@ -75,38 +75,41 @@ build page page404 = do
   let tags = MNE.keys grouped
 
   -- pretty sus of this
-  tagUrlDates <- MNE.elems <$> MNE.traverseWithKey (\tag posts -> mdo
+  tagUrlDates <- MNE.elems <$> MNE.traverseWithKey (\tag posts -> do
     -- Okay LNE.filter does not have this guarantee - anything else?
     postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
     -- TODO: lowercase earlier?
 
-    pageTag <- local (\w@Website { _title = title'', _baseUrl, _siteType = Blog { _atomTitle = atomTitle' }} -> w {
-      _title = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> title'',
-      _siteType = Blog {
-        _atomTitle = ("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <> atomTitle',
-        _atomUrl = fromJust . parseURI $ show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)) <> "/atom.xml"
-      }
-    }) . addBreadcrumb ("Posts tagged with " <> BlogTypes.getTag tag) $
-      page (makeLinks Nothing "#" ("Posts tagged with " <> BlogTypes.getTag tag) posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
-    let fullFilename = prefix <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
+    let relTagUri = fromJust . parseRelativeReference $ "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag))
+    let relAtomUri = fromJust . parseRelativeReference $ "/atom.xml"
+    let tagUri' = relTagUri `relativeTo` baseUrl'
+    let tagAtomUri' = relAtomUri `relativeTo` tagUri'
+
+    let atomDesc = "Posts tagged with " <> BlogTypes.getTag tag
+    let atomPrefix = atomDesc <> ": "
+    let atomPrefixer = (atomPrefix <>)
+    let fullAtomTitle' = atomPrefixer title'
+
+    let atomFilename = ".sites" </> T.unpack slug' </> "tag" </> T.unpack (BlogTypes.getTag tag) </> "atom.xml"
+    let fullFilename = siteDir <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
+
+    pageTag <- local (\w@Website { _title = title'', _baseUrl, _siteType = Blog { _atomTitle = atomTitle' }} -> w {
+      _title = atomPrefixer title'',
+      _siteType = Blog {
+        _atomTitle = atomPrefixer atomTitle',
+        _atomUrl = tagAtomUri'
+      }
+    }) . addBreadcrumb atomDesc $
+      page (makeLinks Nothing "#" atomDesc posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
+    
     liftIO . createDirectoryIfMissing True $ dirname
     liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageTag
-    liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "tag" </> T.unpack (BlogTypes.getTag tag) </> "atom.xml") $
-      makeRSSFeed
-        -- this should come from _atomUrl above
-        (fromJust (parseURI (show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)) <> "/atom.xml")))
-        -- this should come from _pageUrl above
-        (fromJust (parseURI (show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)))))
-        -- this is plain old base url
-        baseUrl'
-        -- and this should come from _pageTitle
-        ("Posts tagged with " <> BlogTypes.getTag tag <> ": " <> title')
-        posts
+    liftIO . TIO.writeFile atomFilename $ makeRSSFeed tagAtomUri' tagUri' baseUrl' fullAtomTitle' posts
     -- liftIO . TIO.putStrLn $ "/tag/" <> BlogTypes.getTag tag
     -- traverse_ (liftIO . TIO.putStrLn . BlogTypes.title . BlogTypes.metadata) posts
     pure (
-      fromJust (parseURI (show baseUrl' <> "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag)))),
+      tagUri',
       BlogTypes.date . BlogTypes.metadata . LNE.head $ posts
       )
     ) grouped
@@ -114,18 +117,38 @@ build page page404 = do
   urlDatePairsFromPages <- fmap join . for sortedPosts $ \post -> do
     let aliases' = BlogTypes.aliases . BlogTypes.metadata $ post
     for aliases' $ \alias -> do
-      let fullFilename = ".sites/" <> T.unpack slug' <> "/post" <> alias <> "/index.html" -- </> ???
+      let fullFilename = siteDir <> "post" <> alias <> "/index.html" -- </> ???
       let dirname = dropFileName fullFilename
+      let aliasSuffix = fromJust . parseRelativeReference $ alias
+      let aliasUrl = aliasSuffix `relativeTo` baseUrl'
+      let postTitle = BlogTypes.title . BlogTypes.metadata $ post
+      let postTitlePrefix = postTitle <> ": "
+      let postTitlePrefixer = (postTitlePrefix <>)
+
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost email' (const mempty) post
       pageBlogPost <- local (\w -> w {
         -- we don't override rss title, only page title, this is why they're separate
-        _title = ((BlogTypes.title . BlogTypes.metadata $ post) <> ": ") <> title'
+        _title = postTitlePrefixer title',
+        _openGraphInfo = OGArticle $ OpenGraphArticle {
+            _ogArticlePublishedTime = BlogTypes.date . BlogTypes.metadata $ post,
+            _ogArticleModifiedTime = Just . BlogTypes.date . BlogTypes.metadata $ post,
+            _ogArticleExpirationTime = Nothing,
+            _ogArticleAuthor =
+              OpenGraphProfile {
+                _ogProfileFirstName = "Dan",
+                _ogProfileLastName = "Dart",
+                _ogProfileUsername = "dandart",
+                _ogProfileGender = "non-binary"
+              } :| [],
+            _ogArticleSection = "Blog post",
+            _ogArticleTag = BlogTypes.tags . BlogTypes.metadata $ post
+        }
       }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
         page (makeLinks (Just . BlogTypes.postId $ post) "/#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
-        fromJust (parseURI (show baseUrl' <> "/post" <> alias)),
+        aliasUrl,
         BlogTypes.date . BlogTypes.metadata $ post
         )
 
@@ -134,7 +157,10 @@ build page page404 = do
         SitemapUrl (T.pack . show $ baseUrl') (Just now) (Just Weekly) (Just 1.0)
         ] <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
           <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
-  liftIO . BS.writeFile ( ".sites" </> T.unpack slug' </> "sitemap.xml") $ renderSitemap sitemap'
-  liftIO . TIO.writeFile (".sites" </> T.unpack slug' </> "atom.xml") $ makeRSSFeed (fromJust (parseURI (show baseUrl' <> "/atom.xml"))) baseUrl' baseUrl' title' sortedPosts
-  liftIO . BS.writeFile (".sites" </> T.unpack slug' </> "robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show baseUrl') <> "/sitemap.xml"
+  let sitemapUrl' = BS.pack (show baseUrl') <> "/sitemap.xml"
+  liftIO . BS.writeFile (siteDir <> "/sitemap.xml") $ renderSitemap sitemap'
+  liftIO . TIO.writeFile (siteDir <> "atom.xml") $
+    makeRSSFeed atomUri' baseUrl' baseUrl' title' sortedPosts
+  liftIO . BS.writeFile (siteDir <> "/robots.txt") $
+    "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl')
   make slug' (page (makeLinks Nothing "#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPosts) page404

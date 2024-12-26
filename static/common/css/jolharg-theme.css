@@ -223,3 +223,14 @@ pre, code {
 .star-empty {
     color: black;
 }
+
+details a,
+summary,
+summary::marker {
+    text-decoration: none;
+}
+
+details a:hover,
+summary:hover {
+    text-decoration: underline;
+}
