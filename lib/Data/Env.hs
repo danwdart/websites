@@ -15,6 +15,7 @@ import Build.M0ORI               qualified as M0ORI
 import Build.MadHacker           qualified as MadHacker
 import Control.Lens
 import Data.Env.Types
+import Html.MadHacker.Suffix
 import Network.URI.Static
 import Text.Email.QuasiQuotation qualified as QE
 
@@ -89,7 +90,8 @@ prodBlog = Website {
     _breadcrumb = Breadcrumb [("Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = "Dan Dart's Blog: Software, Maths, Radio, Music",
-        _atomUrl = [uri|https://blog.dandart.co.uk/atom.xml|]
+        _atomUrl = [uri|https://blog.dandart.co.uk/atom.xml|],
+        _renderSuffix = const mempty
     },
     _email = [QE.email|blog@dandart.co.uk|],
     _openGraphInfo = OGWebsite,
@@ -279,7 +281,8 @@ prodBlogJolHarg = Website {
     _breadcrumb = Breadcrumb [("JolHarg Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = "JolHarg: Software and Technology Blog",
-        _atomUrl = [uri|https://blog.jolharg.com/atom.xml|]
+        _atomUrl = [uri|https://blog.jolharg.com/atom.xml|],
+        _renderSuffix = const mempty
     },
     _email = [QE.email|blog@jolharg.com|],
     _openGraphInfo = OGWebsite,
@@ -343,7 +346,8 @@ prodBlogM0ORI = Website {
     _breadcrumb = Breadcrumb [("M0ORI Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = "The Blog of M0ORI: Interesting Radio Observations",
-        _atomUrl = [uri|https://blog.m0ori.com/atom.xml|]
+        _atomUrl = [uri|https://blog.m0ori.com/atom.xml|],
+        _renderSuffix = const mempty
     },
     _email = [QE.email|blog@m0ori.com|],
     _openGraphInfo = OGWebsite,
@@ -390,7 +394,8 @@ prodMadHacker = Website {
     _breadcrumb = Breadcrumb [("Mad Hacker Reviews", Nothing)],
     _siteType = Blog {
         _atomTitle = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
-        _atomUrl = [uri|https://madhackerreviews.com/atom.xml|]
+        _atomUrl = [uri|https://madhackerreviews.com/atom.xml|],
+        _renderSuffix = renderStars
     },
     _email = [QE.email|madhacker@dandart.co.uk|], -- TODO add MX
     _openGraphInfo = OGWebsite,

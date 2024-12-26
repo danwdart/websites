@@ -40,8 +40,8 @@ make name page page404 = do
 foldtraverse ∷ (Monoid b', Traversable t, Applicative f) ⇒ (a' → f b') → t a' → f b'
 foldtraverse f xs = fold <$> traverse f xs
 
-buildMD ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ FilePath → EmailAddress → (BlogMetadata → Html) → m (NonEmpty BlogPost, Html)
-buildMD postsDir email' renderSuffix = do
+buildMD ∷ forall m. (MonadReader Website m, MonadIO m) ⇒ FilePath → EmailAddress → m (NonEmpty BlogPost, Html)
+buildMD postsDir email' = do
   files' <- liftIO $ getDirectoryContents postsDir
   let fileNames = (postsDir </>) <$> files' -- if used in same line, use Compose
   validFiles <- liftIO $ filterM doesFileExist fileNames
@@ -51,5 +51,5 @@ buildMD postsDir email' renderSuffix = do
     Nothing -> liftIO $ fail "No valid, non-draft posts. Oh dear."
     Just sortedPosts' -> do
       -- potentially we could do this afterwards?
-      renderedPosts <- foldtraverse (renderPost email' renderSuffix) sortedPosts'
+      renderedPosts <- foldtraverse renderPost sortedPosts'
       pure (sortedPosts', renderedPosts)

@@ -69,7 +69,7 @@ build page page404 = do
     "post",
     "tag"
     ]
-  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug') email' (const mempty)
+  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug') email'
   -- By tag
   let grouped = groupByMany (SNE.fromList . BlogTypes.tags . BlogTypes.metadata) sortedPosts :: NEMap BlogTypes.BlogTag (NonEmpty BlogTypes.BlogPost)
   let tags = MNE.keys grouped
@@ -77,7 +77,7 @@ build page page404 = do
   -- pretty sus of this
   tagUrlDates <- MNE.elems <$> MNE.traverseWithKey (\tag posts -> do
     -- Okay LNE.filter does not have this guarantee - anything else?
-    postsRendered <- foldtraverse (renderPost email' (const mempty)) posts
+    postsRendered <- foldtraverse renderPost posts
     -- TODO: lowercase earlier?
 
     let relTagUri = fromJust . parseRelativeReference $ "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag))
@@ -94,9 +94,9 @@ build page page404 = do
     let fullFilename = siteDir <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
 
-    pageTag <- local (\w@Website { _title = title'', _baseUrl, _siteType = Blog { _atomTitle = atomTitle' }} -> w {
+    pageTag <- local (\w@Website { _title = title'', _baseUrl, _siteType = siteType'@Blog { _atomTitle = atomTitle' }} -> w {
       _title = atomPrefixer title'',
-      _siteType = Blog {
+      _siteType = siteType' {
         _atomTitle = atomPrefixer atomTitle',
         _atomUrl = tagAtomUri'
       }
@@ -126,7 +126,7 @@ build page page404 = do
       let postTitlePrefixer = (postTitlePrefix <>)
 
       liftIO . createDirectoryIfMissing True $ dirname
-      renderedPost <- renderPost email' (const mempty) post
+      renderedPost <- renderPost post
       pageBlogPost <- local (\w -> w {
         -- we don't override rss title, only page title, this is why they're separate
         _title = postTitlePrefixer title',

@@ -5,6 +5,7 @@ module Html.Common.Blog.Post where
 
 import Control.Exception
 import Control.Exception.ParseFileException
+import Control.Lens
 import Control.Monad.Reader
 import Data.ByteString.Char8                (ByteString)
 import Data.ByteString.Char8                qualified as BS
@@ -13,6 +14,7 @@ import Data.Env.Types
 import Data.Foldable
 import Data.Frontmatter
 import Data.List.NonEmpty                   qualified as LNE
+import Data.Maybe
 import Data.String
 import Data.Text                            (Text)
 import Data.Text                            qualified as T
@@ -95,10 +97,13 @@ fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
 
-renderPost ∷ (MonadReader Website m) ⇒ EmailAddress → (BlogMetadata → Html) → BlogPost → m Html
-renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
+renderPost ∷ (MonadReader Website m) ⇒ BlogPost → m Html
+renderPost (BlogPost postId' metadata' html' comments') = do
+    email' <- view email
     commentForm' <- commentForm email' (BlogTypes.title metadata')
-    pure $ do
+    renderSuffix' <- preview $ siteType . renderSuffix
+    let renderSuffix'' = fromMaybe (const mempty) renderSuffix'
+    pure . H.article $ do
         a ! name (fromString (T.unpack postId')) $ mempty
         -- Not working in Safari yet, so filter
         h1 . fromString . T.unpack $ BlogTypes.title metadata'
@@ -119,11 +124,12 @@ renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
         br
         fixExternalLinks html'
         br
-        renderSuffix metadata'
+        renderSuffix'' metadata'
         br
-        h3 "Comments"
-        if Prelude.null comments' then small "No comments yet..." <> br else traverse_ renderComment comments'
-        br
-        h4 "Post a comment:"
-        commentForm'
-        br
+        section $ do
+            h3 "Comments"
+            if Prelude.null comments' then small "No comments yet..." <> br else traverse_ renderComment comments'
+            br
+            h4 "Post a comment:"
+            commentForm'
+            br

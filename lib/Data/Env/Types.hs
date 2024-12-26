@@ -8,20 +8,22 @@ module Data.Env.Types where
 
 import Control.Lens
 import Control.Monad.Reader
-import Data.List.NonEmpty   (NonEmpty)
-import Data.List.NonEmpty   qualified as LNE
-import Data.Set             (Set)
+import Data.List.NonEmpty     (NonEmpty)
+import Data.List.NonEmpty     qualified as LNE
+import Data.Set               (Set)
 -- huh? NESet is not IsList? Well I suppose not... maybe there should be an IsNEList...
 -- import Data.Set.NonEmpty     (NESet)
-import Data.Text            (Text)
+import Data.Text              (Text)
 import Data.Time.Clock
-import Html.Common.Blog.Types        qualified as BlogTypes
+import Html.Common.Blog.Types qualified as BlogTypes
 import Network.URI
+import Text.Blaze.Html5       (Html)
 import Text.Email.Parser
 
 data SiteType = Normal | Blog {
-    _atomTitle :: Text,
-    _atomUrl   :: URI
+    _atomTitle    :: Text,
+    _atomUrl      :: URI,
+    _renderSuffix :: BlogTypes.BlogMetadata → Html
 }
 
 makeLenses ''SiteType
