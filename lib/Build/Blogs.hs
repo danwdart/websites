@@ -59,7 +59,6 @@ build page page404 = do
   baseUrl' <- view baseUrl
   title' <- view Env.title
   slug' <- view slug
-  email' <- view email
   mAtomUri' <- preview $ siteType . atomUrl
   let atomUri' = fromJust mAtomUri' -- no Monoid for URI
   -- atomTitle' <- view $ siteType . atomTitle
@@ -69,7 +68,7 @@ build page page404 = do
     "post",
     "tag"
     ]
-  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug') email'
+  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug')
   -- By tag
   let grouped = groupByMany (SNE.fromList . BlogTypes.tags . BlogTypes.metadata) sortedPosts :: NEMap BlogTypes.BlogTag (NonEmpty BlogTypes.BlogPost)
   let tags = MNE.keys grouped

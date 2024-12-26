@@ -105,7 +105,7 @@ makeTags mCurrTag tags = do
                         li $ do
                             if mCurrTag == Just tag
                             then em . strong $ fromString (T.unpack (getTag tag))
-                            else (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
+                            else (a ! rel "tag" ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
                             -- " "
                             -- (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag) <> "/atom.xml")) "📰"
                         ) subtags

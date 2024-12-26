@@ -80,19 +80,19 @@ setDownload (AddAttribute ass1 ass2 acs res) =
 setDownload as = as
 
 fixExternalLinks ∷ MarkupM anyLink → MarkupM anyLink
-fixExternalLinks at@(AddAttribute _ _ acs (Parent ss1 _ _ _)) =
+fixExternalLinks at'@(AddAttribute _ _ acs (Parent ss1 _ _ _)) =
     if isLink ss1 then
         if isExternalLink acs
         then
-            setExternalLink at
+            setExternalLink at'
         else
             if isFeed acs
             then
-                setDownload at
+                setDownload at'
             else
-                at
+                at'
     else
-        at
+        at'
 fixExternalLinks (Parent ss1 ss2 ss3 res) = Parent ss1 ss2 ss3 (fixExternalLinks res)
 fixExternalLinks (Append m1 m2) = Append (fixExternalLinks m1) (fixExternalLinks m2)
 fixExternalLinks as = as
@@ -110,12 +110,12 @@ renderPost (BlogPost postId' metadata' html' comments') = do
         small $ do
             a ! href (fromString . ("/post" <>) . LNE.head . BlogTypes.aliases $ metadata') $ "Permalink"
             " | Author: "
-            a ! href (fromString . T.unpack $ "mailto:" <> decodeUtf8 (toByteString email') <> "&subject=" <> BlogTypes.title metadata') $ "Dan Dart"
+            a ! href (fromString . T.unpack $ "mailto:" <> decodeUtf8 (toByteString email') <> "?subject=" <> BlogTypes.title metadata') $ "Dan Dart"
             " | Published: "
             fromString . show . date $ metadata'
             " | Tags: "
             foldMap ((\str -> do
-                a ! href (fromString ("/tag/" <> str)) $ fromString str
+                a ! rel "tag" ! href (fromString ("/tag/" <> str)) $ fromString str
                 " "
                 ) . T.unpack . getTag) (LNE.sort $ tags metadata')
         br
