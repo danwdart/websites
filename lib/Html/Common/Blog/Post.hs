@@ -112,7 +112,7 @@ renderPost email' renderSuffix (BlogPost postId' metadata' html' comments') = do
             foldMap ((\str -> do
                 a ! href (fromString ("/tag/" <> str)) $ fromString str
                 " "
-                ) . T.unpack . getTag) (tags metadata')
+                ) . T.unpack . getTag) (LNE.sort $ tags metadata')
         br
         br
         maybe mempty (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
