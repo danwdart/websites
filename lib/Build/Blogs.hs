@@ -143,7 +143,8 @@ build page page404 = do
               } :| [],
             _ogArticleSection = "Blog post",
             _ogArticleTag = BlogTypes.tags . BlogTypes.metadata $ post
-        }
+        },
+        _previewImgUrl = maybe (w ^. previewImgUrl) (fromJust . parseURI . T.unpack) . BlogTypes.featuredImage . BlogTypes.metadata $ post
       }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
         page (makeLinks (Just . BlogTypes.postId $ post) "/#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
