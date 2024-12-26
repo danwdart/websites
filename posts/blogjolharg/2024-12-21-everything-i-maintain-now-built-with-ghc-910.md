@@ -3,7 +3,7 @@ title: 'Everything I maintain now built with GHC 9.10'
 date: 2024-12-21T22:44:00Z
 draft: false
 aliases: [ "/2024/12/everything-i-maintain-now-built-with-ghc-910" ]
-tags: [everything, maintain, built, with, haskell, cabal, ghc, 9.10]
+tags: [everything, maintain, built, with, haskell, cabal, ghc, "9.10"]
 ---
 
 Huzzah! All executable and library targets I build in Haskell are now built with GHC 9.10.
