@@ -3,7 +3,7 @@ title: 'This blog now built with GHC 9.4'
 date: 2022-10-10T02:08:02+01:00
 draft: false
 aliases: [ "/2022/10/this-blog-now-built-with-ghc-94" ]
-tags: [blog, built, with, ghc, 9.4]
+tags: [blog, built, with, haskell, cabal, ghc, 9.4]
 ---
 
 Double huzzah!
