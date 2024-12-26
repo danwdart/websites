@@ -74,6 +74,6 @@ makePage pageId label' layout extraParams content' = do
             ! class_ "page"
             ! A.id pageId $ do
                 row .
-                    (H.div ! class_ "col my-md-3") $
+                    (H.div ! class_ "col my-lg-3 my-md-5 my-sm-2 my-xs-3") $
                         breadcrumb'
                 layout content'
