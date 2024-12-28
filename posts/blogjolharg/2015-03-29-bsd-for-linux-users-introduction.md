@@ -35,15 +35,28 @@ Next time: BSD Licences and why they are good, bad and/or certainly not ugly.
 References
 
 [1] [http://en.wikipedia.org/wiki/Berkeley\_Software\_Distribution](http://en.wikipedia.org/wiki/Berkeley_Software_Distribution)
+4
 [2] [http://opensource.org/licenses/BSD-2-Clause](http://opensource.org/licenses/BSD-2-Clause)
+
 [3] [http://opensource.org/licenses/BSD-3-Clause](http://opensource.org/licenses/BSD-2-Clause)
+
 [4] [http://www.freebsd.org/](http://www.freebsd.org/)
+
 [5] [http://www.pcbsd.org/](http://www.pcbsd.org/)
+
 [6] [http://openbsd.org/](http://openbsd.org/)
+
 [7] [http://www.netbsd.org/about/portability.html](http://www.netbsd.org/about/portability.html)
+
 [8] [http://www.dragonflybsd.org/features/](http://www.dragonflybsd.org/features/)
+
 [9] [http://www.debian.org/ports/kfreebsd-gnu/](http://www.debian.org/ports/kfreebsd-gnu/)
+
 [10] [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
+
 [11] [https://www.kernel.org/pub/linux/kernel/COPYING](https://www.kernel.org/pub/linux/kernel/COPYING)
-[12] [https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html](https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html) (edit: archived)
+
+[12] [https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html]
+(https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html) (edit: archived)
+
 [13] [http://opensource.org/licenses/CDDL-1.0](http://opensource.org/licenses/CDDL-1.0)
