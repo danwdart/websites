@@ -60,6 +60,7 @@ build page page404 = do
   title' <- view Env.title
   slug' <- view slug
   mAtomUri' <- preview $ siteType . atomUrl
+  sitemapUrl' <- view sitemapUrl
   let atomUri' = fromJust mAtomUri' -- no Monoid for URI
   -- atomTitle' <- view $ siteType . atomTitle
   -- Clear us out, Jim
@@ -157,7 +158,6 @@ build page page404 = do
         SitemapUrl (T.pack . show $ baseUrl') (Just now) (Just Weekly) (Just 1.0)
         ] <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
           <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
-  let sitemapUrl' = BS.pack (show baseUrl') <> "/sitemap.xml"
   liftIO . BS.writeFile (siteDir <> "/sitemap.xml") $ renderSitemap sitemap'
   liftIO . TIO.writeFile (siteDir <> "atom.xml") $
     makeRSSFeed atomUri' baseUrl' baseUrl' title' sortedPosts

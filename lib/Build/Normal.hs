@@ -16,8 +16,8 @@ import Web.Sitemap.Gen
 build ∷ (MonadReader Website m, MonadIO m) ⇒ m Html → m Html → m ()
 build page page404 = do
     slug' <- view slug
-    baseUrl' <- view baseUrl
+    sitemapUrl' <- view sitemapUrl
     sitemap' <- sitemap
     liftIO . BS.writeFile ( ".sites/" <> T.unpack slug' <> "/sitemap.xml") $ renderSitemap sitemap'
-    liftIO . BS.writeFile ( ".sites/" <> T.unpack slug' <> "/robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show baseUrl') <> "/sitemap.xml"
+    liftIO . BS.writeFile ( ".sites/" <> T.unpack slug' <> "/robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl')
     make slug' page page404
