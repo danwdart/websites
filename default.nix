@@ -33,7 +33,7 @@ let
       doctest src lib
       cabal update
     '';
-    buildInputs = tools.defaultBuildTools;
+    buildInputs = tools.defaultBuildTools ++ [ nixpkgs.openjdk17-bootstrap ];
     withHoogle = false;
   };
   in

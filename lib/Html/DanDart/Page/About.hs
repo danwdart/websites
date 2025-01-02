@@ -21,4 +21,4 @@ pageAbout = plainBreadcrumb "About" . makePage "about" "About" defaultLayout not
     p mempty
     p $ do
         strong "The font choice"
-        " was difficult to make, as I was (and am still not quite happy enough with it, and so therefore still am) looking for a suitable, free software natural sans-serif font style, which has the single-storey \"a\", non-looped \"g\", and the double-seriffed I and J amongst other things. For now I've settled on Caudex, which whilst it is still serif, seems to be the closest I've yet to come across."
+        " was difficult to make, as I was (and am still not quite happy enough with it, and so therefore still am) looking for a suitable, free software natural sans-serif font style, which has the single-storey \"a\", non-looped \"g\", and the double-seriffed I and J amongst other things. For now I've settled on Lexend Deca, which whilst it is not perfect, seems to be the closest I've yet to come across."

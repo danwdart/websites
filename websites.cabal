@@ -268,24 +268,26 @@ test-suite websites-test
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   build-depends:      base >=4.20.0.0 && <5
-
-  -- , aeson
-  -- , async
-  -- , containers
-  -- , hspec
-  -- , hspec-core
-  -- , hspec-expectations
-  -- , http-client
-  -- , http-client-tls
-  -- , http-types
-  -- , process
-  -- , QuickCheck
-  -- , random
-  -- , text
-  -- , transformers
-  -- , vector
-  -- , webdriver
-  -- , websites
+    -- , aeson
+    , async
+    -- , containers
+    , hspec
+    -- , hspec-core
+    -- , hspec-expectations
+    , http-client
+    , http-client-tls
+    , http-types
+    , lens
+    -- , mtl
+    -- , process
+    -- , QuickCheck
+    -- , random
+    , text
+    -- , transformers
+    -- , vector
+    , webdriver
+    , webdriver-wrapper
+    , websites
   build-tool-depends: hspec-discover:hspec-discover
 
 benchmark websites-bench

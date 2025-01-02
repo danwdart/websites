@@ -27,7 +27,7 @@ Following is a summary of some of the main distributions.
 
 **Dragonfly BSD**: a 10-year-old (so still relatively young) distribution famous for its extremely speedy filesystems. [[8]](http://www.dragonflybsd.org/features/)
 
-**Debian GNU/kFreeBSD** [[9]](http://www.debian.org/ports/kfreebsd-gnu/), the Debian distribution compiled to work on top of a BSD-type kernel rather than a Linux one, which has the upshots of being able to be used on top of BSD-supported filesystems, those compatible with BSD licences (but not the GPLv2 [[10]](http://www.gnu.org/licenses/gpl-2.0.html) used by Linux [[11]](https://www.kernel.org/pub/linux/kernel/COPYING)) such as ZFS [[12]](https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html) (edit 2021: archived) (licenced under the CDDL [[13]](http://opensource.org/licenses/CDDL-1.0)), and all the while using the familiar GNU tools common to the Debian GNU/Linux distribution.
+**Debian GNU/kFreeBSD** [[9]](http://www.debian.org/ports/kfreebsd-gnu/), the Debian distribution compiled to work on top of a BSD-type kernel rather than a Linux one, which has the upshots of being able to be used on top of BSD-supported filesystems, those compatible with BSD licences (but not the GPLv2 [[10]](http://www.gnu.org/licenses/gpl-2.0.html) used by Linux [[11]](https://www.kernel.org/doc/linux/COPYING)) such as ZFS [[12]](https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html) (edit 2021: archived) (licenced under the CDDL [[13]](http://opensource.org/licenses/CDDL-1.0)), and all the while using the familiar GNU tools common to the Debian GNU/Linux distribution.
 
 Next time: BSD Licences and why they are good, bad and/or certainly not ugly.
 
@@ -54,7 +54,7 @@ References
 
 [10] [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 
-[11] [https://www.kernel.org/pub/linux/kernel/COPYING](https://www.kernel.org/pub/linux/kernel/COPYING)
+[11] [https://www.kernel.org/doc/linux/COPYING](https://www.kernel.org/doc/linux/COPYING)
 
 [12] [https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html]
 (https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html) (edit: archived)

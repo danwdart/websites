@@ -27,7 +27,7 @@ However it did not handle Linux - almost at all.
 
 ## Linux support found lacking
 
-People had been working on its new chipset, trying to reverse-engineer it, since its release, but sadly, support for this model's keyboard was lacking in both the standard upstream kernel and the special ["MacBook" kernel](https://aur.archlinux.org/packages/linux-macbook/) for Arch Linux, my latest choice.
+People had been working on its new chipset, trying to reverse-engineer it, since its release, but sadly, support for this model's keyboard was lacking in both the standard upstream kernel and the special ["MacBook" kernel](https://web.archive.org/web/20190522071727/https://aur.archlinux.org/packages/linux-macbook/) for Arch Linux, my latest choice.
 
 However, Apple had done nothing about supporting its hardware in Linux (and as far as I can tell, directly to date).
 
