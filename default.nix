@@ -12,7 +12,8 @@ let
   tools = haskell-tools compiler;
   myHaskellPackages = nixpkgs.pkgs.haskell.packages.${compiler}.override {
     overrides = self: super: rec {
-      websites = lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {});
+      # dontCheck because it requires a browser, selenium and a writable home directory...
+      websites = lib.dontCheck (lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {}));
       fsutils = lib.doJailbreak (self.callCabal2nix "fsutils" (builtins.fetchGit {
         url = "https://github.com/danwdart/fsutils.git";
         rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
