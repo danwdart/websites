@@ -20,7 +20,7 @@ or:
 
 This will accept GSM modem commands prefixed with AT, and give information about the phone, and presumably allow a dialup-like interface.
 
-Many of the [examples on M2MSupport.net](http://m2msupport.net/m2msupport/software-and-at-commands-for-m2m-modules/) will work with the phone, depending on which manufacturer and capability set, presumably. With my Samsung Galaxy XCover 4, I got the GSM capability set.
+Many of the [examples on M2MSupport.net](https://m2msupport.net/m2msupport/software-and-at-commands-for-m2m-modules/) will work with the phone, depending on which manufacturer and capability set, presumably. With my Samsung Galaxy XCover 4, I got the GSM capability set.
 
 Try playing around with this, but don't get charged by your provider too much for making calls you never end! Make sure you hang up properly as per the protocol.
 

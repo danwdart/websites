@@ -67,8 +67,8 @@ pageFavourites = plainBreadcrumb "Favourites" . makePage "favourites" "Favourite
     ul $ traverse_ li musicalStyles
     p $ strong "Games"
     ul $ do
-        li $ extLink "http://www.idsoftware.com/en-gb" "Quake"
-        li $ extLink "http://sauerbraten.org/" "Cube 2: Sauerbraten"
+        li $ extLink "https://bethesda.net/en/game/quake" "Quake"
+        li $ extLink "http://sauerbraten.org/" "Cube 2: Sauerbraten" -- http only
         li $ extLink (wikipedia "The_Elder_Scrolls_IV:_Oblivion") "The Elder Scrolls IV: Oblivion"
         li $ extLink "https://ddlc.moe/" "Doki Doki Literature Club"
         li $ do
@@ -77,17 +77,17 @@ pageFavourites = plainBreadcrumb "Favourites" . makePage "favourites" "Favourite
     p $ strong "Coding language:"
     ul . li $ (do
         extLink "https://www.haskell.org/" "Haskell"
-        " (it's epic and pure!)")
+        " (it's interesting, mathematical and pure!)")
     p $ strong "Operating Systems"
     ul $ do
         li $ do
-            extLink "http://www.gnu.org/gnu/why-gnu-linux.en.html" "GNU/Linux"
+            extLink "https://www.gnu.org/gnu/why-gnu-linux.en.html" "GNU/Linux"
             ": "
-            extLink "http://nixos.org" "NixOS"
+            extLink "https://nixos.org" "NixOS"
         li $ do
             extLink (wikipedia "Blue_Screen_of_Death") "Windows"
             ": "
             extLink (wikipedia "Windows_98#Windows_98_Second_Edition") "98 SE"
         li $ do
             "All-time: "
-            extLink "http://riscos.com/riscos/310/index.php" "RISC OS"
+            extLink "http://riscos.com/riscos/310/index.php" "RISC OS" -- http only

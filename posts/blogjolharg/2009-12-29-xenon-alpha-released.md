@@ -20,7 +20,7 @@ The backend can be run online (for users to access their data everywhere), on a 
 
 An API is available at xenon.kevinghadyani.com/wiki/index.php/Developing_Apps (edit 2021: page not archived), so anyone can start developing apps to distribute in Xenon's upcoming App Store.
 
-The project's homepage is located at [http://hackerlanes.com](https://web.archive.org/web/20091220083328/http://hackerlanes.com/) (edit 2021: archived) including the online desktop, ready for instant testing and a download of the alpha image for your server. The actual small footprint OS that will run on netbooks will come later.
+The project's homepage is located at [https://hackerlanes.com](https://web.archive.org/web/20091220083328/https://hackerlanes.com/) (edit 2021: archived) including the online desktop, ready for instant testing and a download of the alpha image for your server. The actual small footprint OS that will run on netbooks will come later.
 
 We encourage contributions to the project, in the form of code (the languages currently used are (X)HTML, CSS, Javascript, PHP and MySQL), art (eg icons, backgrounds, GUI concepts) or even just ideas.
 

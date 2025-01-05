@@ -37,7 +37,7 @@ I'm marathoning **Doctor Who**. It's fantastic stuff, I haven't yet gotten past 
 
 I play **computer games** more than usual (which I know is an important life skill). My favourite at the moment is [Skyrim](https://elderscrolls.bethesda.net/en/skyrim10). Let me know if you want more on that.
 
-I research my **family history**. I've gone back about 500 years, I'm sure I could even find you. I use [Ancestry](http://www.ancestry.co.uk/) for that kind of thing and have almost 1000 people in my tree. It's very interesting to me and one discovers pretty crazy things about one's own heritage!
+I research my **family history**. I've gone back about 500 years, I'm sure I could even find you. I use [Ancestry](https://www.ancestry.co.uk/) for that kind of thing and have almost 1000 people in my tree. It's very interesting to me and one discovers pretty crazy things about one's own heritage!
 
 
 I'm going to see if I can blog a bit **more**, as it gives me a bit of free reign. Maybe I should do regular segments like discoveries of the week. Yes, I'm definitely [a podcast](https://www.linuxvoice.com/category/podcasts/). In fact, I'd rather like to do a tech-related podcast with someone. Any takers?

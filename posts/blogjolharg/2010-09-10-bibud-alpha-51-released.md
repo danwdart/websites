@@ -14,4 +14,4 @@ Homepage improvements
 Facebook support in Chatroom
 Media sharing initial demo support
 
-As always you can find Bibud at [http://bibud.com](http://bibud.com/).
+As always you can find Bibud at [https://bibud.com](https://bibud.com/).

@@ -6,7 +6,7 @@ aliases: [ "/2021/11/on-lying-again" ]
 tags: [lying, lies, truth, gains, truthfulness, meaning]
 ---
 
-A couple of years ago, I made a blog post: [The categories of truthfulness of information](http://blog.dandart.co.uk/#the-categories-of-truthfulness-of). I'm now finding that some of that information is viewed not quite as I had written.
+A couple of years ago, I made a blog post: [The categories of truthfulness of information](https://blog.dandart.co.uk/#the-categories-of-truthfulness-of). I'm now finding that some of that information is viewed not quite as I had written.
 
 <br/>
 

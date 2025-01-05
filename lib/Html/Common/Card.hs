@@ -20,7 +20,7 @@ imagesFs = [
     (LangC, "https://upload.wikimedia.org/wikipedia/commons/3/3b/C.sh-600x600.png"),
     (LangCoffee, "https://farm8.staticflickr.com/7212/7168325292_16a46a1fea_n.jpg"),
     (LangCPP, "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg"),
-    (LangDocker, "https://www.docker.com/sites/default/files/d8/2019-07/vertical-logo-monochromatic.png"),
+    (LangDocker, "/img/docker-mark-blue.svg"),
     (LangGeneric, genericImage),
     (LangHS, "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/1280px-Haskell-Logo.svg.png"),
     (LangHTML, "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png"),
@@ -66,5 +66,5 @@ renderCard repo =
             (H.span ! class_ "description") . fromString . fromMaybe "No description yet given" $ GH.description repo
             br
             maybe (small $ em "Not yet licenced") licenceLink (licence repo)
-        maybe "" (\src' -> a ! class_ "btn btn-secondary mx-1" ! href (fromString src') ! target "_blank" $ "Source") (GH.source repo)
-        maybe "" (\site -> a ! class_ "btn btn-secondary mx-1" ! href (fromString site) ! target "_blank" $ "Website") $ website repo)
+        maybe "" (\src' -> a ! class_ "btn btn-secondary mx-1" ! href (fromString (show src')) ! target "_blank" $ "Source") (GH.source repo)
+        maybe "" (\site -> a ! class_ "btn btn-secondary mx-1" ! href (fromString (show site)) ! target "_blank" $ "Website") $ website repo)

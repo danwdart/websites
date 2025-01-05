@@ -13,7 +13,7 @@ Project Chaplin is an open source, free software video sharing platform with sup
 Since release beta 1, the following features have been added:
 
 Search now produces only [CC](https://creativecommons.org/)\-licenced YouTube videos
-Faster loading through use of HTML5 [AppCache](http://www.html5rocks.com/en/tutorials/appcache/beginner/) (where enabled).
+Faster loading through use of HTML5 [AppCache](https://www.html5rocks.com/en/tutorials/appcache/beginner/) (where enabled).
 
 The release can be updated [using GitHub](https://github.com/dandart/projectchaplin) or [downloaded as a zip or tar file](https://github.com/dandart/projectchaplin/releases/tag/beta2).
 

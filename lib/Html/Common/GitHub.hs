@@ -11,6 +11,7 @@ import Data.Text              as T
 import Data.Text.Encoding
 import GHC.Generics
 import Network.HTTP.Req
+import Network.URI
 import System.Environment
 
 data Language = LangASM
@@ -70,8 +71,8 @@ data Repo = Repo {
     description :: Maybe String,
     fork        :: Bool,
     language    :: Language,
-    source      :: Maybe String,
-    website     :: Maybe String,
+    source      :: Maybe URI,
+    website     :: Maybe URI,
     licence     :: Maybe Licence,
     stars       :: Int
 } deriving stock (Generic, Show)
@@ -82,7 +83,7 @@ instance FromJSON Repo where
         -- private <- a .: "private"
         fork' <- a .: "fork"
         -- fullName <- a .: "full_name"
-        url <- a .: "clone_url"
+        cloneUrl <- a .: "clone_url"
         -- issuesUrl <- a .: "issues_url"
         name' <- a .: "name"
         -- forksCount <- a .: "forks_count"
@@ -103,9 +104,15 @@ instance FromJSON Repo where
         desc <- a .: "description"
         -- watchersCount <- a .: "watchers_count"
 
-        let website' = if isJust homepage && Just "" == homepage
-            then Nothing
-            else homepage
+        let homepage' = case homepage of
+                String "" -> Nothing
+                String url' -> parseURI (T.unpack url')
+                _ -> Nothing
+        
+        let source' = case cloneUrl of
+                String "" -> Nothing
+                String url' -> parseURI (T.unpack url')
+                _ -> Nothing
 
         let licenceText = if isJust licence' && Just (Licence "NOASSERTION") == licence'
             then Nothing
@@ -116,8 +123,8 @@ instance FromJSON Repo where
             description = desc,
             fork = fork',
             language = language',
-            source = url,
-            website = website',
+            source = (\src -> src { uriScheme = "https:" }) <$> source',
+            website = (\ws -> ws { uriScheme = "https:" }) <$> homepage',
             licence = licenceText,
             stars = stargazers
         }

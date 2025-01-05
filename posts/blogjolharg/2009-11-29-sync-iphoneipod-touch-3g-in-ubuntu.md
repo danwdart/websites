@@ -88,5 +88,5 @@ If you get nothing, there's a problem. Go ask teuf. If you get that filename ret
 I hope this has been helpful to you!
 
 Here are some helpful references if you get stuck:
-[iFuse](https://web.archive.org/web/20100211151037/http://matt.colyer.name:80/projects/iphone-linux/?title=Main_Page) (edit 2021: archived, also moved project to http://www.libimobiledevice.org/)
-[iPod Syncing](http://marcansoft.com/blog/2009/10/iphone-syncing-on-linux-part-2/)
+[iFuse](https://web.archive.org/web/20100211151037/http://matt.colyer.name:80/projects/iphone-linux/?title=Main_Page) (edit 2021: archived, also moved project to https://libimobiledevice.org/)
+[iPod Syncing](https://marcansoft.com/blog/2009/10/iphone-syncing-on-linux-part-2/)

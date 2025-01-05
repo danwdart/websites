@@ -268,7 +268,7 @@ test-suite websites-test
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   build-depends:      base >=4.20.0.0 && <5
-    -- , aeson
+    , aeson
     , async
     -- , containers
     , hspec
