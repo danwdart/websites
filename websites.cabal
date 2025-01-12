@@ -42,7 +42,7 @@ library
   default-extensions: UnicodeSyntax
   build-depends:
     , aeson
-    , base          >=4.20.0.0 && <5
+    , base                 >=4.20.0.0 && <5
     , blaze-html
     , blaze-markup
     , bytestring
@@ -51,10 +51,10 @@ library
     , dotenv
     , email-validate
     , extra
-    , feed          >=1.3.2.1
+    , feed                 >=1.3.2.1
     , filepath
     , frontmatter
-    , fsutils       >=0.1.4
+    , fsutils              >=0.1.4
     , lens
     , mtl
     , network-uri
@@ -236,7 +236,7 @@ executable dev
 
   build-depends:
     , aeson
-    , base          >=4.20.0.0 && <5
+    , base                 >=4.20.0.0 && <5
     , blaze-html
     , blaze-markup
     , bytestring
@@ -245,10 +245,10 @@ executable dev
     , dotenv
     , email-validate
     , extra
-    , feed          >=1.3.2.1
+    , feed                 >=1.3.2.1
     , filepath
     , frontmatter
-    , fsutils       >=0.1.4
+    , fsutils              >=0.1.4
     , lens
     , mtl
     , network-uri
@@ -267,27 +267,29 @@ test-suite websites-test
   other-modules:      E2E.Site.CommonSpec
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
-  build-depends:      base >=4.20.0.0 && <5
+  build-depends:
     , aeson
     , async
-    -- , containers
+    , base               >=4.20.0.0 && <5
     , hspec
-    -- , hspec-core
-    -- , hspec-expectations
     , http-client
     , http-client-tls
     , http-types
     , lens
-    -- , mtl
-    -- , process
-    -- , QuickCheck
-    -- , random
     , text
-    -- , transformers
-    -- , vector
     , webdriver
     , webdriver-wrapper
     , websites
+
+  -- , containers
+  -- , hspec-core
+  -- , hspec-expectations
+  -- , mtl
+  -- , process
+  -- , QuickCheck
+  -- , random
+  -- , transformers
+  -- , vector
   build-tool-depends: hspec-discover:hspec-discover
 
 benchmark websites-bench

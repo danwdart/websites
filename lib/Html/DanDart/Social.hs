@@ -12,7 +12,7 @@ import Text.Blaze.Html5            as H hiding (main)
 import Text.Blaze.Html5.Attributes as A
 import Text.Email.Parser
 
-socialIcons ∷ MonadReader Website m => m Html
+socialIcons ∷ MonadReader Website m ⇒ m Html
 socialIcons = do
     email' <- view email
     pure . (H.div ! class_ "row social-row") . (H.div ! class_ "text-end social-inside") $ (do

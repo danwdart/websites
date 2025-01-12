@@ -42,7 +42,7 @@ contactLayout = row .
 customLayout ∷ Html → Html
 customLayout = Prelude.id
 
-renderBreadcrumb :: MonadReader Website m => m Html
+renderBreadcrumb ∷ MonadReader Website m ⇒ m Html
 renderBreadcrumb = do
     breadcrumb' <- view breadcrumb
     pure . small $ foldMap (\(label', mUrl) -> do
@@ -51,7 +51,7 @@ renderBreadcrumb = do
         " "
         ) (getBreadcrumb breadcrumb')
 
-makePage ∷ (MonadReader Website m) ⇒ AttributeValue → String → (Html → Html) → Attribute -> Html -> m Html
+makePage ∷ (MonadReader Website m) ⇒ AttributeValue → String → (Html → Html) → Attribute → Html → m Html
 makePage pageId label' layout extraParams content' = do
     breadcrumb' <- renderBreadcrumb
     pure . (li ! class_ "nav-item") $ do

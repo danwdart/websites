@@ -37,7 +37,7 @@ import Text.Pandoc.Options
 import Text.Pandoc.Readers.Markdown
 import Text.Pandoc.Writers.HTML
 
-parseComment ∷ FilePath -> UTCTime → ByteString → Either ParseFileException ParseCommentResult
+parseComment ∷ FilePath → UTCTime → ByteString → Either ParseFileException ParseCommentResult
 parseComment filename' date' contents' = case parseYamlFrontmatter contents' of
     Done i' r -> Right $ ParseCommentResult date' r (fromRight "" $ runPure (writeHtml5 (def {
             writerHighlightStyle = Just haddock

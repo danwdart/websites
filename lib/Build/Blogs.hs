@@ -15,13 +15,13 @@ import Data.List.NonEmpty            (NonEmpty (..))
 import Data.List.NonEmpty            qualified as LNE
 -- import Data.Map                      (Map)
 import Data.Map                      qualified as M
-import Data.Map.NonEmpty (NEMap)
-import Data.Map.NonEmpty qualified as MNE
+import Data.Map.NonEmpty             (NEMap)
+import Data.Map.NonEmpty             qualified as MNE
 import Data.Maybe
 -- import Data.Set                      (Set)
 -- import Data.Set                      qualified as S
 -- import Data.Set.NonEmpty                      (NESet)
-import Data.Set.NonEmpty                      qualified as SNE
+import Data.Set.NonEmpty             qualified as SNE
 -- import Data.Text                     (Text)
 import Data.Text                     qualified as T
 import Data.Text.IO                  qualified as TIO
@@ -45,7 +45,7 @@ import Web.Sitemap.Gen
 groupByMany ∷ (Foldable1 f, Ord tag) ⇒ (post → f tag) → NonEmpty post → NEMap tag (NonEmpty post)
 groupByMany postToTags posts = MNE.unsafeFromMap $
   foldr' (\post map'' ->
-    foldr' (\tag map' ->  
+    foldr' (\tag map' ->
         M.insertWith (<>) tag (LNE.singleton post) map'
       )
       map''
@@ -102,7 +102,7 @@ build page page404 = do
       }
     }) . addBreadcrumb atomDesc $
       page (makeLinks Nothing "#" atomDesc posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
-    
+
     liftIO . createDirectoryIfMissing True $ dirname
     liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageTag
     liftIO . TIO.writeFile atomFilename $ makeRSSFeed tagAtomUri' tagUri' baseUrl' fullAtomTitle' posts

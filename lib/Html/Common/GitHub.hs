@@ -105,14 +105,14 @@ instance FromJSON Repo where
         -- watchersCount <- a .: "watchers_count"
 
         let homepage' = case homepage of
-                String "" -> Nothing
+                String ""   -> Nothing
                 String url' -> parseURI (T.unpack url')
-                _ -> Nothing
-        
+                _           -> Nothing
+
         let source' = case cloneUrl of
-                String "" -> Nothing
+                String ""   -> Nothing
                 String url' -> parseURI (T.unpack url')
-                _ -> Nothing
+                _           -> Nothing
 
         let licenceText = if isJust licence' && Just (Licence "NOASSERTION") == licence'
             then Nothing

@@ -6,7 +6,7 @@ module Make where
 
 import Control.Monad
 import Control.Monad.Reader
-import Data.ByteString.Char8    qualified as BS
+import Data.ByteString.Char8         qualified as BS
 import Data.Env.Types
 import Data.Foldable
 import Data.List                     (sortOn)

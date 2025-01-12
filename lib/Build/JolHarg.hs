@@ -2,9 +2,9 @@
 
 module Build.JolHarg where
 
-import Build.Normal qualified as Normal
+import Build.Normal           qualified as Normal
 import Configuration.Dotenv
-import Control.Monad (void)
+import Control.Monad          (void)
 import Control.Monad.IO.Class
 import Control.Monad.Reader
 import Data.Env.Types
