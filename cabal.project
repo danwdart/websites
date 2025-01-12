@@ -10,4 +10,5 @@ source-repository-package
 
 packages: ./websites.cabal
 
-allow-newer: base
+-- added data-default-class because of https://github.com/mrkkrp/req/issues/179
+allow-newer: base, data-default-class
