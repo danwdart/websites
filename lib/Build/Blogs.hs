@@ -96,7 +96,7 @@ build page page404 = do
 
     pageTag <- locally title atomPrefixer .
       locally (siteType . atomTitle) atomPrefixer .
-      locally (siteType . atomUrl) (const tagAtomUri') .
+      local (set (siteType . atomUrl) tagAtomUri') .
       addBreadcrumb atomDesc $
       page (makeLinks Nothing "#" atomDesc posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
 
@@ -125,7 +125,7 @@ build page page404 = do
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost post
       pageBlogPost <- locally title postTitlePrefixer .
-        locally openGraphInfo (const . OGArticle $ OpenGraphArticle {
+        local (set openGraphInfo (OGArticle $ OpenGraphArticle {
             _ogArticlePublishedTime = BlogTypes.date . BlogTypes.metadata $ post,
             _ogArticleModifiedTime = Just . BlogTypes.date . BlogTypes.metadata $ post,
             _ogArticleExpirationTime = Nothing,
@@ -138,7 +138,7 @@ build page page404 = do
               } :| [],
             _ogArticleSection = "Blog post",
             _ogArticleTag = BlogTypes.tags . BlogTypes.metadata $ post
-        }) .
+        })) .
         local (\w -> w {
           -- we don't override rss title, only page title, this is why they're separate
           _previewImgUrl = maybe (w ^. previewImgUrl) (fromJust . parseURI . T.unpack) . BlogTypes.featuredImage . BlogTypes.metadata $ post
