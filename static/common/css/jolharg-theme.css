@@ -56,6 +56,10 @@ p, ul {
     margin: 0;
 }
 
+p {
+    margin: 2px 0;
+}
+
 a,
 a:hover,
 a:active,
@@ -233,4 +237,22 @@ summary::marker {
 details a:hover,
 summary:hover {
     text-decoration: underline;
+}
+
+th {
+    font-style: bold;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+table tbody tr:nth-child(odd) {
+    background: #eee;
+}
+
+table tbody tr:hover:nth-child(odd),
+table tbody tr:hover:nth-child(even) {
+    background: #ddd;
 }
