@@ -91,14 +91,14 @@ makeLenses ''Website
 
 -- TODO lens it?
 plainBreadcrumb ∷ MonadReader Website m ⇒ Text → m a → m a
-plainBreadcrumb breadcrumb' = local (\w -> w { _breadcrumb = Breadcrumb [(breadcrumb', Nothing)] })
+plainBreadcrumb breadcrumb' = locally breadcrumb (const $ Breadcrumb [(breadcrumb', Nothing)])
 
 addBreadcrumb ∷ MonadReader Website m ⇒ Text → m a → m a
 addBreadcrumb breadcrumb' page = do
     breadcrumbExisting <- view breadcrumb
     baseUrl' <- view baseUrl
     let firstText = fst . LNE.head $ getBreadcrumb breadcrumbExisting
-    local (\w -> w { _breadcrumb = Breadcrumb [(firstText, Just baseUrl'), (breadcrumb', Nothing)]}) page
+    locally breadcrumb (const $ Breadcrumb [(firstText, Just baseUrl'), (breadcrumb', Nothing)]) page
 
 instance Eq Website where
     Website {_slug = slug1} == Website {_slug = slug2} = slug1 == slug2

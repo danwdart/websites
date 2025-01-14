@@ -94,13 +94,10 @@ build page page404 = do
     let fullFilename = siteDir <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
     let dirname = dropFileName fullFilename
 
-    pageTag <- local (\w@Website { _title = title'', _baseUrl, _siteType = siteType'@Blog { _atomTitle = atomTitle' }} -> w {
-      _title = atomPrefixer title'',
-      _siteType = siteType' {
-        _atomTitle = atomPrefixer atomTitle',
-        _atomUrl = tagAtomUri'
-      }
-    }) . addBreadcrumb atomDesc $
+    pageTag <- locally title atomPrefixer .
+      locally (siteType . atomTitle) atomPrefixer .
+      locally (siteType . atomUrl) (const tagAtomUri') .
+      addBreadcrumb atomDesc $
       page (makeLinks Nothing "#" atomDesc posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
 
     liftIO . createDirectoryIfMissing True $ dirname
@@ -127,10 +124,8 @@ build page page404 = do
 
       liftIO . createDirectoryIfMissing True $ dirname
       renderedPost <- renderPost post
-      pageBlogPost <- local (\w -> w {
-        -- we don't override rss title, only page title, this is why they're separate
-        _title = postTitlePrefixer title',
-        _openGraphInfo = OGArticle $ OpenGraphArticle {
+      pageBlogPost <- locally title postTitlePrefixer .
+        locally openGraphInfo (const . OGArticle $ OpenGraphArticle {
             _ogArticlePublishedTime = BlogTypes.date . BlogTypes.metadata $ post,
             _ogArticleModifiedTime = Just . BlogTypes.date . BlogTypes.metadata $ post,
             _ogArticleExpirationTime = Nothing,
@@ -143,9 +138,11 @@ build page page404 = do
               } :| [],
             _ogArticleSection = "Blog post",
             _ogArticleTag = BlogTypes.tags . BlogTypes.metadata $ post
-        },
-        _previewImgUrl = maybe (w ^. previewImgUrl) (fromJust . parseURI . T.unpack) . BlogTypes.featuredImage . BlogTypes.metadata $ post
-      }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
+        }) .
+        local (\w -> w {
+          -- we don't override rss title, only page title, this is why they're separate
+          _previewImgUrl = maybe (w ^. previewImgUrl) (fromJust . parseURI . T.unpack) . BlogTypes.featuredImage . BlogTypes.metadata $ post
+        }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
         page (makeLinks (Just . BlogTypes.postId $ post) "/#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
