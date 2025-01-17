@@ -15,6 +15,6 @@ pageContact ∷ (MonadReader Website m) ⇒ m Html
 pageContact = do
     email' <- view email
     plainBreadcrumb "Contact" $ do
-        contactForm' <- contactForm (textValue (decodeUtf8 (toByteString email'))) emailHelpPlural "Website for me..." "I am interested in a website..."
+        contactForm' <- contactForm (textValue (decodeUtf8Lenient (toByteString email'))) emailHelpPlural "Website for me..." "I am interested in a website..."
         makePage "contact" "Contact" contactLayout notDefaultPage $ do
             contactForm'

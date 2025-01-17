@@ -1,10 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
+-- {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 module Build.Blogs where
 
+import Control.Exception.MissingAtomURIException
 import Control.Lens
 import Control.Monad                 (join)
+import Control.Monad.Error.Class
 import Control.Monad.IO.Class
 import Control.Monad.Reader
 import Data.ByteString.Char8         qualified as BS
@@ -22,7 +24,6 @@ import Data.Maybe
 -- import Data.Set                      qualified as S
 -- import Data.Set.NonEmpty                      (NESet)
 import Data.Set.NonEmpty             qualified as SNE
--- import Data.Text                     (Text)
 import Data.Text                     qualified as T
 import Data.Text.IO                  qualified as TIO
 import Data.Time.Clock
@@ -54,14 +55,16 @@ groupByMany postToTags posts = MNE.unsafeFromMap $
     M.empty
     posts
 
-build ∷ (MonadReader Website m, MonadIO m) ⇒ (Html → Html → Html → m Html) → m Html → m ()
+build ∷ (MonadReader Website m, MonadError MissingAtomURIException m, MonadIO m) ⇒ (Html → Html → Html → m Html) → m Html → m ()
 build page page404 = do
   baseUrl' <- view baseUrl
   title' <- view Env.title
   slug' <- view slug
   mAtomUri' <- preview $ siteType . atomUrl
   sitemapUrl' <- view sitemapUrl
-  let atomUri' = fromJust mAtomUri' -- no Monoid for URI
+  atomUri' <- case mAtomUri' of
+      Just x  -> pure x
+      Nothing -> throwError MissingAtomURIException -- no Monoid for URI -- is that right?
   -- atomTitle' <- view $ siteType . atomTitle
   -- Clear us out, Jim
   let siteDir = ".sites/" <> T.unpack slug' <> "/"
@@ -107,7 +110,8 @@ build page page404 = do
     -- traverse_ (liftIO . TIO.putStrLn . BlogTypes.title . BlogTypes.metadata) posts
     pure (
       tagUri',
-      BlogTypes.date . BlogTypes.metadata . LNE.head $ posts
+      (BlogTypes.date . BlogTypes.metadata)
+      (LNE.head posts)
       )
     ) grouped
   -- By post
@@ -152,9 +156,9 @@ build page page404 = do
 
   now <- liftIO getCurrentTime
   let sitemap' = Sitemap $ [
-        SitemapUrl (T.pack . show $ baseUrl') (Just now) (Just Weekly) (Just 1.0)
-        ] <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
-          <> fmap (\(url, date) -> SitemapUrl (T.pack . show $ url) (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
+        SitemapUrl (T.show baseUrl') (Just now) (Just Weekly) (Just 1.0)
+        ] <> fmap (\(url, date) -> SitemapUrl (T.show url) (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
+          <> fmap (\(url, date) -> SitemapUrl (T.show url) (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
   liftIO . BS.writeFile (siteDir <> "/sitemap.xml") $ renderSitemap sitemap'
   liftIO . TIO.writeFile (siteDir <> "atom.xml") $
     makeRSSFeed atomUri' baseUrl' baseUrl' title' sortedPosts

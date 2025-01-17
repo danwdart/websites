@@ -13,5 +13,5 @@ sitemap = do
     now <- liftIO getCurrentTime
     baseUrl' <- view baseUrl
     pure $ Sitemap [
-        SitemapUrl (T.pack . show $ baseUrl') (Just now) (Just Weekly) (Just 1.0)
+        SitemapUrl (T.show baseUrl') (Just now) (Just Weekly) (Just 1.0)
         ]

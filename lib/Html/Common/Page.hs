@@ -5,6 +5,7 @@ module Html.Common.Page where
 import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.Foldable
 import Data.String                 (IsString (fromString))
 import Html.Common.Bootstrap
 import Html.Common.Link
@@ -45,7 +46,7 @@ customLayout = Prelude.id
 renderBreadcrumb ∷ MonadReader Website m ⇒ m Html
 renderBreadcrumb = do
     breadcrumb' <- view breadcrumb
-    pure . small $ foldMap (\(label', mUrl) -> do
+    pure . small $ foldMap' (\(label', mUrl) -> do
         "» "
         maybe (text label') (\url -> a ! href (stringValue $ show url) $ text label') mUrl
         " "

@@ -130,7 +130,7 @@ instance FromJSON Repo where
         }
     parseJSON _ = fail "Repo should be an object"
 
-getRepos ∷ Text → Req [Repo]
+getRepos ∷ MonadHttp m ⇒ Text → m [Repo]
 getRepos user = do
     githubAccessToken <- liftIO . getEnv $ "GITHUB_ACCESS_TOKEN" -- throws
     res <- req GET (https "api.github.com" /: "users" /: user /: "repos") NoReqBody jsonResponse (
@@ -138,7 +138,7 @@ getRepos user = do
         "sort" =: ("pushed" :: Text) <> -- can't sort by stars
         "type" =: ("owner" :: Text) <>
         "direction" =: ("desc" :: Text) <>
-        header "User-Agent" "Dan's Haskell Bot v1.0" <>
+        header "User-Agent" "Dan's Haskell Bot" <>
         header "Authorization" (encodeUtf8 . T.pack $ "Bearer " <> githubAccessToken)
         )
     pure $ responseBody res

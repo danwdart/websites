@@ -6,7 +6,9 @@
 
 module Data.Env.Types where
 
+import Control.Exception.MissingAtomURIException
 import Control.Lens
+import Control.Monad.Error.Class
 import Control.Monad.Reader
 import Data.List.NonEmpty     (NonEmpty)
 import Data.List.NonEmpty     qualified as LNE
@@ -84,21 +86,21 @@ data Website = Website {
     _email         :: EmailAddress,
     _openGraphInfo :: OpenGraphInfo,
     _livereload    :: Bool,
-    _build         :: ReaderT Website IO ()
+    _build         :: forall m. (MonadError MissingAtomURIException m, MonadReader Website m, MonadIO m) => m ()
 }
 
 makeLenses ''Website
 
 -- TODO lens it?
 plainBreadcrumb ∷ MonadReader Website m ⇒ Text → m a → m a
-plainBreadcrumb breadcrumb' = locally breadcrumb (const $ Breadcrumb [(breadcrumb', Nothing)])
+plainBreadcrumb breadcrumb' = local (set breadcrumb (Breadcrumb [(breadcrumb', Nothing)]))
 
 addBreadcrumb ∷ MonadReader Website m ⇒ Text → m a → m a
 addBreadcrumb breadcrumb' page = do
     breadcrumbExisting <- view breadcrumb
     baseUrl' <- view baseUrl
-    let firstText = fst . LNE.head $ getBreadcrumb breadcrumbExisting
-    locally breadcrumb (const $ Breadcrumb [(firstText, Just baseUrl'), (breadcrumb', Nothing)]) page
+    let firstText = fst $ LNE.head (getBreadcrumb breadcrumbExisting)
+    local (set breadcrumb (Breadcrumb [(firstText, Just baseUrl'), (breadcrumb', Nothing)])) page
 
 instance Eq Website where
     Website {_slug = slug1} == Website {_slug = slug2} = slug1 == slug2

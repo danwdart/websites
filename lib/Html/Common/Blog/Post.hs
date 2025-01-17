@@ -14,7 +14,6 @@ import Data.Env.Types
 import Data.Foldable
 import Data.Frontmatter
 import Data.List.NonEmpty                   qualified as LNE
-import Data.Maybe
 import Data.String
 import Data.Text                            (Text)
 import Data.Text                            qualified as T
@@ -39,7 +38,7 @@ parseFile filename' contents' = case parseYamlFrontmatter contents' of
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
-        }) (decodeUtf8 i')))
+        }) (decodeUtf8Lenient i')))
     Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
     Partial _ -> Left $ PFPartial filename' contents'
 
@@ -102,7 +101,7 @@ renderPost (BlogPost postId' metadata' html' comments') = do
     email' <- view email
     commentForm' <- commentForm email' (BlogTypes.title metadata')
     renderSuffix' <- preview $ siteType . renderSuffix
-    let renderSuffix'' = fromMaybe (const mempty) renderSuffix'
+    let renderSuffix'' = fold renderSuffix'
     pure . H.article $ do
         a ! name (fromString (T.unpack postId')) $ mempty
         -- Not working in Safari yet, so filter
@@ -110,17 +109,17 @@ renderPost (BlogPost postId' metadata' html' comments') = do
         small $ do
             a ! href (fromString . ("/post" <>) . LNE.head . BlogTypes.aliases $ metadata') $ "Permalink"
             " | Author: "
-            a ! href (fromString . T.unpack $ "mailto:" <> decodeUtf8 (toByteString email') <> "?subject=" <> BlogTypes.title metadata') $ "Dan Dart"
+            a ! href (fromString . T.unpack $ "mailto:" <> decodeUtf8Lenient (toByteString email') <> "?subject=" <> BlogTypes.title metadata') $ "Dan Dart"
             " | Published: "
             fromString . show . date $ metadata'
             " | Tags: "
-            foldMap ((\str -> do
+            foldMap' ((\str -> do
                 a ! rel "tag" ! href (fromString ("/tag/" <> str)) $ fromString str
                 " "
                 ) . T.unpack . getTag) (LNE.sort $ tags metadata')
         br
         br
-        maybe mempty (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
+        foldMap' (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
         br
         fixExternalLinks html'
         br

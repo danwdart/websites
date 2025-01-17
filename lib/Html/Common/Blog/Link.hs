@@ -3,6 +3,7 @@
 
 module Html.Common.Blog.Link where
 
+import Data.Foldable
 import Data.List.NonEmpty          (NonEmpty (..))
 import Data.List.NonEmpty          qualified as LNE
 -- import Data.Map                    (Map)
@@ -47,7 +48,7 @@ genericMakeLinks ∷ Foldable t ⇒ Bool → (t anyLink → String) → (anyLink
 genericMakeLinks opened formatter makeSubLinks byPeriod = do
     detailsOp opened $ do
         H.summary . fromString . formatter $ byPeriod
-        p $ foldMap makeSubLinks byPeriod
+        p $ foldMap' makeSubLinks byPeriod
 
 makeLinksByMonth ∷ Maybe Text → String → Bool → NonEmpty BlogPost → Html
 makeLinksByMonth mCurrId preLink opened = genericMakeLinks opened (formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) (makeLink mCurrId preLink) -- you could use comonad extract here but what is a type with a head
@@ -62,7 +63,7 @@ groupOnNonEmpty f = LNE.groupBy1 ((==) `on2` f)
     -- redefine on so we avoid duplicate computation for most values.
     where (.*.) `on2` fn = \x -> let fx = fn x in \y -> fx .*. fn y
 
--- TODO convert to foldMap for NEMap
+-- TODO convert to foldMap' for NEMap
 -- not doable with M.insertMapWith because it's within a fold (i.e. first insertMapWith, second insertWith)
 -- unless we go crazy with pattern matching, better just to use foldMap1 or something
 -- groupOnNonEmptyWithKey ∷ (Ord b') ⇒ (a' → b') → NonEmpty a' → Map b' (NonEmpty a')
@@ -78,11 +79,11 @@ makeLinks mCurrId preLink titleName bps = do
     (H.div ! class_ "d-none d-lg-block") $ do
         detailsEl Open $ do
             H.summary . text $ titleName
-            foldMap (makeLinksByYear mCurrId preLink True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+            foldMap' (makeLinksByYear mCurrId preLink True . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
     (H.div ! class_ "d-lg-none") $ do
         detailsEl Closed $ do
             H.summary . text $ titleName
-            foldMap (makeLinksByYear mCurrId preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
+            foldMap' (makeLinksByYear mCurrId preLink False . groupOnNonEmpty (month . date . metadata)) . groupOnNonEmpty (year . date . metadata) $ bps
 
 -- TODO open only the letters we're in if we're in a tag page
 makeTags ∷ Maybe BlogTag → NonEmpty BlogTag → Html
@@ -99,9 +100,9 @@ makeTags mCurrTag tags = do
         sortedTags = groupOnNonEmptyWithKey (T.toLower . T.singleton . T.head . getTag) tags :: NEMap Text (NonEmpty BlogTag)
         innerElement = ul $
             (MNE.foldMapWithKey :: (Text → NonEmpty BlogTag → Html) → NEMap Text (NonEmpty BlogTag) → Html)  (\letter subtags ->
-                li . detailsOp (maybe False (`elem` subtags) mCurrTag) $ do
+                li . detailsOp (any (`elem` subtags) mCurrTag) $ do
                     H.summary . fromString . T.unpack $ letter
-                    ul $ foldMap (\tag ->
+                    ul $ foldMap' (\tag ->
                         li $ do
                             if mCurrTag == Just tag
                             then em . strong $ fromString (T.unpack (getTag tag))
@@ -110,6 +111,6 @@ makeTags mCurrTag tags = do
                             -- (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag) <> "/atom.xml")) "📰"
                         ) subtags
             ) (sortedTags :: NEMap Text (NonEmpty BlogTag))
-          {-foldMap (\tag -> do
+          {-foldMap' (\tag -> do
                 li . (a ! href (fromString $ "/tag/" <> T.unpack (getTag tag))) $ fromString (T.unpack (getTag tag))
                 ) tags -}

@@ -43,7 +43,7 @@ parseComment filename' date' contents' = case parseYamlFrontmatter contents' of
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
-        }) (decodeUtf8 i')))
+        }) (decodeUtf8Lenient i')))
     Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
     Partial _ -> Left $ PFPartial filename' contents'
 
@@ -76,7 +76,7 @@ commentForm toEmail title' = pure . (H.form
         ! method "get"
         ! target "email") $ do
             -- less scraping happens? maybe?
-            H.input ! A.type_ "hidden" ! name "to" ! value (textValue (decodeUtf8 (toByteString toEmail)))
+            H.input ! A.type_ "hidden" ! name "to" ! value (textValue (decodeUtf8Lenient (toByteString toEmail)))
             H.input ! A.type_ "hidden" ! name "subject" ! value (textValue $ "Re: " <> title')
             H.div ! A.class_ "group" $ do
                 H.label ! for "body" $ do
@@ -99,7 +99,7 @@ renderComment ParseCommentResult {
     commentHtml
     } = do
         let authorUrl' ∷ AttributeValue
-            authorUrl' = maybe mempty (fromString . T.unpack) authorUrl
+            authorUrl' = foldMap (fromString . T.unpack) authorUrl
         small $ do
             a ! name (fromString (iso8601Show commentDate)) $ mempty
             a ! href ("mailto:" <> (fromString . T.unpack $ authorEmail)) $ string (T.unpack author)

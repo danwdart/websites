@@ -91,7 +91,7 @@ prodBlog = Website {
     _siteType = Blog {
         _atomTitle = "Dan Dart's Blog: Software, Maths, Radio, Music",
         _atomUrl = [uri|https://blog.dandart.co.uk/atom.xml|],
-        _renderSuffix = const mempty
+        _renderSuffix = mempty
     },
     _email = [QE.email|blog@dandart.co.uk|],
     _openGraphInfo = OGWebsite,
@@ -282,7 +282,7 @@ prodBlogJolHarg = Website {
     _siteType = Blog {
         _atomTitle = "JolHarg: Software and Technology Blog",
         _atomUrl = [uri|https://blog.jolharg.com/atom.xml|],
-        _renderSuffix = const mempty
+        _renderSuffix = mempty
     },
     _email = [QE.email|blog@jolharg.com|],
     _openGraphInfo = OGWebsite,
@@ -347,7 +347,7 @@ prodBlogM0ORI = Website {
     _siteType = Blog {
         _atomTitle = "The Blog of M0ORI: Interesting Radio Observations",
         _atomUrl = [uri|https://blog.m0ori.com/atom.xml|],
-        _renderSuffix = const mempty
+        _renderSuffix = mempty
     },
     _email = [QE.email|blog@m0ori.com|],
     _openGraphInfo = OGWebsite,

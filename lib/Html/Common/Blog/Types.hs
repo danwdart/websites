@@ -41,8 +41,8 @@ instance FromJSON Score where
 
 instance FromJSON BlogTag where
     parseJSON (A.String a') = pure $ BlogTag a'
-    parseJSON (A.Number a') = pure . BlogTag $ T.pack (show a')
-    parseJSON (A.Bool a')   = pure . BlogTag $ T.pack (show a')
+    parseJSON (A.Number a') = pure . BlogTag $ T.show a'
+    parseJSON (A.Bool a')   = pure . BlogTag $ T.show a'
     parseJSON e             = fail (show e)
 
 data BlogMetadata = BlogMetadata {
