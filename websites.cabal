@@ -62,7 +62,7 @@ library
     , pandoc
     , req
     , sitemap-gen
-    , text
+    , text                 >=2.1.2
     , time
 
   other-modules:
@@ -77,6 +77,7 @@ library
     Build.Normal
     Build.Sitemap
     Control.Exception.InvalidDateException
+    Control.Exception.MissingAtomURIException
     Control.Exception.ParseFileException
     Data.Foldable.Monoid
     Data.Time.Utils
@@ -172,6 +173,7 @@ executable dev
     Build.Normal
     Build.Sitemap
     Control.Exception.InvalidDateException
+    Control.Exception.MissingAtomURIException
     Control.Exception.ParseFileException
     Data.Env
     Data.Env.Types

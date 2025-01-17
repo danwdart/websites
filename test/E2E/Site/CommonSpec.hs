@@ -23,6 +23,7 @@ import Data.Maybe
 -- import Data.Set                  qualified as S
 import Data.Text                 (Text)
 import Data.Text                 qualified as T
+import Data.Text.IO              qualified as TIO
 import Network.HTTP.Client
 import Network.HTTP.Client.TLS
 import Network.HTTP.Types.Status
@@ -127,7 +128,7 @@ testForLink linkToClick = do
         cards <- findElems $ ByCSS "input:checked ~ .page .card"
         traverse elemSize cards
 
-    liftIO . print $ cardSizes
+    liftIO . TIO.putStrLn . T.show $ cardSizes
 
     liftIO . hspec . describe (T.unpack linkName) . it "visible cards are only one size" $ (
         (length . L.nub . filter (/= (0, 0)) $ cardSizes )`shouldSatisfy` (< 2))
@@ -219,46 +220,46 @@ testForConfig ∷ Website → (Text, WDConfig) → Spec
 testForConfig website (configName, config) = describe (T.unpack (website ^. slug)) .
     describe (T.unpack configName) $ do
         runIO . wrappedRunSession config . finallyClose $ do
-            liftIO . putStrLn $ "Opening page"
+            liftIO . TIO.putStrLn $ "Opening page"
 
             -- Open the dev only pages
             openPage $ website ^. baseUrl . to show . to T.pack . to (T.replace "https://" "https://dev.") . to T.unpack
 
-            liftIO . putStrLn $ "Opened page"
+            liftIO . TIO.putStrLn $ "Opened page"
             -- only the first option - we don't need the following duplicated
             when ("Firefox" == configName) $ do
                 urls' <- do
-                    liftIO . putStrLn $ "Finding external links"
+                    liftIO . TIO.putStrLn $ "Finding external links"
                     as <- findElems (ByCSS "a[href^=http]")
-                    liftIO . putStrLn $ "Going through external links"
+                    liftIO . TIO.putStrLn $ "Going through external links"
                     hrefs <- traverse (`attr` "href") as
                     -- TODO witherable or something
                     pure (catMaybes $ getCompose (T.unpack <$> Compose hrefs))
 
-                liftIO . putStrLn $ "Found " <> show (length urls') <> " urls."
+                liftIO . TIO.putStrLn $ "Found " <> (T.pack (show (length urls'))) <> " urls."
 
                 images <- do
                     as <- findElems (ByCSS "img[src^=http]")
-                    liftIO . putStrLn $ "Going through external images"
+                    liftIO . TIO.putStrLn $ "Going through external images"
                     srcs <- traverse (`attr` "src") as
                     -- TODO witherable or something
                     pure (catMaybes $ getCompose (T.unpack <$> Compose srcs))
 
-                liftIO . putStrLn $ "Found " <> show (length images) <> " images."
+                liftIO . TIO.putStrLn $ "Found " <> T.pack (show (length images)) <> " images."
 
-                liftIO . putStrLn $ "Creating a manager"
+                liftIO . TIO.putStrLn $ "Creating a manager"
 
                 manager <- liftIO $ newManager tlsManagerSettings
 
-                liftIO . putStrLn $ "Getting URL statuses"
+                liftIO . TIO.putStrLn $ "Getting URL statuses"
 
                 urlStatuses <- liftIO $ mapConcurrently (getStatuses manager) urls'
 
-                liftIO . putStrLn $ "Getting image statuses"
+                liftIO . TIO.putStrLn $ "Getting image statuses"
 
                 imageStatuses <- liftIO $ mapConcurrently (getStatuses manager) images
 
-                liftIO . putStrLn $ "Performing tests"
+                liftIO . TIO.putStrLn $ "Performing tests"
 
                 liftIO . hspec $ do
                     describe "has no insecure images" $ traverse_ testSecureLink images
@@ -266,7 +267,7 @@ testForConfig website (configName, config) = describe (T.unpack (website ^. slug
                     describe "has no broken links" $ traverse_ testNotBroken urlStatuses
                     describe "has no missing images" $ traverse_ testNotBroken imageStatuses
 
-            liftIO . putStrLn $ "Testing for each resolution"
+            liftIO . TIO.putStrLn $ "Testing for each resolution"
 
             traverse_ testForResolution resolutions
 
