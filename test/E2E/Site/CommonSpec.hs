@@ -236,7 +236,7 @@ testForConfig website (configName, config) = describe (T.unpack (website ^. slug
                     -- TODO witherable or something
                     pure (catMaybes $ getCompose (T.unpack <$> Compose hrefs))
 
-                liftIO . TIO.putStrLn $ "Found " <> (T.pack (show (length urls'))) <> " urls."
+                liftIO . TIO.putStrLn $ "Found " <> (T.show (length urls')) <> " urls."
 
                 images <- do
                     as <- findElems (ByCSS "img[src^=http]")
@@ -245,7 +245,7 @@ testForConfig website (configName, config) = describe (T.unpack (website ^. slug
                     -- TODO witherable or something
                     pure (catMaybes $ getCompose (T.unpack <$> Compose srcs))
 
-                liftIO . TIO.putStrLn $ "Found " <> T.pack (show (length images)) <> " images."
+                liftIO . TIO.putStrLn $ "Found " <> T.show (length images) <> " images."
 
                 liftIO . TIO.putStrLn $ "Creating a manager"
 
