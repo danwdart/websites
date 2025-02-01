@@ -6,6 +6,7 @@ module Html.Common.GitHub where
 
 import Control.Monad.IO.Class
 import Data.Aeson
+import Data.Aeson.Types
 import Data.Maybe
 import Data.Text              as T
 import Data.Text.Encoding
@@ -128,7 +129,7 @@ instance FromJSON Repo where
             licence = licenceText,
             stars = stargazers
         }
-    parseJSON _ = fail "Repo should be an object"
+    parseJSON other = typeMismatch "Object" other
 
 getRepos ∷ MonadHttp m ⇒ Text → m [Repo]
 getRepos user = do

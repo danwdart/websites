@@ -6,6 +6,7 @@ module Html.Common.Blog.Types where
 
 import Data.Aeson         (FromJSON, (.:))
 import Data.Aeson         qualified as A
+import Data.Aeson.Types   qualified as A
 -- import Data.ByteString.Char8 qualified as BS
 --- import Data.List.NonEmpty (NonEmpty)
 import Data.List.NonEmpty as LNE
@@ -37,13 +38,13 @@ instance FromJSON Score where
                     Left errMsg -> fail errMsg
                     Right score -> pure score
             _ -> fail "Problem parsing score."
-    parseJSON _ = fail "Problem parsing score."
+    parseJSON invalid = A.typeMismatch "String" invalid
 
 instance FromJSON BlogTag where
     parseJSON (A.String a') = pure $ BlogTag a'
     parseJSON (A.Number a') = pure . BlogTag $ T.show a'
     parseJSON (A.Bool a')   = pure . BlogTag $ T.show a'
-    parseJSON e             = fail (show e)
+    parseJSON other         = A.typeMismatch "String | Number | Bool" other
 
 data BlogMetadata = BlogMetadata {
     title         :: Text,
@@ -67,7 +68,7 @@ instance FromJSON BlogCommentMetadata where
         o .: "author" <*>
         o .: "email" <*>
         o .: "url"
-    parseJSON _ = fail "Bad blog comment metadata"
+    parseJSON other = A.typeMismatch "Object" other
 
 data BlogPost = BlogPost {
     postId   :: Text,

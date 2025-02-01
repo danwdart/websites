@@ -20,7 +20,7 @@ import Html.Common.Blog.Post
 import Html.Common.Blog.Types
 import System.Directory              (doesFileExist, getDirectoryContents)
 import System.FilePath               ((</>))
-import System.Path
+-- import System.Path
 import Text.Blaze.Html.Renderer.Utf8
 import Text.Blaze.Html5              as H
 
