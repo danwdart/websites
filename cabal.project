@@ -1,14 +1,4 @@
-source-repository-package
-  type: git
-  location: https://github.com/danwdart/fsutils.git
-  tag: e5f97a067955afffc8d120249488f9b59c38a24a
-
-source-repository-package
-  type: git
-  location: https://github.com/ysangkok/aeson-diff.git
-  tag: 5f2051042fb350ecd1bb63379cc7e2c768fe494f
-
 packages: ./websites.cabal
 
--- added data-default-class because of https://github.com/mrkkrp/req/issues/179
-allow-newer: base, data-default-class
+-- time from feed
+allow-newer: base, time

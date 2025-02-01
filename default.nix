@@ -14,14 +14,32 @@ let
     overrides = self: super: rec {
       # dontCheck because it requires a browser, selenium and a writable home directory...
       websites = lib.dontCheck (lib.dontHaddock (self.callCabal2nix "websites" (gitignore ./.) {}));
-      fsutils = lib.doJailbreak (self.callCabal2nix "fsutils" (builtins.fetchGit {
-        url = "https://github.com/danwdart/fsutils.git";
-        rev = "e5f97a067955afffc8d120249488f9b59c38a24a";
-      }) {});
-      feed = lib.doJailbreak super.feed;
-      toml-parser = lib.doJailbreak super.toml-parser;
-      citeproc = lib.doJailbreak super.citeproc;
-      pandoc = lib.doJailbreak super.pandoc;
+      # https://github.com/haskell-party/feed/issues/73
+      # https://github.com/haskell/security-advisories/pull/220
+      # feed = lib.doJailbreak super.feed;
+      # toml-parser = 
+      # toml-parser = lib.doJailbreak super.toml-parser;
+      # citeproc = lib.doJailbreak super.citeproc;
+
+      # not yet in nix
+      pandoc = self.callHackageDirect {
+        pkg = "pandoc";
+        ver = "3.6.2";
+        sha256 = "sha256-b4CaNo35Oo1U3brgvgqLQzWUQ4cp9jop27n5DwAJWu8=";
+      } {};
+
+      # pandoc = lib.doJailbreak super.pandoc;
+      # # not yet here
+      # text = self.callHackage "text" "2.1.2" {};
+      # # older version requires older text
+      # # also fails tests for some reason
+      # parsec = lib.dontCheck (self.callHackageDirect {
+      #   pkg = "parsec";
+      #   ver = "3.1.18.0";
+      #   sha256 = "FhFYDHqwEFdr3NBWcdWffLUpNGGA5PeEMtzE3tNIMiE=";
+      # } {});
+      # Cabal-syntax = lib.doJailbreak super.Cabal-syntax;
+      # dotenv = self.callHackage "dotenv" "0.12.0.0" {};
     };
   };
   shell = myHaskellPackages.shellFor {
