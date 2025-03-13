@@ -1,5 +1,5 @@
 ---
-title: 'Updated Websites and Blogs!'
+title: 'Behind the Times: Sites still without IPv6 in 2025'
 date: 2025-03-13T23:45:00Z
 draft: false
 aliases: [ "/2025/03/behind-times-sites-still-without-ipv6-2025" ]
