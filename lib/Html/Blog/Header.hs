@@ -20,5 +20,5 @@ htmlHeader blogPostLinks blogTagLinks blogPosts = do
     pure . makeHeader "/#blog" "Dan Dart's Blog" mempty $ do
         extNav (stringValue $ show urlDanDart') "Dan Dart"
         pageBlog'
-        dlNav (stringValue atomXml') "Atom Feed"
+        dlNav (toValue atomXml') "Atom Feed"
         H.style . fromString $ styleToCss haddock
