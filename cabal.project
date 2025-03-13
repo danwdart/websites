@@ -1,4 +1,10 @@
+-- https://github.com/mstksg/nonempty-containers/issues/17
+source-repository-package
+  type: git
+  location: https://github.com/jonathanknowles/nonempty-containers
+  tag: 459536fc8377896d8e2f5f619b6ca78e4c091229
+
 packages: ./websites.cabal
 
--- time from feed
-allow-newer: base, time
+-- time from feed, containers from req
+allow-newer: base, containers, time, template-haskell, ghc-prim
