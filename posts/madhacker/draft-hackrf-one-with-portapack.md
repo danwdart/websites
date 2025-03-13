@@ -3,7 +3,7 @@ title: "HackRF One with Portapack"
 date: 2022-07-08T10:18:00+01:00
 draft: true
 aliases: [ "/2022/07/hackrf-one-with-portapack" ]
-featuredImage: TODO
+featuredImage: https://i.ebayimg.com/images/g/CeYAAOSwH5Nimjgv/s-l200.jpg
 tags: [hackrf,one,hfradio,portapack,vhf,uhf]
 scores :
     -
