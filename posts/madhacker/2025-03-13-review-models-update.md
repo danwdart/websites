@@ -1,6 +1,6 @@
 ---
 title: "Review models wanted: an update?"
-date: 2025-03-13T18:00:00Z
+date: 2025-03-13T22:30:00Z
 draft: false
 aliases: [ "/2025/03/review-models-wanted-update" ]
 tags: [review,models,wanted,"2025",companies,Intel,Microsoft,Lenovo,IBM,Acer,Asus,Samsung,Dell,Sony,LG,NVIDIA,TSMC,HP,Siemens,boycott]
