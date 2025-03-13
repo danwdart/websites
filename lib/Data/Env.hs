@@ -15,6 +15,7 @@ import Build.M0ORI               qualified as M0ORI
 import Build.MadHacker           qualified as MadHacker
 import Control.Lens
 import Data.Env.Types
+import Data.NonEmpty             qualified as NE
 import Html.MadHacker.Suffix
 import Network.URI.Static
 import Text.Email.QuasiQuotation qualified as QE
@@ -38,8 +39,8 @@ prodBlog,
     prodBlogM0ORI,
     prodMadHacker ∷ Website
 prodBlog = Website {
-    _slug = "blog",
-    _title = "Dan Dart's Blog: Software, Mathematics, Radio, Music",
+    _slug = NE.trustedNonEmpty "blog",
+    _title = NE.trustedNonEmpty "Dan Dart's Blog: Software, Mathematics, Radio, Music",
     {- _keywords = [
         "dan",
         "dart",
@@ -81,15 +82,15 @@ prodBlog = Website {
         "ubuntu",
         "debian"
         ],-}
-    _description = "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world.",
+    _description = NE.trustedNonEmpty "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world.",
     _previewImgUrl = [uri|https://blog.dandart.co.uk/img/preview.png|],
     _baseUrl = productionUrls ^. urlBlog,
     _pageUrl = productionUrls ^. urlBlog,
     _sitemapUrl = [uri|https://blog.dandart.co.uk/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("Blog", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "Blog", Nothing)],
     _siteType = Blog {
-        _atomTitle = "Dan Dart's Blog: Software, Maths, Radio, Music",
+        _atomTitle = NE.trustedNonEmpty "Dan Dart's Blog: Software, Maths, Radio, Music",
         _atomUrl = [uri|https://blog.dandart.co.uk/atom.xml|],
         _renderSuffix = mempty
     },
@@ -99,8 +100,8 @@ prodBlog = Website {
     _build = Blog.build
 }
 prodDanDart = Website {
-    _slug = "dandart",
-    _title = "Dan Dart: Software, Maths, Radio, Music",
+    _slug = NE.trustedNonEmpty "dandart",
+    _title = NE.trustedNonEmpty "Dan Dart: Software, Maths, Radio, Music",
     {- _keywords = [
         "dan",
         "dart",
@@ -142,27 +143,27 @@ prodDanDart = Website {
         "debian"
         ],
     -}
-    _description = "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics.",
+    _description = NE.trustedNonEmpty "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics.",
     _previewImgUrl = [uri|https://dandart.co.uk/img/preview.png|],
     _baseUrl = productionUrls ^. urlDanDart,
     _pageUrl = productionUrls ^. urlDanDart,
     _sitemapUrl = [uri|https://dandart.co.uk/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("Dan Dart", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "Dan Dart", Nothing)],
     _siteType = Normal,
     _email = [QE.email|website@dandart.co.uk|],
     _openGraphInfo = OGProfile $ OpenGraphProfile {
-        _ogProfileFirstName = "Dan",
-        _ogProfileLastName = "Dart",
-        _ogProfileUsername = "dandart",
-        _ogProfileGender = "non-binary"
+        _ogProfileFirstName = NE.trustedNonEmpty "Dan",
+        _ogProfileLastName = NE.trustedNonEmpty "Dart",
+        _ogProfileUsername = NE.trustedNonEmpty "dandart",
+        _ogProfileGender = NE.trustedNonEmpty "non-binary"
     },
     _livereload = False,
     _build = DanDart.build
 }
 prodJolHarg = Website {
-    _slug = "jolharg",
-    _title = "JolHarg: Your Software Engineering Partner",
+    _slug = NE.trustedNonEmpty "jolharg",
+    _title = NE.trustedNonEmpty "JolHarg: Your Software Engineering Partner",
     {- _keywords = [
         "jolharg",
         "dan",
@@ -216,13 +217,13 @@ prodJolHarg = Website {
         "ubuntu",
         "debian"
         ], -}
-    _description = "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications.",
+    _description = NE.trustedNonEmpty "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications.",
     _previewImgUrl = [uri|https://jolharg.com/img/preview.png|],
     _baseUrl = productionUrls ^. urlJolHarg,
     _pageUrl = productionUrls ^. urlJolHarg,
     _sitemapUrl = [uri|https://jolharg.com/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("JolHarg", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "JolHarg", Nothing)],
     _siteType = Normal,
     _email = [QE.email|website@jolharg.com|],
     _openGraphInfo = OGWebsite,
@@ -230,8 +231,8 @@ prodJolHarg = Website {
     _build = JolHarg.build
 }
 prodBlogJolHarg = Website {
-    _slug = "blogjolharg",
-    _title = "JolHarg: Software and Technology Blog",
+    _slug = NE.trustedNonEmpty "blogjolharg",
+    _title = NE.trustedNonEmpty "JolHarg: Software and Technology Blog",
     {- _keywords = [
         "jolharg",
         "blog",
@@ -272,15 +273,15 @@ prodBlogJolHarg = Website {
         "ubuntu",
         "debian"
         ], -}
-    _description = "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier.",
+    _description = NE.trustedNonEmpty "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier.",
     _previewImgUrl = [uri|https://blog.jolharg.com/img/preview.png|],
     _baseUrl = productionUrls ^. urlBlogJolHarg,
     _pageUrl = productionUrls ^. urlBlogJolHarg,
     _sitemapUrl = [uri|https://blog.jolharg.com/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("JolHarg Blog", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "JolHarg Blog", Nothing)],
     _siteType = Blog {
-        _atomTitle = "JolHarg: Software and Technology Blog",
+        _atomTitle = NE.trustedNonEmpty "JolHarg: Software and Technology Blog",
         _atomUrl = [uri|https://blog.jolharg.com/atom.xml|],
         _renderSuffix = mempty
     },
@@ -290,8 +291,8 @@ prodBlogJolHarg = Website {
     _build = BlogJolHarg.build
 }
 prodM0ORI = Website {
-    _slug = "m0ori",
-    _title = "M0ORI call sign: Dan Dart, England",
+    _slug = NE.trustedNonEmpty "m0ori",
+    _title = NE.trustedNonEmpty "M0ORI call sign: Dan Dart, England",
     {- _keywords = [
         "dan",
         "dart",
@@ -321,13 +322,13 @@ prodM0ORI = Website {
         "qrz"
         ]
     -}
-    _description = "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth.",
+    _description = NE.trustedNonEmpty "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth.",
     _previewImgUrl = [uri|https://m0ori.com/img/preview.png|],
     _baseUrl = productionUrls ^. urlHamRadio,
     _pageUrl = productionUrls ^. urlHamRadio,
     _sitemapUrl = [uri|https://m0ori.com/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("M0ORI", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "M0ORI", Nothing)],
     _siteType = Normal,
     _email = [QE.email|website@m0ori.com|],
     _openGraphInfo = OGWebsite,
@@ -335,17 +336,17 @@ prodM0ORI = Website {
     _build = M0ORI.build
 }
 prodBlogM0ORI = Website {
-    _slug = "blogm0ori",
-    _title = "The Blog of M0ORI: Interesting Radio Observations",
-    _description = "My radio blog covers interesting observations I have had whilst working on ham bands.",
+    _slug = NE.trustedNonEmpty "blogm0ori",
+    _title = NE.trustedNonEmpty "The Blog of M0ORI: Interesting Radio Observations",
+    _description = NE.trustedNonEmpty "My radio blog covers interesting observations I have had whilst working on ham bands.",
     _previewImgUrl = [uri|https://blog.m0ori.com/img/preview.png|],
     _baseUrl = productionUrls ^. urlBlogHamRadio,
     _pageUrl = productionUrls ^. urlBlogHamRadio,
     _sitemapUrl = [uri|https://blog.m0ori.com/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("M0ORI Blog", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "M0ORI Blog", Nothing)],
     _siteType = Blog {
-        _atomTitle = "The Blog of M0ORI: Interesting Radio Observations",
+        _atomTitle = NE.trustedNonEmpty "The Blog of M0ORI: Interesting Radio Observations",
         _atomUrl = [uri|https://blog.m0ori.com/atom.xml|],
         _renderSuffix = mempty
     },
@@ -355,8 +356,8 @@ prodBlogM0ORI = Website {
     _build = BlogM0ORI.build
 }
 prodMadHacker = Website {
-    _slug = "madhacker",
-    _title = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
+    _slug = NE.trustedNonEmpty "madhacker",
+    _title = NE.trustedNonEmpty "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
     {- _keywords = [
         "exmouth",
         "exeter",
@@ -385,15 +386,15 @@ prodMadHacker = Website {
         "react"
         ]
     -}
-    _description = "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored.",
+    _description = NE.trustedNonEmpty "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored.",
     _previewImgUrl = [uri|https://madhackerreviews.com/img/preview.png|],
     _baseUrl = productionUrls ^. urlMadHacker,
     _pageUrl = productionUrls ^. urlMadHacker,
     _sitemapUrl = [uri|https://madhackerreviews.com/sitemap.xml|],
     _urls = productionUrls,
-    _breadcrumb = Breadcrumb [("Mad Hacker Reviews", Nothing)],
+    _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "Mad Hacker Reviews", Nothing)],
     _siteType = Blog {
-        _atomTitle = "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
+        _atomTitle = NE.trustedNonEmpty "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
         _atomUrl = [uri|https://madhackerreviews.com/atom.xml|],
         _renderSuffix = renderStars
     },

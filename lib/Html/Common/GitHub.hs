@@ -7,9 +7,13 @@ module Html.Common.GitHub where
 import Control.Monad.IO.Class
 import Data.Aeson
 import Data.Aeson.Types
+import Data.Aeson.Types.Instances.NonEmpty ()
 import Data.Maybe
-import Data.Text              as T
-import Data.Text.Encoding
+import Data.Text.NonEmpty     (NonEmptyText)
+import Data.NonEmpty          qualified as NE
+import Data.Text              qualified as T
+import Data.Text              (Text)
+import Data.Text.Encoding     qualified as TE
 import GHC.Generics
 import Network.HTTP.Req
 import Network.URI
@@ -63,13 +67,13 @@ instance FromJSON Language where
     parseJSON _ = pure LangGeneric
 
 newtype Licence = Licence {
-    spdx_id :: String
+    spdx_id :: NonEmptyText
 } deriving stock (Eq, Generic, Show)
   deriving anyclass FromJSON
 
 data Repo = Repo {
-    name        :: String,
-    description :: Maybe String,
+    name        :: NonEmptyText,
+    description :: Maybe NonEmptyText,
     fork        :: Bool,
     language    :: Language,
     source      :: Maybe URI,
@@ -115,7 +119,7 @@ instance FromJSON Repo where
                 String url' -> parseURI (T.unpack url')
                 _           -> Nothing
 
-        let licenceText = if isJust licence' && Just (Licence "NOASSERTION") == licence'
+        let licenceText = if isJust licence' && Just (Licence $ NE.trustedNonEmpty "NOASSERTION") == licence'
             then Nothing
             else licence'
 
@@ -131,15 +135,15 @@ instance FromJSON Repo where
         }
     parseJSON other = typeMismatch "Object" other
 
-getRepos ∷ MonadHttp m ⇒ Text → m [Repo]
+getRepos ∷ MonadHttp m ⇒ NonEmptyText → m [Repo]
 getRepos user = do
     githubAccessToken <- liftIO . getEnv $ "GITHUB_ACCESS_TOKEN" -- throws
-    res <- req GET (https "api.github.com" /: "users" /: user /: "repos") NoReqBody jsonResponse (
+    res <- req GET (https "api.github.com" /: "users" /: NE.getNonEmpty user /: "repos") NoReqBody jsonResponse (
         "per_page" =: ("100" :: Text) <>
         "sort" =: ("pushed" :: Text) <> -- can't sort by stars
         "type" =: ("owner" :: Text) <>
         "direction" =: ("desc" :: Text) <>
         header "User-Agent" "Dan's Haskell Bot" <>
-        header "Authorization" (encodeUtf8 . T.pack $ "Bearer " <> githubAccessToken)
+        header "Authorization" (TE.encodeUtf8 . T.pack $ "Bearer " <> githubAccessToken)
         )
     pure $ responseBody res

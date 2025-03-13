@@ -6,7 +6,6 @@ import Control.Monad.Reader
 import Data.ByteString.Char8       (ByteString)
 import Data.Env.Types              as Env
 import Data.Text                   (Text)
-import Data.Text.Encoding
 import Html.Common.Error.NotFound
 import Html.Common.Head
 import Text.Blaze.Html5            as H hiding (main)

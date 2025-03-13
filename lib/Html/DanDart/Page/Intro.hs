@@ -4,13 +4,14 @@ module Html.DanDart.Page.Intro where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.NonEmpty               qualified as NE
 import Html.Common.Link
 import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)
 -- import Text.Blaze.Html5.Attributes as A
 
 pageIntro ∷ (MonadReader Website m) ⇒ m Html
-pageIntro = plainBreadcrumb "Intro" . makePage "intro" "Intro" defaultLayout defaultPage $ do
+pageIntro = plainBreadcrumb (NE.trustedNonEmpty "Intro") . makePage "intro" "Intro" defaultLayout defaultPage $ do
     p "Hello, my name is Dan."
     p "I am a software engineer, mathematics lover, radio ham and musician."
     p $ do

@@ -20,6 +20,7 @@ import Data.Map                      qualified as M
 import Data.Map.NonEmpty             (NEMap)
 import Data.Map.NonEmpty             qualified as MNE
 import Data.Maybe
+import Data.NonEmpty                 qualified as NE
 -- import Data.Set                      (Set)
 -- import Data.Set                      qualified as S
 -- import Data.Set.NonEmpty                      (NESet)
@@ -67,12 +68,12 @@ build page page404 = do
       Nothing -> throwError MissingAtomURIException -- no Monoid for URI -- is that right?
   -- atomTitle' <- view $ siteType . atomTitle
   -- Clear us out, Jim
-  let siteDir = ".sites/" <> T.unpack slug' <> "/"
+  let siteDir = ".sites/" <> T.unpack (NE.getNonEmpty slug') <> "/"
   traverse_ (liftIO . removePathForcibly . (siteDir <>)) [
     "post",
     "tag"
     ]
-  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack slug')
+  (sortedPosts, renderedPosts) <- buildMD ("posts" </> T.unpack (NE.getNonEmpty slug'))
   -- By tag
   let grouped = groupByMany (SNE.fromList . BlogTypes.tags . BlogTypes.metadata) sortedPosts :: NEMap BlogTypes.BlogTag (NonEmpty BlogTypes.BlogPost)
   let tags = MNE.keys grouped
@@ -83,29 +84,32 @@ build page page404 = do
     postsRendered <- foldtraverse renderPost posts
     -- TODO: lowercase earlier?
 
-    let relTagUri = fromJust . parseRelativeReference $ "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (BlogTypes.getTag tag))
+    let relTagUri = fromJust . parseRelativeReference $ "/tag/" <> escapeURIString isUnescapedInURIComponent (T.unpack (NE.getNonEmpty (BlogTypes.getTag tag)))
     let relAtomUri = fromJust . parseRelativeReference $ "/atom.xml"
     let tagUri' = relTagUri `relativeTo` baseUrl'
     let tagAtomUri' = relAtomUri `relativeTo` tagUri'
 
-    let atomDesc = "Posts tagged with " <> BlogTypes.getTag tag
-    let atomPrefix = atomDesc <> ": "
+    -- TODO nonempty th?
+    let atomDesc = NE.trustedNonEmpty "Posts tagged with " <> BlogTypes.getTag tag
+    let atomPrefix = atomDesc <> NE.trustedNonEmpty ": "
     let atomPrefixer = (atomPrefix <>)
     let fullAtomTitle' = atomPrefixer title'
 
-    let atomFilename = ".sites" </> T.unpack slug' </> "tag" </> T.unpack (BlogTypes.getTag tag) </> "atom.xml"
-    let fullFilename = siteDir <> "tag/" <> T.unpack (BlogTypes.getTag tag) <> "/index.html"
+    let atomFilename = ".sites" </> T.unpack (NE.getNonEmpty slug') </> "tag" </> T.unpack (NE.getNonEmpty (BlogTypes.getTag tag)) </> "atom.xml"
+    let fullFilename = siteDir <> "tag/" <> T.unpack (NE.getNonEmpty (BlogTypes.getTag tag)) <> "/index.html"
     let dirname = dropFileName fullFilename
 
     pageTag <- locally title atomPrefixer .
       locally (siteType . atomTitle) atomPrefixer .
       local (set (siteType . atomUrl) tagAtomUri') .
       addBreadcrumb atomDesc $
-      page (makeLinks Nothing "#" atomDesc posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
+      page (makeLinks Nothing (NE.trustedNonEmpty "#") atomDesc posts) (makeTags (Just tag) tags) postsRendered --  (("Posts tagged with " <> BlogTypes.getTag tag <> ": ") <>)
 
     liftIO . createDirectoryIfMissing True $ dirname
     liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageTag
-    liftIO . TIO.writeFile atomFilename $ makeRSSFeed tagAtomUri' tagUri' baseUrl' fullAtomTitle' posts
+    case makeRSSFeed tagAtomUri' tagUri' baseUrl' fullAtomTitle' posts of
+        Just rssFeed -> liftIO . TIO.writeFile atomFilename . NE.getNonEmpty $ rssFeed
+        Nothing -> liftIO . putStrLn $ "No RSS feed - todo error"
     -- liftIO . TIO.putStrLn $ "/tag/" <> BlogTypes.getTag tag
     -- traverse_ (liftIO . TIO.putStrLn . BlogTypes.title . BlogTypes.metadata) posts
     pure (
@@ -123,7 +127,7 @@ build page page404 = do
       let aliasSuffix = fromJust . parseRelativeReference $ alias
       let aliasUrl = aliasSuffix `relativeTo` baseUrl'
       let postTitle = BlogTypes.title . BlogTypes.metadata $ post
-      let postTitlePrefix = postTitle <> ": "
+      let postTitlePrefix = postTitle <> NE.trustedNonEmpty ": "
       let postTitlePrefixer = (postTitlePrefix <>)
 
       liftIO . createDirectoryIfMissing True $ dirname
@@ -135,19 +139,20 @@ build page page404 = do
             _ogArticleExpirationTime = Nothing,
             _ogArticleAuthor =
               OpenGraphProfile {
-                _ogProfileFirstName = "Dan",
-                _ogProfileLastName = "Dart",
-                _ogProfileUsername = "dandart",
-                _ogProfileGender = "non-binary"
+                _ogProfileFirstName = NE.trustedNonEmpty "Dan",
+                _ogProfileLastName = NE.trustedNonEmpty "Dart",
+                _ogProfileUsername = NE.trustedNonEmpty "dandart",
+                _ogProfileGender = NE.trustedNonEmpty "non-binary"
               } :| [],
-            _ogArticleSection = "Blog post",
+            _ogArticleSection = NE.trustedNonEmpty "Blog post",
             _ogArticleTag = BlogTypes.tags . BlogTypes.metadata $ post
         })) .
         local (\w -> w {
           -- we don't override rss title, only page title, this is why they're separate
-          _previewImgUrl = maybe (w ^. previewImgUrl) (fromJust . parseURI . T.unpack) . BlogTypes.featuredImage . BlogTypes.metadata $ post
+          -- TODO maybe id -> fromMaybe? 
+          _previewImgUrl = maybe (w ^. previewImgUrl) id (BlogTypes.featuredImage . BlogTypes.metadata $ post)
         }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
-        page (makeLinks (Just . BlogTypes.postId $ post) "/#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPost
+        page (makeLinks (Just . BlogTypes.postId $ post) (NE.trustedNonEmpty "/#") (NE.trustedNonEmpty "All Posts") sortedPosts) (makeTags Nothing tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost
       pure (
         aliasUrl,
@@ -160,8 +165,11 @@ build page page404 = do
         ] <> fmap (\(url, date) -> SitemapUrl (T.show url) (Just date) (Just Never) (Just 1.0)) (LNE.toList urlDatePairsFromPages)
           <> fmap (\(url, date) -> SitemapUrl (T.show url) (Just date) (Just Weekly) (Just 2.0)) (LNE.toList tagUrlDates)
   liftIO . BS.writeFile (siteDir <> "/sitemap.xml") $ renderSitemap sitemap'
-  liftIO . TIO.writeFile (siteDir <> "atom.xml") $
-    makeRSSFeed atomUri' baseUrl' baseUrl' title' sortedPosts
+  
+  case makeRSSFeed atomUri' baseUrl' baseUrl' title' sortedPosts of
+    Just rssFeed' -> liftIO . TIO.writeFile (siteDir <> "atom.xml") . NE.getNonEmpty $ rssFeed'
+    Nothing -> liftIO . putStrLn $ "There was no feed to write... todo make this a proper error"
+    
   liftIO . BS.writeFile (siteDir <> "/robots.txt") $
     "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl')
-  make slug' (page (makeLinks Nothing "#" "All Posts" sortedPosts) (makeTags Nothing tags) renderedPosts) page404
+  make slug' (page (makeLinks Nothing (NE.trustedNonEmpty "#") (NE.trustedNonEmpty "All Posts") sortedPosts) (makeTags Nothing tags) renderedPosts) page404

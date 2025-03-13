@@ -5,6 +5,7 @@ module Html.DanDart.Page.Favourites where
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.Foldable
+import Data.NonEmpty               qualified as NE
 import Data.String
 import Html.Common.Link
 import Html.Common.Page
@@ -13,7 +14,7 @@ import Html.DanDart.Data
 import Text.Blaze.Html5      as H hiding (main)
 
 pageFavourites ∷ (MonadReader Website m) ⇒ m Html
-pageFavourites = plainBreadcrumb "Favourites" . makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do
+pageFavourites = plainBreadcrumb (NE.trustedNonEmpty "Favourites") . makePage "favourites" "Favourites" defaultLayout notDefaultPage $ do
     p "Here is a list of some of my favourite things."
     p $ strong "YouTube channels"
     ul $ do

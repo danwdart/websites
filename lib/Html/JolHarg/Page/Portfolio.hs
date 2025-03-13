@@ -5,7 +5,8 @@ module Html.JolHarg.Page.Portfolio where
 import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
-import Data.Text.Encoding
+import Data.Text.Encoding          qualified as TE
+import Data.NonEmpty               qualified as NE
 import Html.Common.Bootstrap
 import Html.Common.Card
 import Html.Common.Link
@@ -17,11 +18,11 @@ import Text.Email.Parser
 pagePortfolio ∷ (MonadReader Website m) ⇒ m Html
 pagePortfolio = do
     email' <- view email
-    plainBreadcrumb "Portfolio" . makePage "portfolio" "Portfolio" customLayout defaultPage $ do
+    plainBreadcrumb (NE.trustedNonEmpty "Portfolio") . makePage "portfolio" "Portfolio" customLayout defaultPage $ do
         row . (H.div ! class_ "col-md-12 text-center") $
             p "Some of the websites, projects and companies Dan Dart has been involved with are:"
         row $ do
-            (H.div ! class_ "card col-md-4 col-12 text-center") . extLink ("mailto:" <> textValue (decodeUtf8Lenient (toByteString email'))) . (H.div ! class_ "card-body") $ (do
+            (H.div ! class_ "card col-md-4 col-12 text-center") . extLink ("mailto:" <> textValue (TE.decodeUtf8Lenient (toByteString email'))) . (H.div ! class_ "card-body") $ (do
                 img ! class_ "card-img-top" ! src "img/sample.png"
                 h4 ! class_ "card-title" $ "Your website here"
                 p ! class_ "card-text" $ "Make an enquiry for a website or project.")

@@ -6,6 +6,7 @@ import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
 import Data.Foldable
+import Data.NonEmpty               qualified as NE
 import Data.String                 (IsString (fromString))
 import Html.Common.Bootstrap
 import Html.Common.Link
@@ -48,7 +49,7 @@ renderBreadcrumb = do
     breadcrumb' <- view breadcrumb
     pure . small $ foldMap' (\(label', mUrl) -> do
         "» "
-        maybe (text label') (\url -> a ! href (stringValue $ show url) $ text label') mUrl
+        maybe (text (NE.getNonEmpty label')) (\url -> a ! href (stringValue $ show url) $ text (NE.getNonEmpty label')) mUrl
         " "
         ) (getBreadcrumb breadcrumb')
 

@@ -15,7 +15,7 @@ import Data.List.NonEmpty     qualified as LNE
 import Data.Set               (Set)
 -- huh? NESet is not IsList? Well I suppose not... maybe there should be an IsNEList...
 -- import Data.Set.NonEmpty     (NESet)
-import Data.Text              (Text)
+import Data.Text.NonEmpty              (NonEmptyText)
 import Data.Time.Clock
 import Html.Common.Blog.Types qualified as BlogTypes
 import Network.URI
@@ -23,7 +23,7 @@ import Text.Blaze.Html5       (Html)
 import Text.Email.Parser
 
 data SiteType = Normal | Blog {
-    _atomTitle    :: Text,
+    _atomTitle    :: NonEmptyText,
     _atomUrl      :: URI,
     _renderSuffix :: BlogTypes.BlogMetadata → Html
 }
@@ -44,14 +44,14 @@ makeLenses ''Urls
 
 -- not a map because ordered
 newtype Breadcrumb = Breadcrumb {
-    getBreadcrumb :: NonEmpty (Text, Maybe URI)
+    getBreadcrumb :: NonEmpty (NonEmptyText, Maybe URI)
 }
 
 data OpenGraphProfile = OpenGraphProfile {
-    _ogProfileFirstName :: Text,
-    _ogProfileLastName  :: Text,
-    _ogProfileUsername  :: Text,
-    _ogProfileGender    :: Text
+    _ogProfileFirstName :: NonEmptyText,
+    _ogProfileLastName  :: NonEmptyText,
+    _ogProfileUsername  :: NonEmptyText,
+    _ogProfileGender    :: NonEmptyText
 }
 
 makeLenses ''OpenGraphProfile
@@ -61,7 +61,7 @@ data OpenGraphArticle = OpenGraphArticle {
     _ogArticleModifiedTime   :: Maybe UTCTime, -- ISO
     _ogArticleExpirationTime :: Maybe UTCTime, -- ISO
     _ogArticleAuthor         :: NonEmpty OpenGraphProfile,
-    _ogArticleSection        :: Text,
+    _ogArticleSection        :: NonEmptyText,
     _ogArticleTag            :: NonEmpty BlogTypes.BlogTag
 }
 
@@ -72,10 +72,10 @@ data OpenGraphInfo = OGWebsite | OGArticle OpenGraphArticle | OGProfile OpenGrap
 makeLenses ''OpenGraphInfo
 
 data Website = Website {
-    _slug          :: Text,
-    _title         :: Text,
-    -- _keywords :: NESet Text,
-    _description   :: Text,
+    _slug          :: NonEmptyText,
+    _title         :: NonEmptyText,
+    -- _keywords :: NESet NonEmptyText,
+    _description   :: NonEmptyText,
     _previewImgUrl :: URI,
     _baseUrl       :: URI,
     _pageUrl       :: URI,
@@ -92,10 +92,10 @@ data Website = Website {
 makeLenses ''Website
 
 -- TODO lens it?
-plainBreadcrumb ∷ MonadReader Website m ⇒ Text → m a → m a
+plainBreadcrumb ∷ MonadReader Website m ⇒ NonEmptyText → m a → m a
 plainBreadcrumb breadcrumb' = local (set breadcrumb (Breadcrumb [(breadcrumb', Nothing)]))
 
-addBreadcrumb ∷ MonadReader Website m ⇒ Text → m a → m a
+addBreadcrumb ∷ MonadReader Website m ⇒ NonEmptyText → m a → m a
 addBreadcrumb breadcrumb' page = do
     breadcrumbExisting <- view breadcrumb
     baseUrl' <- view baseUrl

@@ -4,12 +4,13 @@ module Html.DanDart.Page.Music where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.NonEmpty        qualified as NE
 import Html.Common.Audio
 import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)
 
 pageMusic ∷ (MonadReader Website m) ⇒ m Html
-pageMusic = plainBreadcrumb "Music" . makePage "music" "Music" defaultLayout notDefaultPage $ do
+pageMusic = plainBreadcrumb (NE.trustedNonEmpty "Music") . makePage "music" "Music" defaultLayout notDefaultPage $ do
     p "I play the guitar, keyboard and synthesiser."
     p "I've created the following pieces of music/sound effects:"
     audioFile "Gothic Orchestra" "GothicOrchestra" "SatanicOrchestra"

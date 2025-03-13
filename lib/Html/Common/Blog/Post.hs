@@ -3,9 +3,11 @@
 
 module Html.Common.Blog.Post where
 
-import Control.Exception
+import Control.Exception.BlogPostException
+import Control.Exception.MissingPostIdException
 import Control.Exception.ParseFileException
 import Control.Lens
+import Control.Monad.Error.Class
 import Control.Monad.Reader
 import Data.ByteString.Char8                (ByteString)
 import Data.ByteString.Char8                qualified as BS
@@ -14,10 +16,11 @@ import Data.Env.Types
 import Data.Foldable
 import Data.Frontmatter
 import Data.List.NonEmpty                   qualified as LNE
+import Data.NonEmpty                        qualified as NE
 import Data.String
 import Data.Text                            (Text)
 import Data.Text                            qualified as T
-import Data.Text.Encoding
+import Data.Text.Encoding                   qualified as TE
 import Html.Common.Blog.Comment
 import Html.Common.Blog.Types               as BlogTypes
 import System.FilePath
@@ -38,19 +41,24 @@ parseFile filename' contents' = case parseYamlFrontmatter contents' of
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
-        }) (decodeUtf8Lenient i')))
+        }) (TE.decodeUtf8Lenient i')))
     Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
     Partial _ -> Left $ PFPartial filename' contents'
 
-makeBlogPost ∷ FilePath → FilePath → IO BlogPost
+makeBlogPost ∷ (MonadIO m, MonadError BlogPostException m) => FilePath → FilePath → m BlogPost
 makeBlogPost postsDir filename = do
-    file <- BS.readFile filename
+    file <- liftIO $ BS.readFile filename
     case parseFile filename file of
-        Left ex -> throwIO ex -- wah wah wah
+        Left ex -> throwError (BPPFEx ex) -- wah wah wah
         Right (ParseResult metadata' html') -> do
-            let postId' = dropExtension . takeFileName . LNE.head . aliases $ metadata'
-            comments' <- getComments postsDir postId'
-            pure $ BlogPost (T.pack postId') metadata' html' comments'
+            let maybePostId' = NE.nonEmpty . T.pack . dropExtension . takeFileName . LNE.head . aliases $ metadata'
+            case maybePostId' of
+                Just postId' -> do
+                    comments' <- modifyError BPCEx $ getComments postsDir postId'
+                    -- TODO stop trusting!
+                    pure $ BlogPost postId' metadata' html' comments'
+                Nothing -> do
+                    throwError $ BPMPIEx MissingPostIdException
 
 tshowChoiceString ∷ ChoiceString → Text
 tshowChoiceString (Text text') = text'
@@ -103,23 +111,23 @@ renderPost (BlogPost postId' metadata' html' comments') = do
     renderSuffix' <- preview $ siteType . renderSuffix
     let renderSuffix'' = fold renderSuffix'
     pure . H.article $ do
-        a ! name (fromString (T.unpack postId')) $ mempty
+        a ! name (fromString (T.unpack (NE.getNonEmpty postId'))) $ mempty
         -- Not working in Safari yet, so filter
-        h1 . fromString . T.unpack $ BlogTypes.title metadata'
+        h1 . fromString . T.unpack . NE.getNonEmpty $ BlogTypes.title metadata'
         small $ do
             a ! href (fromString . ("/post" <>) . LNE.head . BlogTypes.aliases $ metadata') $ "Permalink"
             " | Author: "
-            a ! href (fromString . T.unpack $ "mailto:" <> decodeUtf8Lenient (toByteString email') <> "?subject=" <> BlogTypes.title metadata') $ "Dan Dart"
+            a ! href (fromString . T.unpack $ "mailto:" <> TE.decodeUtf8Lenient (toByteString email') <> "?subject=" <> NE.getNonEmpty (BlogTypes.title metadata')) $ "Dan Dart"
             " | Published: "
             fromString . show . date $ metadata'
             " | Tags: "
             foldMap' ((\str -> do
-                a ! rel "tag" ! href (fromString ("/tag/" <> str)) $ fromString str
+                a ! rel "tag" ! href (textValue ("/tag/" <> str)) $ text str
                 " "
-                ) . T.unpack . getTag) (LNE.sort $ tags metadata')
+                ) . NE.getNonEmpty . getTag) (LNE.sort $ tags metadata')
         br
         br
-        foldMap' (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (textValue x)) $ featuredImage metadata'
+        foldMap' (\x -> (H.div ! class_ "row") . (H.div ! class_ "col text-center") $ img ! class_ "img-fluid" ! src (toValue (show x))) $ featuredImage metadata'
         br
         fixExternalLinks html'
         br

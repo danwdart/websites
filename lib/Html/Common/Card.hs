@@ -4,6 +4,7 @@ module Html.Common.Card where
 
 import Control.Monad
 import Data.Maybe
+import Data.NonEmpty               qualified as NE
 import Data.String
 import Html.Common.GitHub          as GH
 import Html.Common.Link
@@ -50,7 +51,7 @@ cardDefunct cardTitle cardText = (H.div ! class_ "card col-md-4 col-12 text-cent
     p ! class_ "card-text" $ cardText)
 
 licenceLink ∷ Licence → Html
-licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> fromString avOrHtmlSpdx <> ".html") ! target "_blank" $ fromString avOrHtmlSpdx
+licenceLink licence' =  a ! href ("https://spdx.org/licenses/" <> textValue (NE.getNonEmpty avOrHtmlSpdx) <> ".html") ! target "_blank" $ text (NE.getNonEmpty avOrHtmlSpdx)
     where avOrHtmlSpdx = GH.spdx_id licence'
 
 renderCard ∷ Repo → Html
@@ -58,12 +59,12 @@ renderCard repo =
     (H.div ! class_ "card col-md-4 col-12 text-center") . (H.div ! class_ "card-body") $ (do
         img ! class_ "card-img-top-github" ! A.src (languageImage . language $ repo)
         h4 ! class_ "card-title" $ do
-            (H.span ! class_ "name") . fromString . GH.name $ repo
+            (H.span ! class_ "name") . text . NE.getNonEmpty . GH.name $ repo
             " "
             H.span ! class_ "stars" $ "(" <> (fromString . show . stars $ repo) <> "★)"
             when (fork repo) . (H.span ! class_ "fork") $ "⑂"
         p ! class_ "card-text" $ do
-            (H.span ! class_ "description") . fromString . fromMaybe "No description yet given" $ GH.description repo
+            (H.span ! class_ "description") . text . NE.getNonEmpty . fromMaybe (NE.trustedNonEmpty "No description yet given") $ GH.description repo
             br
             maybe (small $ em "Not yet licenced") licenceLink (licence repo)
         maybe "" (\src' -> a ! class_ "btn btn-secondary mx-1" ! href (fromString (show src')) ! target "_blank" $ "Source") (GH.source repo)

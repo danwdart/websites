@@ -7,18 +7,21 @@ module Html.Common.Blog.Types where
 import Data.Aeson         (FromJSON, (.:))
 import Data.Aeson         qualified as A
 import Data.Aeson.Types   qualified as A
+import Data.Aeson.Types.Instances.NonEmpty ()
 -- import Data.ByteString.Char8 qualified as BS
---- import Data.List.NonEmpty (NonEmpty)
-import Data.List.NonEmpty as LNE
+import Data.List.NonEmpty (NonEmpty)
+import Data.NonEmpty      qualified as NE
+import Data.Text.NonEmpty (NonEmptyText)
 import Data.Text          (Text)
 import Data.Text          qualified as T
 import Data.Time
 import GHC.Generics
+import Network.URI
 import Text.Blaze.Html5   as H hiding (main)
 import Text.Read
 
 newtype BlogTag = BlogTag {
-    getTag :: Text
+    getTag :: NonEmptyText
  } deriving newtype (Show, Eq, Ord)
 
 data Score = Score {
@@ -41,26 +44,28 @@ instance FromJSON Score where
     parseJSON invalid = A.typeMismatch "String" invalid
 
 instance FromJSON BlogTag where
-    parseJSON (A.String a') = pure $ BlogTag a'
-    parseJSON (A.Number a') = pure . BlogTag $ T.show a'
-    parseJSON (A.Bool a')   = pure . BlogTag $ T.show a'
+    parseJSON (A.String a') = case NE.nonEmpty a' of
+        Nothing -> fail "Empty string"
+        Just a'' -> pure $ BlogTag a''
+    parseJSON (A.Number a') = pure . BlogTag . NE.trustedNonEmpty . T.show $ a'
+    parseJSON (A.Bool a')   = pure . BlogTag . NE.trustedNonEmpty . T.show $ a'
     parseJSON other         = A.typeMismatch "String | Number | Bool" other
 
 data BlogMetadata = BlogMetadata {
-    title         :: Text,
+    title         :: NonEmptyText,
     date          :: UTCTime,
     draft         :: Bool,
     aliases       :: NonEmpty FilePath,
-    featuredImage :: Maybe Text,
+    featuredImage :: Maybe URI,
     tags          :: NonEmpty BlogTag, -- Doesn't like tags which are numbers... nor don't have tags
     scores        :: Maybe (NonEmpty (Text, Score))
 } deriving stock (Generic)
     deriving anyclass (FromJSON)
 
 data BlogCommentMetadata = BlogCommentMetadata {
-    author      :: Text,
-    authorEmail :: Text,
-    authorUrl   :: Maybe Text
+    author      :: NonEmptyText,
+    authorEmail :: NonEmptyText,
+    authorUrl   :: Maybe URI
 } deriving stock (Generic, Show)
 
 instance FromJSON BlogCommentMetadata where
@@ -71,7 +76,7 @@ instance FromJSON BlogCommentMetadata where
     parseJSON other = A.typeMismatch "Object" other
 
 data BlogPost = BlogPost {
-    postId   :: Text,
+    postId   :: NonEmptyText,
     metadata :: BlogMetadata,
     html     :: Html,
     comments :: [ParseCommentResult]

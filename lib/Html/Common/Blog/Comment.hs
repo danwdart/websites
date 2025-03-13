@@ -5,9 +5,10 @@
 
 module Html.Common.Blog.Comment where
 
-import Control.Exception
+import Control.Exception.CommentException
 import Control.Exception.ParseFileException
 import Control.Monad
+import Control.Monad.Error.Class
 import Control.Monad.Reader
 import Data.ByteString.Char8                (ByteString)
 import Data.ByteString.Char8                qualified as BS
@@ -15,11 +16,12 @@ import Data.Either
 import Data.Env.Types
 import Data.Frontmatter
 import Data.List                            qualified as L
+import Data.NonEmpty                        qualified as NE
 import Data.Ord
 import Data.String
-import Data.Text                            (Text)
 import Data.Text                            qualified as T
-import Data.Text.Encoding
+import Data.Text.NonEmpty                   (NonEmptyText)
+import Data.Text.Encoding                   qualified as TE
 import Data.Time
 import Data.Time.Format.ISO8601
 import Data.Time.Utils
@@ -43,32 +45,32 @@ parseComment filename' date' contents' = case parseYamlFrontmatter contents' of
             writerHighlightStyle = Just haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
-        }) (decodeUtf8Lenient i')))
+        }) (TE.decodeUtf8Lenient i')))
     Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
     Partial _ -> Left $ PFPartial filename' contents'
 
-getCommentsIfExists ∷ FilePath → FilePath → IO [ParseCommentResult]
+getCommentsIfExists ∷ (MonadIO m, MonadError CommentException m) => FilePath → NonEmptyText → m [ParseCommentResult]
 getCommentsIfExists postsDir postId' = do
-    commentFiles <- getDirectoryContents $ postsDir </> postId'
-    let commentFileNames = (postsDir </>) . (postId' </>) <$> commentFiles
-    validCommentFiles <- filterM doesFileExist commentFileNames
+    commentFiles <- liftIO . getDirectoryContents $ postsDir </> T.unpack (NE.getNonEmpty postId')
+    let commentFileNames = (postsDir </>) . (T.unpack (NE.getNonEmpty postId') </>) <$> commentFiles
+    validCommentFiles <- filterM (liftIO . doesFileExist) commentFileNames
     let mDates = traverse (stringToTime . dropExtension . takeFileName) validCommentFiles
     case mDates of
-        Left ex -> throwIO ex
+        Left ex -> throwError (CIDEx ex)
         Right dates -> do
-            commentTexts <- traverse BS.readFile validCommentFiles
+            commentTexts <- traverse (liftIO . BS.readFile) validCommentFiles
             case sequenceA (zipWith3 parseComment validCommentFiles dates commentTexts) of
-                Left ex -> throwIO ex
+                Left ex -> throwError (CPFEx ex)
                 Right commentData -> pure $ L.sortOn (Down . commentDate) commentData
 
-getComments ∷ FilePath → FilePath → IO [ParseCommentResult]
+getComments ∷ (MonadIO m, MonadError CommentException m) => FilePath → NonEmptyText → m [ParseCommentResult]
 getComments postsDir postId' = do
-    dirExists <- doesDirectoryExist $ postsDir </> postId'
+    dirExists <- liftIO . doesDirectoryExist $ postsDir </> T.unpack (NE.getNonEmpty postId')
     if dirExists
         then getCommentsIfExists postsDir postId'
         else pure mempty
 
-commentForm ∷ MonadReader Website m ⇒ EmailAddress → Text → m Html
+commentForm ∷ MonadReader Website m ⇒ EmailAddress → NonEmptyText → m Html
 commentForm toEmail title' = pure . (H.form
         ! A.class_ "form"
         ! enctype "application/x-www-form-urlencoded"
@@ -76,8 +78,8 @@ commentForm toEmail title' = pure . (H.form
         ! method "get"
         ! target "email") $ do
             -- less scraping happens? maybe?
-            H.input ! A.type_ "hidden" ! name "to" ! value (textValue (decodeUtf8Lenient (toByteString toEmail)))
-            H.input ! A.type_ "hidden" ! name "subject" ! value (textValue $ "Re: " <> title')
+            H.input ! A.type_ "hidden" ! name "to" ! value (textValue (TE.decodeUtf8Lenient (toByteString toEmail)))
+            H.input ! A.type_ "hidden" ! name "subject" ! value (textValue $ "Re: " <> NE.getNonEmpty title')
             H.div ! A.class_ "group" $ do
                 H.label ! for "body" $ do
                     "Comment"
@@ -99,10 +101,10 @@ renderComment ParseCommentResult {
     commentHtml
     } = do
         let authorUrl' ∷ AttributeValue
-            authorUrl' = foldMap (fromString . T.unpack) authorUrl
+            authorUrl' = foldMap (toValue . show) authorUrl
         small $ do
             a ! name (fromString (iso8601Show commentDate)) $ mempty
-            a ! href ("mailto:" <> (fromString . T.unpack $ authorEmail)) $ string (T.unpack author)
+            a ! href ("mailto:" <> (textValue . NE.getNonEmpty $ authorEmail)) $ text (NE.getNonEmpty author)
             " "
             a ! href authorUrl' $ " (URL)"
             " said on "

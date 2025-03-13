@@ -4,11 +4,12 @@ module Html.DanDart.Page.About where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.NonEmpty        qualified as NE
 import Html.Common.Page
 import Text.Blaze.Html5     as H hiding (main)
 
 pageAbout ∷ (MonadReader Website m) ⇒ m Html
-pageAbout = plainBreadcrumb "About" . makePage "about" "About" defaultLayout notDefaultPage $ do
+pageAbout = plainBreadcrumb (NE.trustedNonEmpty "About") . makePage "about" "About" defaultLayout notDefaultPage $ do
     p "This website entailed a few design and code decisions which I would like to explain."
     p mempty
     p $ do

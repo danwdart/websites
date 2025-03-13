@@ -4,13 +4,14 @@ module Html.DanDart.Page.Health where
 
 import Control.Monad.Reader
 import Data.Env.Types
+import Data.NonEmpty               qualified as NE
 import Html.Common.Link
 import Html.Common.Page
 import Html.Common.Shortcuts
 import Text.Blaze.Html5      as H hiding (main)
 
 pageHealth ∷ (MonadReader Website m) ⇒ m Html
-pageHealth = plainBreadcrumb "Health" . makePage "health" "Health" defaultLayout notDefaultPage $ do
+pageHealth = plainBreadcrumb (NE.trustedNonEmpty "Health") . makePage "health" "Health" defaultLayout notDefaultPage $ do
     p "Both my physical and mental health are very low at the moment, but I am always more than happy to talk about them."
     p "I think I'm addicted to caffeine, which I wouldn't recommend."
     p "I have been diagnosed with the following things, both physical and mental intermingling:"

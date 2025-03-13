@@ -5,7 +5,7 @@ module Html.DanDart.Social where
 import Control.Lens
 import Control.Monad.Reader
 import Data.Env.Types
-import Data.Text.Encoding
+import Data.Text.Encoding          qualified as TE
 import Html.Common.Shortcuts
 import Html.Common.Social
 import Text.Blaze.Html5            as H hiding (main)
@@ -16,7 +16,7 @@ socialIcons ∷ MonadReader Website m ⇒ m Html
 socialIcons = do
     email' <- view email
     pure . (H.div ! class_ "row social-row") . (H.div ! class_ "text-end social-inside") $ (do
-        socialIconS ("mailto:" <> textValue (decodeUtf8Lenient (toByteString email'))) "Email" "envelope"
+        socialIconS ("mailto:" <> textValue (TE.decodeUtf8Lenient (toByteString email'))) "Email" "envelope"
         socialIconB "https://github.com/danwdart" "GitHub" "github"
         socialIconB "https://www.imdb.com/user/ur81806610" "ImDB" "imdb"
         socialIconB "https://www.last.fm/user/DanDart" "Last.fm" "lastfm"

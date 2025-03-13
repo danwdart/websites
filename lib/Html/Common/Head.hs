@@ -7,6 +7,7 @@ import Control.Monad               (when)
 import Control.Monad.Reader
 import Data.Env.Types              as Env
 import Data.Foldable
+import Data.NonEmpty               qualified as NE
 import Html.Common.Blog.Feed
 import Html.Common.Blog.Types      as BlogTypes
 import Html.Common.CSS
@@ -15,10 +16,10 @@ import Text.Blaze.Html5.Attributes as A
 
 toOGProfileList ∷ OpenGraphProfile → [(AttributeValue, AttributeValue)]
 toOGProfileList ogProfile = [
-    ("profile:first_name", ogProfile ^. ogProfileFirstName . to textValue),
-    ("profile:last_name", ogProfile ^. ogProfileLastName . to textValue),
-    ("profile:username", ogProfile ^. ogProfileUsername . to textValue),
-    ("profile:gender", ogProfile ^. ogProfileGender . to textValue)
+    ("profile:first_name", ogProfile ^. ogProfileFirstName . to NE.getNonEmpty . to textValue),
+    ("profile:last_name", ogProfile ^. ogProfileLastName . to NE.getNonEmpty . to textValue),
+    ("profile:username", ogProfile ^. ogProfileUsername . to NE.getNonEmpty . to textValue),
+    ("profile:gender", ogProfile ^. ogProfileGender . to NE.getNonEmpty . to textValue)
     ]
 
 toOGList ∷ OpenGraphInfo → [(AttributeValue, AttributeValue)]
@@ -30,9 +31,9 @@ toOGList (OGArticle ogArticle) = [
     ("article:published_time", ogArticle ^. ogArticlePublishedTime . to show . to stringValue),
     -- ("article:expiration_time", ...)
     -- ("article:author", -- ???
-    ("article:section", ogArticle ^. ogArticleSection . to textValue)
+    ("article:section", ogArticle ^. ogArticleSection . to NE.getNonEmpty . to textValue)
     ]
-        <> ogArticle ^. ogArticleTag . each . to (\t -> [("article:tag", textValue (BlogTypes.getTag t))])
+        <> ogArticle ^. ogArticleTag . each . to (\t -> [("article:tag", textValue (NE.getNonEmpty (BlogTypes.getTag t)))])
         <> ogArticle ^. ogArticleAuthor . each . to toOGProfileList
     -- TODO: optional values
     --  ("article:modified_time", ogArticle ^. ogArticleModifiedTime . folded . to show . to stringValue),
@@ -50,16 +51,16 @@ metas = do
     pure $ do
         meta ! charset "utf-8"
         traverse_ (\(aName, aCont) -> meta ! name aName ! content aCont) [
-            ("title", textValue title'),
+            ("title", textValue (NE.getNonEmpty title')),
             ("url", stringValue $ show pageUrl'),
-            ("description", textValue description'),
+            ("description", textValue (NE.getNonEmpty description')),
             ("robots", "index, follow"),
             ("theme-color", "#800080"),
             ("twitter:card", "summary_large_image"),
             -- ("twitter:site", "@..."),
             ("twitter:url", stringValue $ show pageUrl'),
-            ("twitter:title", textValue title'),
-            ("twitter:description", textValue description'),
+            ("twitter:title", textValue (NE.getNonEmpty title')),
+            ("twitter:description", textValue (NE.getNonEmpty description')),
             ("twitter:image", stringValue $ show previewImgUrl')
             ]
         meta ! name "viewport" ! content "width=device-width, initial-scale=1"
@@ -69,9 +70,9 @@ metas = do
             ("X-UA-Compatible", "IE=edge,chrome=1")
             ]
         traverse_ (\(aProp, aCont) -> meta ! customAttribute "property" aProp ! content aCont) $ [
-            ("og:title", textValue title'),
+            ("og:title", textValue (NE.getNonEmpty title')),
             ("og:url", stringValue $ show pageUrl'),
-            ("og:description", textValue description'),
+            ("og:description", textValue (NE.getNonEmpty description')),
             ("og:locale", "en_GB"),
             ("og:image", stringValue $ show previewImgUrl')
             ] <> toOGList openGraphInfo'
@@ -83,7 +84,7 @@ htmlHead = do
     livereload' <- view livereload
     extraHead' <- extraHead
     pure . H.head $ do
-        H.title $ toHtml title'
+        H.title $ toHtml (NE.getNonEmpty title')
         metas'
         commonCSS
         extraHead'
