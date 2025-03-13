@@ -51,7 +51,7 @@ Perplexing, perhaps. So what are people to do?
 
 Interestingly, here are the results for some of the most popular open source/free software and management:
 
-Top sites stolen from my memory, (TechRadar)[https://www.techradar.com/best/best-open-source-software] and (DistroWatch)[https://distrowatch.com/].
+Top sites stolen from my memory, [TechRadar](https://www.techradar.com/best/best-open-source-software) and [DistroWatch](https://distrowatch.com/).
 
 | Website | Works? |
 | ------- | ------ |
