@@ -19,6 +19,7 @@ import Data.Foldable
 import Data.Functor.Compose
 import Data.List                 qualified as L
 import Data.Maybe
+import Data.NonEmpty             qualified as NE
 -- import Data.Set                  (Set)
 -- import Data.Set                  qualified as S
 import Data.Text                 (Text)
@@ -217,7 +218,7 @@ testNotBroken (url', status) = describe url' .
     --     status `shouldNotBe` 404
 
 testForConfig ∷ Website → (Text, WDConfig) → Spec
-testForConfig website (configName, config) = describe (T.unpack (website ^. slug)) .
+testForConfig website (configName, config) = describe (T.unpack (website ^. slug . to NE.getNonEmpty)) .
     describe (T.unpack configName) $ do
         runIO . wrappedRunSession config . finallyClose $ do
             liftIO . TIO.putStrLn $ "Opening page"
@@ -272,7 +273,7 @@ testForConfig website (configName, config) = describe (T.unpack (website ^. slug
             traverse_ testForResolution resolutions
 
 testForSite ∷ Website → Spec
-testForSite website = describe (T.unpack (website ^. slug)) $
+testForSite website = describe (T.unpack (website ^. slug . to NE.getNonEmpty)) $
     traverse_ (testForConfig website) configs
 
 spec ∷ Spec
