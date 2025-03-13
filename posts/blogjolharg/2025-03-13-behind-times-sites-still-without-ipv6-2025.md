@@ -2,7 +2,7 @@
 title: 'Updated Websites and Blogs!'
 date: 2025-03-13T23:45:00Z
 draft: false
-aliases: [ "/2024/12/behind-times-sites-still-without-ipv6-2025" ]
+aliases: [ "/2025/03/behind-times-sites-still-without-ipv6-2025" ]
 tags: [behind,times,sites,still,without,ipv6,"2025",google,meta,x,wikipedia,chatgpt,reddit,yahoo,amazon,dzen,baidu,tiktok,netflix,microsoft,linkedin,naver,pinterest,bilibili,twitch,vk,mail.ru,samsung,fandom,globo,canva,duckduckgo,tetlegram,weather.com,quora,temu,cnn,zoom,ebay,networking]
 ---
 
