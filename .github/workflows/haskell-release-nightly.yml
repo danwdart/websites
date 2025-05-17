@@ -17,8 +17,8 @@ jobs:
             exeName: websites-nightly-linux-x86_64
           - os: macOS-latest
             exeName: websites-nightly-darwin-aarch64
-          - os: windows-latest
-            exeName: websites-nightly-windows-x86_64.exe
+          # - os: windows-latest
+          #   exeName: websites-nightly-windows-x86_64.exe
         
     steps:
     - uses: actions/checkout@v4

@@ -19,8 +19,8 @@ jobs:
             exeName: websites-dev-linux-x86_64
           - os: macOS-latest
             exeName: websites-dev-darwin-aarch64
-          - os: windows-latest
-            exeName: websites-dev-windows-x86_64.exe
+          # - os: windows-latest
+          #   exeName: websites-dev-windows-x86_64.exe
         
     steps:
     - uses: actions/checkout@v4
