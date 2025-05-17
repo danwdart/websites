@@ -16,8 +16,8 @@ jobs:
         include:
           - os: ubuntu-latest
             exeName: websites-linux-x86_64
-          - os: macOS-latest
-            exeName: websites-darwin-aarch64
+          # - os: macOS-latest
+          #   exeName: websites-darwin-aarch64
           # - os: windows-latest
           #   exeName: websites-windows-x86_64.exe
         

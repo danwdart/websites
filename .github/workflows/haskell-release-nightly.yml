@@ -15,8 +15,8 @@ jobs:
         include:
           - os: ubuntu-latest
             exeName: websites-nightly-linux-x86_64
-          - os: macOS-latest
-            exeName: websites-nightly-darwin-aarch64
+          # - os: macOS-latest
+          #   exeName: websites-nightly-darwin-aarch64
           # - os: windows-latest
           #   exeName: websites-nightly-windows-x86_64.exe
         
