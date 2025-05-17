@@ -7,4 +7,8 @@ source-repository-package
 packages: ./websites.cabal
 
 -- time from feed, containers from req
-allow-newer: base, containers, time, template-haskell, ghc-prim
+-- allow-newer: base, containers, template-haskell, ghc-prim
+
+-- base/containers from haddock-library -> pandoc
+-- time from feed
+allow-newer: base, containers, time
