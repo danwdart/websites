@@ -15,6 +15,8 @@ extra-source-files: README.md
 common shared-properties
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
+  if !os(wasi)
+    ghc-options: -threaded -rtsopts -with-rtsopts=-N 
   ghc-options:
     -Weverything -Wno-unsafe -Wno-missing-import-lists
     -Wno-missing-export-lists -Wno-implicit-prelude
@@ -22,7 +24,7 @@ common shared-properties
     -Wno-missing-poly-kind-signatures -Wno-missing-local-signatures
     -Wno-all-missed-specialisations -Wno-missed-specialisations
     -Wno-missing-role-annotations -Wno-unrecognised-warning-flags
-    -Werror -haddock -threaded -rtsopts -with-rtsopts=-N
+    -Werror -haddock
 
   ghcjs-options:      -dedupe
 
@@ -61,7 +63,7 @@ library
     , nonempty-wrapper       ^>=0.1.0.0
     , nonempty-wrapper-aeson ^>=0.1.0.0
     , nonempty-wrapper-text  ^>=0.1.0.0
-    , pandoc                 ^>=3.6.2
+    , pandoc                 ^>=3.7.0.1
     , req                    ^>=3.13.4
     , sitemap-gen            ^>=0.1.0.0
     , text                   ^>=2.1.2
@@ -266,7 +268,7 @@ executable dev
     , nonempty-wrapper-aeson ^>=0.1.0.0
     , nonempty-wrapper-text  ^>=0.1.0.0
     , nonempty-containers    ^>=0.3.4.5
-    , pandoc                 ^>=3.6.2
+    , pandoc                 ^>=3.7.0.1
     , req                    ^>=3.13.4
     , sitemap-gen            ^>=0.1.0.0
     , text                   ^>=2.1.2

@@ -56,7 +56,7 @@ makeLinksByMonth ∷ Maybe NonEmptyText → NonEmptyText → Bool → NonEmpty B
 makeLinksByMonth mCurrId preLink opened = genericMakeLinks opened (NE.trustedNonEmpty . T.pack . formatTime defaultTimeLocale "%B" . date . metadata . LNE.head) (makeLink mCurrId preLink) -- you could use comonad extract here but what is a type with a head
 
 makeLinksByYear ∷ Maybe NonEmptyText → NonEmptyText → Bool → NonEmpty (NonEmpty BlogPost) → Html
-makeLinksByYear mCurrId preLink opened = genericMakeLinks opened (NE.trustedNonEmpty . T.pack . show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth mCurrId preLink opened)
+makeLinksByYear mCurrId preLink opened = genericMakeLinks opened (NE.trustedNonEmpty . T.show . year . date . metadata . LNE.head . LNE.head) (makeLinksByMonth mCurrId preLink opened)
 
 -- why don't we make this an ordered map???
 -- TODO libify
