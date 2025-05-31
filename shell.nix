@@ -6,6 +6,7 @@ mkShell rec {
         zlib.dev
         haskell.compiler.ghc912
         cabal-install
+        openjdk17-bootstrap
     ];
     # maybe we can include the copy to store stuff in here? as mkShell is a custom stdenv.mkDerivation
     # shellHook = ''
