@@ -534,7 +534,7 @@ favCharacters = [
         [
             (
                 "Real Frank",
-                wikia "filthy-frank" "Filthy_Frank",
+                "https://web.archive.org/web/20180930073858/https://filthy-frank.wikia.com/wiki/Filthy_Frank",
                 "he's lost and good to his crew. ^Also depression, yay^"
             )
         ]

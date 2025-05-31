@@ -19,7 +19,7 @@ pageHamRadio = plainBreadcrumb (NE.trustedNonEmpty "Ham Radio") . makePage "ham"
         "I work on a "
         extLink "https://www.baofengradio.co.uk/uv-5r-black-vhf-uhf/" "Baofeng UV-5R"
         " (8W FM VHF/UHF transceiver) and a "
-        extLink "https://www.yaesu.com/indexVS.cfm?cmd=DisplayProducts&ProdCatID=102&encProdID=06014CD0AFA0702B25B12AB4DC9C0D27" "Yaesu FT-817"
+        extLink "https://en.wikipedia.org/wiki/Yaesu_FT-817" "Yaesu FT-817"
         " (5W, all-mode HF, VHF, UHF transceiver)"
     p "You may sometimes find me on:"
     ul $ do
