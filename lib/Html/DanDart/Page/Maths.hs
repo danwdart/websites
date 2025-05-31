@@ -48,6 +48,7 @@ pageMaths = plainBreadcrumb (NE.trustedNonEmpty "Maths") . makePage "maths" "Mat
         li $ extLink (oeis <> "308267") "A308267: Numbers which divide their Zeckendorffian format exactly."
         li $ extLink (oeis <> "309979") "A309979: Hash Parker numbers: Integers whose real 32nd root's first six nonzero digits (after the decimal point) rearranged in ascending order are equal to 234477."
         li $ extLink (oeis <> "355467") "A355467: a(n) is the smallest number which is greater than n and has more prime factors (with multiplicity) than n."
+        li $ extLink (oeis <> "384195") "A384195: a(n) = tau(n+1) - tau(n-1), where tau(n) = A000005(n), the number of divisors of n."
     p $ do
         "I also discovered "
         extLink (oeis <> "332049") "A332049: a(n) = (1/2) * Sum_{d|n, d > 1} d * phi(d)"
