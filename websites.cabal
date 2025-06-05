@@ -15,7 +15,7 @@ extra-source-files: README.md
 common shared-properties
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
-  if !os(wasi)
+  if !arch(wasm32)
     ghc-options: -threaded -rtsopts -with-rtsopts=-N 
   ghc-options:
     -Weverything -Wno-unsafe -Wno-missing-import-lists
@@ -278,6 +278,8 @@ executable dev
 -- , non-empty-text
 test-suite websites-test
   import:             shared-properties
+  if arch(javascript) || arch(wasm32)
+    buildable: False
   hs-source-dirs:     test
   type:               exitcode-stdio-1.0
   main-is:            Spec.hs
