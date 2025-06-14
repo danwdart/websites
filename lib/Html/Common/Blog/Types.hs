@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DerivingVia    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -60,7 +60,7 @@ data BlogMetadata = BlogMetadata {
     tags          :: NonEmpty BlogTag, -- Doesn't like tags which are numbers... nor don't have tags
     scores        :: Maybe (NonEmpty (Text, Score))
 } deriving stock (Generic)
-    deriving anyclass (FromJSON)
+    deriving (FromJSON) via Generically BlogMetadata
 
 data BlogCommentMetadata = BlogCommentMetadata {
     author      :: NonEmptyText,

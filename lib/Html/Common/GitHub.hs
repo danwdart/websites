@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DerivingVia    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -69,7 +69,7 @@ instance FromJSON Language where
 newtype Licence = Licence {
     spdx_id :: NonEmptyText
 } deriving stock (Eq, Generic, Show)
-  deriving anyclass FromJSON
+  deriving FromJSON via Generically Licence
 
 data Repo = Repo {
     name        :: NonEmptyText,
