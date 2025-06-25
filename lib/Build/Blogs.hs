@@ -115,7 +115,7 @@ build page page404 = do
     pure (
       tagUri',
       (BlogTypes.date . BlogTypes.metadata)
-      (LNE.head posts)
+      (LNE.head posts) -- disable partial warning
       )
     ) grouped
   -- By post
@@ -149,8 +149,7 @@ build page page404 = do
         })) .
         local (\w -> w {
           -- we don't override rss title, only page title, this is why they're separate
-          -- TODO maybe id -> fromMaybe? 
-          _previewImgUrl = maybe (w ^. previewImgUrl) id (BlogTypes.featuredImage . BlogTypes.metadata $ post)
+          _previewImgUrl = fromMaybe (w ^. previewImgUrl) (BlogTypes.featuredImage . BlogTypes.metadata $ post)
         }) . addBreadcrumb (BlogTypes.title . BlogTypes.metadata $ post) $
         page (makeLinks (Just . BlogTypes.postId $ post) (NE.trustedNonEmpty "/#") (NE.trustedNonEmpty "All Posts") sortedPosts) (makeTags Nothing tags) renderedPost
       liftIO . BS.writeFile fullFilename . BS.toStrict . renderHtml $ pageBlogPost

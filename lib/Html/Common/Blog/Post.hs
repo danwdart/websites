@@ -135,7 +135,7 @@ renderPost (BlogPost postId' metadata' html' comments') = do
         br
         section $ do
             h3 "Comments"
-            if Prelude.null comments' then small "No comments yet..." <> br else traverse_ renderComment comments'
+            if Prelude.null comments' then small "No comments yet..." <> br else fixExternalLinks $ traverse_ renderComment comments'
             br
             h4 "Post a comment:"
             commentForm'
