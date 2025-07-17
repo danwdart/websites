@@ -23,5 +23,5 @@ htmlHeader reviewLinks reviewTagLinks reviews' = do
             (H.div ! class_ "col") . (ul ! class_ "navbar-nav px-3") $ do
                     extNav (stringValue (show urlDanDart')) "Dan Dart"
                     pageReviews'
-                    dlNav (toValue $ atomXml') "Atom Feed"
+                    dlNav (toValue atomXml') "Atom Feed"
         )

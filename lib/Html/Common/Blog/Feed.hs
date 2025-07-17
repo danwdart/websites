@@ -41,7 +41,7 @@ extraHead = do -- TODO maybeT
 toEntry ∷ ByteString → BlogPost → Atom.Entry
 toEntry domain (BlogPost _ BlogMetadata { aliases = aliases', title = title', date = date' } html' _) = (
         Atom.nullEntry
-        (Prelude.last . T.splitOn "/" . T.pack $ (LNE.head aliases')) -- The ID field. Must be a link to validate.
+        (Prelude.last . T.splitOn "/" . T.pack $ LNE.head aliases') -- The ID field. Must be a link to validate.
         (Atom.TextString (NE.getNonEmpty title'))
         (T.show date')
     )

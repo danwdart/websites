@@ -115,7 +115,8 @@ build page page404 = do
     pure (
       tagUri',
       (BlogTypes.date . BlogTypes.metadata)
-      (LNE.head posts) -- disable partial warning
+      {- HLINT ignore "Avoid partial function" -}
+      (LNE.head posts) -- this should not be marked as partial by hlint because it's notElem
       )
     ) grouped
   -- By post

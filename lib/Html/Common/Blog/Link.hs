@@ -36,7 +36,7 @@ renderMetaLink ∷ Maybe NonEmptyText → NonEmptyText → NonEmptyText → Blog
 renderMetaLink mCurrId preLink postId' m =
     if Just postId' == mCurrId
     then em . strong $ text (NE.getNonEmpty $ BT.title m)
-    else a ! href (textValue $ NE.getNonEmpty (preLink <> postId')) $ text . NE.getNonEmpty $ (BT.title m)
+    else (a ! href (textValue $ NE.getNonEmpty (preLink <> postId'))) . text . NE.getNonEmpty $ BT.title m
 
 renderLink ∷ Maybe NonEmptyText → NonEmptyText → BlogPost → Html
 renderLink mCurrId preLink bp = renderMetaLink mCurrId preLink (postId bp) (metadata bp)

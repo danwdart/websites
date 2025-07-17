@@ -38,7 +38,7 @@ make name page page404 = do
         copyDirectoryRecursive silent ("static" </> path) (".sites" </> path)
         BS.writeFile (".sites" </> path </> "index.html") . BS.toStrict $ renderHtml page'
         BS.writeFile (".sites" </> path </> "404.html") . BS.toStrict $ renderHtml page404'
-        TIO.putStrLn $ (NE.getNonEmpty name) <> " compiled."
+        TIO.putStrLn $ NE.getNonEmpty name <> " compiled."
 
 foldtraverse ∷ (Monoid b', Traversable t, Applicative f) ⇒ (a' → f b') → t a' → f b'
 foldtraverse f xs = fold <$> traverse f xs

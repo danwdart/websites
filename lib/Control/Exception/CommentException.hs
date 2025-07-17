@@ -5,7 +5,7 @@ import Control.Exception.InvalidDateException
 import Control.Exception.ParseFileException
 
 -- we could probably do better here
-data CommentException = CIDEx InvalidDateException | CPFEx ParseFileException
+data CommentException = CommentInvalidDateException InvalidDateException | CommentParseFileException ParseFileException
     deriving stock (Show)
 
 instance Exception CommentException

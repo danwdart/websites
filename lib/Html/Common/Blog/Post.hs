@@ -42,23 +42,23 @@ parseFile filename' contents' = case parseYamlFrontmatter contents' of
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (TE.decodeUtf8Lenient i')))
-    Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
-    Partial _ -> Left $ PFPartial filename' contents'
+    Fail inputNotYetConsumed ctxs errMsg -> Left $ ParseFileFailException filename' inputNotYetConsumed ctxs errMsg
+    Partial _ -> Left $ ParseFilePartialException filename' contents'
 
 makeBlogPost ∷ (MonadIO m, MonadError BlogPostException m) => FilePath → FilePath → m BlogPost
 makeBlogPost postsDir filename = do
     file <- liftIO $ BS.readFile filename
     case parseFile filename file of
-        Left ex -> throwError (BPPFEx ex) -- wah wah wah
+        Left ex -> throwError (BlogPostParseFileException ex) -- wah wah wah
         Right (ParseResult metadata' html') -> do
             let maybePostId' = NE.nonEmpty . T.pack . dropExtension . takeFileName . LNE.head . aliases $ metadata'
             case maybePostId' of
                 Just postId' -> do
-                    comments' <- modifyError BPCEx $ getComments postsDir postId'
+                    comments' <- modifyError BlogPostCommentException $ getComments postsDir postId'
                     -- TODO stop trusting!
                     pure $ BlogPost postId' metadata' html' comments'
                 Nothing -> do
-                    throwError $ BPMPIEx MissingPostIdException
+                    throwError $ BlogPostMissingPostIdException MissingPostIdException
 
 tshowChoiceString ∷ ChoiceString → Text
 tshowChoiceString (Text text') = text'

@@ -46,8 +46,8 @@ parseComment filename' date' contents' = case parseYamlFrontmatter contents' of
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (TE.decodeUtf8Lenient i')))
-    Fail inputNotYetConsumed ctxs errMsg -> Left $ PFFail filename' inputNotYetConsumed ctxs errMsg
-    Partial _ -> Left $ PFPartial filename' contents'
+    Fail inputNotYetConsumed ctxs errMsg -> Left $ ParseFileFailException filename' inputNotYetConsumed ctxs errMsg
+    Partial _ -> Left $ ParseFilePartialException filename' contents'
 
 getCommentsIfExists ∷ (MonadIO m, MonadError CommentException m) => FilePath → NonEmptyText → m [ParseCommentResult]
 getCommentsIfExists postsDir postId' = do
@@ -56,11 +56,12 @@ getCommentsIfExists postsDir postId' = do
     validCommentFiles <- filterM (liftIO . doesFileExist) commentFileNames
     let mDates = traverse (stringToTime . dropExtension . takeFileName) validCommentFiles
     case mDates of
-        Left ex -> throwError (CIDEx ex)
+        Left ex -> throwError (CommentInvalidDateException ex)
         Right dates -> do
             commentTexts <- traverse (liftIO . BS.readFile) validCommentFiles
+            -- Get replies
             case sequenceA (zipWith3 parseComment validCommentFiles dates commentTexts) of
-                Left ex -> throwError (CPFEx ex)
+                Left ex -> throwError (CommentParseFileException ex)
                 Right commentData -> pure $ L.sortOn (Down . commentDate) commentData
 
 getComments ∷ (MonadIO m, MonadError CommentException m) => FilePath → NonEmptyText → m [ParseCommentResult]
