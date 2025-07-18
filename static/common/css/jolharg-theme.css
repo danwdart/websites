@@ -2,7 +2,7 @@
     color-scheme: dark light;
     /* --font: 'Caudex', serif */
     /* --font: 'Lexend Deca', sans-serif; */
-/*
+
     --background: repeating-linear-gradient(-45deg, #222, #111 5px, #111 5px);
     --body-bg-colour: #111; 
     --fg-colour: #ddd;
@@ -16,11 +16,14 @@
     --bg-page: black;
     --title-colour: #d0d;
     --blockquote-bg-colour: #111;
+    --table-bg-color-odd: #111;
+    --table-bg-color-hover: #222;
+    --star-empty-colour: #333;
+    --star-full-colour: gold;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-*/
         --background: repeating-linear-gradient(-45deg, #ddd, #eee 5px, #eee 5px);
         --body-bg-colour: #eee; 
         --fg-colour: #222;
@@ -34,7 +37,11 @@
         --bg-page: white;
         --title-colour: purple;
         --blockquote-bg-colour: #eee;
-    /* } */
+        --table-bg-color-odd: #eee;
+        --table-bg-color-hover: #ddd;
+        --star-empty-colour: black;
+        --star-full-colour: gold;
+    }
 }
 
 * {
@@ -121,8 +128,14 @@ input:checked ~ .page {
     background-color: transparent;
     border: none;
     display: inline-block;
+    color: var(--card-text-colour);
 }
 
+/* when the card contains links... */
+.card a {
+}
+
+/* when the whole card is a link.. */
 .card > a {
     color: var(--card-text-colour);
     text-decoration: none;
@@ -168,12 +181,12 @@ input:checked ~ .page {
 }
 
 .bg-nav {
-    background: var(--bg-nav);
+    background-color: var(--bg-nav);
 }
 
 .bg-page {
     color: var(--fg-page);
-    background: var(--bg-page);
+    background-color: var(--bg-page);
 }
 
 .form-group:last-of-type {
@@ -221,11 +234,11 @@ pre, code {
 }
 
 .star-full {
-    color: gold;
+    color: var(--star-full-colour);
 }
 
 .star-empty {
-    color: black;
+    color: var(--star-empty-colour);
 }
 
 details a,
@@ -249,10 +262,10 @@ th, td {
 }
 
 table tbody tr:nth-child(odd) {
-    background: #eee;
+    background-color: var(--table-bg-color-odd);
 }
 
 table tbody tr:hover:nth-child(odd),
 table tbody tr:hover:nth-child(even) {
-    background: #ddd;
+    background-color: var(--table-bg-color-hover);
 }
