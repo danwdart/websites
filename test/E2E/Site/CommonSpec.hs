@@ -198,12 +198,15 @@ brokenExceptions = [
     "https://web.archive.org/web/20100224082039/https://xenon.kevinghadyani.com/desktop",
     "https://web.archive.org/web/20100211151037/http://matt.colyer.name:80/projects/iphone-linux/?title=Main_Page", -- archive is weird
     "https://web.archive.org/web/20140908152050/http://www.freebsd.org/doc/handbook/filesystems-zfs.html",
+    "https://web.archive.org/web/20091018103227/https://windows.microsoft.com/en-US/windows-vista/Installing-and-reinstalling-Windows",
+    "https://web.archive.org/web/20100106113611/http://voices.washingtonpost.com/securityfix/2009/10/avoid_windows_malware_bank_on.html",
     "https://www.deepburner.com/", -- ????
     "https://www.linkedin.com/in/dandart", -- why 999???
     "https://viewex.co.uk/", -- either no longer active or blocked
     "https://cloudbanter.com/", -- either no longer active or blocked
     "https://docs.dadi.cloud/", -- either no longer active or blocked
-    "https://www.soampli.com/" -- it's fine though???
+    "https://www.soampli.com/", -- it's fine though???
+    "https://themadhacker.net/" -- ????
     ]
 
 testNotBroken ∷ (String, Int) → Spec
