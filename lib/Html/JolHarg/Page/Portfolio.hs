@@ -29,7 +29,7 @@ pagePortfolio = do
             card "img/equalsmoney.png" "Equals Money" "B2B money management platform" "https://equalsmoney.com"
             card "img/fairfx.png" "FairFX" "Currency card and conversion" "https://fairfx.com"
             card "img/roqqett.png" "Roqqett" "Fast checkout app and website plugin" "https://roqqett.com"
-            card "img/timezap.png" "TimeZap" "Set-and-forget accurate time tracking" "https://timezap.ai"
+            card "img/timezap.png" "TimeZap (now Eppiq Timer)" "Set-and-forget accurate time tracking" "https://eppiqtimer.com/"
             card "img/eppiq.png" "Eppiq Marketing" "Digital marketing agency" "https://eppiq.co.uk"
             card "img/penta.png" "Penta Consulting" "Web Agency" "https://www.pentaconsulting.com/"
             card "img/dotfive.png" "DotFive" "Promotional website" "https://www.dotfive.co.uk/"
