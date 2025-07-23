@@ -31,4 +31,4 @@ It is likely that your distribution does not come with necessary media codecs (f
 5. "Linux is all command line".
 Proof enough is this picture:
 
-[![](https://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)](https://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)
+[![Kubuntu being pretty](https://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg "Kubuntu being pretty")](https://www.pendrivelinux.com/wp-content/uploads/kubuntu.jpg)

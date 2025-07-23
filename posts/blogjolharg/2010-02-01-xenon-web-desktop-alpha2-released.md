@@ -42,4 +42,4 @@ To try the system out for yourself, you can [try the demo](https://web.archive.o
 
 Please send patches, icons, ideas, apps, et al to [xenon@dandart.co.uk](mailto:xenon@dandart.co.uk)
 
-The project's website is at [https://xenon.kevinghadyani.com](https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/) (edit 2021: archived) or a shorter version: [https://hackerlanes.com](https://web.archive.org/web/20091220083328/http://hackerlanes.com/) (edit 2021: archived)
+The project's website is at [https://xenon.kevinghadyani.com](https://web.archive.org/web/20100107134808/http://xenon.kevinghadyani.com/) (edit 2021: archived) or a shorter version: [https://hackerlanes.com](https://web.archive.org/web/20091220083328/https://hackerlanes.com/) (edit 2021: archived)

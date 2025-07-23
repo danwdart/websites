@@ -35,7 +35,7 @@ Next time: BSD Licences and why they are good, bad and/or certainly not ugly.
 References
 
 [1] [https://en.wikipedia.org/wiki/Berkeley\_Software\_Distribution](https://en.wikipedia.org/wiki/Berkeley_Software_Distribution)
-4
+
 [2] [https://opensource.org/licenses/BSD-2-Clause](https://opensource.org/licenses/BSD-2-Clause)
 
 [3] [https://opensource.org/licenses/BSD-3-Clause](https://opensource.org/licenses/BSD-2-Clause)
