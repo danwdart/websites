@@ -19,7 +19,8 @@ makeHeader mainLink title' extraHeaderContent content' =
                     img
                         ! src "/img/header.png"
                         ! A.style "height:32px"
-                        ! alt ""
+                        ! alt "Logo"
+                        ! A.title "Logo"
                     if title' == "" then "" else H.span
                         ! class_ "title ms-2" $ string title'
             H.div ! class_ "col" $ do

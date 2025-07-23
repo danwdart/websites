@@ -107,7 +107,7 @@ renderComment ParseCommentResult {
             a ! name (fromString (iso8601Show commentDate)) $ mempty
             a ! href ("mailto:" <> (textValue . NE.getNonEmpty $ authorEmail)) $ text (NE.getNonEmpty author)
             " "
-            a ! href authorUrl' $ " (URL)"
+            a ! href authorUrl' ! A.target "_blank" ! A.rel "noreferrer" $ " (URL)"
             " said on "
             (a ! href ("#" <> fromString (iso8601Show commentDate))) . fromString $ iso8601Show commentDate
             ":"

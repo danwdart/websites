@@ -23,7 +23,7 @@ pagePortfolio = do
             p "Some of the websites, projects and companies Dan Dart has been involved with are:"
         row $ do
             (H.div ! class_ "card col-md-4 col-12 text-center") . extLink ("mailto:" <> textValue (TE.decodeUtf8Lenient (toByteString email'))) . (H.div ! class_ "card-body") $ (do
-                img ! class_ "card-img-top" ! src "img/sample.png"
+                img ! class_ "card-img-top" ! src "img/sample.png" ! alt "Mockup of a website" ! A.title "Mockup of a website"
                 h4 ! class_ "card-title" $ "Your website here"
                 p ! class_ "card-text" $ "Make an enquiry for a website or project.")
             card "img/equalsmoney.png" "Equals Money" "B2B money management platform" "https://equalsmoney.com"
@@ -55,5 +55,5 @@ pagePortfolio = do
             card "img/gamingzap.png" "Gamingzap" "Web shop for gaming devices and accessories" "https://www.mobilefun.co.uk/"
             card "img/gearzap.png" "Gearzap" "Web shop for cases and accessories" "https://gearzap.com"
             card "img/rattray.png" "Rattray Mosaics" "Portfolio and personal website of local mosaic artist" "https://rattraymosaics.co.uk"
-            card "img/smdaf.png" "Shepton Mallet Digital Arts Festival" "Local festival site" "https://sheptondigitalarts.co.uk"
+            cardDefunct "Shepton Mallet Digital Arts Festival" "Local festival site"
             cardDefunct "Somerset School of Oriental Healing Arts" "Qi Gong and Tai Chi"

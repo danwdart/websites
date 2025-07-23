@@ -1,6 +1,7 @@
 {-# LANGUAGE DerivingVia    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StrictData        #-}
+{-# LANGUAGE QuasiQuotes        #-}
 
 module Html.Common.GitHub where
 
@@ -17,6 +18,7 @@ import Data.Text.Encoding     qualified as TE
 import GHC.Generics
 import Network.HTTP.Req
 import Network.URI
+import Network.URI.Static
 import System.Environment
 
 data Language = LangASM
@@ -37,6 +39,46 @@ data Language = LangASM
     | LangTS
     | LangVB
     deriving stock (Eq, Generic, Show)
+
+languageToURI :: Language -> URI
+languageToURI = \case
+    LangASM -> [uri|https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Motorola_6800_Assembly_Language.png/800px-Motorola_6800_Assembly_Language.png|]
+    LangBlitzBasic -> [uri|https://upload.wikimedia.org/wikipedia/en/6/65/BlitzBasicLogo.gif|]
+    LangC -> [uri|https://upload.wikimedia.org/wikipedia/commons/3/3b/C.sh-600x600.png|]
+    LangCoffee -> [uri|https://farm8.staticflickr.com/7212/7168325292_16a46a1fea_n.jpg|]
+    LangCPP -> [uri|https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg|]
+    LangDocker -> [relativeReference|/img/docker-mark-blue.svg|]
+    LangGeneric -> [uri|https://web.archive.org/web/20181125122112if_/https://upload.wikimedia.org/wikipedia/commons/1/1a/Code.jpg|]
+    LangHS -> [uri|https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/1280px-Haskell-Logo.svg.png|]
+    LangHTML -> [uri|https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png|]
+    LangJS -> [uri|https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png|]
+    LangNix -> [uri|https://raw.githubusercontent.com/NixOS/nixos-artwork/refs/heads/master/logo/nix-snowflake-colours.svg|]
+    LangPHP -> [uri|https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/711px-PHP-logo.svg.png|]
+    LangPython -> [uri|https://upload.wikimedia.org/wikipedia/commons/0/0a/Python.svg|]
+    LangShell -> [uri|https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Antu_bash.svg/512px-Antu_bash.svg.png|]
+    LangTcl -> [uri|https://upload.wikimedia.org/wikipedia/commons/4/41/Tcl.svg|]
+    LangTS -> [uri|https://rynop.files.wordpress.com/2016/09/ts.png?w=200|]
+    LangVB -> [uri|https://upload.wikimedia.org/wikipedia/en/e/e4/Visual_Basic_6.0_logo.png|]
+
+displayLanguage :: Language -> Text
+displayLanguage = \case
+    LangASM -> "Assembly language"
+    LangBlitzBasic -> "Blitz Basic"
+    LangC -> "C"
+    LangCoffee -> "CoffeeScript"
+    LangCPP -> "C++"
+    LangDocker -> "Docker"
+    LangGeneric -> "Unknown/Generic"
+    LangHS -> "Haskell"
+    LangHTML -> "HTML"
+    LangJS -> "JS"
+    LangNix -> "Nix"
+    LangPHP -> "PHP"
+    LangPython -> "Python"
+    LangShell -> "Shell script"
+    LangTcl -> "Tcl"
+    LangTS -> "TypeScript"
+    LangVB -> "Visual Basic"
 
 instance FromJSON Language where
     parseJSON (String "Assembly") = pure LangASM

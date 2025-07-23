@@ -28,5 +28,5 @@ pageHamRadio = plainBreadcrumb (NE.trustedNonEmpty "Ham Radio") . makePage "ham"
     p $ extLink "https://www.qrzcq.com/call/M0ORI" "My QRZCQ page"
     br
     (H.div ! A.id "rigref-solar-widget")
-        . (a ! href "https://www.hamqsl.com/solar.html" ! target "_blank")
-        $ (img ! src (stringValue "https://www.hamqsl.com/solar101vhf.php?muf=trms&kindex=tromso"))
+        . (a ! href "https://www.hamqsl.com/solar.html" ! target "_blank" ! rel "noreferrer")
+        $ (img ! src (stringValue "https://www.hamqsl.com/solar101vhf.php?muf=trms&kindex=tromso") ! alt "Solar conditions diagram" ! A.title "Solar conditions diagram")

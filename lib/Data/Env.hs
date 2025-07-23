@@ -83,15 +83,15 @@ prodBlog = Website {
         "debian"
         ],-}
     _description = NE.trustedNonEmpty "The blog of Dan Dart. Includes life-changing observations and scientific breakthroughs, as well as interesting content from around the world.",
-    _previewImgUrl = [uri|https://blog.dandart.co.uk/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlBlog,
     _pageUrl = productionUrls ^. urlBlog,
-    _sitemapUrl = [uri|https://blog.dandart.co.uk/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = NE.trustedNonEmpty "Dan Dart's Blog: Software, Maths, Radio, Music",
-        _atomUrl = [uri|https://blog.dandart.co.uk/atom.xml|],
+        _atomUrl = [relativeReference|/atom.xml|],
         _renderSuffix = mempty
     },
     _email = [QE.email|blog@dandart.co.uk|],
@@ -144,10 +144,10 @@ prodDanDart = Website {
         ],
     -}
     _description = NE.trustedNonEmpty "Dan Dart works on a large collection of software and is interested in mathematics, physics, chemistry, radio and linguistics.",
-    _previewImgUrl = [uri|https://dandart.co.uk/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlDanDart,
     _pageUrl = productionUrls ^. urlDanDart,
-    _sitemapUrl = [uri|https://dandart.co.uk/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "Dan Dart", Nothing)],
     _siteType = Normal,
@@ -218,10 +218,10 @@ prodJolHarg = Website {
         "debian"
         ], -}
     _description = NE.trustedNonEmpty "Dan Dart can provide you with all kinds of software engineering including fully-functioning web and phone applications.",
-    _previewImgUrl = [uri|https://jolharg.com/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlJolHarg,
     _pageUrl = productionUrls ^. urlJolHarg,
-    _sitemapUrl = [uri|https://jolharg.com/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "JolHarg", Nothing)],
     _siteType = Normal,
@@ -274,15 +274,15 @@ prodBlogJolHarg = Website {
         "debian"
         ], -}
     _description = NE.trustedNonEmpty "JolHarg's blog covers various pieces of technology, code and tutorials to help make your life easier.",
-    _previewImgUrl = [uri|https://blog.jolharg.com/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlBlogJolHarg,
     _pageUrl = productionUrls ^. urlBlogJolHarg,
-    _sitemapUrl = [uri|https://blog.jolharg.com/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "JolHarg Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = NE.trustedNonEmpty "JolHarg: Software and Technology Blog",
-        _atomUrl = [uri|https://blog.jolharg.com/atom.xml|],
+        _atomUrl = [relativeReference|/atom.xml|],
         _renderSuffix = mempty
     },
     _email = [QE.email|blog@jolharg.com|],
@@ -323,10 +323,10 @@ prodM0ORI = Website {
         ]
     -}
     _description = NE.trustedNonEmpty "The M0ORI callsign is owned by Dan Dart located in England. He works on HF and VHF in Exmouth.",
-    _previewImgUrl = [uri|https://m0ori.com/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlHamRadio,
     _pageUrl = productionUrls ^. urlHamRadio,
-    _sitemapUrl = [uri|https://m0ori.com/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "M0ORI", Nothing)],
     _siteType = Normal,
@@ -339,15 +339,15 @@ prodBlogM0ORI = Website {
     _slug = NE.trustedNonEmpty "blogm0ori",
     _title = NE.trustedNonEmpty "The Blog of M0ORI: Interesting Radio Observations",
     _description = NE.trustedNonEmpty "My radio blog covers interesting observations I have had whilst working on ham bands.",
-    _previewImgUrl = [uri|https://blog.m0ori.com/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlBlogHamRadio,
     _pageUrl = productionUrls ^. urlBlogHamRadio,
-    _sitemapUrl = [uri|https://blog.m0ori.com/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "M0ORI Blog", Nothing)],
     _siteType = Blog {
         _atomTitle = NE.trustedNonEmpty "The Blog of M0ORI: Interesting Radio Observations",
-        _atomUrl = [uri|https://blog.m0ori.com/atom.xml|],
+        _atomUrl = [relativeReference|/atom.xml|],
         _renderSuffix = mempty
     },
     _email = [QE.email|blog@m0ori.com|],
@@ -387,15 +387,15 @@ prodMadHacker = Website {
         ]
     -}
     _description = NE.trustedNonEmpty "Find tech and software reviews with a hackability twist, right here! Requests are accepted and review models are always non-sponsored.",
-    _previewImgUrl = [uri|https://madhackerreviews.com/img/preview.png|],
+    _previewImgUrl = [relativeReference|/img/preview.png|],
     _baseUrl = productionUrls ^. urlMadHacker,
     _pageUrl = productionUrls ^. urlMadHacker,
-    _sitemapUrl = [uri|https://madhackerreviews.com/sitemap.xml|],
+    _sitemapUrl = [relativeReference|/sitemap.xml|],
     _urls = productionUrls,
     _breadcrumb = Breadcrumb [(NE.trustedNonEmpty "Mad Hacker Reviews", Nothing)],
     _siteType = Blog {
         _atomTitle = NE.trustedNonEmpty "The Mad Hacker: Tech Reviews by a crazy computer enthusiast",
-        _atomUrl = [uri|https://madhackerreviews.com/atom.xml|],
+        _atomUrl = [relativeReference|/atom.xml|],
         _renderSuffix = renderStars
     },
     _email = [QE.email|madhacker@dandart.co.uk|], -- TODO add MX
