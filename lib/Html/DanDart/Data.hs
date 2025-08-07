@@ -142,7 +142,7 @@ favCharacters = [
             (
                 "Naoto Hachiouji",
                 fandom "nagatoro" "Naoto_Hachiouji",
-                "he is very awkward like me, and tolerates and eventually enjoys the loving tsumdere/yandere pestering and loving harrassment of his " <> babby "Nagatoro" <> ". We match very well."
+                "he is very awkward like me, and tolerates and eventually enjoys the loving tsundere/yandere pestering and loving harrassment of his " <> babby "Nagatoro" <> ". We match very well."
             )
         ]
     ),
