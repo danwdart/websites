@@ -11,10 +11,10 @@ cabal new-run build
 # nix-build -A websites
 # result/bin/build
 
-cd .sites
+cd .sites || exit
 for site in */
 do
-    cd $site
+    cd "$site" || exit
     siteupdate
     cd ..
 done
