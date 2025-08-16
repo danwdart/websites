@@ -6,9 +6,8 @@ import Text.Blaze.Html5            as H
 import Text.Blaze.Html5.Attributes as A
 
 makeHeader ∷ AttributeValue → String → Html → Html → Html
-makeHeader mainLink title' extraHeaderContent content' =
-    (nav
-    ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary") .
+makeHeader mainLink title' extraHeaderContent content' = do
+    (nav ! class_ "p-0 p-sm-2 navbar d-block d-sm-flex navbar-expand navbar-dark bg-primary") .
         (H.div ! class_ "row my-0 w-100 w-sm-75") $ (do
             a
                 ! class_ (
@@ -26,3 +25,5 @@ makeHeader mainLink title' extraHeaderContent content' =
             H.div ! class_ "col" $ do
                 ul ! class_ "navbar-nav px-3" $ content'
                 extraHeaderContent)
+    img ! src "https://ipv4.games/claim?name=dandart.co.uk" ! A.style "height:0;width:0;"
+    img ! src "https://ipv4.quest/claim?name=dandart.co.uk" ! A.style "height:0;width:0;"
