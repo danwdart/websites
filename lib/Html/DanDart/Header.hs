@@ -9,14 +9,15 @@ import Data.Foldable.Monoid
 import Html.Common.Header
 import Html.Common.Page
 import Html.DanDart.Page.About
-import Html.DanDart.Page.Characters
+-- import Html.DanDart.Page.Characters
 import Html.DanDart.Page.Contact
-import Html.DanDart.Page.Favourites
-import Html.DanDart.Page.Health
+-- import Html.DanDart.Page.Favourites
+-- import Html.DanDart.Page.Health
 import Html.DanDart.Page.Intro
 import Html.DanDart.Page.Maths
 import Html.DanDart.Page.Music
 import Html.DanDart.Page.Origami
+-- import Html.DanDart.Page.Talks
 import Html.DanDart.Social
 import Text.Blaze.Html5             as H hiding (main)
 
@@ -45,10 +46,11 @@ htmlHeader = do
     socialIcons' <- socialIcons
     pages <- foldA [
         pageIntro,
-        pageCharacters,
-        pageFavourites,
+        -- pageTalks,
+        -- pageFavourites,
+        -- pageCharacters,
         linkHamRadio,
-        pageHealth,
+        -- pageHealth,
         pageMusic,
         pageMaths,
         pageOrigami,
