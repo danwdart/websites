@@ -39,7 +39,7 @@ import Text.Pandoc.Writers.HTML
 parseFile ∷ FilePath → ByteString → Either ParseFileException ParseResult
 parseFile filename' contents' = case parseYamlFrontmatter contents' of
     Done i' r -> Right $ ParseResult r (fromRight "" $ runPure (writeHtml5 (def {
-            writerHighlightStyle = Just haddock
+            writerHighlightMethod = Skylighting haddock
         }) =<< readMarkdown (def {
             readerExtensions = githubMarkdownExtensions
         }) (TE.decodeUtf8Lenient i')))

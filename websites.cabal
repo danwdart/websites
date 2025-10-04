@@ -46,7 +46,7 @@ library
   default-extensions: UnicodeSyntax
   build-depends:
     , aeson                   ^>=2.2.3.0
-    , base                    ^>=4.21.0.0
+    , base                    >=4.21.0.0 && <4.23.0.0
     , blaze-html              ^>=0.9.2.0
     , blaze-markup            ^>=0.8.3.0
     , bytestring              ^>=0.12.2.0
@@ -65,7 +65,7 @@ library
     , nonempty-wrapper        ^>=0.1.0.0
     , nonempty-wrapper-aeson  ^>=0.1.0.0
     , nonempty-wrapper-text   ^>=0.1.0.0
-    , pandoc                  ^>=3.7.0.1
+    , pandoc                  ^>=3.8.1
     , req                     ^>=3.13.4
     , sitemap-gen             ^>=0.1.0.0
     , text                    ^>=2.1.2
@@ -160,7 +160,7 @@ executable build
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   build-depends:
-    , base      ^>=4.21.0.0
+    , base      >=4.21.0.0 && <4.23.0.0
     , websites  ^>=0.2.0.0
 
 executable dev
@@ -252,7 +252,7 @@ executable dev
 
   build-depends:
     , aeson                   ^>=2.2.3.0
-    , base                    ^>=4.21.0.0
+    , base                    >=4.21.0.0 && <4.23.0.0
     , blaze-html              ^>=0.9.2.0
     , blaze-markup            ^>=0.8.3.0
     , bytestring              ^>=0.12.2.0
@@ -271,7 +271,7 @@ executable dev
     , nonempty-wrapper        ^>=0.1.0.0
     , nonempty-wrapper-aeson  ^>=0.1.0.0
     , nonempty-wrapper-text   ^>=0.1.0.0
-    , pandoc                  ^>=3.7.0.1
+    , pandoc                  ^>=3.8.1
     , req                     ^>=3.13.4
     , sitemap-gen             ^>=0.1.0.0
     , text                    ^>=2.1.2
@@ -294,7 +294,7 @@ test-suite websites-test
   build-depends:
     , aeson              ^>=2.2.3.0
     , async              ^>=2.2.5
-    , base               ^>=4.21.0.0
+    , base               >=4.21.0.0 && <4.23.0.0
     , hspec              ^>=2.11.10
     , http-client        ^>=0.7.18
     , http-client-tls    ^>=0.3.6.4
@@ -327,6 +327,6 @@ benchmark websites-bench
   default-language:   GHC2024
   default-extensions: UnicodeSyntax
   build-depends:
-    , base       ^>=4.21.0.0
+    , base       >=4.21.0.0 && <4.23.0.0
     , criterion  ^>=1.6.4.0
     , websites   ^>=0.2.0.0
