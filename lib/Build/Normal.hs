@@ -20,5 +20,5 @@ build page page404 = do
     sitemapUrl' <- view sitemapUrl
     sitemap' <- sitemap
     liftIO . BS.writeFile ( ".sites/" <> T.unpack (NE.getNonEmpty slug') <> "/sitemap.xml") $ renderSitemap sitemap'
-    liftIO . BS.writeFile ( ".sites/" <> T.unpack (NE.getNonEmpty slug') <> "/robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl')
+    liftIO . BS.writeFile ( ".sites/" <> T.unpack (NE.getNonEmpty slug') <> "/robots.txt") $ "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl') <> "\nContent-Signal: ai-train=no, search=yes, ai-input=no"
     make slug' page page404

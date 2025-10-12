@@ -171,5 +171,5 @@ build page page404 = do
     Nothing -> liftIO . putStrLn $ "There was no feed to write... todo make this a proper error"
     
   liftIO . BS.writeFile (siteDir <> "/robots.txt") $
-    "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl')
+    "User-agent: *\nAllow: /\nSitemap: " <> BS.pack (show sitemapUrl') <> "\nContent-Signal: ai-train=no, search=yes, ai-input=no"
   make slug' (page (makeLinks Nothing (NE.trustedNonEmpty "#") (NE.trustedNonEmpty "All Posts") sortedPosts) (makeTags Nothing tags) renderedPosts) page404
