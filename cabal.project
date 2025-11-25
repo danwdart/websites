@@ -12,3 +12,4 @@ packages: ./websites.cabal
 -- base/containers from haddock-library -> pandoc
 -- time from feed
 allow-newer: base, containers, time
+multi-repl: True
