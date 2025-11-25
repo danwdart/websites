@@ -21,7 +21,7 @@ commonCSS = do
     link ! rel "license" ! href "LICENSE"
     link ! rel "shortcut icon" ! type_ "image/png" ! href "/img/favicon.png"
     link ! rel "author" ! type_ "text/plain" ! href "/humans.txt"
-    extCSS "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" "sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    extCSS "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" "sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     css "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     css "https://fonts.googleapis.com/css?family=Caudex"
     css "https://fonts.googleapis.com/css?family=Lexend+Deca"
