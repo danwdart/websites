@@ -57,7 +57,7 @@ library
     , extra                   ^>=1.8
     , feed                    ^>=1.3.2.1
     , filepath                ^>=1.5.4
-    , frontmatter             ^>=0.1.2
+    , frontmatter             ^>=0.1.0.2
     , lens                    ^>=5.3.3
     , mtl                     ^>=2.3.1
     , network-uri             ^>=2.6.4.2
