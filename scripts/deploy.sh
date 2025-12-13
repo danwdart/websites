@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
+trap pwd ERR
+
 siteupdate() {
     git add .
     git commit -m 'Site update'
@@ -11,10 +14,10 @@ cabal new-run build
 # nix-build -A websites
 # result/bin/build
 
-cd .sites || exit
+cd .sites
 for site in */
 do
-    cd "$site" || exit
+    cd "$site"
     siteupdate
     cd ..
 done
