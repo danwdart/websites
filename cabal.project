@@ -11,5 +11,5 @@ packages: ./websites.cabal
 
 -- base/containers from haddock-library -> pandoc
 -- time from feed
-allow-newer: base, containers, time
+allow-newer: base, containers, ghc-bignum, template-haskell, time
 multi-repl: True
